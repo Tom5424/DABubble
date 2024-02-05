@@ -1,0 +1,119 @@
+@import '../../../scss/fonts.scss';
+@import '../../../scss/mixin.scss';
+
+
+main {
+    background-color: $bgColor;
+}
+
+
+header {
+    @include flexSpaceBetween();
+    padding: 20px 40px 0 40px;
+}
+
+
+.containerText {
+
+    p {
+        font-size: 18px;
+    }
+
+    p:nth-of-type(2) {
+        @include hover();
+        color: $primaryColorHover;
+        border: 1px solid transparent;
+        border-radius: 30px;
+        padding: 10px;
+        margin: -8px 0 0 12px;
+        text-align: end;
+
+        &:hover {
+            color: $primaryColor;
+            border: 1px solid $hoverColorInputfieldsOrText;
+            font-weight: 500;
+        }
+    }
+}
+
+
+.mainContainerloginBox {
+    @include flexCenteredXAxis();
+    margin-top: 20px;
+}
+
+
+.loginBox {
+    border-radius: 30px;
+    padding: 0 50px 0 50px;
+    box-shadow: 0px 2px 10px 0 #00000014;
+    background-color: #ffffff;
+
+    h1 {
+        color: $primaryColor;
+        text-align: center;
+        font-size: 46px;
+    }
+
+    p {
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 20px
+    }
+
+    form {
+        @include flexColumnCenteredXAxis();
+        gap: 30px;
+
+        input {
+            @include inputfieldOrTextarea(500px, 100px, 18px, 32px, 18px, 80px, 18px, $bgColor);
+            border: unset;
+
+            &:hover {
+                @include inputfieldOrTextareaHover();
+            }
+
+            &:focus {
+                @include inputfieldOrTextareaFocus();
+                color: #000000;
+
+                &.inputFieldEmail {
+                    background-image: url('../../../assets/icons/email-icon-black.svg');
+                }
+
+                &.inputFieldPassword {
+                    background-image: url('../../../assets/icons/lock-icon-black.svg');
+                }
+            }
+        }
+
+        p {
+            @include hover();
+            color: $primaryColorHover;
+            font-size: 18px;
+            padding: 5px 15px 5px 15px;
+            text-align: center;
+
+            &:hover {
+                background-color: $bgColor;
+                color: $primaryColor;
+                border-radius: 30px;
+                font-weight: 500;
+            }
+        }
+    }
+}
+
+
+.inputFieldEmail {
+    background-image: url('../../../assets/icons/email-icon-gray.svg');
+    background-position: 30px 16px;
+    background-repeat: no-repeat;
+}
+
+
+.inputFieldPassword {
+    background-image: url('../../../assets/icons/lock-icon-gray.svg');
+    background-position: 30px 16px;
+    background-repeat: no-repeat;
+}

@@ -21,7 +21,7 @@
 
 @mixin btnPrimaryDisabled() {
     @include hoverDisabled();
-    background-color: $colorDisabledOrColorInputfields;
+    background-color: $disabledColorOrColorInputfieldHover;
 }
 
 
@@ -44,8 +44,8 @@
 
 @mixin btnSecondaryDisabled() {
     @include hoverDisabled();
-    color: $colorDisabledOrColorInputfields;
-    border-radius: 1px solid $colorDisabledOrColorInputfields;
+    color: $disabledColorOrColorInputfieldHover;
+    border: 1px solid $disabledColorOrColorInputfieldHover;
 }
 
 
@@ -77,19 +77,22 @@
 }
 
 
-@mixin inputfieldOrTextarea() {
-    // width: ;
-    // height: ;
-    // border-radius: ;
-    // padding: ;
-    // background-color: ;
+@mixin inputfieldOrTextarea($widthValueInPx, $borderRadiusValueInPx, $padddingTopInPx, $padddingRightInPx, $padddingBottomInPx, $padddingLeftInPx, $fontSizeValueInPx, $bgColor) {
+    width: $widthValueInPx;
+    border-radius: $borderRadiusValueInPx;
+    padding: $padddingTopInPx $padddingRightInPx $padddingBottomInPx $padddingLeftInPx;
+    font-size: $fontSizeValueInPx;
+    background-color: $bgColor;
+    color: $disabledColorOrColorInputfieldHover;
+    outline: none;
 }
 
 
 @mixin inputfieldOrTextareaHover() {
 
     &:hover {
-        border: 1px solid $colorDisabledOrColorInputfieldsHover;
+        transition: all 225ms ease-in-out;
+        border: 1px solid $disabledColorOrColorInputfieldHover;
     }
 }
 
@@ -120,9 +123,26 @@
 
 
 @mixin flexCenteredInTheMiddle() {
-    @include flex();
     @include flexCenteredXAxis();
     @include flexCenteredYAxis();
+}
+
+
+@mixin flexColumn() {
+    @include flex();
+    flex-direction: column
+}
+
+
+@mixin flexColumnCenteredXAxis() {
+    @include flexColumn();
+    align-items: center;
+}
+
+
+@mixin flexColumnCenteredYAxis() {
+    @include flexColumn();
+    justify-content: center
 }
 
 
@@ -145,9 +165,9 @@
 
 
 @mixin positionAbsolute() {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    // position: absolute;
+    // top: 0;
+    // bottom: 0;
+    // left: 0;
+    // right: 0;
 }
