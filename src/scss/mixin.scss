@@ -1,0 +1,153 @@
+@import '../scss/variable.scss';
+
+
+@mixin hover() {
+
+    &:hover {
+        transition: all 225ms ease-in-out;
+        cursor: pointer;
+    }
+}
+
+
+@mixin hoverDisabled() {
+    @include hover();
+
+    &:hover {
+        cursor: not-allowed;
+    }
+}
+
+
+@mixin btnPrimaryDisabled() {
+    @include hoverDisabled();
+    background-color: $colorDisabledOrColorInputfields;
+}
+
+
+@mixin btnPrimary() {
+    background-color: $primaryColor;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
+@mixin btnPrimaryHover() {
+    @include hover();
+
+    &:hover {
+        background-color: $primaryColorHover;
+    }
+}
+
+
+@mixin btnSecondaryDisabled() {
+    @include hoverDisabled();
+    color: $colorDisabledOrColorInputfields;
+    border-radius: 1px solid $colorDisabledOrColorInputfields;
+}
+
+
+@mixin btnSecondary() {
+    color: $primaryColor;
+    border: 1px solid $primaryColorHover;
+    background-color: white;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
+@mixin btnSecondaryHover() {
+    @include hover();
+
+    &:hover {
+        background-color: $secondaryColorHover;
+        color: white;
+    }
+}
+
+
+@mixin iconHover() {
+    @include hover();
+
+    &:hover {
+        background-color: $bgColor;
+    }
+}
+
+
+@mixin inputfieldOrTextarea() {
+    // width: ;
+    // height: ;
+    // border-radius: ;
+    // padding: ;
+    // background-color: ;
+}
+
+
+@mixin inputfieldOrTextareaHover() {
+
+    &:hover {
+        border: 1px solid $colorDisabledOrColorInputfieldsHover;
+    }
+}
+
+
+@mixin inputfieldOrTextareaFocus() {
+
+    &:focus {
+        border: 1px solid $secondaryColorHover;
+    }
+}
+
+
+@mixin flex() {
+    display: flex;
+}
+
+
+@mixin flexCenteredXAxis() {
+    @include flex();
+    justify-content: center;
+}
+
+
+@mixin flexCenteredYAxis() {
+    @include flex();
+    align-items: center;
+}
+
+
+@mixin flexCenteredInTheMiddle() {
+    @include flex();
+    @include flexCenteredXAxis();
+    @include flexCenteredYAxis();
+}
+
+
+@mixin flexSpaceAround() {
+    @include flex();
+    justify-content: space-around;
+}
+
+
+@mixin flexSpaceBetween() {
+    @include flex();
+    justify-content: space-between;
+}
+
+
+@mixin flexSpaceEvenly() {
+    @include flex();
+    justify-content: space-evenly;
+}
+
+
+@mixin positionAbsolute() {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
