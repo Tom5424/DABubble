@@ -4,12 +4,13 @@
 
 main {
     background-color: $bgColor;
+    height: 100vh
 }
 
 
 header {
     @include flexSpaceBetween();
-    padding: 20px 40px 0 40px;
+    padding: 0 40px 0 40px;
 }
 
 
@@ -19,9 +20,13 @@ header {
         font-size: 18px;
     }
 
+    p:nth-of-type(1) {
+        margin-bottom: 15px;
+    }
+
     p:nth-of-type(2) {
         @include hover();
-        color: $primaryColorHover;
+        color: $purple;
         border: 1px solid transparent;
         border-radius: 30px;
         padding: 10px;
@@ -29,8 +34,8 @@ header {
         text-align: end;
 
         &:hover {
-            color: $primaryColor;
-            border: 1px solid $hoverColorInputfieldsOrText;
+            color: $darkPurple;
+            border: 1px solid $lightPurple;
             font-weight: 500;
         }
     }
@@ -45,29 +50,30 @@ header {
 
 .loginBox {
     border-radius: 30px;
-    padding: 0 50px 0 50px;
+    padding: 20px 50px 20px 50px;
     box-shadow: 0px 2px 10px 0 #00000014;
     background-color: #ffffff;
 
     h1 {
-        color: $primaryColor;
+        color: $darkPurple;
         text-align: center;
+        margin: 0 0 25px 0;
         font-size: 46px;
     }
 
     p {
         text-align: center;
-        margin-bottom: 40px;
+        margin-bottom: 20px;
         font-size: 20px
     }
 
     form {
         @include flexColumnCenteredXAxis();
-        gap: 30px;
+        gap: 25px;
 
         input {
-            @include inputfieldOrTextarea(500px, 100px, 18px, 32px, 18px, 80px, 18px, $bgColor);
-            border: unset;
+            @include inputfieldOrTextarea(470px, 100px, 18px, 32px, 18px, 80px, 18px, $bgColor);
+            border: 1px solid transparent;
 
             &:hover {
                 @include inputfieldOrTextareaHover();
@@ -89,14 +95,15 @@ header {
 
         p {
             @include hover();
-            color: $primaryColorHover;
+            color: $purple;
+            margin: -10px 0 0 0;
             font-size: 18px;
             padding: 5px 15px 5px 15px;
             text-align: center;
 
             &:hover {
                 background-color: $bgColor;
-                color: $primaryColor;
+                color: $darkPurple;
                 border-radius: 30px;
                 font-weight: 500;
             }
@@ -116,4 +123,75 @@ header {
     background-image: url('../../../assets/icons/lock-icon-gray.svg');
     background-position: 30px 16px;
     background-repeat: no-repeat;
+}
+
+
+// .containerTextWithTwoLines {
+//     @include flexEndYAxis();
+//     gap: 20px;
+//     margin-top: -15px;
+
+//     p {
+//         margin: 0;
+//         padding: 0 !important;
+//         color: #000000 !important;
+//         text-align: unset !important;
+//     }
+
+//     hr {
+//         border: 1px solid $lightPurple;
+//         width: 250px;
+//     }
+// }
+
+
+.btnSignInWithGoogle {
+    @include hover();
+    @include flexCenteredInTheMiddle();
+    background-color: $bgColor;
+    color: $darkPurple;
+    width: 580px;
+    gap: 20px;
+    padding: 11px 32px 11px 32px;
+    border-radius: 100px;
+    font-size: 18px;
+    border: 1px solid transparent;
+
+    &:hover {
+        border: 1px solid $darkPurple;
+        transition: all 225ms ease-in-out;
+        font-weight: 700;
+    }
+
+    &:active {
+        border: 1px solid $textGray;
+        transition: all 225ms ease-in-out;
+        font-weight: 500;
+    }
+}
+
+
+.btnContainer {
+    @include flex();
+    gap: 30px;
+
+    button {
+        border-radius: 25px;
+        padding: 12px 25px 12px 25px;
+    }
+}
+
+
+.btnPrimary {
+    @include btnPrimary();
+    @include btnPrimaryHover();
+    @include btnPrimaryActive();
+    border: unset;
+}
+
+
+.btnSecondary {
+    @include btnSecondary();
+    @include btnSecondaryHover();
+    @include btnSecondaryActive();
 }

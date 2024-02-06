@@ -21,12 +21,12 @@
 
 @mixin btnPrimaryDisabled() {
     @include hoverDisabled();
-    background-color: $disabledColorOrColorInputfieldHover;
+    background-color: $textGray;
 }
 
 
 @mixin btnPrimary() {
-    background-color: $primaryColor;
+    background-color: $darkPurple;
     color: white;
     font-size: 18px;
     font-weight: 700;
@@ -37,21 +37,31 @@
     @include hover();
 
     &:hover {
-        background-color: $primaryColorHover;
+        transition: all 225ms ease-in-out;
+        background-color: $purple;
+    }
+}
+
+
+@mixin btnPrimaryActive() {
+
+    &:active {
+        background-color: $darkPurple;
+        transition: all 225ms ease-in-out;
     }
 }
 
 
 @mixin btnSecondaryDisabled() {
     @include hoverDisabled();
-    color: $disabledColorOrColorInputfieldHover;
-    border: 1px solid $disabledColorOrColorInputfieldHover;
+    color: $textGray;
+    border: 1px solid $textGray;
 }
 
 
 @mixin btnSecondary() {
-    color: $primaryColor;
-    border: 1px solid $primaryColorHover;
+    color: $darkPurple;
+    border: 1px solid $purple;
     background-color: white;
     font-size: 18px;
     font-weight: 700;
@@ -62,8 +72,18 @@
     @include hover();
 
     &:hover {
-        background-color: $secondaryColorHover;
+        background-color: $middlePurple;
+        transition: all 225ms ease-in-out;
         color: white;
+    }
+}
+
+
+@mixin btnSecondaryActive() {
+
+    &:active {
+        background-color: $darkPurple;
+        transition: all 225ms ease-in-out;
     }
 }
 
@@ -73,17 +93,18 @@
 
     &:hover {
         background-color: $bgColor;
+        transition: all 225ms ease-in-out;
     }
 }
 
 
-@mixin inputfieldOrTextarea($widthValueInPx, $borderRadiusValueInPx, $padddingTopInPx, $padddingRightInPx, $padddingBottomInPx, $padddingLeftInPx, $fontSizeValueInPx, $bgColor) {
-    width: $widthValueInPx;
-    border-radius: $borderRadiusValueInPx;
+@mixin inputfieldOrTextarea($widthInPx, $borderRadiusInPx, $padddingTopInPx, $padddingRightInPx, $padddingBottomInPx, $padddingLeftInPx, $fontSizeInPx, $bgColor) {
+    width: $widthInPx;
+    border-radius: $borderRadiusInPx;
     padding: $padddingTopInPx $padddingRightInPx $padddingBottomInPx $padddingLeftInPx;
-    font-size: $fontSizeValueInPx;
+    font-size: $fontSizeInPx;
     background-color: $bgColor;
-    color: $disabledColorOrColorInputfieldHover;
+    color: $textGray;
     outline: none;
 }
 
@@ -92,7 +113,7 @@
 
     &:hover {
         transition: all 225ms ease-in-out;
-        border: 1px solid $disabledColorOrColorInputfieldHover;
+        border: 1px solid $textGray;
     }
 }
 
@@ -100,7 +121,7 @@
 @mixin inputfieldOrTextareaFocus() {
 
     &:focus {
-        border: 1px solid $secondaryColorHover;
+        border: 1px solid $middlePurple;
     }
 }
 
@@ -119,6 +140,12 @@
 @mixin flexCenteredYAxis() {
     @include flex();
     align-items: center;
+}
+
+
+@mixin flexEndYAxis() {
+    @include flex();
+    align-items: flex-end;
 }
 
 

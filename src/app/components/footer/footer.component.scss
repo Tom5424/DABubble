@@ -1,0 +1,24 @@
+@import '../../../scss/fonts.scss';
+@import '../../../scss/mixin.scss';
+
+
+footer {
+    @include flexCenteredXAxis();
+    gap: 16px;
+    padding-top: 25px;
+
+    a {
+        @include hover();
+        color: $purple;
+        border-radius: 30px;
+        padding: 10px 15px 10px 15px;
+        border: 1px solid transparent;
+        font-size: 18px;
+
+        &:hover {
+            color: $darkPurple;
+            border: 1px solid $lightPurple;
+            font-weight: 500;
+        }
+    }
+}
