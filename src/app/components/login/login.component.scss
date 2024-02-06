@@ -1,10 +1,10 @@
-@import '../../../scss/fonts.scss';
+@import '../../../scss/variable.scss';
 @import '../../../scss/mixin.scss';
 
 
 main {
     background-color: $bgColor;
-    height: 100vh
+    min-height: 100vh
 }
 
 
@@ -44,11 +44,12 @@ header {
 
 .mainContainerloginBox {
     @include flexCenteredXAxis();
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 
 .loginBox {
+    @include flexColumnCenteredXAxis();
     border-radius: 30px;
     padding: 20px 50px 20px 50px;
     box-shadow: 0px 2px 10px 0 #00000014;
@@ -56,15 +57,8 @@ header {
 
     h1 {
         color: $darkPurple;
-        text-align: center;
         margin: 0 0 25px 0;
         font-size: 46px;
-    }
-
-    p {
-        text-align: center;
-        margin-bottom: 20px;
-        font-size: 20px
     }
 
     form {
@@ -96,7 +90,7 @@ header {
         p {
             @include hover();
             color: $purple;
-            margin: -10px 0 0 0;
+            margin: -10px 0 -10px 0;
             font-size: 18px;
             padding: 5px 15px 5px 15px;
             text-align: center;
@@ -109,6 +103,12 @@ header {
             }
         }
     }
+}
+
+
+.text {
+    margin-bottom: 20px;
+    font-size: 20px
 }
 
 

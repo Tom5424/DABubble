@@ -1,4 +1,24 @@
+@import './scss/variable.scss';
+@import './scss/mixin.scss';
+
+
 body {
     margin: 0;
     font-family: 'Figtree', sans-serif;
+}
+
+
+.errorMessage {
+    @include errorMessage();
+}
+
+
+.errorInputfield {
+    border: 1px solid $rosaError !important;
+}
+
+
+.btnDisabled {
+    @include btnPrimaryDisabled();
+    @include btnPrimaryDisabled();
 }
