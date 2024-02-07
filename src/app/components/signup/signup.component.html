@@ -1,0 +1,36 @@
+<main>
+    <header>
+        <img src="./assets/img/da-bubble-logo.svg" alt="DABubble Logo">
+    </header>
+
+    <div class="mainContainerSignupBox">
+
+        <div class="signupBox">
+            <div routerLink="/login" class="containerArrowIcon">
+                <img src="./assets/icons/arrow-icon.svg" alt="Arrow Icon">
+            </div>
+
+            <h1>Create Account</h1>
+            <p class="text">With your name and email address you have your new DABubble account.</p>
+
+            <form id="signupForm">
+                <input class="inputFieldName" type="text" placeholder="First Name and Last Name">
+                <input class="inputFieldEmail" type="email" placeholder="examplename@email.com">
+                <input class="inputFieldPassword" type="password" placeholder="Password">
+
+                <label for="checkboxPrivacyPolicy" form="signupForm">
+                    <input class="checkbox" type="checkbox" id="checkboxPrivacyPolicy">
+                    I accept the
+                    <a routerLink="/privacyPolicy">privacy policy</a>
+                </label>
+
+                <div class="btnContainer">
+                    <button type="button">Further</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <app-footer></app-footer>
+</main>

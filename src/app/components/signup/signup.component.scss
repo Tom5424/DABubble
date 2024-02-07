@@ -1,0 +1,145 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+main {
+    background-color: $bgColor;
+    height: 100vh;
+}
+
+
+header {
+    padding: 10px 40px 0 40px;
+}
+
+
+.mainContainerSignupBox {
+    @include flexCenteredXAxis();
+}
+
+
+.signupBox {
+    @include flexColumnCenteredXAxis();
+    position: relative;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 10px 0px #00000014;
+    border-radius: 30px;
+    padding: 20px 50px 20px 50px;
+
+    h1 {
+        color: $darkPurple;
+        font-size: 46px;
+    }
+}
+
+
+.containerArrowIcon {
+    @include hover();
+    @include iconHover();
+    @include flexCenteredInTheMiddle();
+    @include positionAbsolute(50px, unset, 60px, unset);
+    width: 20px;
+    height: 20px;
+    padding: 8px;
+
+    &:hover {
+
+        img {
+            transition: all 225ms ease-in-out;
+            filter: brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(1557%) hue-rotate(226deg) brightness(110%) contrast(90%);
+        }
+    }
+}
+
+
+.text {
+    font-size: 20px;
+    margin-top: 0;
+}
+
+
+form {
+    @include flexColumnCenteredXAxis();
+    gap: 30px;
+
+    input {
+        @include inputfieldOrTextarea(470px, 30px, 18px, 32px, 18px, 80px, 18px, $bgColor);
+        @include inputfieldOrTextareaHover();
+        @include inputfieldOrTextareaFocus();
+        border: 1px solid transparent;
+
+        &:focus {
+
+            &.inputFieldName {
+                background-image: url('../../../assets/icons/user-icon-black.svg');
+            }
+
+            &.inputFieldEmail {
+                background-image: url('../../../assets/icons/email-icon-black.svg');
+            }
+
+            &.inputFieldPassword {
+                background-image: url('../../../assets/icons/lock-icon-black.svg');
+            }
+        }
+    }
+
+    label {
+        @include hover();
+        width: 100%;
+
+        input {
+            width: unset;
+        }
+
+        a {
+            color: $purple;
+            font-size: 18px;
+            border-radius: 30px;
+            padding: 5px 8px 5px 8px;
+            text-decoration: none;
+
+            &:hover {
+                background-color: $bgColor;
+                color: $darkPurple;
+                font-weight: 500;
+            }
+        }
+    }
+}
+
+
+.inputFieldName {
+    background-image: url('../../../assets/icons/user-icon-gray.svg');
+    background-repeat: no-repeat;
+    background-position: 30px 16px;
+}
+
+
+.inputFieldEmail {
+    background-image: url('../../../assets/icons/email-icon-gray.svg');
+    background-repeat: no-repeat;
+    background-position: 30px 16px;
+}
+
+
+.inputFieldPassword {
+    background-image: url('../../../assets/icons/lock-icon-gray.svg');
+    background-repeat: no-repeat;
+    background-position: 30px 16px;
+}
+
+
+.btnContainer {
+    @include flexEndXAxis();
+    width: 100%;
+
+    button {
+        @include btnPrimary();
+        @include btnPrimaryHover();
+        @include btnPrimaryActive();
+        padding: 12px 25px 12px 25px;
+        border-radius: 25px;
+        border: unset;
+    }
+}

@@ -123,6 +123,7 @@
 
     &:focus {
         border: 1px solid $middlePurple;
+        color: black;
     }
 }
 
@@ -144,6 +145,12 @@
 @mixin flexCenteredXAxis() {
     @include flex();
     justify-content: center;
+}
+
+
+@mixin flexEndXAxis() {
+    @include flex();
+    justify-content: flex-end;
 }
 
 
@@ -201,10 +208,10 @@
 }
 
 
-@mixin positionAbsolute() {
-    // position: absolute;
-    // top: 0;
-    // bottom: 0;
-    // left: 0;
-    // right: 0;
+@mixin positionAbsolute($top, $bottom, $left, $right) {
+    position: absolute;
+    top: $top;
+    bottom: $bottom;
+    left: $left;
+    right: $right;
 }

@@ -67,15 +67,11 @@ header {
 
         input {
             @include inputfieldOrTextarea(470px, 100px, 18px, 32px, 18px, 80px, 18px, $bgColor);
+            @include inputfieldOrTextareaHover();
             border: 1px solid transparent;
-
-            &:hover {
-                @include inputfieldOrTextareaHover();
-            }
 
             &:focus {
                 @include inputfieldOrTextareaFocus();
-                color: #000000;
 
                 &.inputFieldEmail {
                     background-image: url('../../../assets/icons/email-icon-black.svg');
