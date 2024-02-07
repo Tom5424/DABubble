@@ -13,19 +13,69 @@
             <h1>Create Account</h1>
             <p class="text">With your name and email address you have your new DABubble account.</p>
 
-            <form id="signupForm">
-                <input class="inputFieldName" type="text" placeholder="First Name and Last Name">
-                <input class="inputFieldEmail" type="email" placeholder="examplename@email.com">
-                <input class="inputFieldPassword" type="password" placeholder="Password">
+            <form id="signupForm" [formGroup]="signupForm">
+                <!--------------------------------- Inputfield Name --------------------------------->
+                <input class="inputFieldName" type="text" placeholder="First Name and Last Name" formControlName="name"
+                    [ngClass]="{'errorInputfield': inputfieldNameIsRequired() || inputfieldNameIsToShort() || inputfieldNameIsToLong()}">
+
+                @if (inputfieldNameIsRequired()) {
+                <p class="errorMessage">Name is required</p>
+                } @else if (inputfieldNameIsToShort()) {
+                <p style="margin-right: 250px !important;" class="errorMessage">
+                    Name must be at least 3 Characters long
+                </p>
+                } @else if (inputfieldNameIsToLong()) {
+                <p style="margin-right: 210px !important;" class="errorMessage">
+                    Name can be a maximum of 15 characters long
+                </p>
+                }
+                <!--------------------------------- Inputfield Name --------------------------------->
+
+
+                <!--------------------------------- Inputfield Email --------------------------------->
+                <input class="inputFieldEmail" type="email" placeholder="examplename@email.com" formControlName="email"
+                    [ngClass]="{'errorInputfield': inputfieldEmailIsRequired() || inputfieldEmailIsInvalid()}">
+
+                @if (inputfieldEmailIsRequired()) {
+                <p class="errorMessage">Email is required</p>
+                } @else if (inputfieldEmailIsInvalid()) {
+                <p style="margin-right: 342px !important;" class="errorMessage">Please enter a valid Email</p>
+                }
+                <!--------------------------------- Inputfield Email --------------------------------->
+
+
+                <!--------------------------------- Inputfield Password --------------------------------->
+                <input class="inputFieldPassword" type="password" placeholder="Password" formControlName="password"
+                    [ngClass]="{'errorInputfield': inputfieldPasswordIsRequired() || inputfieldPasswordIsToShort() || inputfieldPasswordIsToLong()}">
+
+                @if (inputfieldPasswordIsRequired()) {
+                <p class="errorMessage">Password is required</p>
+                } @else if (inputfieldPasswordIsToShort()) {
+                <p style="margin-right: 244px !important;" class="errorMessage">
+                    Password must be at least 12 Characters long
+                </p>
+                }@else if (inputfieldPasswordIsToLong()) {
+                <p style="margin-right: 214px !important;" class="errorMessage">
+                    Password can be a maximum of 50 characters long
+                </p>
+                }
+                <!--------------------------------- Inputfield Password --------------------------------->
+
 
                 <label for="checkboxPrivacyPolicy" form="signupForm">
-                    <input class="checkbox" type="checkbox" id="checkboxPrivacyPolicy">
+                    <input class="checkbox" type="checkbox" id="checkboxPrivacyPolicy"
+                        formControlName="checkboxPrivacyPolicy">
                     I accept the
                     <a routerLink="/privacyPolicy">privacy policy</a>
                 </label>
 
+
                 <div class="btnContainer">
-                    <button type="button">Further</button>
+                    <button type="button"
+                        [disabled]="signupForm.invalid || !signupForm.controls.checkboxPrivacyPolicy.value"
+                        [ngClass]="{'btnDisabled': signupForm.invalid || !signupForm.controls.checkboxPrivacyPolicy.value}">
+                        Further
+                    </button>
                 </div>
             </form>
         </div>

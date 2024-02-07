@@ -26,12 +26,12 @@ export class LoginComponent {
   }
 
 
-  inputfieldEmailIsInvalid() {
+  inputfieldEmailIsRequired(): boolean {
     return (this.loginForm.controls.email.touched && this.loginForm.controls.email.errors?.['required']) ? true : false;
   }
 
 
-  inputfieldPasswordIsInvalid() {
+  inputfieldPasswordIsRequired(): boolean {
     return (this.loginForm.controls.password.touched && this.loginForm.controls.password.errors?.['required']) ? true : false;
   }
 }

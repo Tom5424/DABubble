@@ -18,9 +18,9 @@
             <form (ngSubmit)="logIn()" [formGroup]="loginForm">
                 <!--------------------------------- Inputfield Email --------------------------------->
                 <input class="inputFieldEmail" type="email" placeholder="examplename@email.com" formControlName="email"
-                    [ngClass]="{'errorInputfield': inputfieldEmailIsInvalid()}">
+                    [ngClass]="{'errorInputfield': inputfieldEmailIsRequired()}">
 
-                @if (inputfieldEmailIsInvalid()) {
+                @if (inputfieldEmailIsRequired()) {
                 <p class="errorMessage">Email is required</p>
                 }
                 <!--------------------------------- Inputfield Email --------------------------------->
@@ -28,9 +28,9 @@
 
                 <!--------------------------------- Inputfield Password --------------------------------->
                 <input class="inputFieldPassword" type="password" placeholder="Password" formControlName="password"
-                    [ngClass]="{'errorInputfield': inputfieldPasswordIsInvalid()}">
+                    [ngClass]="{'errorInputfield': inputfieldPasswordIsRequired()}">
 
-                @if (inputfieldPasswordIsInvalid()) {
+                @if (inputfieldPasswordIsRequired()) {
                 <p style="margin-right: 372px !important;" class="errorMessage">Password is required</p>
                 }
                 <!--------------------------------- Inputfield Password --------------------------------->
