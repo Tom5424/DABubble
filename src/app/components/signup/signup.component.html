@@ -11,9 +11,8 @@
             </div>
 
             <h1>Create Account</h1>
-            <p class="text">With your name and email address you have your new DABubble account.</p>
 
-            <form id="signupForm" [formGroup]="signupForm">
+            <form (ngSubmit)="createAccount()" id="signupForm" [formGroup]="signupForm">
                 <!--------------------------------- Inputfield Name --------------------------------->
                 <input class="inputFieldName" type="text" placeholder="First Name and Last Name" formControlName="name"
                     [ngClass]="{'errorInputfield': inputfieldNameIsRequired() || inputfieldNameIsToShort() || inputfieldNameIsToLong()}">
@@ -21,11 +20,11 @@
                 @if (inputfieldNameIsRequired()) {
                 <p class="errorMessage">Name is required</p>
                 } @else if (inputfieldNameIsToShort()) {
-                <p style="margin-right: 250px !important;" class="errorMessage">
+                <p style="margin-right: 250px;" class="errorMessage">
                     Name must be at least 3 Characters long
                 </p>
                 } @else if (inputfieldNameIsToLong()) {
-                <p style="margin-right: 210px !important;" class="errorMessage">
+                <p style="margin-right: 210px;" class="errorMessage">
                     Name can be a maximum of 15 characters long
                 </p>
                 }
@@ -39,7 +38,7 @@
                 @if (inputfieldEmailIsRequired()) {
                 <p class="errorMessage">Email is required</p>
                 } @else if (inputfieldEmailIsInvalid()) {
-                <p style="margin-right: 342px !important;" class="errorMessage">Please enter a valid Email</p>
+                <p style="margin-right: 342px;" class="errorMessage">Please enter a valid Email</p>
                 }
                 <!--------------------------------- Inputfield Email --------------------------------->
 
@@ -49,13 +48,13 @@
                     [ngClass]="{'errorInputfield': inputfieldPasswordIsRequired() || inputfieldPasswordIsToShort() || inputfieldPasswordIsToLong()}">
 
                 @if (inputfieldPasswordIsRequired()) {
-                <p class="errorMessage">Password is required</p>
+                <p style="margin-right: 370px;" class="errorMessage">Password is required</p>
                 } @else if (inputfieldPasswordIsToShort()) {
-                <p style="margin-right: 244px !important;" class="errorMessage">
+                <p style="margin-right: 215px;" class="errorMessage">
                     Password must be at least 12 Characters long
                 </p>
                 }@else if (inputfieldPasswordIsToLong()) {
-                <p style="margin-right: 214px !important;" class="errorMessage">
+                <p style="margin-right: 185px;" class="errorMessage">
                     Password can be a maximum of 50 characters long
                 </p>
                 }

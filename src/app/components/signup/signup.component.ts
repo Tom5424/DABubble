@@ -23,6 +23,11 @@ export class SignupComponent {
   });
 
 
+  createAccount() {
+
+  }
+
+
   inputfieldNameIsRequired(): boolean {
     return (this.signupForm.controls.name.touched && this.signupForm.controls.name.errors?.['required']) ? true : false;
   }

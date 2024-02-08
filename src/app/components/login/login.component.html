@@ -13,7 +13,6 @@
 
         <div class="loginBox">
             <h1>Log in</h1>
-            <p class="text">We recommend that you use the email address you use at work.</p>
 
             <form (ngSubmit)="logIn()" [formGroup]="loginForm">
                 <!--------------------------------- Inputfield Email --------------------------------->
@@ -31,18 +30,18 @@
                     [ngClass]="{'errorInputfield': inputfieldPasswordIsRequired()}">
 
                 @if (inputfieldPasswordIsRequired()) {
-                <p style="margin-right: 372px !important;" class="errorMessage">Password is required</p>
+                <p style="margin-right: 372px;" class="errorMessage">Password is required</p>
                 }
                 <!--------------------------------- Inputfield Password --------------------------------->
 
 
-                <p>Forgot Password?</p>
+                <p class="textForgotPassword">Forgot Password?</p>
 
-                <!-- <div class=" containerTextWithTwoLines">
-                <hr>
-                <p>OR</p>
-                <hr>
-                </div> -->
+                <div class=" containerTextWithTwoLines">
+                    <hr>
+                    <p>OR</p>
+                    <hr>
+                </div>
 
                 <button class="btnSignInWithGoogle" type="submit">
                     <img src="./assets/icons/google-icon.svg" alt="Google Icon">
