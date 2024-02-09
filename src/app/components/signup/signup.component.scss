@@ -36,7 +36,6 @@ header {
 
 
 .containerArrowIcon {
-    @include hover();
     @include iconHover();
     @include flexCenteredInTheMiddle();
     @include positionAbsolute(30px, unset, 60px, unset);
