@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
+import { AvatarPickerComponent } from '../avatar-picker/avatar-picker.component';
+import { FormDataService } from '../../services/form-data.service';
 
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [FooterComponent, RouterLink, ReactiveFormsModule, NgClass],
+  imports: [FooterComponent, AvatarPickerComponent, RouterLink, ReactiveFormsModule, NgClass],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })
@@ -23,8 +25,14 @@ export class SignupComponent {
   });
 
 
-  createAccount() {
+  constructor(public router: Router, public formDataService: FormDataService) {
 
+  }
+
+
+  saveFormDataAndDirectToNextPage(): void {
+    this.formDataService.saveFormDataSignupForm(this.signupForm.value);
+    this.router.navigateByUrl('/avatarPicker');
   }
 
 

@@ -1,0 +1,51 @@
+<main>
+    <header>
+        <img src="./assets/img/da-bubble-logo.svg" alt="DABubble Logo">
+    </header>
+
+
+    <div class="mainContainerAvatarPicker">
+
+        <div class="avatarPickerBox">
+            <div routerLink="/signup" class="containerArrowIcon">
+                <img src="./assets/icons/arrow-icon.svg" alt="Arrow Icon">
+            </div>
+
+            <h1>Choose your Avatar</h1>
+
+            <img class="imgNonSelectedUser" src="./assets/img/non-user-selected.svg" alt="Image non selected User">
+
+            <h2>{{ formDataService.user.name }}</h2>
+
+            <div>
+                <p class="text">Choose from the List</p>
+
+                <div class="containerUserImages">
+                    <img src="./assets/img/avatar-1.svg" alt="Avatar Image">
+                    <img src="./assets/img/avatar-2.svg" alt="Avatar Image">
+                    <img src="./assets/img/avatar-3.svg" alt="Avatar Image">
+                    <img src="./assets/img/avatar-4.svg" alt="Avatar Image">
+                    <img src="./assets/img/avatar-5.svg" alt="Avatar Image">
+                    <img src="./assets/img/avatar-6.svg" alt="Avatar Image">
+                </div>
+
+                <div class="containerTextAndBtn">
+                    <p>Use your own Image</p>
+
+                    <label for="uploadFile">
+                        Upload File
+                        <input id="uploadFile" type="file" hidden>
+                    </label>
+                </div>
+
+                <div class="containerBtn">
+                    <button (click)="test()" type="button">Further</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <app-footer></app-footer>
+</main>

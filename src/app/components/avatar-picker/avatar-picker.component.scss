@@ -1,0 +1,122 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+main {
+    background-color: $bgColor;
+    min-height: 100vh;
+}
+
+
+header {
+    padding: 10px 40px 0 40px;
+}
+
+
+.mainContainerAvatarPicker {
+    @include flexCenteredXAxis();
+    margin-top: 15px;
+}
+
+
+.avatarPickerBox {
+    @include flexColumnCenteredXAxis();
+    position: relative;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 10px 0px #00000014;
+    border-radius: 30px;
+    padding: 30px 50px 30px 50px;
+
+    h1 {
+        color: $darkPurple;
+        margin: 0 0 25px 0;
+        font-size: 46px;
+    }
+
+    h2 {
+        font-size: 32px;
+        margin: 15px 0 15px 0px;
+    }
+}
+
+
+.containerArrowIcon {
+    @include hover();
+    @include iconHover();
+    @include flexCenteredInTheMiddle();
+    @include positionAbsolute(35px, unset, 10px, unset);
+    width: 20px;
+    height: 20px;
+    padding: 8px;
+
+    &:hover {
+
+        img {
+            transition: all 225ms ease-in-out;
+            filter: brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(1557%) hue-rotate(226deg) brightness(110%) contrast(90%);
+        }
+    }
+}
+
+
+.imgNonSelectedUser {
+    background-color: $purple;
+    border-radius: 50%;
+    padding: 16px;
+    width: 75px;
+}
+
+
+.text {
+    width: 95%;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+
+.containerUserImages {
+    @include flex();
+    gap: 8px;
+
+    img {
+        width: 55px;
+        border-radius: 50%;
+    }
+}
+
+
+.containerTextAndBtn {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-top: 20px;
+
+    p {
+        font-size: 20px;
+        margin: 0;
+    }
+
+    label {
+        @include btnSecondaryHover();
+        @include btnSecondaryActive();
+        @include btnSecondary();
+        padding: 12px 25px 12px 25px;
+        border-radius: 25px;
+    }
+}
+
+
+.containerBtn {
+    @include flexEndXAxis();
+    margin-top: 20px;
+
+    button {
+        @include btnPrimary();
+        @include btnPrimaryHover();
+        @include btnPrimaryActive();
+        border: unset;
+        margin-right: -40px;
+        padding: 12px 25px 12px 25px;
+        border-radius: 25px;
+    }
+}

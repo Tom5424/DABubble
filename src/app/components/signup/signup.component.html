@@ -3,6 +3,7 @@
         <img src="./assets/img/da-bubble-logo.svg" alt="DABubble Logo">
     </header>
 
+
     <div class="mainContainerSignupBox">
 
         <div class="signupBox">
@@ -12,7 +13,7 @@
 
             <h1>Create Account</h1>
 
-            <form (ngSubmit)="createAccount()" id="signupForm" [formGroup]="signupForm">
+            <form (ngSubmit)="saveFormDataAndDirectToNextPage()" id="signupForm" [formGroup]="signupForm">
                 <!--------------------------------- Inputfield Name --------------------------------->
                 <input class="inputFieldName" type="text" placeholder="First Name and Last Name" formControlName="name"
                     [ngClass]="{'errorInputfield': inputfieldNameIsRequired() || inputfieldNameIsToShort() || inputfieldNameIsToLong()}">
@@ -70,7 +71,7 @@
 
 
                 <div class="btnContainer">
-                    <button type="button"
+                    <button type="submit"
                         [disabled]="signupForm.invalid || !signupForm.controls.checkboxPrivacyPolicy.value"
                         [ngClass]="{'btnDisabled': signupForm.invalid || !signupForm.controls.checkboxPrivacyPolicy.value}">
                         Further
@@ -80,6 +81,7 @@
         </div>
 
     </div>
+
 
     <app-footer></app-footer>
 </main>
