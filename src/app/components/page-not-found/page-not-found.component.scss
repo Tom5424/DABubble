@@ -1,0 +1,36 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+main {
+    background-color: $bgColor;
+    height: 100vh;
+}
+
+
+header {
+    padding: 10px 40px 0 40px;
+}
+
+
+.containerPageNotFound {
+    @include flexColumnCenteredXAxis();
+    margin-top: 50px;
+
+    h1 {
+        color: $darkPurple;
+        margin-bottom: 0;
+        font-size: 100px;
+    }
+
+    h2 {
+        margin-bottom: 0;
+        font-size: 50px;
+    }
+
+    p {
+        text-align: center;
+        line-height: 1.5;
+        font-size: 20px;
+    }
+}

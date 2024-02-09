@@ -4,6 +4,7 @@ import { LegalNoticeComponent } from './components/legal-notice/legal-notice.com
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { AvatarPickerComponent } from './components/avatar-picker/avatar-picker.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 
 export const routes: Routes = [
@@ -15,4 +16,6 @@ export const routes: Routes = [
 
     { path: 'signup', title: 'DABubble - Signup', component: SignupComponent },
     { path: 'avatarPicker', title: 'DABubble - Avatar Picker', component: AvatarPickerComponent },
+
+    { path: '**', title: 'DABubble - Page not Found', component: PageNotFoundComponent }
 ];

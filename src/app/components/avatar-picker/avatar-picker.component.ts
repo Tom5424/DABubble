@@ -32,7 +32,6 @@ export class AvatarPickerComponent implements OnInit {
   }
 
 
-
   ngOnInit(): void {
     this.formDataService.loadFormDataSignupForm();
   }
@@ -47,7 +46,7 @@ export class AvatarPickerComponent implements OnInit {
   }
 
 
-  createAccount() {
+  createAccount(): void {
     this.formDataService.accountIsCreated = true;
     setTimeout(() => {
       this.router.navigateByUrl('/login');
