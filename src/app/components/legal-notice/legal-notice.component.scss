@@ -8,11 +8,6 @@ main {
 }
 
 
-header {
-    padding: 10px 40px 0 40px;
-}
-
-
 .mainContainerLegalNotice {
     @include flexCenteredXAxis();
     margin-top: 40px;

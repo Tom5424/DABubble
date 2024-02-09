@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormDataService } from '../../services/form-data.service';
 
 
 @Component({
@@ -11,5 +12,10 @@ import { Component } from '@angular/core';
 
 
 export class UserFeedbackMessageComponent {
+
+
+  constructor(public formDataService: FormDataService) {
+
+  }
 
 }

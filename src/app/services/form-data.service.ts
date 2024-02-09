@@ -10,6 +10,8 @@ import { User } from '../models/user';
 export class FormDataService {
   user: User = new User();
   accountIsCreated: boolean = false;
+  mailWasSentToResetPassword: boolean = false;
+  passwordReseted: boolean = false;
 
 
   saveFormDataSignupForm(formData: any): void {

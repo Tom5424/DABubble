@@ -1,3 +1,12 @@
 <div class="overlay">
+    @if(formDataService.accountIsCreated) {
     <p>Account created successfully!</p>
+    } @else if(formDataService.mailWasSentToResetPassword) {
+    <p>
+        <img src="./assets/icons/send-message-icon-white.svg" alt="Send Icon">
+        Email sent
+    </p>
+    }@else if (formDataService.passwordReseted) {
+    <p>Login</p>
+    }
 </div>

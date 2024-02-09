@@ -4,12 +4,13 @@ import { Router, RouterLink } from '@angular/router';
 import { FormDataService } from '../../services/form-data.service';
 import { NgClass } from '@angular/common';
 import { UserFeedbackMessageComponent } from '../user-feedback-message/user-feedback-message.component';
+import { HeaderComponent } from '../header/header.component';
 
 
 @Component({
   selector: 'app-avatar-picker',
   standalone: true,
-  imports: [FooterComponent, UserFeedbackMessageComponent, RouterLink, NgClass],
+  imports: [HeaderComponent, FooterComponent, UserFeedbackMessageComponent, RouterLink, NgClass],
   templateUrl: './avatar-picker.component.html',
   styleUrl: './avatar-picker.component.scss'
 })

@@ -3,12 +3,13 @@ import { FooterComponent } from '../footer/footer.component';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { HeaderComponent } from '../header/header.component';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FooterComponent, ReactiveFormsModule, NgClass, RouterLink],
+  imports: [HeaderComponent, FooterComponent, ReactiveFormsModule, NgClass, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

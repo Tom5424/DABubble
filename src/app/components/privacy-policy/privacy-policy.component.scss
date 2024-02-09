@@ -9,11 +9,6 @@ main {
 }
 
 
-header {
-    padding: 10px 40px 0 40px;
-}
-
-
 .mainContainerPrivacyPolicy {
     @include flexCenteredXAxis();
     margin: 40px 0 40px 0;

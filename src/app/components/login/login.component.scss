@@ -8,38 +8,6 @@ main {
 }
 
 
-header {
-    @include flexSpaceBetween();
-    padding: 0 40px 0 40px;
-}
-
-
-.containerText {
-
-    p {
-        font-size: 18px;
-        margin-bottom: 15px;
-    }
-
-    a {
-        @include hover();
-        color: $purple;
-        font-size: 18px;
-        border: 1px solid transparent;
-        border-radius: 30px;
-        padding: 10px;
-        margin: -8px 0 0 12px;
-        text-decoration: none;
-
-        &:hover {
-            color: $darkPurple;
-            border: 1px solid $lightPurple;
-            font-weight: 500;
-        }
-    }
-}
-
-
 .mainContainerloginBox {
     @include flexCenteredXAxis();
     margin-top: 15px;

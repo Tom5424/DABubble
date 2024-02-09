@@ -5,12 +5,13 @@ import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angula
 import { NgClass } from '@angular/common';
 import { AvatarPickerComponent } from '../avatar-picker/avatar-picker.component';
 import { FormDataService } from '../../services/form-data.service';
+import { HeaderComponent } from '../header/header.component';
 
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [FooterComponent, AvatarPickerComponent, RouterLink, ReactiveFormsModule, NgClass],
+  imports: [HeaderComponent, FooterComponent, AvatarPickerComponent, RouterLink, ReactiveFormsModule, NgClass],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })
@@ -32,6 +33,7 @@ export class SignupComponent {
 
   saveFormDataAndDirectToNextPage(): void {
     this.formDataService.saveFormDataSignupForm(this.signupForm.value);
+    this.signupForm.reset();
     this.router.navigateByUrl('/avatarPicker');
   }
 

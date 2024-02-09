@@ -8,11 +8,6 @@ main {
 }
 
 
-header {
-    padding: 10px 40px 0 40px;
-}
-
-
 .mainContainerSignupBox {
     @include flexCenteredXAxis();
     margin-top: 15px;
