@@ -4,6 +4,7 @@
 
 body {
     margin: 0;
+    overflow-x: hidden;
     font-family: 'Figtree', sans-serif;
 }
 
@@ -20,4 +21,18 @@ body {
 
 .btnDisabled {
     @include btnPrimaryDisabled();
+}
+
+
+/////////// Animation for User Feedback Message 
+@keyframes slideInLeft {
+    from {
+        transition: all 225ms ease-in-out;
+        transform: translateX(100vw);
+    }
+
+    to {
+        transition: all 225ms ease-in-out;
+        transform: translateX(0vw);
+    }
 }

@@ -26,7 +26,7 @@
 
                 <div class="containerAvatarImages">
                     @for (avatarImageUrl of avatarImageUrls; track $index) {
-                    <img (click)="selectOrToggleAvatar(avatarImageUrl)" src="{{ avatarImageUrl }}" alt="Avatar Image"
+                    <img (click)="selectAvatar(avatarImageUrl)" src="{{ avatarImageUrl }}" alt="Avatar Image"
                         [ngClass]="{'selectedAvatar': avatarImageUrl == selectedImageAvatarUrl}">
                     }
                 </div>
@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="containerBtn">
-                    <button (click)="test()" type="button">Further</button>
+                    <button (click)="createAccount()" type="button">Further</button>
                 </div>
             </div>
 
@@ -51,4 +51,9 @@
 
 
     <app-footer></app-footer>
+
+
+    @if (formDataService.accountIsCreated) {
+    <app-user-feedback-message></app-user-feedback-message>
+    }
 </main>

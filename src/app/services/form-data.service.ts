@@ -9,16 +9,17 @@ import { User } from '../models/user';
 
 export class FormDataService {
   user: User = new User();
+  accountIsCreated: boolean = false;
 
 
   saveFormDataSignupForm(formData: any): void {
     this.user = formData;
-    localStorage.setItem('data', JSON.stringify(this.user));
+    localStorage.setItem('userData', JSON.stringify(this.user));
   }
 
 
   loadFormDataSignupForm(): User {
-    let userAsString = localStorage.getItem('data');
+    let userAsString = localStorage.getItem('userData');
     if (userAsString) {
       this.user = JSON.parse(userAsString);
     }

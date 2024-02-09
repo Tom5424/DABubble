@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FooterComponent } from '../footer/footer.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormDataService } from '../../services/form-data.service';
 import { NgClass } from '@angular/common';
+import { UserFeedbackMessageComponent } from '../user-feedback-message/user-feedback-message.component';
 
 
 @Component({
   selector: 'app-avatar-picker',
   standalone: true,
-  imports: [FooterComponent, RouterLink, NgClass],
+  imports: [FooterComponent, UserFeedbackMessageComponent, RouterLink, NgClass],
   templateUrl: './avatar-picker.component.html',
   styleUrl: './avatar-picker.component.scss'
 })
@@ -26,7 +27,7 @@ export class AvatarPickerComponent implements OnInit {
   selectedImageAvatarUrl: string = '';
 
 
-  constructor(public formDataService: FormDataService) {
+  constructor(public formDataService: FormDataService, public router: Router) {
 
   }
 
@@ -37,7 +38,7 @@ export class AvatarPickerComponent implements OnInit {
   }
 
 
-  selectOrToggleAvatar(selectedImageAvatarUrl: string): void {
+  selectAvatar(selectedImageAvatarUrl: string): void {
     if (this.selectedImageAvatarUrl !== selectedImageAvatarUrl) {
       this.selectedImageAvatarUrl = selectedImageAvatarUrl;
     } else {
@@ -46,7 +47,12 @@ export class AvatarPickerComponent implements OnInit {
   }
 
 
-  test() {
-
+  createAccount() {
+    this.formDataService.accountIsCreated = true;
+    setTimeout(() => {
+      this.router.navigateByUrl('/login');
+      localStorage.removeItem('userData');
+      this.formDataService.accountIsCreated = false;
+    }, 1200);
   }
 }
