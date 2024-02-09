@@ -35,7 +35,7 @@ header {
 
     h2 {
         font-size: 32px;
-        margin: 15px 0 15px 0px;
+        margin: 15px 0 10px 0px;
     }
 }
 
@@ -59,11 +59,17 @@ header {
 }
 
 
-.imgNonSelectedUser {
+.imgNonSelectedAvatar {
     background-color: $purple;
     border-radius: 50%;
     padding: 16px;
     width: 75px;
+}
+
+
+.selectedAvatarImages {
+    width: 107px;
+    border-radius: 50%;
 }
 
 
@@ -74,14 +80,26 @@ header {
 }
 
 
-.containerUserImages {
+.containerAvatarImages {
     @include flex();
     gap: 8px;
 
     img {
+        @include hover();
+        border: 4px solid transparent;
         width: 55px;
         border-radius: 50%;
+
+        &:hover {
+            border: 4px solid $bgColor;
+        }
     }
+}
+
+
+.selectedAvatar {
+    transition: all 225ms ease-in-out;
+    border: 4px solid $bgColor !important;
 }
 
 
