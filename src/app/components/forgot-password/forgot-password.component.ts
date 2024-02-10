@@ -27,10 +27,11 @@ export class ForgotPasswordComponent {
   }
 
 
-  sendMailToResetPassword(): void {
+  sendEmailToResetPassword(): void {
     this.formDataService.mailWasSentToResetPassword = true;
     this.forgotPasswordForm.reset();
     setTimeout(() => {
+      this.router.navigateByUrl('/login');
       this.formDataService.mailWasSentToResetPassword = false;
     }, 1200);
   }
