@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
@@ -6,6 +6,7 @@ import { NgClass } from '@angular/common';
 import { AvatarPickerComponent } from '../avatar-picker/avatar-picker.component';
 import { FormDataService } from '../../services/form-data.service';
 import { HeaderComponent } from '../header/header.component';
+import { RoutingService } from '../../services/routing.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ import { HeaderComponent } from '../header/header.component';
 })
 
 
-export class SignupComponent {
+export class SignupComponent implements OnInit {
   signupForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
     email: new FormControl('', [Validators.required, Validators.email, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]{2,3}$/)]),
@@ -26,8 +27,13 @@ export class SignupComponent {
   });
 
 
-  constructor(public router: Router, public formDataService: FormDataService) {
+  constructor(public router: Router, public formDataService: FormDataService, public routingService: RoutingService) {
 
+  }
+
+
+  ngOnInit(): void {
+    this.routingService.savePreviousUrl(this.router.routerState.snapshot.url);
   }
 
 

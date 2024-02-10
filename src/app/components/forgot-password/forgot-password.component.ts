@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FooterComponent } from '../footer/footer.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { UserFeedbackMessageComponent } from '../user-feedback-message/user-feedback-message.component';
 import { FormDataService } from '../../services/form-data.service';
+import { RoutingService } from '../../services/routing.service';
 
 
 @Component({
@@ -16,14 +17,19 @@ import { FormDataService } from '../../services/form-data.service';
 })
 
 
-export class ForgotPasswordComponent {
+export class ForgotPasswordComponent implements OnInit {
   forgotPasswordForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]{2,3}$/)]),
   });
 
 
-  constructor(public formDataService: FormDataService, public router: Router) {
+  constructor(public formDataService: FormDataService, public routingService: RoutingService, public router: Router) {
 
+  }
+
+
+  ngOnInit(): void {
+    this.routingService.savePreviousUrl(this.router.routerState.snapshot.url);
   }
 
 

@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FooterComponent } from '../footer/footer.component';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
+import { RoutingService } from '../../services/routing.service';
 
 
 @Component({
@@ -15,11 +16,21 @@ import { HeaderComponent } from '../header/header.component';
 })
 
 
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm = new FormGroup({
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
   });
+
+
+  constructor(public router: Router, public routingService: RoutingService) {
+
+  }
+
+
+  ngOnInit(): void {
+    this.routingService.savePreviousUrl(this.router.routerState.snapshot.url);
+  }
 
 
   logIn() {

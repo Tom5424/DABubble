@@ -5,6 +5,7 @@ import { FormDataService } from '../../services/form-data.service';
 import { NgClass } from '@angular/common';
 import { UserFeedbackMessageComponent } from '../user-feedback-message/user-feedback-message.component';
 import { HeaderComponent } from '../header/header.component';
+import { RoutingService } from '../../services/routing.service';
 
 
 @Component({
@@ -28,13 +29,14 @@ export class AvatarPickerComponent implements OnInit {
   selectedImageAvatarUrl: string = '';
 
 
-  constructor(public formDataService: FormDataService, public router: Router) {
+  constructor(public formDataService: FormDataService, public routingService: RoutingService, public router: Router) {
 
   }
 
 
   ngOnInit(): void {
     this.formDataService.loadFormDataSignupForm();
+    this.routingService.savePreviousUrl(this.router.routerState.snapshot.url);
   }
 
 

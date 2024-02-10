@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FooterComponent } from '../footer/footer.component';
 import { UserFeedbackMessageComponent } from '../user-feedback-message/user-feedback-message.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -6,6 +6,7 @@ import { NgClass } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { FormDataService } from '../../services/form-data.service';
 import { HeaderComponent } from '../header/header.component';
+import { RoutingService } from '../../services/routing.service';
 
 
 @Component({
@@ -17,15 +18,20 @@ import { HeaderComponent } from '../header/header.component';
 })
 
 
-export class ResetPasswordComponent {
+export class ResetPasswordComponent implements OnInit {
   resetPasswordForm = new FormGroup({
     newPassword: new FormControl('', [Validators.required, Validators.minLength(12), Validators.maxLength(50)]),
     confirmPassword: new FormControl('', [Validators.required, Validators.minLength(12), Validators.maxLength(50)]),
   });
 
 
-  constructor(public formDataService: FormDataService, public router: Router) {
+  constructor(public formDataService: FormDataService, public routingService: RoutingService, public router: Router) {
 
+  }
+
+
+  ngOnInit(): void {
+    this.routingService.savePreviousUrl(this.router.routerState.snapshot.url);
   }
 
 

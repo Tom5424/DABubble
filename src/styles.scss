@@ -24,6 +24,30 @@ body {
 }
 
 
+/////////// Custom Styles for the scrollbar
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+/* Track */
+::-webkit-scrollbar-track {
+    background-color: $bgColor;
+}
+
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background-color: $textGray;
+    border-radius: 10px;
+
+    &:hover {
+        background-color: #4b4b4bbd;
+    }
+}
+
+
 /////////// Animation for User Feedback Message 
 @keyframes slideInLeft {
     from {

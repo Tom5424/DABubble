@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
+import { RoutingService } from '../../services/routing.service';
 
 
 @Component({
@@ -12,6 +13,15 @@ import { HeaderComponent } from '../header/header.component';
 })
 
 
-export class PrivacyPolicyComponent {
+export class PrivacyPolicyComponent implements OnInit {
 
+
+  constructor(public routingService: RoutingService) {
+
+  }
+
+
+  ngOnInit(): void {
+    this.routingService.getPreviousUrl();
+  }
 }
