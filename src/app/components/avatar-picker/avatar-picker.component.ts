@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FooterComponent } from '../footer/footer.component';
 import { Router, RouterLink } from '@angular/router';
-import { FormDataService } from '../../services/form-data.service';
 import { NgClass } from '@angular/common';
 import { UserFeedbackMessageComponent } from '../user-feedback-message/user-feedback-message.component';
 import { HeaderComponent } from '../header/header.component';
 import { RoutingService } from '../../services/routing.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -29,13 +29,13 @@ export class AvatarPickerComponent implements OnInit {
   selectedImageAvatarUrl: string = '';
 
 
-  constructor(public formDataService: FormDataService, public routingService: RoutingService, public router: Router) {
+  constructor(public routingService: RoutingService, public router: Router, public authService: AuthService) {
 
   }
 
 
   ngOnInit(): void {
-    this.formDataService.loadFormDataSignupForm();
+    this.authService.loadFormDataSignupFormService();
     this.routingService.savePreviousUrl(this.router.routerState.snapshot.url);
   }
 
@@ -50,11 +50,6 @@ export class AvatarPickerComponent implements OnInit {
 
 
   createAccount(): void {
-    this.formDataService.accountIsCreated = true;
-    setTimeout(() => {
-      this.router.navigateByUrl('/login');
-      localStorage.removeItem('userData');
-      this.formDataService.accountIsCreated = false;
-    }, 1200);
+    this.authService.signupService(this.authService.user.email, this.authService.user.password);
   }
 }

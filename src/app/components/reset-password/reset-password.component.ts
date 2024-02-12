@@ -4,9 +4,9 @@ import { UserFeedbackMessageComponent } from '../user-feedback-message/user-feed
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { FormDataService } from '../../services/form-data.service';
 import { HeaderComponent } from '../header/header.component';
 import { RoutingService } from '../../services/routing.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -25,7 +25,7 @@ export class ResetPasswordComponent implements OnInit {
   });
 
 
-  constructor(public formDataService: FormDataService, public routingService: RoutingService, public router: Router) {
+  constructor(public authService: AuthService, public routingService: RoutingService, public router: Router) {
 
   }
 
@@ -36,11 +36,11 @@ export class ResetPasswordComponent implements OnInit {
 
 
   resetPassword(): void {
-    this.formDataService.passwordReseted = true;
+    this.authService.passwordReseted = true;
     this.resetPasswordForm.reset();
     setTimeout(() => {
       this.router.navigateByUrl('/login');
-      this.formDataService.passwordReseted = false;
+      this.authService.passwordReseted = false;
     }, 1200);
   }
 

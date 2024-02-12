@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormDataService } from '../../services/form-data.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { FormDataService } from '../../services/form-data.service';
 export class UserFeedbackMessageComponent {
 
 
-  constructor(public formDataService: FormDataService) {
+  constructor(public authService: AuthService) {
 
   }
 

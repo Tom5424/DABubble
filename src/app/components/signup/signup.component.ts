@@ -4,9 +4,9 @@ import { FooterComponent } from '../footer/footer.component';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { AvatarPickerComponent } from '../avatar-picker/avatar-picker.component';
-import { FormDataService } from '../../services/form-data.service';
 import { HeaderComponent } from '../header/header.component';
 import { RoutingService } from '../../services/routing.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -27,7 +27,7 @@ export class SignupComponent implements OnInit {
   });
 
 
-  constructor(public router: Router, public formDataService: FormDataService, public routingService: RoutingService) {
+  constructor(public router: Router, public routingService: RoutingService, public authService: AuthService) {
 
   }
 
@@ -38,7 +38,7 @@ export class SignupComponent implements OnInit {
 
 
   saveFormDataAndDirectToNextPage(): void {
-    this.formDataService.saveFormDataSignupForm(this.signupForm.value);
+    this.authService.saveFormDataSignupFormService(this.signupForm.value);
     this.signupForm.reset();
     this.router.navigateByUrl('/avatarPicker');
   }

@@ -4,8 +4,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { UserFeedbackMessageComponent } from '../user-feedback-message/user-feedback-message.component';
-import { FormDataService } from '../../services/form-data.service';
 import { RoutingService } from '../../services/routing.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -23,7 +23,7 @@ export class ForgotPasswordComponent implements OnInit {
   });
 
 
-  constructor(public formDataService: FormDataService, public routingService: RoutingService, public router: Router) {
+  constructor(public authService: AuthService, public routingService: RoutingService, public router: Router) {
 
   }
 
@@ -34,11 +34,11 @@ export class ForgotPasswordComponent implements OnInit {
 
 
   sendEmailToResetPassword(): void {
-    this.formDataService.mailWasSentToResetPassword = true;
+    this.authService.emailWasSentToResetPassword = true;
     this.forgotPasswordForm.reset();
     setTimeout(() => {
       this.router.navigateByUrl('/login');
-      this.formDataService.mailWasSentToResetPassword = false;
+      this.authService.emailWasSentToResetPassword = false;
     }, 1200);
   }
 

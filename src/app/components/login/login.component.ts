@@ -5,6 +5,7 @@ import { NgClass } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 import { RoutingService } from '../../services/routing.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
   });
 
 
-  constructor(public router: Router, public routingService: RoutingService) {
+  constructor(public router: Router, public routingService: RoutingService, public authService: AuthService) {
 
   }
 
@@ -34,7 +35,8 @@ export class LoginComponent implements OnInit {
 
 
   logIn() {
-
+    this.authService.loginService(this.loginForm.value);
+    this.loginForm.reset();
   }
 
 

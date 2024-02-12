@@ -9,7 +9,6 @@
     p {
         @include positionAbsolute(unset, 30px, unset, 30px);
         @include flexCenteredYAxis();
-        background-color: $darkPurple;
         gap: 28px;
         animation: slideInLeft 300ms ease-in-out 250ms both;
         margin: 0;
@@ -24,4 +23,15 @@
             width: 23px;
         }
     }
+}
+
+
+.popSuccessfully {
+    background-color: $darkPurple;
+}
+
+
+.popFailed {
+    background-color: $rosaError;
+    text-align: center;
 }

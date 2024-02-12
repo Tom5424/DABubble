@@ -1,12 +1,21 @@
 <div class="overlay">
-    @if(formDataService.accountIsCreated) {
-    <p>Account created successfully!</p>
-    } @else if(formDataService.mailWasSentToResetPassword) {
-    <p>
+    @if(authService.accountIsCreated) {
+    <p class="popSuccessfully">Account created successfully!</p>
+
+    } @else if (authService.accountIsCreatedFailed) {
+    <p class="popFailed">
+        Account creation failed!
+        <br>
+        The entered Email already exist.
+    </p>
+
+    }@else if(authService.emailWasSentToResetPassword) {
+    <p class="popSuccessfully">
         <img src="./assets/icons/send-message-icon-white.svg" alt="Send Icon">
         Email sent
     </p>
-    }@else if (formDataService.passwordReseted) {
-    <p>Login</p>
+
+    }@else if (authService.passwordReseted) {
+    <p class="popSuccessfully">Login</p>
     }
 </div>
