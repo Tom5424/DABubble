@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FooterComponent } from '../footer/footer.component';
 import { UserFeedbackMessageComponent } from '../user-feedback-message/user-feedback-message.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -19,15 +19,13 @@ import { AuthService } from '../../services/auth.service';
 
 
 export class ResetPasswordComponent implements OnInit {
+  authService = inject(AuthService);
+  routingService = inject(RoutingService);
+  router = inject(Router);
   resetPasswordForm = new FormGroup({
     newPassword: new FormControl('', [Validators.required, Validators.minLength(12), Validators.maxLength(50)]),
     confirmPassword: new FormControl('', [Validators.required, Validators.minLength(12), Validators.maxLength(50)]),
   });
-
-
-  constructor(public authService: AuthService, public routingService: RoutingService, public router: Router) {
-
-  }
 
 
   ngOnInit(): void {

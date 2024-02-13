@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FooterComponent } from '../footer/footer.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -18,14 +18,12 @@ import { AuthService } from '../../services/auth.service';
 
 
 export class ForgotPasswordComponent implements OnInit {
+  authService = inject(AuthService);
+  routingService = inject(RoutingService);
+  router = inject(Router);
   forgotPasswordForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]{2,3}$/)]),
   });
-
-
-  constructor(public authService: AuthService, public routingService: RoutingService, public router: Router) {
-
-  }
 
 
   ngOnInit(): void {

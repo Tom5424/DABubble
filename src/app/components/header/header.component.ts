@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 
@@ -12,9 +12,5 @@ import { Router, RouterLink } from '@angular/router';
 
 
 export class HeaderComponent {
-
-
-  constructor(public router: Router) {
-
-  }
+  router = inject(Router);
 }

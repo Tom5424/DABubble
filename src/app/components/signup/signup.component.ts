@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
@@ -19,17 +19,16 @@ import { AuthService } from '../../services/auth.service';
 
 
 export class SignupComponent implements OnInit {
+  router = inject(Router);
+  routingService = inject(RoutingService);
+  authService = inject(AuthService);
+
   signupForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
     email: new FormControl('', [Validators.required, Validators.email, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]{2,3}$/)]),
     password: new FormControl('', [Validators.required, Validators.minLength(12), Validators.maxLength(50)]),
     checkboxPrivacyPolicy: new FormControl('', Validators.required),
   });
-
-
-  constructor(public router: Router, public routingService: RoutingService, public authService: AuthService) {
-
-  }
 
 
   ngOnInit(): void {

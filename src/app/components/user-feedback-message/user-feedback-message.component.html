@@ -9,7 +9,14 @@
         The entered Email already exist.
     </p>
 
-    }@else if(authService.emailWasSentToResetPassword) {
+    }@else if (authService.loginFailed) {
+    <p class="popFailed">
+        Login failed!
+        <br>
+        The entered Email or Password are wrong.
+    </p>
+
+    } @else if(authService.emailWasSentToResetPassword) {
     <p class="popSuccessfully">
         <img src="./assets/icons/send-message-icon-white.svg" alt="Send Icon">
         Email sent

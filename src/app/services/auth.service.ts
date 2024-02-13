@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "@angular/fire/auth";
 import { User } from '../models/user';
 import { Router } from '@angular/router';
@@ -10,16 +10,15 @@ import { Router } from '@angular/router';
 
 
 export class AuthService {
+  auth = inject(Auth);
+  router = inject(Router);
   user: User = new User();
   accountIsCreated: boolean = false;
   accountIsCreatedFailed: boolean = false;
+  loginSuccessfully: boolean = false;
+  loginFailed: boolean = false;
   emailWasSentToResetPassword: boolean = false;
   passwordReseted: boolean = false;
-
-
-  constructor(public auth: Auth, public router: Router) {
-
-  }
 
 
   saveFormDataSignupFormService(formData: any): void {
@@ -72,10 +71,28 @@ export class AuthService {
   loginService(formValues: any) {
     signInWithEmailAndPassword(this.auth, formValues.email, formValues.password)
       .then((userCredential) => {
+        this.displayUserFeedbackIfLoginSuccessfullyService();
         console.log(userCredential);
       })
       .catch((error) => {
+        this.displayUserFeedbackIfLoginFailedService();
         console.error(error.message);
       });
+  }
+
+
+  displayUserFeedbackIfLoginSuccessfullyService() {
+    this.loginSuccessfully = true;
+    setTimeout(() => {
+      this.loginSuccessfully = false;
+    }, 1400)
+  }
+
+
+  displayUserFeedbackIfLoginFailedService() {
+    this.loginFailed = true;
+    setTimeout(() => {
+      this.loginFailed = false;
+    }, 1400)
   }
 }

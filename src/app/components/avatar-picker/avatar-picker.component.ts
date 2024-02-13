@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FooterComponent } from '../footer/footer.component';
 import { Router, RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
@@ -18,6 +18,9 @@ import { AuthService } from '../../services/auth.service';
 
 
 export class AvatarPickerComponent implements OnInit {
+  routingService = inject(RoutingService);
+  router = inject(Router);
+  authService = inject(AuthService);
   avatarImageUrls: string[] = [
     './assets/img/avatar-1.svg',
     './assets/img/avatar-2.svg',
@@ -27,11 +30,6 @@ export class AvatarPickerComponent implements OnInit {
     './assets/img/avatar-6.svg',
   ];
   selectedImageAvatarUrl: string = '';
-
-
-  constructor(public routingService: RoutingService, public router: Router, public authService: AuthService) {
-
-  }
 
 
   ngOnInit(): void {

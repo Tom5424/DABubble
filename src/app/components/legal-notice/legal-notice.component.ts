@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 import { RoutingService } from '../../services/routing.service';
@@ -14,15 +14,10 @@ import { RoutingService } from '../../services/routing.service';
 
 
 export class LegalNoticeComponent implements OnInit {
-
-
-  constructor(public routingService: RoutingService) {
-
-  }
+  routingService = inject(RoutingService);
 
 
   ngOnInit(): void {
     this.routingService.getPreviousUrl();
   }
-
 }

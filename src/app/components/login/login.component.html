@@ -54,4 +54,8 @@
 
 
     <app-footer></app-footer>
+
+    @if(authService.loginSuccessfully || authService.loginFailed) {
+    <app-user-feedback-message></app-user-feedback-message>
+    }
 </main>

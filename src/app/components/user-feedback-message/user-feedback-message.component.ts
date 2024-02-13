@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 
@@ -12,10 +12,5 @@ import { AuthService } from '../../services/auth.service';
 
 
 export class UserFeedbackMessageComponent {
-
-
-  constructor(public authService: AuthService) {
-
-  }
-
+  authService = inject(AuthService);
 }
