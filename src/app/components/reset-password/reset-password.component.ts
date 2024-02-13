@@ -3,7 +3,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { UserFeedbackMessageComponent } from '../user-feedback-message/user-feedback-message.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 import { RoutingService } from '../../services/routing.service';
 import { AuthService } from '../../services/auth.service';
@@ -22,6 +22,8 @@ export class ResetPasswordComponent implements OnInit {
   authService = inject(AuthService);
   routingService = inject(RoutingService);
   router = inject(Router);
+  activatedRoute = inject(ActivatedRoute);
+
   resetPasswordForm = new FormGroup({
     newPassword: new FormControl('', [Validators.required, Validators.minLength(12), Validators.maxLength(50)]),
     confirmPassword: new FormControl('', [Validators.required, Validators.minLength(12), Validators.maxLength(50)]),
@@ -30,16 +32,12 @@ export class ResetPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.routingService.savePreviousUrl(this.router.routerState.snapshot.url);
+    this.authService.codeToResetPassword = this.activatedRoute.snapshot.queryParams['oobCode'];  // Extract the reset code from the active route to reset the password.
   }
 
 
   resetPassword(): void {
-    this.authService.passwordReseted = true;
-    this.resetPasswordForm.reset();
-    setTimeout(() => {
-      this.router.navigateByUrl('/login');
-      this.authService.passwordReseted = false;
-    }, 1200);
+    this.authService.resetPasswordService(this.resetPasswordForm.controls.newPassword.value, this.resetPasswordForm);
   }
 
 

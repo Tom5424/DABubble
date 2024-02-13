@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "@angular/fire/auth";
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInAnonymously, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, confirmPasswordReset } from "@angular/fire/auth";
 import { User } from '../models/user';
 import { Router } from '@angular/router';
 
@@ -19,6 +19,7 @@ export class AuthService {
   loginFailed: boolean = false;
   emailWasSentToResetPassword: boolean = false;
   passwordReseted: boolean = false;
+  codeToResetPassword: string = '';
 
 
   saveFormDataSignupFormService(formData: any): void {
@@ -36,7 +37,7 @@ export class AuthService {
   }
 
 
-  signupService(userEmail: string, userPassword: string) {
+  signupService(userEmail: string, userPassword: string): void {
     createUserWithEmailAndPassword(this.auth, userEmail, userPassword).
       then((userCredential) => {
         this.displayUserFeedbackIfSignupSuccessfullyService();
@@ -48,7 +49,7 @@ export class AuthService {
   }
 
 
-  displayUserFeedbackIfSignupSuccessfullyService() {
+  displayUserFeedbackIfSignupSuccessfullyService(): void {
     this.accountIsCreated = true;
     setTimeout(() => {
       this.accountIsCreated = false;
@@ -58,7 +59,7 @@ export class AuthService {
   }
 
 
-  displayUserFeedbackIfSignupFailedService() {
+  displayUserFeedbackIfSignupFailedService(): void {
     this.accountIsCreatedFailed = true;
     setTimeout(() => {
       this.accountIsCreatedFailed = false;
@@ -68,7 +69,7 @@ export class AuthService {
   }
 
 
-  loginService(formValues: any) {
+  loginService(formValues: any): void {
     signInWithEmailAndPassword(this.auth, formValues.email, formValues.password)
       .then((userCredential) => {
         this.displayUserFeedbackIfLoginSuccessfullyService();
@@ -81,7 +82,7 @@ export class AuthService {
   }
 
 
-  displayUserFeedbackIfLoginSuccessfullyService() {
+  displayUserFeedbackIfLoginSuccessfullyService(): void {
     this.loginSuccessfully = true;
     setTimeout(() => {
       this.loginSuccessfully = false;
@@ -89,10 +90,96 @@ export class AuthService {
   }
 
 
-  displayUserFeedbackIfLoginFailedService() {
+  displayUserFeedbackIfLoginFailedService(): void {
     this.loginFailed = true;
     setTimeout(() => {
       this.loginFailed = false;
     }, 1400)
+  }
+
+
+  loginWithGoogleService(): void {
+    const googleProvider = new GoogleAuthProvider();
+    signInWithPopup(this.auth, googleProvider)
+      .then((userCredential) => {
+        this.displayUserFeedbackIfLoginWithGoogleSuccessfullyService();
+        console.log(userCredential);
+      })
+      .catch((error) => {
+        console.error('Error Message', error.message);
+        console.error('Used Email', error.customData.email);
+        console.error('AuthCredential type', GoogleAuthProvider.credentialFromError(error));
+      })
+  }
+
+
+  displayUserFeedbackIfLoginWithGoogleSuccessfullyService(): void {
+    this.loginSuccessfully = true;
+    setTimeout(() => {
+      this.loginSuccessfully = false;
+    }, 1400)
+  }
+
+
+  loginAsGuestService(): void {
+    signInAnonymously(this.auth)
+      .then((userCredential) => {
+        this.displayUserFeedbackIfLoginAsGuestSuccessfullyService();
+        console.log(userCredential);
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+  }
+
+
+  displayUserFeedbackIfLoginAsGuestSuccessfullyService(): void {
+    this.loginSuccessfully = true;
+    setTimeout(() => {
+      this.loginSuccessfully = false;
+    }, 1400)
+  }
+
+
+  sendMailToResetPasswordService(email: string | null, forgotPasswordForm: any): void {
+    if (email) {
+      sendPasswordResetEmail(this.auth, email)
+        .then(() => {
+          this.emailWasSentToResetPassword = true;
+          forgotPasswordForm.reset();
+        })
+        .catch((error) => {
+          console.error(error.message);
+        });
+      this.displayUserFeedbackIfEmailSentToResetPasswordService();
+    }
+  }
+
+
+  displayUserFeedbackIfEmailSentToResetPasswordService(): void {
+    setTimeout(() => {
+      this.emailWasSentToResetPassword = false;
+      this.router.navigateByUrl('/login');
+    }, 1400);
+  }
+
+
+  resetPasswordService(newPassword: string | null, resetPasswordForm: any): void {
+    if (newPassword) {
+      confirmPasswordReset(this.auth, this.codeToResetPassword, newPassword)
+        .then(() => {
+          this.passwordReseted = true;
+          resetPasswordForm.reset();
+        })
+    }
+    this.displayUserFeedbackIfPasswordResetedService();
+  }
+
+
+  displayUserFeedbackIfPasswordResetedService(): void {
+    setTimeout(() => {
+      this.router.navigateByUrl('/login');
+      this.passwordReseted = false;
+    }, 1400);
   }
 }

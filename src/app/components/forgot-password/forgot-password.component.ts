@@ -32,12 +32,7 @@ export class ForgotPasswordComponent implements OnInit {
 
 
   sendEmailToResetPassword(): void {
-    this.authService.emailWasSentToResetPassword = true;
-    this.forgotPasswordForm.reset();
-    setTimeout(() => {
-      this.router.navigateByUrl('/login');
-      this.authService.emailWasSentToResetPassword = false;
-    }, 1200);
+    this.authService.sendMailToResetPasswordService(this.forgotPasswordForm.controls.email.value, this.forgotPasswordForm);
   }
 
 

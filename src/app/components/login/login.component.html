@@ -35,7 +35,7 @@
                     <hr>
                 </div>
 
-                <button class="btnSignInWithGoogle" type="submit">
+                <button class="btnSignInWithGoogle" type="button" (click)="loginWithGoogle()">
                     <img src="./assets/icons/google-icon.svg" alt="Google Icon">
                     Sing in with Google
                 </button>
@@ -45,7 +45,7 @@
                         [ngClass]="{'btnDisabled': loginForm.invalid}">
                         Log in
                     </button>
-                    <button class="btnSecondary" type="button">Guest Log in</button>
+                    <button class="btnSecondary" type="button" (click)="loginAsGuest()">Guest Log in</button>
                 </div>
             </form>
         </div>
@@ -54,6 +54,7 @@
 
 
     <app-footer></app-footer>
+
 
     @if(authService.loginSuccessfully || authService.loginFailed) {
     <app-user-feedback-message></app-user-feedback-message>

@@ -34,9 +34,19 @@ export class LoginComponent implements OnInit {
   }
 
 
-  logIn() {
+  logIn(): void {
     this.authService.loginService(this.loginForm.value);
     this.loginForm.reset();
+  }
+
+
+  loginWithGoogle(): void {
+    this.authService.loginWithGoogleService();
+  }
+
+
+  loginAsGuest(): void {
+    this.authService.loginAsGuestService();
   }
 
 
