@@ -61,6 +61,14 @@ body {
 }
 
 
+/////////// Custom Styles for Matdialog 
+.mat-mdc-dialog-container._mat-animation-noopable .mdc-dialog__container,
+.mat-mdc-dialog-container._mat-animation-noopable .mdc-dialog__surface {
+    border-radius: 25px;
+    background-color: #ffffff;
+}
+
+
 /////////// Animation for User Feedback Message 
 @keyframes slideInLeft {
     from {

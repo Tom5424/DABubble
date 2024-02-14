@@ -8,12 +8,13 @@ import { RoutingService } from '../../services/routing.service';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { DialogUploadInvalidDataComponent } from '../dialog-upload-invalid-data/dialog-upload-invalid-data.component';
 
 
 @Component({
   selector: 'app-avatar-picker',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, UserFeedbackMessageComponent, RouterLink, NgClass, MatTooltipModule],
+  imports: [HeaderComponent, FooterComponent, UserFeedbackMessageComponent, DialogUploadInvalidDataComponent, RouterLink, NgClass, MatTooltipModule],
   templateUrl: './avatar-picker.component.html',
   styleUrl: './avatar-picker.component.scss'
 })
@@ -24,7 +25,7 @@ export class AvatarPickerComponent implements OnInit {
   router = inject(Router);
   authService = inject(AuthService);
   storageService = inject(StorageService);
-  tooltipText: string = 'Note: The following Data can be only uploaded: jpg and png. In addition you can only upload Data up to maximum 500 kb.';
+  tooltipText: string = 'Note: The following Data can be only uploaded: jpg and png. In addition you can only upload Data up to maximum 300 kb.';
 
 
   ngOnInit(): void {

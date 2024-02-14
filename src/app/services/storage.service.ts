@@ -1,5 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { Storage, StorageReference, ref, uploadBytes, getDownloadURL } from '@angular/fire/storage';
+import { Storage, StorageReference, ref, uploadBytes, getDownloadURL, uploadBytesResumable, UploadResult } from '@angular/fire/storage';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogUploadInvalidDataComponent } from '../components/dialog-upload-invalid-data/dialog-upload-invalid-data.component';
 
 
 @Injectable({
@@ -9,6 +11,7 @@ import { Storage, StorageReference, ref, uploadBytes, getDownloadURL } from '@an
 
 export class StorageService {
   storage: Storage = inject(Storage);
+  matDialog = inject(MatDialog);
   urlFromUploadedImg: string = '';
   selectedImageAvatarUrl: string = '';
   imgIsUploaded: boolean = false;
@@ -32,10 +35,11 @@ export class StorageService {
 
   uploadFileService(file: Blob | Uint8Array | ArrayBuffer | undefined, storageRef: StorageReference): void {
     if (file) {
+      this.uploadImg = true;
+      this.imgIsUploaded = false;
       uploadBytes(storageRef, file)
         .then((data) => {
-          this.uploadImg = true;
-          this.getUrlFromUploadedData(storageRef);
+          this.checkDataBeforeUploadService(storageRef, data, file);
         })
         .catch((error) => {
           console.error(error.message);
@@ -44,7 +48,26 @@ export class StorageService {
   }
 
 
-  getUrlFromUploadedData(storageRef: StorageReference): void {
+  checkDataBeforeUploadService(storageRef: StorageReference, data: UploadResult, file: Blob | Uint8Array | ArrayBuffer): void {
+    let fileExtension = data.metadata.name.split('.');
+    let dataSize = data.metadata.size;
+    if (dataSize >= 300000 || fileExtension[1] !== 'jpg' && fileExtension[1] !== 'png') {
+      this.cancelUploadIfDataIsInvalidService(storageRef, file);
+    } else {
+      this.getUrlFromUploadedDataService(storageRef);
+    }
+  }
+
+
+  cancelUploadIfDataIsInvalidService(storageRef: StorageReference, file: Blob | Uint8Array | ArrayBuffer): void {
+    const uploadTask = uploadBytesResumable(storageRef, file);
+    uploadTask.cancel();
+    this.uploadImg = false;
+    this.matDialog.open(DialogUploadInvalidDataComponent);
+  }
+
+
+  getUrlFromUploadedDataService(storageRef: StorageReference): void {
     getDownloadURL(storageRef)
       .then((url) => {
         this.urlFromUploadedImg = url;
