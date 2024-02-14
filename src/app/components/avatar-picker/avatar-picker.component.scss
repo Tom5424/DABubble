@@ -118,6 +118,7 @@ main {
 
 
 .containerTextAndBtn {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 24px;
@@ -134,6 +135,10 @@ main {
         @include btnSecondary();
         padding: 12px 25px 12px 25px;
         border-radius: 25px;
+    }
+
+    img {
+        @include positionAbsolute(0, unset, unset, 20px);
     }
 }
 

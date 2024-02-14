@@ -25,9 +25,17 @@ export class AuthService {
 
 
   saveFormDataSignupFormService(formData: any): void {
-    this.storageService.selectedImageAvatarUrl = '';
+    this.removeSelectionsFromAvatarPicker();
     this.user = formData;
     localStorage.setItem('userData', JSON.stringify(this.user));
+  }
+
+
+  removeSelectionsFromAvatarPicker() {
+    this.storageService.selectedImageAvatarUrl = '';
+    this.storageService.urlFromUploadedImg = '';
+    this.storageService.uploadImg = false;
+    this.storageService.imgIsUploaded = false;
   }
 
 

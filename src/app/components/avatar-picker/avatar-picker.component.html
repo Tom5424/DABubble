@@ -46,6 +46,9 @@
                         Upload File
                         <input id="uploadFile" type="file" hidden (change)="selectFile(selectedFile)" #selectedFile>
                     </label>
+
+                    <img src="./assets/icons/info-icon.svg" alt="Info Icon" matTooltip="{{ tooltipText }}"
+                        matTooltipShowDelay="150" matTooltipHideDelay="150" matTooltipPosition="above">
                 </div>
 
                 <div class="containerBtn">
