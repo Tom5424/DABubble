@@ -6,6 +6,7 @@ import { UserFeedbackMessageComponent } from '../user-feedback-message/user-feed
 import { HeaderComponent } from '../header/header.component';
 import { RoutingService } from '../../services/routing.service';
 import { AuthService } from '../../services/auth.service';
+import { StorageService } from '../../services/storage.service';
 
 
 @Component({
@@ -21,15 +22,7 @@ export class AvatarPickerComponent implements OnInit {
   routingService = inject(RoutingService);
   router = inject(Router);
   authService = inject(AuthService);
-  avatarImageUrls: string[] = [
-    './assets/img/avatar-1.svg',
-    './assets/img/avatar-2.svg',
-    './assets/img/avatar-3.svg',
-    './assets/img/avatar-4.svg',
-    './assets/img/avatar-5.svg',
-    './assets/img/avatar-6.svg',
-  ];
-  selectedImageAvatarUrl: string = '';
+  storageService = inject(StorageService);
 
 
   ngOnInit(): void {
@@ -38,12 +31,38 @@ export class AvatarPickerComponent implements OnInit {
   }
 
 
+  noAvatarIsSelected(): boolean {
+    return this.storageService.selectedImageAvatarUrl == '' && !this.storageService.imgIsUploaded && !this.storageService.uploadImg;
+  }
+
+
+  avatarIsSelected(): boolean {
+    return this.storageService.selectedImageAvatarUrl !== '' && !this.storageService.imgIsUploaded && !this.storageService.uploadImg;
+  }
+
+
+  imageUploadingIsInProgress(): boolean {
+    return this.storageService.uploadImg && !this.storageService.imgIsUploaded;
+  }
+
+
+  imageIsUploaded(): boolean {
+    return this.storageService.urlFromUploadedImg !== '' && this.storageService.imgIsUploaded;
+  }
+
+
   selectAvatar(selectedImageAvatarUrl: string): void {
-    if (this.selectedImageAvatarUrl !== selectedImageAvatarUrl) {
-      this.selectedImageAvatarUrl = selectedImageAvatarUrl;
+    if (this.storageService.selectedImageAvatarUrl !== selectedImageAvatarUrl) {
+      this.storageService.selectedImageAvatarUrl = selectedImageAvatarUrl;
+      this.storageService.imgIsUploaded = false;
     } else {
-      this.selectedImageAvatarUrl = '';
+      this.storageService.selectedImageAvatarUrl = '';
     }
+  }
+
+
+  selectFile(selectedFile: HTMLInputElement): void {
+    this.storageService.selectFileService(selectedFile);
   }
 
 

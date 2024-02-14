@@ -11,21 +11,31 @@
 
             <h1>Choose your Avatar</h1>
 
-            @if (selectedImageAvatarUrl == '') {
+
+            @if (noAvatarIsSelected()) {
             <img class="imgNonSelectedAvatar" src="./assets/img/non-user-selected.svg" alt="Image non selected Avatar">
-            }@else {
-            <img class="avatarImages" src="{{ selectedImageAvatarUrl }}" alt="Avatar Image">
+
+            }@else if(avatarIsSelected()){
+            <img class="avatarImages" src="{{ storageService.selectedImageAvatarUrl }}" alt="Avatar Image">
+
+            }@else if(imageUploadingIsInProgress()){
+            <img class="spinnerIcon" src="./assets/icons/spinner-icon.svg" alt="Spinner Icon">
+
+            }@else if(imageIsUploaded()){
+            <img class="uploadedImg" src="{{ storageService.urlFromUploadedImg }}" alt="Uploaded Image">
             }
+
 
             <h2>{{ authService.user.name }}</h2>
 
-            <div>
+
+            <div class="containerAvatarPickerBoxLowerPart">
                 <p class="text">Choose from the List</p>
 
                 <div class="containerAvatarImages">
-                    @for (avatarImageUrl of avatarImageUrls; track $index) {
+                    @for (avatarImageUrl of storageService.avatarImageUrls; track $index) {
                     <img (click)="selectAvatar(avatarImageUrl)" src="{{ avatarImageUrl }}" alt="Avatar Image"
-                        [ngClass]="{'selectedAvatar': avatarImageUrl == selectedImageAvatarUrl}">
+                        [ngClass]="{'selectedAvatar': avatarImageUrl == storageService.selectedImageAvatarUrl}">
                     }
                 </div>
 
@@ -34,7 +44,7 @@
 
                     <label for="uploadFile">
                         Upload File
-                        <input id="uploadFile" type="file" hidden>
+                        <input id="uploadFile" type="file" hidden (change)="selectFile(selectedFile)" #selectedFile>
                     </label>
                 </div>
 

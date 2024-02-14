@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInAnonymously, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, confirmPasswordReset } from "@angular/fire/auth";
 import { User } from '../models/user';
 import { Router } from '@angular/router';
+import { StorageService } from './storage.service';
 
 
 @Injectable({
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   auth = inject(Auth);
   router = inject(Router);
+  storageService = inject(StorageService);
   user: User = new User();
   accountIsCreated: boolean = false;
   accountIsCreatedFailed: boolean = false;
@@ -23,6 +25,7 @@ export class AuthService {
 
 
   saveFormDataSignupFormService(formData: any): void {
+    this.storageService.selectedImageAvatarUrl = '';
     this.user = formData;
     localStorage.setItem('userData', JSON.stringify(this.user));
   }
