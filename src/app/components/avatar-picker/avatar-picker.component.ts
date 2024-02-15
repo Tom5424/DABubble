@@ -21,10 +21,10 @@ import { DialogUploadInvalidDataComponent } from '../dialog-upload-invalid-data/
 
 
 export class AvatarPickerComponent implements OnInit {
-  routingService = inject(RoutingService);
-  router = inject(Router);
   authService = inject(AuthService);
   storageService = inject(StorageService);
+  routingService = inject(RoutingService);
+  router = inject(Router);
   tooltipText: string = 'Note: The following Data can be only uploaded: jpg and png. In addition you can only upload Data up to maximum 300 kb.';
 
 
@@ -70,6 +70,7 @@ export class AvatarPickerComponent implements OnInit {
 
 
   createAccount(): void {
+    this.authService.saveUserImgUrl(this.storageService.selectedImageAvatarUrl, this.storageService.urlFromUploadedImg);
     this.authService.signupService(this.authService.user.email, this.authService.user.password);
   }
 }

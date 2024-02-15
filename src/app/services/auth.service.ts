@@ -3,6 +3,7 @@ import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signI
 import { User } from '../models/user';
 import { Router } from '@angular/router';
 import { StorageService } from './storage.service';
+import { CreateUserService } from './create-user.service';
 
 
 @Injectable({
@@ -11,9 +12,10 @@ import { StorageService } from './storage.service';
 
 
 export class AuthService {
+  storageService = inject(StorageService);
+  createUserService = inject(CreateUserService);
   auth = inject(Auth);
   router = inject(Router);
-  storageService = inject(StorageService);
   user: User = new User();
   accountIsCreated: boolean = false;
   accountIsCreatedFailed: boolean = false;
@@ -22,6 +24,16 @@ export class AuthService {
   emailWasSentToResetPassword: boolean = false;
   passwordReseted: boolean = false;
   codeToResetPassword: string = '';
+
+
+  saveUserImgUrl(selectedImageAvatarUrl: string, urlFromUploadedImg: string): void {
+    if (selectedImageAvatarUrl) {
+      localStorage.setItem('userImgUrl', selectedImageAvatarUrl);
+    } else if (urlFromUploadedImg) {
+      localStorage.setItem('userImgUrl', urlFromUploadedImg);
+    }
+    this.user.imgUrl = localStorage.getItem('userImgUrl');
+  }
 
 
   saveFormDataSignupFormService(formData: any): void {
@@ -51,6 +63,7 @@ export class AuthService {
   signupService(userEmail: string, userPassword: string): void {
     createUserWithEmailAndPassword(this.auth, userEmail, userPassword).
       then((userCredential) => {
+        this.createUserService.createUserService(this.user);
         this.displayUserFeedbackIfSignupSuccessfullyService();
       })
       .catch((error) => {
@@ -66,6 +79,7 @@ export class AuthService {
       this.accountIsCreated = false;
       this.router.navigateByUrl('/login');
       localStorage.removeItem('userData');
+      localStorage.removeItem('userImgUrl');
     }, 1400);
   }
 
@@ -76,6 +90,7 @@ export class AuthService {
       this.accountIsCreatedFailed = false;
       this.router.navigateByUrl('/signup');
       localStorage.removeItem('userData');
+      localStorage.removeItem('userImgUrl');
     }, 1400);
   }
 

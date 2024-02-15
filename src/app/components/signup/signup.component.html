@@ -62,7 +62,7 @@
 
                 <label for="checkboxPrivacyPolicy" form="signupForm">
                     <input class="checkbox" type="checkbox" id="checkboxPrivacyPolicy"
-                        formControlName="checkboxPrivacyPolicy">
+                        [formControl]="signupForm.controls.checkboxPrivacyPolicy">
                     I accept the
                     <a routerLink="/privacyPolicy">privacy policy</a>
                 </label>

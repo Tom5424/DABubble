@@ -27,7 +27,7 @@ export class SignupComponent implements OnInit {
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
     email: new FormControl('', [Validators.required, Validators.email, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]{2,3}$/)]),
     password: new FormControl('', [Validators.required, Validators.minLength(12), Validators.maxLength(50)]),
-    checkboxPrivacyPolicy: new FormControl('', Validators.required),
+    checkboxPrivacyPolicy: new FormControl(false, Validators.required),
   });
 
 
