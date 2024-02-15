@@ -7,6 +7,7 @@ import { AvatarPickerComponent } from './components/avatar-picker/avatar-picker.
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { isAuthorizedToGoAvatarpicker } from './isAuthorizedToGoAvatarpicker.guard';
 
 
 export const routes: Routes = [
@@ -17,7 +18,7 @@ export const routes: Routes = [
     { path: 'privacyPolicy', title: 'DABubble - Privacy Policy', component: PrivacyPolicyComponent },
 
     { path: 'signup', title: 'DABubble - Signup', component: SignupComponent },
-    { path: 'avatarPicker', title: 'DABubble - Avatar Picker', component: AvatarPickerComponent },
+    { path: 'avatarPicker', title: 'DABubble - Avatar Picker', component: AvatarPickerComponent, canActivate: [isAuthorizedToGoAvatarpicker] },
 
     { path: 'forgotPassword', title: 'DABubble - Forgot Password', component: ForgotPasswordComponent },
     { path: 'resetPassword', title: 'DABubble - Reset Password', component: ResetPasswordComponent },

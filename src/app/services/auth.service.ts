@@ -78,8 +78,7 @@ export class AuthService {
     setTimeout(() => {
       this.accountIsCreated = false;
       this.router.navigateByUrl('/login');
-      localStorage.removeItem('userData');
-      localStorage.removeItem('userImgUrl');
+      this.removeDataFromLocaleStorage();
     }, 1400);
   }
 
@@ -89,9 +88,14 @@ export class AuthService {
     setTimeout(() => {
       this.accountIsCreatedFailed = false;
       this.router.navigateByUrl('/signup');
-      localStorage.removeItem('userData');
-      localStorage.removeItem('userImgUrl');
+      this.removeDataFromLocaleStorage();
     }, 1400);
+  }
+
+
+  removeDataFromLocaleStorage() {
+    localStorage.removeItem('userData');
+    localStorage.removeItem('userImgUrl');
   }
 
 
