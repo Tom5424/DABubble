@@ -162,3 +162,9 @@ main {
 .avatarIsNotSelectable {
     pointer-events: none;
 }
+
+
+.btnSecondaryDisabled {
+    @include btnSecondaryDisabled();
+    pointer-events: none;
+}

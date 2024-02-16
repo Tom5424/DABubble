@@ -54,8 +54,8 @@
 
 @mixin btnSecondaryDisabled() {
     @include hoverDisabled();
-    color: $textGray;
-    border: 1px solid $textGray;
+    color: $textGray !important;
+    border: 1px solid $textGray !important;
 }
 
 

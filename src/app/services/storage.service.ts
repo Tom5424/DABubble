@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Storage, StorageReference, ref, uploadBytes, getDownloadURL, uploadBytesResumable, UploadResult } from '@angular/fire/storage';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogUploadInvalidDataComponent } from '../components/dialog-upload-invalid-data/dialog-upload-invalid-data.component';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -12,6 +13,7 @@ import { DialogUploadInvalidDataComponent } from '../components/dialog-upload-in
 export class StorageService {
   storage: Storage = inject(Storage);
   matDialog = inject(MatDialog);
+  router = inject(Router);
   urlFromUploadedImg: string = '';
   selectedImageAvatarUrl: string = '';
   imgIsUploaded: boolean = false;
@@ -51,7 +53,7 @@ export class StorageService {
   checkDataBeforeUploadService(storageRef: StorageReference, data: UploadResult, file: Blob | Uint8Array | ArrayBuffer): void {
     let fileExtension = data.metadata.name.split('.');
     let dataSize = data.metadata.size;
-    if (dataSize >= 300000 || fileExtension[1] !== 'jpg' && fileExtension[1] !== 'png') {
+    if (dataSize >= 300000 || (fileExtension[1] !== 'jpg' && fileExtension[1] !== 'png')) {
       this.cancelUploadIfDataIsInvalidService(storageRef, file);
     } else {
       this.getUrlFromUploadedDataService(storageRef);
@@ -63,7 +65,9 @@ export class StorageService {
     const uploadTask = uploadBytesResumable(storageRef, file);
     uploadTask.cancel();
     this.uploadImg = false;
-    this.matDialog.open(DialogUploadInvalidDataComponent);
+    if (this.router.url == '/avatarPicker') { //  Prevents the dialog from opening when the route is no longer /'avatarPicker'.
+      this.matDialog.open(DialogUploadInvalidDataComponent);
+    }
   }
 
 

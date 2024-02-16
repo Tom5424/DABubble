@@ -44,7 +44,7 @@
                 <div class="containerTextAndBtn">
                     <p>Use your own Image</p>
 
-                    <label for="uploadFile">
+                    <label for="uploadFile" [ngClass]="{'btnSecondaryDisabled': storageService.uploadImg}">
                         Upload File
                         <input id="uploadFile" type="file" hidden (change)="selectFile(selectedFile)" #selectedFile>
                     </label>
