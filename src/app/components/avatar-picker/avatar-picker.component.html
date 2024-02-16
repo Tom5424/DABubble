@@ -2,6 +2,11 @@
     <app-header></app-header>
 
 
+    <!--------------------------------- Only Displayed if Image upload is in Progress --------------------------------->
+    <div [ngClass]="{'overlay': storageService.uploadImg}"></div>
+    <!--------------------------------- Only Displayed if Image upload is in Progress --------------------------------->
+
+
     <div class="mainContainerAvatarPicker">
 
         <div class="avatarPickerBox">
@@ -35,16 +40,15 @@
 
                 <div class="containerAvatarImages">
                     @for (avatarImageUrl of storageService.avatarImageUrls; track $index) {
-                    <img (click)="selectAvatar(avatarImageUrl)" src="{{ avatarImageUrl }}" alt="Avatar Image" [ngClass]="{
-                        'selectedAvatar': avatarImageUrl == storageService.selectedImageAvatarUrl,
-                         'avatarIsNotSelectable': storageService.uploadImg}">
+                    <img (click)="selectAvatar(avatarImageUrl)" src="{{ avatarImageUrl }}" alt="Avatar Image"
+                        [ngClass]="{'selectedAvatar': avatarImageUrl == storageService.selectedImageAvatarUrl}">
                     }
                 </div>
 
                 <div class="containerTextAndBtn">
                     <p>Use your own Image</p>
 
-                    <label for="uploadFile" [ngClass]="{'btnSecondaryDisabled': storageService.uploadImg}">
+                    <label for="uploadFile">
                         Upload File
                         <input id="uploadFile" type="file" hidden (change)="selectFile(selectedFile)" #selectedFile>
                     </label>
@@ -54,8 +58,7 @@
                 </div>
 
                 <div class="containerBtn">
-                    <button (click)="createAccount()" type="button" [disabled]="storageService.uploadImg"
-                        [ngClass]="{'btnDisabled': storageService.uploadImg}">
+                    <button (click)="createAccount()" type="button">
                         Further
                     </button>
                 </div>

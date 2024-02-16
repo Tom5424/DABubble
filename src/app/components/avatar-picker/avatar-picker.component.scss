@@ -8,6 +8,13 @@ main {
 }
 
 
+.overlay {
+    @include positionAbsolute(0, 0, 0, 0);
+    background-color: #fdfdfd47;
+    z-index: 1;
+}
+
+
 .mainContainerAvatarPicker {
     @include flexCenteredXAxis();
     margin-top: 15px;
@@ -156,15 +163,4 @@ main {
         padding: 12px 25px 12px 25px;
         border-radius: 25px;
     }
-}
-
-
-.avatarIsNotSelectable {
-    pointer-events: none;
-}
-
-
-.btnSecondaryDisabled {
-    @include btnSecondaryDisabled();
-    pointer-events: none;
 }

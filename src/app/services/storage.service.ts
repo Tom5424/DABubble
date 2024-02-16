@@ -65,9 +65,7 @@ export class StorageService {
     const uploadTask = uploadBytesResumable(storageRef, file);
     uploadTask.cancel();
     this.uploadImg = false;
-    if (this.router.url == '/avatarPicker') { //  Prevents the dialog from opening when the route is no longer /'avatarPicker'.
-      this.matDialog.open(DialogUploadInvalidDataComponent);
-    }
+    this.matDialog.open(DialogUploadInvalidDataComponent);
   }
 
 
