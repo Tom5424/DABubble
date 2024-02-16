@@ -93,7 +93,7 @@ export class AuthService {
   }
 
 
-  removeDataFromLocaleStorage() {
+  removeDataFromLocaleStorage(): void {
     localStorage.removeItem('userData');
     localStorage.removeItem('userImgUrl');
   }
@@ -175,6 +175,7 @@ export class AuthService {
     if (email) {
       sendPasswordResetEmail(this.auth, email)
         .then(() => {
+          localStorage.setItem('userEmail', email);
           this.emailWasSentToResetPassword = true;
           forgotPasswordForm.reset();
         })
