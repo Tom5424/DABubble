@@ -35,8 +35,9 @@
 
                 <div class="containerAvatarImages">
                     @for (avatarImageUrl of storageService.avatarImageUrls; track $index) {
-                    <img (click)="selectAvatar(avatarImageUrl)" src="{{ avatarImageUrl }}" alt="Avatar Image"
-                        [ngClass]="{'selectedAvatar': avatarImageUrl == storageService.selectedImageAvatarUrl}">
+                    <img (click)="selectAvatar(avatarImageUrl)" src="{{ avatarImageUrl }}" alt="Avatar Image" [ngClass]="{
+                        'selectedAvatar': avatarImageUrl == storageService.selectedImageAvatarUrl,
+                         'avatarIsNotSelectable': storageService.uploadImg}">
                     }
                 </div>
 
@@ -53,7 +54,10 @@
                 </div>
 
                 <div class="containerBtn">
-                    <button (click)="createAccount()" type="button">Further</button>
+                    <button (click)="createAccount()" type="button" [disabled]="storageService.uploadImg"
+                        [ngClass]="{'btnDisabled': storageService.uploadImg}">
+                        Further
+                    </button>
                 </div>
             </div>
 
