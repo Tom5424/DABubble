@@ -9,6 +9,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { isAuthorizedToGoAvatarpicker } from './router-guards/is-authorized-to-go-Avatarpicker.guard';
 import { isAuthorizedToGoResetPassword } from './router-guards/is-authorized-to-go-reset-password.guard';
+import { MainViewComponent } from './components/main-view/main-view.component';
 
 
 export const routes: Routes = [
@@ -23,6 +24,8 @@ export const routes: Routes = [
 
     { path: 'forgotPassword', title: 'DABubble - Forgot Password', component: ForgotPasswordComponent },
     { path: 'resetPassword', title: 'DABubble - Reset Password', component: ResetPasswordComponent, canActivate: [isAuthorizedToGoResetPassword] },
+
+    { path: 'mainView', title: 'DABubble - Main View', component: MainViewComponent },
 
     { path: '**', title: 'DABubble - Page not Found', component: PageNotFoundComponent }
 ];
