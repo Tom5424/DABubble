@@ -1,0 +1,23 @@
+<header>
+    <img src="./assets/img/da-bubble-logo.svg" alt="DABubble Logo">
+    <input type="text" placeholder="Browse Learn Code">
+
+    <div class="containerProfileImgAndName">
+        @if (loadUserData()) {
+        <img class="spinnerIcon" src="./assets/icons/spinner-icon.svg" alt="Spinner Icon">
+        }@else {
+        <p>{{ authService.user.name }}</p>
+
+        @if (noProfileImgExist()) {
+        <img class="imgNoSelectedProfile" src="./assets/img/non-user-selected.svg" alt="Profile Image">
+        }@else {
+        <img class="profileImg" src="{{ authService.user.imgUrl }}" alt="Profile Image">
+        }
+
+        <img class="iconOnlineStatus" src="./assets/icons/user-is-online-icon.svg" alt="Green Dot">
+        <!-- <img class="iconOnlineStatus" src="./assets/icons/user-is-offline-icon.svg" alt="Gray Dot"> -->
+
+        <img class="arrowIcon" src="./assets/icons/arrow-icon-profile.svg" alt="Arrow Icon">
+        }
+    </div>
+</header>

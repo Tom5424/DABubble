@@ -1,0 +1,71 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+header {
+    @include flexCenteredYAxis();
+    @include flexSpaceBetween();
+    padding: 0px 40px 0 40px;
+
+    input {
+        @include inputfieldOrTextarea(650px, 42px, 17.5px, 45px, 17.5px, 35px, 24px, #ffffff);
+        @include inputfieldOrTextareaHover();
+        @include inputfieldOrTextareaFocus();
+        border: unset;
+        background-image: url('../../../assets/icons/search-icon.svg');
+        background-position: 688px 16px;
+        background-size: 30px;
+        background-repeat: no-repeat;
+    }
+}
+
+
+.containerProfileImgAndName {
+    @include hover();
+    @include flexCenteredYAxis();
+    gap: 20px;
+    position: relative;
+
+    &:hover {
+
+        p {
+            color: $purple;
+        }
+
+        .arrowIcon {
+            filter: brightness(0) saturate(100%) invert(64%) sepia(67%) saturate(4918%) hue-rotate(213deg) brightness(100%) contrast(91%);
+        }
+    }
+
+    p {
+        font-size: 32px;
+        font-weight: 700;
+    }
+}
+
+
+.spinnerIcon {
+    width: 100px;
+}
+
+
+.profileImg {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+
+.imgNoSelectedProfile {
+    background-color: $purple;
+    width: 50px;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+
+.iconOnlineStatus {
+    @include positionAbsolute(unset, 13px, unset, 34px);
+    border: 2px solid $bgColor;
+    border-radius: 50%;
+}

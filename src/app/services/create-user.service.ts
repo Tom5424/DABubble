@@ -17,7 +17,12 @@ export class CreateUserService {
     const userRef = new User(user);
     addDoc(collectionRef, userRef.toJson())
       .then((userData) => {
-        console.log(userData);
+
       })
+  }
+
+
+  getUserService() {
+
   }
 }

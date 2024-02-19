@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInAnonymously, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, confirmPasswordReset } from "@angular/fire/auth";
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInAnonymously, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, confirmPasswordReset, updateProfile, onAuthStateChanged } from "@angular/fire/auth";
 import { User } from '../models/user';
 import { Router } from '@angular/router';
 import { StorageService } from './storage.service';
@@ -64,12 +64,29 @@ export class AuthService {
     createUserWithEmailAndPassword(this.auth, userEmail, userPassword).
       then((userCredential) => {
         this.createUserService.createUserService(this.user);
+        this.updateProfileService(userCredential.user, this.user);
         this.displayUserFeedbackIfSignupSuccessfullyService();
       })
       .catch((error) => {
         this.displayUserFeedbackIfSignupFailedService();
         console.error(error.message);
       });
+  }
+
+
+  updateProfileService(userCredential: any, user: User): void {
+    updateProfile(userCredential, { displayName: user.name, photoURL: user.imgUrl })
+      .then(() => {
+        this.getDataFromLoggedInUser();
+      })
+  }
+
+
+  getDataFromLoggedInUser(): void {
+    onAuthStateChanged(this.auth, (user) => {
+      this.user.name = user?.displayName;
+      this.user.imgUrl = user?.photoURL;
+    });
   }
 
 
@@ -103,7 +120,6 @@ export class AuthService {
     signInWithEmailAndPassword(this.auth, formValues.email, formValues.password)
       .then((userCredential) => {
         this.displayUserFeedbackIfLoginSuccessfullyService();
-        console.log(userCredential);
       })
       .catch((error) => {
         this.displayUserFeedbackIfLoginFailedService();
@@ -116,6 +132,7 @@ export class AuthService {
     this.loginSuccessfully = true;
     setTimeout(() => {
       this.loginSuccessfully = false;
+      this.router.navigateByUrl('/mainView');
     }, 1400)
   }
 
