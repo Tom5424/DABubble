@@ -67,11 +67,7 @@ export class ResetPasswordComponent implements OnInit {
   }
 
 
-  checkIfNewPasswordMatchesWithConfirmPassword(): boolean {
-    if (this.resetPasswordForm.controls.newPassword.value !== this.resetPasswordForm.controls.confirmPassword.value) {
-      return true;
-    } else {
-      return false;
-    }
+  newPasswordNotMatcheWithConfirmedPassword(): boolean {
+    return (this.resetPasswordForm.controls.newPassword.value !== this.resetPasswordForm.controls.confirmPassword.value) ? true : false;
   }
 }

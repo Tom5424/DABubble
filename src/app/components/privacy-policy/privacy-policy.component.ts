@@ -18,6 +18,6 @@ export class PrivacyPolicyComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.routingService.getPreviousUrl();
+    this.routingService.loadPreviousUrl();
   }
 }

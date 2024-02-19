@@ -16,7 +16,7 @@ export class RoutingService {
   }
 
 
-  getPreviousUrl(): string {
+  loadPreviousUrl(): string {
     let previousUrl = localStorage.getItem('previousUrl');
     if (previousUrl) {
       this.url = previousUrl;

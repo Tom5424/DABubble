@@ -3,7 +3,7 @@ export class User {
     email: string;
     password: string;
     imgUrl: string | null;
-    isOnline: boolean = true;
+    isOnline: boolean;
 
 
     constructor(object?: User) {
@@ -11,17 +11,17 @@ export class User {
         this.email = object ? object.email : '';
         this.password = object ? object.password : '';
         this.imgUrl = object ? object.imgUrl : '';
-        this.isOnline = object ? object.isOnline = true : false;
+        this.isOnline = object ? this.isOnline = true : this.isOnline = false;
     }
 
 
-    // toJson() {
-    //     return {
-    //         name: this.name,
-    //         email: this.email,
-    //         password: this.password,
-    //         imgUrl: this.imgUrl,
-    //         isOnline: this.isOnline,
-    //     }
-    // }
+    toJson() {
+        return {
+            name: this.name,
+            email: this.email,
+            password: this.password,
+            imgUrl: this.imgUrl,
+            isOnline: this.isOnline,
+        }
+    }
 }

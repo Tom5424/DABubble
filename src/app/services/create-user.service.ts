@@ -14,7 +14,8 @@ export class CreateUserService {
 
   createUserService(user: User): void {
     const collectionRef = collection(this.fireStore, 'users');
-    addDoc(collectionRef, user)
+    const userRef = new User(user);
+    addDoc(collectionRef, userRef.toJson())
       .then((userData) => {
         console.log(userData);
       })
