@@ -1,11 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @Component({
   selector: 'app-header-main-view',
   standalone: true,
-  imports: [],
+  imports: [MatMenuModule],
   templateUrl: './header-main-view.component.html',
   styleUrl: './header-main-view.component.scss'
 })
@@ -27,5 +28,10 @@ export class HeaderMainViewComponent implements OnInit {
 
   noProfileImgExist(): boolean {
     return (!this.authService.user.imgUrl) ? true : false;
+  }
+
+
+  logout(): void {
+    this.authService.logoutService();
   }
 }

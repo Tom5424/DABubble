@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInAnonymously, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, confirmPasswordReset, updateProfile, onAuthStateChanged } from "@angular/fire/auth";
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInAnonymously, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, confirmPasswordReset, updateProfile, onAuthStateChanged, signOut, deleteUser } from "@angular/fire/auth";
 import { User } from '../models/user';
 import { Router } from '@angular/router';
 import { StorageService } from './storage.service';
@@ -149,7 +149,10 @@ export class AuthService {
     const googleProvider = new GoogleAuthProvider();
     signInWithPopup(this.auth, googleProvider)
       .then((userCredential) => {
-        this.displayUserFeedbackIfLoginWithGoogleSuccessfullyService();
+        updateProfile(userCredential.user, { photoURL: userCredential.user.photoURL })
+          .then(() => {
+            this.displayUserFeedbackIfLoginWithGoogleSuccessfullyService();
+          })
       })
       .catch((error) => {
         console.error('Error Message', error.message);
@@ -195,6 +198,25 @@ export class AuthService {
       this.loginSuccessfully = false;
       this.router.navigateByUrl('/mainView');
     }, 1400)
+  }
+
+
+  logoutService(): void {
+    this.deleteGuestUserAfterLogoutService();
+    signOut(this.auth)
+      .then(() => {
+        this.router.navigateByUrl('/login');
+      })
+    setTimeout(() => {
+      location.reload();
+    }, 450);
+  }
+
+
+  deleteGuestUserAfterLogoutService(): void {
+    if (this.auth.currentUser?.isAnonymous) {
+      deleteUser(this.auth.currentUser);
+    }
   }
 
 

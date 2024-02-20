@@ -38,7 +38,7 @@ header {
     }
 
     p {
-        width: 180px;
+        max-width: 150px;
         font-size: 32px;
         font-weight: 700;
         overflow-x: hidden;
@@ -71,4 +71,22 @@ header {
     @include positionAbsolute(unset, 13px, unset, 34px);
     border: 2px solid $bgColor;
     border-radius: 50%;
+}
+
+
+.btnMatMenu {
+    @include hover();
+    border-radius: 35px;
+    width: 240px;
+    font-size: 24px;
+    font-weight: 600;
+    padding: 10px 70px 10px 70px;
+    background-color: #ffffff;
+    border: unset;
+
+    &:hover {
+        background-color: $bgColor;
+        color: $middlePurple;
+        font-weight: 700;
+    }
 }

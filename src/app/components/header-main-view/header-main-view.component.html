@@ -2,7 +2,7 @@
     <img src="./assets/img/da-bubble-logo.svg" alt="DABubble Logo">
     <input type="text" placeholder="Browse Learn Code">
 
-    <div class="containerProfileImgAndName">
+    <div class="containerProfileImgAndName" [matMenuTriggerFor]="menu">
         @if (loadUserData()) {
         <img class="spinnerIcon" src="./assets/icons/spinner-icon.svg" alt="Spinner Icon">
         }@else {
@@ -20,4 +20,9 @@
         <img class="arrowIcon" src="./assets/icons/arrow-icon-profile.svg" alt="Arrow Icon">
         }
     </div>
+
+    <mat-menu #menu="matMenu">
+        <button class="btnMatMenu">Profile</button>
+        <button (click)="logout()" class="btnMatMenu">Log out</button>
+    </mat-menu>
 </header>
