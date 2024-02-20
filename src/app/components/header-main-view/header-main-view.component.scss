@@ -8,12 +8,12 @@ header {
     padding: 0px 40px 0 40px;
 
     input {
-        @include inputfieldOrTextarea(650px, 42px, 17.5px, 45px, 17.5px, 35px, 24px, #ffffff);
+        @include inputfieldOrTextarea(600px, 42px, 17.5px, 45px, 17.5px, 35px, 24px, #ffffff);
         @include inputfieldOrTextareaHover();
         @include inputfieldOrTextareaFocus();
         border: unset;
         background-image: url('../../../assets/icons/search-icon.svg');
-        background-position: 688px 16px;
+        background-position: 635px 16px;
         background-size: 30px;
         background-repeat: no-repeat;
     }
@@ -38,8 +38,11 @@ header {
     }
 
     p {
+        width: 180px;
         font-size: 32px;
         font-weight: 700;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
     }
 }
 

@@ -150,7 +150,6 @@ export class AuthService {
     signInWithPopup(this.auth, googleProvider)
       .then((userCredential) => {
         this.displayUserFeedbackIfLoginWithGoogleSuccessfullyService();
-        console.log(userCredential);
       })
       .catch((error) => {
         console.error('Error Message', error.message);
@@ -164,6 +163,7 @@ export class AuthService {
     this.loginSuccessfully = true;
     setTimeout(() => {
       this.loginSuccessfully = false;
+      this.router.navigateByUrl('mainView');
     }, 1400)
   }
 
@@ -171,8 +171,9 @@ export class AuthService {
   loginAsGuestService(): void {
     signInAnonymously(this.auth)
       .then((userCredential) => {
+        this.storageService.getRandomAvatarImgForGuestUserService();
+        this.updateProfileGuestService(userCredential.user);
         this.displayUserFeedbackIfLoginAsGuestSuccessfullyService();
-        console.log(userCredential);
       })
       .catch((error) => {
         console.error(error.message);
@@ -180,10 +181,19 @@ export class AuthService {
   }
 
 
+  updateProfileGuestService(userCredential: any): void {
+    updateProfile(userCredential, { displayName: 'Guest', photoURL: this.storageService.randomAvatarImageUrl })
+      .then(() => {
+        this.getDataFromLoggedInUser();
+      })
+  }
+
+
   displayUserFeedbackIfLoginAsGuestSuccessfullyService(): void {
     this.loginSuccessfully = true;
     setTimeout(() => {
       this.loginSuccessfully = false;
+      this.router.navigateByUrl('/mainView');
     }, 1400)
   }
 

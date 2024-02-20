@@ -16,6 +16,7 @@ export class StorageService {
   router = inject(Router);
   urlFromUploadedImg: string = '';
   selectedImageAvatarUrl: string = '';
+  randomAvatarImageUrl: string = '';
   imgIsUploaded: boolean = false;
   uploadImg: boolean = false;
   avatarImageUrls: string[] = [
@@ -80,5 +81,10 @@ export class StorageService {
       .catch((error) => {
         console.error(error.message);
       })
+  }
+
+
+  getRandomAvatarImgForGuestUserService(): void {
+    this.randomAvatarImageUrl = this.avatarImageUrls[Math.round(Math.random() * this.avatarImageUrls.length)];
   }
 }
