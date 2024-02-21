@@ -60,17 +60,19 @@ export class AuthService {
   }
 
 
-  signupService(userEmail: string, userPassword: string): void {
-    createUserWithEmailAndPassword(this.auth, userEmail, userPassword).
-      then((userCredential) => {
-        this.createUserService.createUserService(this.user);
-        this.updateProfileService(userCredential.user, this.user);
-        this.displayUserFeedbackIfSignupSuccessfullyService();
-      })
-      .catch((error) => {
-        this.displayUserFeedbackIfSignupFailedService();
-        console.error(error.message);
-      });
+  signupService(userEmail: string | null | undefined, userPassword: string): void {
+    if (userEmail && userPassword) {
+      createUserWithEmailAndPassword(this.auth, userEmail, userPassword).
+        then((userCredential) => {
+          this.createUserService.createUserService(this.user);
+          this.updateProfileService(userCredential.user, this.user);
+          this.displayUserFeedbackIfSignupSuccessfullyService();
+        })
+        .catch((error) => {
+          this.displayUserFeedbackIfSignupFailedService();
+          console.error(error.message);
+        });
+    }
   }
 
 
@@ -84,6 +86,7 @@ export class AuthService {
 
   getDataFromLoggedInUser(): void {
     onAuthStateChanged(this.auth, (user) => {
+      this.user.email = user?.email;
       this.user.name = user?.displayName;
       this.user.imgUrl = user?.photoURL;
     });

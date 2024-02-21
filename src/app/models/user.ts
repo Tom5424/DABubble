@@ -1,6 +1,6 @@
 export class User {
     name: string | null | undefined;
-    email: string;
+    email: string | null | undefined;
     password: string;
     imgUrl: string | null | undefined;
     isOnline: boolean;

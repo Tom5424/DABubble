@@ -36,9 +36,18 @@
     @include flexCenteredXAxis();
 
     img {
-        width: 180px;
+        width: 170px;
+        height: 170px;
         border-radius: 50%;
     }
+}
+
+
+.imgNoSelectedProfile {
+    background-color: $purple;
+    width: 150px !important;
+    height: unset !important;
+    padding: 10px;
 }
 
 
@@ -89,9 +98,7 @@
 
 
 .emailAddress {
-    width: 45%;
-    margin: 0;
+    margin: 0px 0px 0 45px;
     font-size: 18px;
     color: #1381FF;
-    text-align: end;
 }

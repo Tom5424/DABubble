@@ -10,12 +10,16 @@
 
 
     <div class="containerProfileImg">
-        <img src="/assets/img/avatar-1.svg" alt="Profile Image">
+        @if (!authService.user.imgUrl) {
+        <img class="imgNoSelectedProfile" src="/assets/img/non-user-selected.svg" alt="Profile Image">
+        }@else {
+        <img src="{{ authService.user.imgUrl }}" alt="Profile Image">
+        }
     </div>
 
 
     <div class="dialogBoxMiddlePart">
-        <p>Tom</p>
+        <p>{{ authService.user.name }}</p>
         <p>Edit</p>
     </div>
 
@@ -31,5 +35,5 @@
         <p>Email Address</p>
     </div>
 
-    <p class="emailAddress">tom&#64;sadj.sadsd</p>
+    <p class="emailAddress">{{ authService.user.email }}</p>
 </div>
