@@ -22,7 +22,7 @@
     </div>
 
     <mat-menu #menu="matMenu">
-        <button class="btnMatMenu">Profile</button>
+        <button class="btnMatMenu" (click)="openProfileDetailView()">Profile</button>
         <button (click)="logout()" class="btnMatMenu">Log out</button>
     </mat-menu>
 </header>

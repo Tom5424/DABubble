@@ -1,6 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogProfileDetailViewComponent } from '../dialog-profile-detail-view/dialog-profile-detail-view.component';
 
 
 @Component({
@@ -14,6 +16,7 @@ import { MatMenuModule } from '@angular/material/menu';
 
 export class HeaderMainViewComponent implements OnInit {
   authService = inject(AuthService);
+  matDialog = inject(MatDialog);
 
 
   ngOnInit(): void {
@@ -28,6 +31,11 @@ export class HeaderMainViewComponent implements OnInit {
 
   noProfileImgExist(): boolean {
     return (!this.authService.user.imgUrl) ? true : false;
+  }
+
+
+  openProfileDetailView() {
+    this.matDialog.open(DialogProfileDetailViewComponent, { position: { top: '95px', right: '25px' } });
   }
 
 

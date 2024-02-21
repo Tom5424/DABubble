@@ -208,8 +208,8 @@ export class AuthService {
         this.router.navigateByUrl('/login');
       })
     setTimeout(() => {
-      location.reload();
-    }, 450);
+      location.reload();   ///////////////////////////////
+    }, 500);
   }
 
 
