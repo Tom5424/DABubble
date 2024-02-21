@@ -24,7 +24,7 @@ export class HeaderMainViewComponent implements OnInit {
   }
 
 
-  loadUserData(): boolean {
+  userDataLoading(): boolean {
     return (!this.authService.user.name && !this.authService.user.imgUrl) ? true : false;
   }
 
@@ -34,7 +34,7 @@ export class HeaderMainViewComponent implements OnInit {
   }
 
 
-  openProfileDetailView() {
+  openProfileDetailView(): void {
     this.matDialog.open(DialogProfileDetailViewComponent, { position: { top: '95px', right: '25px' } });
   }
 

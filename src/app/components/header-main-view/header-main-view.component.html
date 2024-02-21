@@ -3,7 +3,7 @@
     <input type="text" placeholder="Browse Learn Code">
 
     <div class="containerProfileImgAndName" [matMenuTriggerFor]="menu">
-        @if (loadUserData()) {
+        @if (userDataLoading()) {
         <img class="spinnerIcon" src="./assets/icons/spinner-icon.svg" alt="Spinner Icon">
         }@else {
         <p>{{ authService.user.name }}</p>

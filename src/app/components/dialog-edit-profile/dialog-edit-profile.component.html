@@ -1,0 +1,41 @@
+<div class="dialogBox">
+
+    <div class="dialogBoxUpperPart">
+        <p>Edit your profile</p>
+
+        <div mat-dialog-close class="containerCloseIcon">
+            <img src="/assets/icons/close-icon.svg" alt="Close Icon">
+        </div>
+    </div>
+
+
+    <div class="containerProfileImg">
+        @if (!authService.user.imgUrl) {
+        <img class="imgNoSelectedProfile" src="/assets/img/non-user-selected.svg" alt="Profile Image">
+        }@else {
+        <img src="{{ authService.user.imgUrl }}" alt="Profile Image">
+        }
+    </div>
+
+
+    <form id="editProfileForm">
+        <label for="userName" form="editProfileForm">
+            <img src="/assets/icons/user-icon-with-circle-black.svg" alt="User Icon">
+            Full Name
+        </label>
+        <input type="text" id="userName" placeholder="{{ authService.user.name }}">
+
+
+        <label for="userEmail" form="editProfileForm">
+            <img class="emailIcon" src="/assets/icons/email-icon-black.svg" alt="Email Icon">
+            Email Address
+        </label>
+        <input type="email" id="userEmail" placeholder="{{ authService.user.email }}">
+
+        <div class="btnContainer">
+            <button mat-dialog-close class="btnSecondary" type="button">Cancel</button>
+            <button class="btnPrimary" type="submit">Save</button>
+        </div>
+    </form>
+
+</div>

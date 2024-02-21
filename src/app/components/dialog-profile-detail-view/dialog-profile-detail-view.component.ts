@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { MatDialogClose } from '@angular/material/dialog';
+import { MatDialog, MatDialogClose } from '@angular/material/dialog';
 import { AuthService } from '../../services/auth.service';
+import { DialogEditProfileComponent } from '../dialog-edit-profile/dialog-edit-profile.component';
 
 
 @Component({
@@ -14,9 +15,15 @@ import { AuthService } from '../../services/auth.service';
 
 export class DialogProfileDetailViewComponent implements OnInit {
   authService = inject(AuthService);
+  matDialog = inject(MatDialog);
 
 
   ngOnInit(): void {
     this.authService.getDataFromLoggedInUser();
+  }
+
+
+  openProfileEditView(): void {
+    this.matDialog.open(DialogEditProfileComponent, { position: { top: '95px', right: '25px' }, autoFocus: false });
   }
 }
