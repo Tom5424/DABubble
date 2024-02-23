@@ -24,9 +24,28 @@
     </div>
 
 
-    <div class="dialogBoxUserOnlineStatus">
-        <img src="/assets/icons/user-is-online-icon.svg" alt="Green Dot">
-        <p>Online</p>
+    <div class="mainContainerUserOnlineStatus">
+        <div class="firstChildContainerUserOnlineStatus">
+            @if(authService.user.isOnline) {
+            <img src="/assets/icons/user-is-online-icon.svg" alt="Green Dot">
+            <p [ngStyle]="authService.user.isOnline ? {'color':  '#92C83E'} : {'color': '#686868'}">Online</p>
+
+            }@else {
+            <img src="/assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
+            <p [ngStyle]="authService.user.isOnline ? {'color':  '#92C83E'} : {'color': '#686868'}">
+                Offline
+            </p>
+            }
+        </div>
+
+
+        <div class="secondChildContainerUserOnlineStatus">
+            @if (authService.user.isOnline) {
+            <p (click)="changeOnlineStatus()">Set to Offline</p>
+            }@else {
+            <p (click)="changeOnlineStatus()">Set to Online</p>
+            }
+        </div>
     </div>
 
 

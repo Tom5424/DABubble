@@ -1,8 +1,8 @@
 export class User {
-    name: string | null | undefined;
-    email: string | null | undefined;
+    name: string | null;
+    email: string | null;
     password: string;
-    imgUrl: string | null | undefined;
+    imgUrl: string | null;
     isOnline: boolean;
 
 

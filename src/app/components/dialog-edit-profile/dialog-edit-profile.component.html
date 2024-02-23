@@ -18,23 +18,43 @@
     </div>
 
 
-    <form id="editProfileForm">
+    <form (ngSubmit)="updateUserName()" id="editProfileForm" [formGroup]="editProfileForm">
         <label for="userName" form="editProfileForm">
             <img src="/assets/icons/user-icon-with-circle-black.svg" alt="User Icon">
             Full Name
         </label>
-        <input type="text" id="userName" placeholder="{{ authService.user.name }}">
+        <input type="text" id="userName" placeholder="{{ authService.user.name }}" formControlName="name"
+            [ngClass]="{'errorInputfield': inputfieldNameIsRequired() || inputfieldNameIsToShort() || inputfieldNameIsToLong()}">
 
 
-        <label for="userEmail" form="editProfileForm">
+        @if (inputfieldNameIsRequired()) {
+        <p style="margin: -5px 0 0 20px" class="errorMessage">
+            Name is required
+        </p>
+        } @else if (inputfieldNameIsToShort()) {
+        <p style="margin: -5px 0 0 20px" class="errorMessage">
+            Name must be at least 3 Characters long
+        </p>
+        } @else if (inputfieldNameIsToLong()) {
+        <p style="margin: -5px 0 0 20px" class=" errorMessage">
+            Name can be a maximum of 15 characters long
+        </p>
+        }
+
+
+        <!-- <label for="userEmail" form="editProfileForm">
             <img class="emailIcon" src="/assets/icons/email-icon-black.svg" alt="Email Icon">
             Email Address
         </label>
-        <input type="email" id="userEmail" placeholder="{{ authService.user.email }}">
+        <input type="email" id="userEmail" placeholder="{{ authService.user.email }}" formControlName="email"> -->
+
 
         <div class="btnContainer">
             <button mat-dialog-close class="btnSecondary" type="button">Cancel</button>
-            <button class="btnPrimary" type="submit">Save</button>
+            <button class="btnPrimary" type="submit" [disabled]="editProfileForm.invalid"
+                [ngClass]="{'btnDisabled': editProfileForm.invalid}">
+                Save
+            </button>
         </div>
     </form>
 

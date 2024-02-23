@@ -32,18 +32,23 @@ export class AuthService {
     } else if (urlFromUploadedImg) {
       localStorage.setItem('userImgUrl', urlFromUploadedImg);
     }
+    this.loadUserImgUrlService();
+  }
+
+
+  loadUserImgUrlService(): void {
     this.user.imgUrl = localStorage.getItem('userImgUrl');
   }
 
 
   saveFormDataSignupFormService(formData: any): void {
-    this.removeSelectionsFromAvatarPicker();
+    this.removeSelectionsFromAvatarPickerService();
     this.user = formData;
     localStorage.setItem('userData', JSON.stringify(this.user));
   }
 
 
-  removeSelectionsFromAvatarPicker() {
+  removeSelectionsFromAvatarPickerService(): void {
     this.storageService.selectedImageAvatarUrl = '';
     this.storageService.urlFromUploadedImg = '';
     this.storageService.uploadImg = false;
@@ -60,12 +65,14 @@ export class AuthService {
   }
 
 
-  signupService(userEmail: string | null | undefined, userPassword: string): void {
+  signupService(userEmail: string | null, userPassword: string): void {
     if (userEmail && userPassword) {
-      createUserWithEmailAndPassword(this.auth, userEmail, userPassword).
-        then((userCredential) => {
-          this.createUserService.createUserService(this.user);
-          this.updateProfileService(userCredential.user, this.user);
+      createUserWithEmailAndPassword(this.auth, userEmail, userPassword)
+        .then((userCredential) => {
+          this.loadFormDataSignupFormService();
+          this.loadUserImgUrlService();
+          this.createUserService.createUserService(userCredential.user.uid, this.user);
+          this.setUserDataService(userCredential.user);
           this.displayUserFeedbackIfSignupSuccessfullyService();
         })
         .catch((error) => {
@@ -76,20 +83,37 @@ export class AuthService {
   }
 
 
-  updateProfileService(userCredential: any, user: User): void {
-    updateProfile(userCredential, { displayName: user.name, photoURL: user.imgUrl })
+  setUserDataService(userCredential: any): void {
+    updateProfile(userCredential, { displayName: this.user.name, photoURL: this.user.imgUrl })
       .then(() => {
-        this.getDataFromLoggedInUser();
+        this.getDataFromLoggedInUserService();
+      })
+      .catch((error) => {
+        console.error(error.message);
       })
   }
 
 
-  getDataFromLoggedInUser(): void {
+  getDataFromLoggedInUserService(): void {
     onAuthStateChanged(this.auth, (user) => {
-      this.user.email = user?.email;
-      this.user.name = user?.displayName;
-      this.user.imgUrl = user?.photoURL;
+      if (user) {
+        this.user.email = user?.email;
+        this.user.name = user?.displayName;
+        this.user.imgUrl = user?.photoURL;
+      }
     });
+  }
+
+
+  updateUserNameService(userCredential: any, formValues: any): void {
+    updateProfile(userCredential, { displayName: formValues.name })
+      .then(() => {
+        this.createUserService.updateUserNameService(userCredential.uid, formValues);
+        this.getDataFromLoggedInUserService();
+      })
+      .catch((error) => {
+        console.error(error.message);
+      })
   }
 
 
@@ -98,7 +122,7 @@ export class AuthService {
     setTimeout(() => {
       this.accountIsCreated = false;
       this.router.navigateByUrl('/login');
-      this.removeDataFromLocaleStorage();
+      this.removeDataFromLocaleStorageService();
     }, 1400);
   }
 
@@ -108,12 +132,12 @@ export class AuthService {
     setTimeout(() => {
       this.accountIsCreatedFailed = false;
       this.router.navigateByUrl('/signup');
-      this.removeDataFromLocaleStorage();
+      this.removeDataFromLocaleStorageService();
     }, 1400);
   }
 
 
-  removeDataFromLocaleStorage(): void {
+  removeDataFromLocaleStorageService(): void {
     localStorage.removeItem('userData');
     localStorage.removeItem('userImgUrl');
   }
@@ -122,12 +146,33 @@ export class AuthService {
   loginService(formValues: any): void {
     signInWithEmailAndPassword(this.auth, formValues.email, formValues.password)
       .then((userCredential) => {
+        this.user.isOnline = true;
+        this.createUserService.updateUserOnlineStatusService(userCredential.user.uid, this.user.isOnline);
+        this.saveUserOnlineStatusService();
         this.displayUserFeedbackIfLoginSuccessfullyService();
       })
       .catch((error) => {
         this.displayUserFeedbackIfLoginFailedService();
-        console.error(error.message);
+        console.error('The enterd Email or Password are wrong', error.message);
       });
+  }
+
+
+  saveUserOnlineStatusService(): void {
+    localStorage.setItem('userOnlineStatus', JSON.stringify(this.user.isOnline));
+  }
+
+
+  removeUserOnlineStatusService(): void {
+    localStorage.removeItem('userOnlineStatus');
+  }
+
+
+  loadUserOnlineStatusService(): void {
+    let userOnlineStatusAsString = localStorage.getItem('userOnlineStatus');
+    if (userOnlineStatusAsString) {
+      this.user.isOnline = JSON.parse(userOnlineStatusAsString);
+    }
   }
 
 
@@ -190,7 +235,7 @@ export class AuthService {
   updateProfileGuestService(userCredential: any): void {
     updateProfile(userCredential, { displayName: 'Guest', photoURL: this.storageService.randomAvatarImageUrl })
       .then(() => {
-        this.getDataFromLoggedInUser();
+        this.getDataFromLoggedInUserService();
       })
   }
 
@@ -206,13 +251,13 @@ export class AuthService {
 
   logoutService(): void {
     this.deleteGuestUserAfterLogoutService();
+    this.user.isOnline = false;
+    this.createUserService.updateUserOnlineStatusService(this.auth.currentUser?.uid, this.user.isOnline);
     signOut(this.auth)
       .then(() => {
+        this.removeUserOnlineStatusService();
         this.router.navigateByUrl('/login');
       })
-    setTimeout(() => {
-      location.reload();   //////////////////////////////////////////////////////////////
-    }, 500);
   }
 
 

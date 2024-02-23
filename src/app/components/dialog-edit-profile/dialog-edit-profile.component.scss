@@ -82,7 +82,7 @@ form {
 .btnContainer {
     @include flexCenteredXAxis();
     gap: 32px;
-    margin-top: 30px;
+    margin-top: 40px;
 
     button {
         border-radius: 50px;

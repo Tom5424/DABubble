@@ -34,7 +34,7 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     this.routingService.savePreviousUrl(this.router.routerState.snapshot.url);
     if (this.router.url !== '/avatarPicker') {
-      this.authService.removeDataFromLocaleStorage();
+      this.authService.removeDataFromLocaleStorageService();
     }
   }
 
