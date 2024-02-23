@@ -21,7 +21,7 @@ export class HeaderMainViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getDataFromLoggedInUserService();
-    this.authService.loadUserOnlineStatusService();
+    // this.authService.loadUserOnlineStatusService();
   }
 
 

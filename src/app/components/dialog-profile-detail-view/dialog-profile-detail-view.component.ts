@@ -2,14 +2,12 @@ import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog, MatDialogClose } from '@angular/material/dialog';
 import { AuthService } from '../../services/auth.service';
 import { DialogEditProfileComponent } from '../dialog-edit-profile/dialog-edit-profile.component';
-import { NgStyle } from '@angular/common';
-import { CreateUserService } from '../../services/create-user.service';
 
 
 @Component({
   selector: 'app-dialog-profile-detail-view',
   standalone: true,
-  imports: [MatDialogClose, NgStyle],
+  imports: [MatDialogClose],
   templateUrl: './dialog-profile-detail-view.component.html',
   styleUrl: './dialog-profile-detail-view.component.scss'
 })
@@ -17,13 +15,12 @@ import { CreateUserService } from '../../services/create-user.service';
 
 export class DialogProfileDetailViewComponent implements OnInit {
   authService = inject(AuthService);
-  createUserService = inject(CreateUserService);
   matDialog = inject(MatDialog);
 
 
   ngOnInit(): void {
     this.authService.getDataFromLoggedInUserService();
-    this.authService.loadUserOnlineStatusService();
+    // this.authService.loadUserOnlineStatusService();
   }
 
 
@@ -32,9 +29,12 @@ export class DialogProfileDetailViewComponent implements OnInit {
   }
 
 
-  changeOnlineStatus() {
-    this.authService.user.isOnline = !this.authService.user.isOnline;
-    this.authService.saveUserOnlineStatusService();
-    this.createUserService.updateUserOnlineStatusService(this.authService.auth.currentUser?.uid, this.authService.user.isOnline);
+  guestUserIsNotLoggedIn(): boolean {
+    return !this.authService.auth.currentUser?.isAnonymous;
+  }
+
+
+  userWithGoogleIsNotLoggedIn(): boolean {
+    return this.authService.auth.currentUser?.providerData[0] !== undefined && this.authService.auth.currentUser?.providerData[0].providerId !== 'google.com';
   }
 }

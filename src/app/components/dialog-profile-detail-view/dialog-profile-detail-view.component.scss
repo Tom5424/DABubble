@@ -75,35 +75,14 @@
 }
 
 
-.mainContainerUserOnlineStatus {
-    @include flexSpaceBetween();
-    @include flexCenteredYAxis();
-    margin-top: -30px;
-}
-
-
-.firstChildContainerUserOnlineStatus {
+.dialogBoxUserOnlineStatus {
     @include flex();
     gap: 15px;
+    margin-top: -30px;
 
     p {
+        color: $onlineGreen;
         font-size: 20px;
-    }
-}
-
-
-.secondChildContainerUserOnlineStatus {
-
-    p {
-        color: $middlePurple;
-        font-size: 18px;
-        font-weight: 600;
-
-        &:hover {
-            @include hover();
-            color: $darkPurple;
-            font-weight: 700;
-        }
     }
 }
 
