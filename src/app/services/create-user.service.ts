@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, collection, doc, setDoc, addDoc, updateDoc, getDoc } from '@angular/fire/firestore';
+import { Firestore, collection, doc, setDoc, addDoc, updateDoc, getDoc, deleteDoc } from '@angular/fire/firestore';
 import { User } from '../models/user';
 
 
@@ -59,7 +59,16 @@ export class CreateUserService {
   updateUserOnlineStatusService(userId: string | undefined, userOnlineStatus: boolean): void {
     if (userId) {
       const docRef = doc(this.fireStore, 'users', userId);
-      updateDoc(docRef, { isOnline: userOnlineStatus })
+      updateDoc(docRef, { isOnline: userOnlineStatus });
     }
+  }
+
+
+  deleteUserService(userId: string): void {
+    const docRef = doc(this.fireStore, 'users', userId);
+    deleteDoc(docRef)
+      .catch((error) => {
+        console.error(error.message);
+      })
   }
 }

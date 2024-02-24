@@ -15,9 +15,13 @@
         }
 
 
+        @if (guestUserIsLoggedIn()) {
+        <!---------------- No online Status will displayed if Guest User is Logged in ---------------->
+        <img>
+        }@else {
         <img class="iconOnlineStatus" src="./assets/icons/user-is-online-icon.svg" alt="Green Dot">
         <!-- <img class="iconOnlineStatus" src="./assets/icons/user-is-offline-icon.svg" alt="Gray Dot"> -->
-
+        }
 
         <img class="arrowIcon" src="./assets/icons/arrow-icon-profile.svg" alt="Arrow Icon">
         }

@@ -199,10 +199,9 @@ export class AuthService {
       .then((userCredential) => {
         // this.user.isOnline = true;
         // this.saveUserOnlineStatusService();
-        updateProfile(userCredential.user, { photoURL: userCredential.user.photoURL })
-          .then(() => {
-            this.displayUserFeedbackIfLoginWithGoogleSuccessfullyService();
-          })
+        this.getDataFromLoggedInUserService();
+        this.createUserService.createUserService(userCredential.user.uid, this.user);
+        this.displayUserFeedbackIfLoginWithGoogleSuccessfullyService();
       })
       .catch((error) => {
         console.error('Error Message', error.message);
@@ -216,7 +215,7 @@ export class AuthService {
     this.loginSuccessfully = true;
     setTimeout(() => {
       this.loginSuccessfully = false;
-      this.router.navigateByUrl('mainView');
+      this.router.navigateByUrl('/mainView');
     }, 1400)
   }
 
@@ -269,6 +268,18 @@ export class AuthService {
     if (this.auth.currentUser?.isAnonymous) {
       deleteUser(this.auth.currentUser);
     }
+  }
+
+
+  deleteUserService(currentUser: any): void {
+    deleteUser(currentUser)
+      .then(() => {
+        this.createUserService.deleteUserService(currentUser.uid);
+        this.router.navigateByUrl('/login');
+      })
+      .catch((error) => {
+        console.error(error.message);
+      })
   }
 
 

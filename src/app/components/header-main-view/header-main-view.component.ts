@@ -35,6 +35,11 @@ export class HeaderMainViewComponent implements OnInit {
   }
 
 
+  guestUserIsLoggedIn(): boolean {
+    return (this.authService.auth.currentUser?.isAnonymous) ? true : false;
+  }
+
+
   openProfileDetailView(): void {
     this.matDialog.open(DialogProfileDetailViewComponent, { position: { top: '95px', right: '25px' } });
   }

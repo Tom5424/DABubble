@@ -56,18 +56,20 @@
     @include flexSpaceBetween();
     @include flexCenteredYAxis();
 
-    p:nth-of-type(1) {
+    p {
         font-size: 32px;
         font-weight: 700;
     }
 
-    p:nth-of-type(2) {
+    button {
+        @include hover();
         color: $middlePurple;
         font-size: 18px;
         font-weight: 600;
+        background-color: #ffffff;
+        border: unset;
 
         &:hover {
-            @include hover();
             color: $darkPurple;
             font-weight: 700;
         }
@@ -81,7 +83,6 @@
     margin-top: -30px;
 
     p {
-        color: $onlineGreen;
         font-size: 20px;
     }
 }
@@ -98,8 +99,31 @@
 }
 
 
-.emailAddress {
-    margin: 0px 0px 0 45px;
-    font-size: 18px;
-    color: #1381FF;
+.containerBtnAndText {
+    @include flexSpaceBetween();
+    @include flexCenteredYAxis();
+
+    p {
+        margin: 0 0 0 0;
+        font-size: 18px;
+        color: #1381FF;
+    }
+
+    button {
+        @include btnPrimary();
+        @include btnPrimaryHover();
+        @include btnPrimaryActive();
+        border-radius: 25px;
+        border: unset;
+        padding: 12px 15px 12px 15px;
+    }
+}
+
+
+.disabledEditButton {
+    color: $textGray !important;
+
+    &:hover {
+        cursor: not-allowed !important;
+    }
 }

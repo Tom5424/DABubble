@@ -10,7 +10,7 @@
 
 
     <div class="containerProfileImg">
-        @if (!authService.user.imgUrl) {
+        @if (noProfileImgExist()) {
         <img class="imgNoSelectedProfile" src="/assets/img/non-user-selected.svg" alt="Profile Image">
         }@else {
         <img src="{{ authService.user.imgUrl }}" alt="Profile Image">
@@ -21,15 +21,28 @@
     <div class="dialogBoxMiddlePart">
         <p>{{ authService.user.name }}</p>
 
-        @if (userWithGoogleIsNotLoggedIn() && guestUserIsNotLoggedIn()) {
-        <p (click)="openProfileEditView()">Edit</p>
-        }
+        <button (click)="openProfileEditView()" type="button" [disabled]="guestUserIsLoggedIn()"
+            [ngClass]="{'disabledEditButton': guestUserIsLoggedIn()}"
+            [matTooltip]="guestUserIsLoggedIn() ? tooltipTextForEditUserBtn : ''" matTooltipPosition="above"
+            matTooltipShowDelay="150" matTooltipHideDelay="150">
+            Edit
+        </button>
     </div>
 
 
     <div class="dialogBoxUserOnlineStatus">
+        @if (guestUserIsLoggedIn()) {
+        <p [ngStyle]="guestUserIsLoggedIn() ? {'color': '#000000'} : {'color': '#92C83E'}">
+            Guest User have no online Status
+        </p>
+
+        }@else {
+
         <img src="/assets/icons/user-is-online-icon.svg" alt="Green Dot">
-        <p>Online</p>
+        <p [ngStyle]="guestUserIsLoggedIn() ? {'color': '#000000'} : {'color': '#92C83E'}">
+            Online
+        </p>
+        }
     </div>
 
 
@@ -39,8 +52,16 @@
     </div>
 
 
-    <p class="emailAddress">
-        {{ !authService.auth.currentUser?.isAnonymous ? authService.user.email : 'Guest User have no Email' }}
-    </p>
+    <div class="containerBtnAndText">
+        <p>
+            {{ guestUserIsLoggedIn() ? 'Guest User have no Email' : authService.user.email }}
+        </p>
 
+        <button type="button" (click)="deleteUser()" [disabled]="guestUserIsLoggedIn()"
+            [ngClass]="{'btnDisabled': guestUserIsLoggedIn()}"
+            [matTooltip]="guestUserIsLoggedIn() ? tooltipTextForDeleteUserBtn : ''" matTooltipPosition="above"
+            matTooltipShowDelay="150" matTooltipHideDelay="150">
+            Delete Account
+        </button>
+    </div>
 </div>
