@@ -10,9 +10,11 @@
 
     <div class="scrollingContainer">
 
-        <div class="containerSidebarMiddlePart">
+        <div class="containerSidebarMiddlePart" (click)="foldInChannels()">
             <div class="childContainerSidebarMiddlePart">
-                <img src="assets/icons/arrow-icon-dropdown.svg" alt="Arrow Icon">
+                <img src="assets/icons/arrow-icon-dropdown.svg" alt="Arrow Icon"
+                    [ngClass]="{'rotateArrowIcon': channelsAreCollapsed}">
+
                 <img src="assets/icons/three-circles-icon.svg" alt="Three Circle Icon">
                 <p>Channels</p>
             </div>
@@ -23,7 +25,7 @@
         </div>
 
 
-        <ul class="channelList">
+        <ul class="channelList" [ngClass]="{'d-none': channelsAreCollapsed}">
             <li>
                 <img src="assets/icons/hashtag-icon.svg" alt="Hashtag Icon">
                 <p>HTML</p>
@@ -43,23 +45,25 @@
                 <img src="assets/icons/hashtag-icon.svg" alt="Hashtag Icon">
                 <p>Angular</p>
             </li>
+
+
+            <div class="containerIconAndText">
+                <img src="assets/icons/plus-icon-with-circle.svg" alt="Plus Icon">
+                <p>Add Channel</p>
+            </div>
         </ul>
 
 
-        <div class="containerIconAndText">
-            <img src="assets/icons/plus-icon-with-circle.svg" alt="Plus Icon">
-            <p>Add Channel</p>
-        </div>
+        <div class="containerSidebarLowerPart" (click)="foldInContacts()">
+            <img src="assets/icons/arrow-icon-dropdown.svg" alt="Arrow Icon"
+                [ngClass]="{'rotateArrowIcon': contactsAreCollapsed}">
 
-
-        <div class="containerSidebarLowerPart">
-            <img src="assets/icons/arrow-icon-dropdown.svg" alt="Arrow Icon">
             <img src="assets/icons/user-icon-with-circle-black.svg" alt="User Icon">
             <p>Direct Messages</p>
         </div>
 
 
-        <ul class="contactList">
+        <ul class="contactList" [ngClass]="{'d-none': contactsAreCollapsed}">
             <li>
                 <img src="assets/img/avatar-1.svg" alt="User Profile Image">
                 <img src="assets/icons/user-is-online-icon.svg" alt="Green Dot">

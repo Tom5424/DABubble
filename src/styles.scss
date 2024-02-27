@@ -95,6 +95,11 @@ body {
 }
 
 
+.d-none {
+    display: none !important;
+}
+
+
 /////////// Animation for User Feedback Message 
 @keyframes slideInLeft {
     from {
