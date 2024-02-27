@@ -100,6 +100,7 @@ export class AuthService {
         this.user.email = user?.email;
         this.user.name = user?.displayName;
         this.user.imgUrl = user?.photoURL;
+        this.user.userId = user?.uid;
       }
     });
   }

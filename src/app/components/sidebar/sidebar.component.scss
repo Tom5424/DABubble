@@ -115,6 +115,7 @@ nav {
 .channelList {
     @include flexColumn();
     gap: 15px;
+    margin: 0;
     padding-left: 23px;
     list-style: none;
 
@@ -210,6 +211,7 @@ nav {
 .contactList {
     @include flexColumn();
     gap: 15px;
+    margin: 0;
     padding-left: 32px;
     list-style: none;
 
@@ -245,7 +247,21 @@ nav {
 }
 
 
+.imgNoSelectedProfile {
+    background-color: $purple;
+    width: 38px !important;
+    height: 38px !important;
+    padding: 6px;
+}
+
+
 .rotateArrowIcon {
     transition: all 225ms ease-in-out;
     transform: rotate(-90deg) !important;
+}
+
+
+.text {
+    font-size: 18px;
+    padding-left: 25px;
 }

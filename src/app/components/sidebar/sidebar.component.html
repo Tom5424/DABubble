@@ -10,10 +10,10 @@
 
     <div class="scrollingContainer">
 
-        <div class="containerSidebarMiddlePart" (click)="foldInChannels()">
-            <div class="childContainerSidebarMiddlePart">
+        <div class="containerSidebarMiddlePart">
+            <div class="childContainerSidebarMiddlePart" (click)="foldInChannelList()">
                 <img src="assets/icons/arrow-icon-dropdown.svg" alt="Arrow Icon"
-                    [ngClass]="{'rotateArrowIcon': channelsAreCollapsed}">
+                    [ngClass]="{'rotateArrowIcon': channelListAreCollapsed}">
 
                 <img src="assets/icons/three-circles-icon.svg" alt="Three Circle Icon">
                 <p>Channels</p>
@@ -25,7 +25,7 @@
         </div>
 
 
-        <ul class="channelList" [ngClass]="{'d-none': channelsAreCollapsed}">
+        <ul class="channelList" [ngClass]="{'d-none': channelListAreCollapsed}">
             <li>
                 <img src="assets/icons/hashtag-icon.svg" alt="Hashtag Icon">
                 <p>HTML</p>
@@ -54,39 +54,36 @@
         </ul>
 
 
-        <div class="containerSidebarLowerPart" (click)="foldInContacts()">
+        <div class="containerSidebarLowerPart" (click)="foldInContactList()">
             <img src="assets/icons/arrow-icon-dropdown.svg" alt="Arrow Icon"
-                [ngClass]="{'rotateArrowIcon': contactsAreCollapsed}">
+                [ngClass]="{'rotateArrowIcon': contactListAreCollapsed}">
 
             <img src="assets/icons/user-icon-with-circle-black.svg" alt="User Icon">
             <p>Direct Messages</p>
         </div>
 
 
-        <ul class="contactList" [ngClass]="{'d-none': contactsAreCollapsed}">
+        <ul class="contactList" [ngClass]="{'d-none': contactListAreCollapsed}">
+            @for (user of createUserService.allUsersAsObservable | async; track $index) {
             <li>
-                <img src="assets/img/avatar-1.svg" alt="User Profile Image">
-                <img src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
-                <p>Tom</p>
-            </li>
+                @if (noProfileImgExist(user)) {
+                <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="User Profile Image">
+                }@else {
+                <img src="{{ user.imgUrl }}" alt="User Profile Image">
+                }
 
-            <li>
-                <img src="assets/img/avatar-2.svg" alt="User Profile Image">
                 <img src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
-                <p>Tom</p>
-            </li>
+                <p>{{ user.name }}</p>
 
-            <li>
-                <img src="assets/img/avatar-3.svg" alt="User Profile Image">
-                <img src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
-                <p>Tom</p>
+                @if (userIdMatchesWithIdFromLoggedinUser(user)) {
+                <p>(You)</p>
+                }
             </li>
+            }
 
-            <li>
-                <img src="assets/img/avatar-4.svg" alt="User Profile Image">
-                <img src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
-                <p>Tom</p>
-            </li>
+            @if (checkIfContactsExistingInDatabase()) {
+            <p class="text">No Contacts Existing</p>
+            }
         </ul>
 
     </div>
