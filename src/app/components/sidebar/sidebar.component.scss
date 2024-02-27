@@ -1,0 +1,235 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+nav {
+    width: 300px;
+    height: 75vh;
+    border-radius: 30px;
+    padding: 32px 30px 32px 30px;
+    background-color: #ffffff;
+}
+
+
+.containerSidebarUpperPart {
+    @include flexCenteredYAxis();
+    @include flexSpaceBetween();
+}
+
+
+.containerPencilIcon {
+    @include iconHover();
+    padding: 6px;
+
+    &:hover {
+
+        img {
+            filter: brightness(0) saturate(100%) invert(23%) sepia(96%) saturate(3126%) hue-rotate(235deg) brightness(97%) contrast(96%);
+        }
+    }
+
+    &:active {
+
+        img {
+            filter: brightness(0) saturate(100%) invert(0%) sepia(85%) saturate(7500%) hue-rotate(319deg) brightness(117%) contrast(113%);
+        }
+    }
+}
+
+
+.scrollingContainer {
+    height: 70vh;
+    overflow-y: hidden;
+
+    &:hover {
+        transition: all 225ms ease-in-out;
+        overflow-y: scroll;
+    }
+}
+
+
+.containerSidebarMiddlePart {
+    @include flexCenteredYAxis();
+    @include flexSpaceBetween();
+    margin-top: 20px;
+}
+
+
+.childContainerSidebarMiddlePart {
+    @include hover();
+    @include flexCenteredYAxis();
+    gap: 15px;
+
+    p {
+        font-weight: 700;
+        font-size: 20px;
+    }
+
+    &:hover {
+
+        img {
+            filter: brightness(0) saturate(100%) invert(36%) sepia(75%) saturate(3861%) hue-rotate(228deg) brightness(96%) contrast(97%);
+        }
+
+        p {
+            color: $middlePurple;
+        }
+    }
+
+    &:active {
+
+        p {
+            color: #000000;
+        }
+    }
+}
+
+
+.containerPlusIcon {
+    @include flex();
+    @include iconHover();
+    padding: 3px;
+
+    &:hover {
+
+        img {
+            filter: brightness(0) saturate(100%) invert(50%) sepia(79%) saturate(6449%) hue-rotate(229deg) brightness(98%) contrast(93%);
+        }
+    }
+
+    &:active {
+        background-color: unset;
+
+        img {
+            filter: brightness(0) saturate(100%) invert(0%) sepia(85%) saturate(7500%) hue-rotate(280deg) brightness(111%) contrast(115%);
+        }
+    }
+}
+
+
+.channelList {
+    @include flexColumn();
+    gap: 15px;
+    padding-left: 23px;
+    list-style: none;
+
+    li {
+        @include flexCenteredYAxis();
+        @include hover();
+        border-radius: 20px;
+        gap: 15px;
+        padding: 5px 0 5px 20px;
+
+        p {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        &:hover {
+            background-color: $bgColor;
+
+            img {
+                filter: brightness(0) saturate(100%) invert(30%) sepia(20%) saturate(6972%) hue-rotate(226deg) brightness(105%) contrast(89%);
+            }
+        }
+    }
+}
+
+
+.containerIconAndText {
+    @include flex();
+    @include hover();
+    gap: 10px;
+    padding-left: 45px;
+
+    p {
+        font-size: 18px;
+    }
+
+    &:hover {
+
+        img {
+            filter: brightness(0) saturate(100%) invert(27%) sepia(38%) saturate(4414%) hue-rotate(230deg) brightness(106%) contrast(89%);
+        }
+
+        p {
+            color: $middlePurple;
+        }
+    }
+
+    &:active {
+
+        p {
+            color: #000000;
+        }
+    }
+}
+
+
+.containerSidebarLowerPart {
+    @include flexCenteredYAxis();
+    @include hover();
+    gap: 15px;
+    margin-top: 20px;
+
+    p {
+        font-weight: 700;
+        font-size: 20px;
+    }
+
+    &:hover {
+
+        img {
+            filter: brightness(0) saturate(100%) invert(36%) sepia(75%) saturate(3861%) hue-rotate(228deg) brightness(96%) contrast(97%);
+        }
+
+        p {
+            color: $middlePurple;
+        }
+    }
+
+    &:active {
+
+        p {
+            color: #000000;
+        }
+    }
+}
+
+
+.contactList {
+    @include flexColumn();
+    gap: 15px;
+    padding-left: 32px;
+    list-style: none;
+
+    li {
+        @include flexCenteredYAxis();
+        @include hover();
+        position: relative;
+        gap: 15px;
+        border-radius: 35px;
+        padding: 4px 20px 4px 20px;
+
+        img:nth-of-type(1) {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        img:nth-of-type(2) {
+            @include positionAbsolute(45px, unset, 55px, unset);
+            width: 12px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        &:hover {
+            background-color: $bgColor;
+        }
+    }
+}

@@ -5,6 +5,7 @@
 header {
     @include flexCenteredYAxis();
     @include flexSpaceBetween();
+    background-color: $bgColor;
     padding: 0px 40px 0 40px;
 
     input {

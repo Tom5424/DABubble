@@ -223,8 +223,6 @@ export class AuthService {
   loginAsGuestService(): void {
     signInAnonymously(this.auth)
       .then((userCredential) => {
-        // this.user.isOnline = true;
-        // this.saveUserOnlineStatusService();
         this.storageService.getRandomAvatarImgForGuestUserService();
         this.updateProfileGuestService(userCredential.user);
         this.displayUserFeedbackIfLoginAsGuestSuccessfullyService();
