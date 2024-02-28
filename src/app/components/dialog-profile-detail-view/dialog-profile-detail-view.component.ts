@@ -30,7 +30,7 @@ export class DialogProfileDetailViewComponent implements OnInit {
 
 
   openProfileEditView(): void {
-    this.matDialog.open(DialogEditProfileComponent, { position: { top: '95px', right: '25px' }, autoFocus: false });
+    this.matDialog.open(DialogEditProfileComponent, { position: { top: '95px', right: '25px' } });
   }
 
 

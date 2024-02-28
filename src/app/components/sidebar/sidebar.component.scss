@@ -236,6 +236,12 @@ nav {
             border: 2px solid #ffffff;
         }
 
+        p:nth-of-type(1) {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow-x: hidden;
+        }
+
         p {
             font-size: 18px;
         }

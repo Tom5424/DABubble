@@ -1,0 +1,88 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+.dialogBox {
+    border-radius: 30px;
+    background-color: #ffffff;
+    padding: 40px;
+
+    span {
+        font-size: 18px
+    }
+}
+
+
+.dialogBoxUpperPart {
+    @include flexCenteredYAxis();
+    @include flexSpaceBetween();
+    margin-bottom: 30px;
+
+    p {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 700;
+    }
+}
+
+
+.containerCloseIcon {
+    @include flex();
+    @include iconHover();
+    border-radius: 50%;
+    padding: 6px;
+
+    &:hover {
+
+        img {
+            filter: brightness(0) saturate(100%) invert(35%) sepia(70%) saturate(4922%) hue-rotate(231deg) brightness(98%) contrast(92%);
+        }
+    }
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+
+    input:nth-of-type(1) {
+        background-image: url('../../../assets/icons/hashtag-icon-gray.svg');
+        background-repeat: no-repeat;
+        background-position: 15px;
+        padding-left: 50px;
+    }
+
+    label {
+        font-size: 18px;
+        font-weight: 700;
+
+        mark {
+            color: $textGray;
+            background-color: unset;
+            font-weight: 400;
+        }
+    }
+
+    input {
+        @include inputfieldOrTextarea(unset, 40px, 18px, 20px, 18px, 20px, 18px, #ffffff);
+        @include inputfieldOrTextareaHover();
+        @include inputfieldOrTextareaFocus();
+        border: 1px solid $lightPurple;
+    }
+}
+
+
+.containerBtn {
+    @include flexEndXAxis();
+
+    button {
+        @include btnPrimary();
+        @include btnPrimaryHover();
+        @include btnPrimaryActive();
+        padding: 12px 25px 12px 25px;
+        border-radius: 25px;
+        border: unset;
+    }
+}

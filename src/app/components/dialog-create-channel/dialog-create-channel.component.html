@@ -1,0 +1,34 @@
+<div class="dialogBox">
+
+    <div class="dialogBoxUpperPart">
+        <p>Create Channel</p>
+
+        <div class="containerCloseIcon" mat-dialog-close>
+            <img src="assets/icons/close-icon.svg" alt="Close Icon">
+        </div>
+    </div>
+
+    <span>
+        Channels are used by your team to communicate.
+        Ideally they should be topic-related #marketing for example.
+    </span>
+
+
+    <form id="createChannelForm">
+        <label for="channelName" form="createChannelForm">
+            Channel Name
+        </label>
+        <input type="text" id="channelName" placeholder="e.g. cooperation Projects">
+
+
+        <label for="channelDescription" form="createChannelForm">
+            Description <mark>(optional)</mark>
+        </label>
+        <input type="text" id="channelDescription" placeholder="Your Text here">
+
+
+        <div class="containerBtn">
+            <button type="button">Create</button>
+        </div>
+    </form>
+</div>

@@ -19,7 +19,7 @@
                 <p>Channels</p>
             </div>
 
-            <div class="containerPlusIcon">
+            <div class="containerPlusIcon" (click)="openDialogCreateChannel()">
                 <img src="assets/icons/plus-icon.svg" alt="Plus Icon">
             </div>
         </div>
@@ -27,27 +27,27 @@
 
         <ul class="channelList" [ngClass]="{'d-none': channelListAreCollapsed}">
             <li>
-                <img src="assets/icons/hashtag-icon.svg" alt="Hashtag Icon">
+                <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
                 <p>HTML</p>
             </li>
 
             <li>
-                <img src="assets/icons/hashtag-icon.svg" alt="Hashtag Icon">
+                <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
                 <p>CSS</p>
             </li>
 
             <li>
-                <img src="assets/icons/hashtag-icon.svg" alt="Hashtag Icon">
+                <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
                 <p>JavaScript</p>
             </li>
 
             <li>
-                <img src="assets/icons/hashtag-icon.svg" alt="Hashtag Icon">
+                <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
                 <p>Angular</p>
             </li>
 
 
-            <div class="containerIconAndText">
+            <div class="containerIconAndText" (click)="openDialogCreateChannel()">
                 <img src="assets/icons/plus-icon-with-circle.svg" alt="Plus Icon">
                 <p>Add Channel</p>
             </div>

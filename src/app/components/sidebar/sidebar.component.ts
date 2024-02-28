@@ -3,6 +3,8 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CreateUserService } from '../../services/create-user.service';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogCreateChannelComponent } from '../dialog-create-channel/dialog-create-channel.component';
 
 
 @Component({
@@ -17,6 +19,7 @@ import { User } from '../../models/user';
 export class SidebarComponent implements OnInit {
   createUserService = inject(CreateUserService);
   authService = inject(AuthService);
+  matDialog = inject(MatDialog);
   channelListAreCollapsed: boolean = false;
   contactListAreCollapsed: boolean = false;
 
@@ -24,7 +27,6 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.createUserService.checkIfContactsExistingInDatabaseService();
     this.createUserService.getAllUserService();
-    this.authService.getDataFromLoggedInUserService();
   }
 
 
@@ -35,6 +37,11 @@ export class SidebarComponent implements OnInit {
 
   foldInContactList(): void {
     this.contactListAreCollapsed = !this.contactListAreCollapsed;
+  }
+
+
+  openDialogCreateChannel(): void {
+    this.matDialog.open(DialogCreateChannelComponent);
   }
 
 
