@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogCreateChannelComponent } from '../dialog-create-channel/dialog-create-channel.component';
+import { CreateChannelService } from '../../services/create-channel.service';
 
 
 @Component({
@@ -18,6 +19,7 @@ import { DialogCreateChannelComponent } from '../dialog-create-channel/dialog-cr
 
 export class SidebarComponent implements OnInit {
   createUserService = inject(CreateUserService);
+  createChannelService = inject(CreateChannelService);
   authService = inject(AuthService);
   matDialog = inject(MatDialog);
   channelListAreCollapsed: boolean = false;
@@ -26,7 +28,9 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.createUserService.checkIfContactsExistingInDatabaseService();
+    this.createChannelService.checkIfChannelsExistingInDatabaseService();
     this.createUserService.getAllUserService();
+    this.createChannelService.getAllChannelsService();
   }
 
 
@@ -56,6 +60,24 @@ export class SidebarComponent implements OnInit {
 
 
   checkIfContactsExistingInDatabase(): boolean {
-    return this.createUserService.noContactsExistingInDatabase;
+    return (this.createUserService.noContactsExistingInDatabase) ? true : false;
   }
+
+
+  checkIfChannelsExistingInDatabase(): boolean {
+    return (this.createChannelService.noChannelsExistingInDatabase) ? true : false;
+  }
+
+
+  channelsAreLoading(): boolean {
+    return (this.createChannelService.loadChannels) ? true : false;
+  }
+
+
+  contactsAreLoading(): boolean {
+    return (this.createUserService.loadContacts) ? true : false;
+  }
+
+
+  //Todo: Check if user and contacts existing in Database after delete (No Channels Existing, No Contacts Existing).
 }

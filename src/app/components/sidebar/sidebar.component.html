@@ -26,31 +26,29 @@
 
 
         <ul class="channelList" [ngClass]="{'d-none': channelListAreCollapsed}">
+            @for(channel of createChannelService.allChannelsAsObservable | async; track $index) {
             <li>
                 <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
-                <p>HTML</p>
+                <p>{{ channel.channelName }}</p>
             </li>
-
-            <li>
-                <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
-                <p>CSS</p>
-            </li>
-
-            <li>
-                <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
-                <p>JavaScript</p>
-            </li>
-
-            <li>
-                <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
-                <p>Angular</p>
-            </li>
+            }
 
 
+            @if (checkIfChannelsExistingInDatabase()) {
+            <p class="text">No Channels Existing</p>
+            }
+
+
+            @if (channelsAreLoading()) {
+            <div class="containerSpinnerIcon">
+                <img src="./assets/icons/spinner-icon.svg" alt="Spinner Icon">
+            </div>
+            }@else {
             <div class="containerIconAndText" (click)="openDialogCreateChannel()">
                 <img src="assets/icons/plus-icon-with-circle.svg" alt="Plus Icon">
                 <p>Add Channel</p>
             </div>
+            }
         </ul>
 
 
@@ -81,8 +79,16 @@
             </li>
             }
 
+
             @if (checkIfContactsExistingInDatabase()) {
             <p class="text">No Contacts Existing</p>
+            }
+
+
+            @if (contactsAreLoading()) {
+            <div class="containerSpinnerIcon">
+                <img src="./assets/icons/spinner-icon.svg" alt="Spinner Icon">
+            </div>
             }
         </ul>
 

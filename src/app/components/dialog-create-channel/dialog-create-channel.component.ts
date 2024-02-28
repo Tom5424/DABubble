@@ -42,8 +42,8 @@ export class DialogCreateChannelComponent {
   }
 
 
-  openDialogAddPeople() {
+  openDialogAddPeople(): void {
     this.matDialog.closeAll();
-    this.matDialog.open(DialogAddPeopleToChannelComponent);
+    this.matDialog.open(DialogAddPeopleToChannelComponent, { data: { channelData: this.createChannelForm.value } });
   }
 }

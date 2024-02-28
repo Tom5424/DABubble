@@ -10,13 +10,14 @@ import { Observable } from 'rxjs';
 
 
 export class CreateUserService {
-  fireStore = inject(Firestore);
+  firestore = inject(Firestore);
   allUsersAsObservable!: Observable<User[]>;
   noContactsExistingInDatabase: boolean = false;
+  loadContacts: boolean = false;
 
 
   createUserService(userId: string, user: User): void {
-    const docRef = doc(this.fireStore, 'users', userId);
+    const docRef = doc(this.firestore, 'users', userId);
     const userRef = new User(user, userId);
     setDoc(docRef, userRef.toJson())
       .then(() => {
@@ -29,13 +30,18 @@ export class CreateUserService {
 
 
   getAllUserService(): void {
-    const collectionRef = query(collection(this.fireStore, 'users'), orderBy('initialLetter'));
+    this.loadContacts = true;
+    const collectionRef = query(collection(this.firestore, 'users'), orderBy('initialLetter'));
+    collectionData(collectionRef)
+      .subscribe(() => {
+        this.loadContacts = false;
+      })
     this.allUsersAsObservable = collectionData(collectionRef) as Observable<User[]>;
   }
 
 
   checkIfContactsExistingInDatabaseService(): void {
-    const collectionRef = collection(this.fireStore, 'users');
+    const collectionRef = collection(this.firestore, 'users');
     getDocs(collectionRef)
       .then((data) => {
         this.noContactsExistingInDatabase = data.empty;
@@ -45,7 +51,7 @@ export class CreateUserService {
 
   updateUserNameService(userId: string | undefined, formValues: any): void {
     if (userId) {
-      const docRef = doc(this.fireStore, 'users', userId);
+      const docRef = doc(this.firestore, 'users', userId);
       updateDoc(docRef, { name: formValues.name, initialLetter: formValues.name.charAt(0).toLocaleLowerCase() })
     }
   }
@@ -60,7 +66,7 @@ export class CreateUserService {
 
 
   deleteUserService(userId: string): void {
-    const docRef = doc(this.fireStore, 'users', userId);
+    const docRef = doc(this.firestore, 'users', userId);
     deleteDoc(docRef)
       .catch((error) => {
         console.error(error.message);

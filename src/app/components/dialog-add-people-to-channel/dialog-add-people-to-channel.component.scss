@@ -43,7 +43,11 @@ form {
 
     label {
         @include hover();
-        // min-width: 100px;
+
+        mark {
+            color: $middlePurple;
+            background-color: unset;
+        }
     }
 
     input {
