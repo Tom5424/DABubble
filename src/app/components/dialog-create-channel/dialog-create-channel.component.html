@@ -14,21 +14,50 @@
     </span>
 
 
-    <form id="createChannelForm">
+    <form id="createChannelForm" [formGroup]="createChannelForm">
+        <!--------------------------------- Inputfield Channel Name --------------------------------->
         <label for="channelName" form="createChannelForm">
             Channel Name
         </label>
-        <input type="text" id="channelName" placeholder="e.g. cooperation Projects">
+        <input type="text" id="channelName" placeholder="e.g. cooperation Projects" formControlName="channelName"
+            [ngClass]="{'errorInputfield': inputFieldChannelNameIsRequired() || inputfieldChannelNameIsToShort() || inputfieldChannelNameIsToLong()}">
+
+        @if (inputFieldChannelNameIsRequired()) {
+        <p class="errorMessage" style="margin: -5px 0 0 20px; height: unset;">
+            Channel Name is required
+        </p>
+        }@else if (inputfieldChannelNameIsToShort()) {
+        <p class="errorMessage" style="margin: -5px 0 0 20px; height: unset;">
+            Channel Name must be at least 3 Characters long
+        </p>
+        }@else if (inputfieldChannelNameIsToLong()) {
+        <p style="margin: -5px 0 0 20px; height: unset;" class="errorMessage">
+            Channel Name can be a maximum of 15 characters long
+        </p>
+        }
+        <!--------------------------------- Inputfield Channel Name --------------------------------->
 
 
+        <!--------------------------------- Inputfield Channel Description --------------------------------->
         <label for="channelDescription" form="createChannelForm">
             Description <mark>(optional)</mark>
         </label>
-        <input type="text" id="channelDescription" placeholder="Your Text here">
+        <input type="text" id="channelDescription" placeholder="Your Text here" formControlName="channelDescription"
+            [ngClass]="{'errorInputfield': inputfieldChannelDescriptionIsToLong()}">
+
+        @if (inputfieldChannelDescriptionIsToLong()) {
+        <p style="margin: -5px 0 0 20px; height: unset;" class="errorMessage">
+            Channel Description can be a maximum of 150 characters long
+        </p>
+        }
+        <!--------------------------------- Inputfield Channel Description --------------------------------->
 
 
         <div class="containerBtn">
-            <button type="button">Create</button>
+            <button type="button" (click)="openDialogAddPeople()" [disabled]="createChannelForm.invalid"
+                [ngClass]="{'btnDisabled': createChannelForm.invalid}">
+                Create
+            </button>
         </div>
     </form>
 </div>
