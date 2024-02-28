@@ -1,7 +1,8 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialogClose } from '@angular/material/dialog';
+import { MatDialog, MatDialogClose } from '@angular/material/dialog';
+import { DialogAddPeopleToChannelComponent } from '../dialog-add-people-to-channel/dialog-add-people-to-channel.component';
 
 
 @Component({
@@ -14,6 +15,7 @@ import { MatDialogClose } from '@angular/material/dialog';
 
 
 export class DialogCreateChannelComponent {
+  matDialog = inject(MatDialog);
   createChannelForm = new FormGroup({
     channelName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
     channelDescription: new FormControl('', Validators.maxLength(150)),
@@ -41,6 +43,7 @@ export class DialogCreateChannelComponent {
 
 
   openDialogAddPeople() {
-
+    this.matDialog.closeAll();
+    this.matDialog.open(DialogAddPeopleToChannelComponent);
   }
 }

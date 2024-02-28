@@ -1,0 +1,37 @@
+<div class="dialogBox">
+
+    <div class="dialogBoxUpperPart">
+        <p>Add People</p>
+
+        <div class="containerCloseIcon" mat-dialog-close>
+            <img src="assets/icons/close-icon.svg" alt="Close Icon">
+        </div>
+    </div>
+
+
+    <form (ngSubmit)="createChannel()" id="addPeopleForm" [formGroup]="addPeopleForm">
+        <!--------------------------------- Radio Button add all People --------------------------------->
+        <label for="radioAddAllPeople" form="addPeopleForm">
+            <input type="radio" id="radioAddAllPeople" formControlName="radioAddPeople" name="radioAddPeople"
+                value="radioAddAllPeople">
+            Add all members of OfficeTeam
+        </label>
+        <!--------------------------------- Radio Button add all People --------------------------------->
+
+
+        <!--------------------------------- Radio Button add specific People --------------------------------->
+        <label for="radioAddSpecificPeople" form="addPeopleForm">
+            <input type="radio" id="radioAddSpecificPeople" formControlName="radioAddPeople" name="radioAddPeople"
+                value="radioAddSpecificPeople">
+            Add certain People
+        </label>
+        <!--------------------------------- Radio Button add specific People --------------------------------->
+
+
+        <div class="containerBtn">
+            <button type="submit" [disabled]="addPeopleForm.invalid" [ngClass]="{'btnDisabled': addPeopleForm.invalid}">
+                Create
+            </button>
+        </div>
+    </form>
+</div>
