@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angula
 import { NgClass } from '@angular/common';
 import { CreateChannelService } from '../../services/create-channel.service';
 import { CreateUserService } from '../../services/create-user.service';
+import { take } from 'rxjs';
 
 
 @Component({
@@ -30,7 +31,15 @@ export class DialogAddPeopleToChannelComponent {
 
 
   createChannel() {
-    this.createChannelService.createChannelService(this.data.channelData);
-    this.matDialog.closeAll();
+    if (this.addPeopleForm.controls.radioAddPeople.value == 'radioAddAllPeople') {
+      this.createUserService.allUsersAsObservable.pipe(take(1))
+        .subscribe((allusers) => {
+          this.createChannelService.createChannelService(this.data.channelData, allusers);
+          this.matDialog.closeAll();
+        })
+    } else {
+      this.createChannelService.createChannelService(this.data.channelData);
+      this.matDialog.closeAll();
+    }
   }
 }

@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Firestore, addDoc, collection, collectionData, getDocs, orderBy, query } from '@angular/fire/firestore';
 import { Channel } from '../models/channel';
 import { Observable } from 'rxjs';
+import { User } from '../models/user';
 
 
 @Injectable({
@@ -16,9 +17,9 @@ export class CreateChannelService {
   loadChannels: boolean = false;
 
 
-  createChannelService(channelData: any): void {
+  createChannelService(channelData: any, allusers?: User[]): void {
     const collectionRef = collection(this.firestore, 'channels');
-    const channelRef = new Channel(channelData);
+    const channelRef = new Channel(channelData, allusers);
     addDoc(collectionRef, channelRef.toJson())
       .then(() => {
 

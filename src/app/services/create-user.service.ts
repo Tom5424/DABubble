@@ -13,6 +13,7 @@ export class CreateUserService {
   firestore = inject(Firestore);
   allUsersAsObservable!: Observable<User[]>;
   noContactsExistingInDatabase: boolean = false;
+  userId: string = '';
   loadContacts: boolean = false;
 
 
@@ -52,7 +53,28 @@ export class CreateUserService {
   updateUserNameService(userId: string, formValues: any): void {
     const docRef = doc(this.firestore, 'users', userId);
     updateDoc(docRef, { name: formValues.name, initialLetter: formValues.name.charAt(0).toLocaleLowerCase() })
+      .then(() => {
+        // this.updateUsersThatAddedToChannel(userId, formValues);
+      })
   }
+
+
+  // updateUsersThatAddedToChannel(userId: string, formValues: any) {
+  //   const collectionRef = collection(this.firestore, 'channels');
+  //   getDocs(collectionRef)
+  //     .then((docs) => {
+  //       docs.forEach((doc) => {
+  //         doc.data()['members'].forEach((doc: User) => {
+  //           this.userId = doc.userId;
+  //         });
+  //         console.log(this.userId);
+  //       });
+  //       if (this.userId == userId) {
+  //         const docRef = doc(this.firestore, 'users', this.userId);
+  //         updateDoc(docRef, { name: formValues.name });
+  //       }
+  //     })
+  // }
 
 
   updateUserOnlineStatusService(userId: string | undefined, userOnlineStatus: boolean): void {
