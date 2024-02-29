@@ -70,7 +70,12 @@
                 <img src="{{ user.imgUrl }}" alt="User Profile Image">
                 }
 
+                @if (userIsOnline(user)) {
                 <img src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
+                }@else {
+                <img src="./assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
+                }
+
                 <p>{{ user.name }}</p>
 
                 @if (userIdMatchesWithIdFromLoggedinUser(user)) {

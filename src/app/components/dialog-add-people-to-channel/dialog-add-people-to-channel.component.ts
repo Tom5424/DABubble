@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogClose } from '@angular/material/di
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { CreateChannelService } from '../../services/create-channel.service';
+import { CreateUserService } from '../../services/create-user.service';
 
 
 @Component({
@@ -16,6 +17,7 @@ import { CreateChannelService } from '../../services/create-channel.service';
 
 export class DialogAddPeopleToChannelComponent {
   createChannelService = inject(CreateChannelService);
+  createUserService = inject(CreateUserService);
   matDialog = inject(MatDialog);
   addPeopleForm = new FormGroup({
     radioAddPeople: new FormControl('', Validators.required),

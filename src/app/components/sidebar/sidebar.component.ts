@@ -54,6 +54,11 @@ export class SidebarComponent implements OnInit {
   }
 
 
+  userIsOnline(user: User): boolean {
+    return (user.isOnline) ? true : false;
+  }
+
+
   userIdMatchesWithIdFromLoggedinUser(user: User): boolean {
     return user.userId == this.authService.user.userId;
   }

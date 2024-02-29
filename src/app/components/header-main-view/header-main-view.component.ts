@@ -21,7 +21,7 @@ export class HeaderMainViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getDataFromLoggedInUserService();
-    // this.authService.loadUserOnlineStatusService();
+    this.authService.loadUserOnlineStatusService();
   }
 
 
@@ -37,6 +37,11 @@ export class HeaderMainViewComponent implements OnInit {
 
   guestUserIsLoggedIn(): boolean {
     return (this.authService.auth.currentUser?.isAnonymous) ? true : false;
+  }
+
+
+  userIsOnline(): boolean {
+    return (this.authService.user.isOnline) ? true : false;
   }
 
 

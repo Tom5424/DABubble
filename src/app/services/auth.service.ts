@@ -147,9 +147,9 @@ export class AuthService {
   loginService(formValues: any): void {
     signInWithEmailAndPassword(this.auth, formValues.email, formValues.password)
       .then((userCredential) => {
-        // this.user.isOnline = true;
-        // this.createUserService.updateUserOnlineStatusService(userCredential.user.uid, this.user.isOnline);
-        // this.saveUserOnlineStatusService();
+        this.user.isOnline = true;
+        this.createUserService.updateUserOnlineStatusService(userCredential.user.uid, this.user.isOnline);
+        this.saveUserOnlineStatusService();
         this.displayUserFeedbackIfLoginSuccessfullyService();
       })
       .catch((error) => {
@@ -159,22 +159,22 @@ export class AuthService {
   }
 
 
-  // saveUserOnlineStatusService(): void {
-  //   localStorage.setItem('userOnlineStatus', JSON.stringify(this.user.isOnline));
-  // }
+  saveUserOnlineStatusService(): void {
+    localStorage.setItem('userOnlineStatus', JSON.stringify(this.user.isOnline));
+  }
 
 
-  // removeUserOnlineStatusService(): void {
-  //   localStorage.removeItem('userOnlineStatus');
-  // }
+  loadUserOnlineStatusService(): void {
+    let userOnlineStatusAsString = localStorage.getItem('userOnlineStatus');
+    if (userOnlineStatusAsString) {
+      this.user.isOnline = JSON.parse(userOnlineStatusAsString);
+    }
+  }
 
 
-  // loadUserOnlineStatusService(): void {
-  //   let userOnlineStatusAsString = localStorage.getItem('userOnlineStatus');
-  //   if (userOnlineStatusAsString) {
-  //     this.user.isOnline = JSON.parse(userOnlineStatusAsString);
-  //   }
-  // }
+  removeUserOnlineStatusService(): void {
+    localStorage.removeItem('userOnlineStatus');
+  }
 
 
   displayUserFeedbackIfLoginSuccessfullyService(): void {
@@ -198,10 +198,11 @@ export class AuthService {
     const googleProvider = new GoogleAuthProvider();
     signInWithPopup(this.auth, googleProvider)
       .then((userCredential) => {
-        // this.user.isOnline = true;
-        // this.saveUserOnlineStatusService();
+        this.user.isOnline = true;
+        this.saveUserOnlineStatusService();
         this.getDataFromLoggedInUserService();
         this.createUserService.createUserService(userCredential.user.uid, this.user);
+        this.createUserService.updateUserOnlineStatusService(this.auth.currentUser?.uid, this.user.isOnline);
         this.displayUserFeedbackIfLoginWithGoogleSuccessfullyService();
       })
       .catch((error) => {
@@ -252,12 +253,12 @@ export class AuthService {
 
 
   logoutService(): void {
-    // this.user.isOnline = false;
-    // this.createUserService.updateUserOnlineStatusService(this.auth.currentUser?.uid, this.user.isOnline);
+    this.user.isOnline = false;
+    this.createUserService.updateUserOnlineStatusService(this.auth.currentUser?.uid, this.user.isOnline);
+    this.removeUserOnlineStatusService();
     this.deleteGuestUserAfterLogoutService();
     signOut(this.auth)
       .then(() => {
-        // this.removeUserOnlineStatusService();
         this.router.navigateByUrl('/login');
       })
   }

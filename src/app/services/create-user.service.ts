@@ -49,20 +49,18 @@ export class CreateUserService {
   }
 
 
-  updateUserNameService(userId: string | undefined, formValues: any): void {
-    if (userId) {
-      const docRef = doc(this.firestore, 'users', userId);
-      updateDoc(docRef, { name: formValues.name, initialLetter: formValues.name.charAt(0).toLocaleLowerCase() })
-    }
+  updateUserNameService(userId: string, formValues: any): void {
+    const docRef = doc(this.firestore, 'users', userId);
+    updateDoc(docRef, { name: formValues.name, initialLetter: formValues.name.charAt(0).toLocaleLowerCase() })
   }
 
 
-  // updateUserOnlineStatusService(userId: string | undefined, userOnlineStatus: boolean): void {
-  //   if (userId) {
-  //     const docRef = doc(this.fireStore, 'users', userId);
-  //     updateDoc(docRef, { isOnline: userOnlineStatus });
-  //   }
-  // }
+  updateUserOnlineStatusService(userId: string | undefined, userOnlineStatus: boolean): void {
+    if (userId) {
+      const docRef = doc(this.firestore, 'users', userId);
+      updateDoc(docRef, { isOnline: userOnlineStatus });
+    }
+  }
 
 
   deleteUserService(userId: string): void {

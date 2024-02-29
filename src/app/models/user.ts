@@ -5,7 +5,7 @@ export class User {
     imgUrl: string | null;
     initialLetter: string | undefined;
     userId: string;
-    isOnline: boolean;
+    isOnline: boolean | undefined;
 
 
     constructor(object?: User, userId?: string) {
@@ -15,7 +15,6 @@ export class User {
         this.imgUrl = object ? object.imgUrl : '';
         this.initialLetter = object ? object.name?.charAt(0).toLocaleLowerCase() : '';
         this.userId = userId ? userId : '';
-        this.isOnline = object ? this.isOnline = true : this.isOnline = false;
     }
 
 
@@ -25,7 +24,6 @@ export class User {
             email: this.email,
             password: this.password,
             imgUrl: this.imgUrl,
-            isOnline: this.isOnline,
             initialLetter: this.initialLetter,
             userId: this.userId,
         }

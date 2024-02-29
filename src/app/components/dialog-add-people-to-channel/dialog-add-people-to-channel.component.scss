@@ -43,6 +43,7 @@ form {
 
     label {
         @include hover();
+        font-size: 18px;
 
         mark {
             color: $middlePurple;
