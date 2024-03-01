@@ -254,11 +254,13 @@ export class AuthService {
 
   logoutService(): void {
     this.user.isOnline = false;
-    this.createUserService.updateUserOnlineStatusService(this.auth.currentUser?.uid, this.user.isOnline);
-    this.removeUserOnlineStatusService();
-    this.deleteGuestUserAfterLogoutService();
-    signOut(this.auth)
+    this.createUserService.updateUserOnlineStatusService(this.auth.currentUser?.uid, this.user.isOnline)
       .then(() => {
+        this.deleteGuestUserAfterLogoutService();
+        return signOut(this.auth);
+      })
+      .then(() => {
+        this.removeUserOnlineStatusService();
         this.router.navigateByUrl('/login');
       })
   }

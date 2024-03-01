@@ -11,7 +11,7 @@
 
     <form (ngSubmit)="createChannel()" id="addPeopleForm" [formGroup]="addPeopleForm">
         <!--------------------------------- Radio Button add all People --------------------------------->
-        <label for="radioAddAllPeople" form="addPeopleForm">
+        <label for="radioAddAllPeople" form="addPeopleForm" (click)="hideInputfieldToAddSpecificMembersToChannel()">
             <input type="radio" id="radioAddAllPeople" formControlName="radioAddPeople" name="radioAddPeople"
                 value="radioAddAllPeople">
             Add all members of <mark>{{ data.channelData.channelName }}</mark>
@@ -20,11 +20,19 @@
 
 
         <!--------------------------------- Radio Button add specific People --------------------------------->
-        <label for="radioAddSpecificPeople" form="addPeopleForm">
+        <label for="radioAddSpecificPeople" form="addPeopleForm"
+            (click)="showInputfieldToAddSpecificMembersToChannel()">
             <input type="radio" id="radioAddSpecificPeople" formControlName="radioAddPeople" name="radioAddPeople"
                 value="radioAddSpecificPeople">
             Add certain People
         </label>
+
+
+        @if (inputfieldIsDisplayed) {
+        <div>
+            <input type="text" placeholder="Enter Name" formControlName="inputAddPeople">
+        </div>
+        }
         <!--------------------------------- Radio Button add specific People --------------------------------->
 
 

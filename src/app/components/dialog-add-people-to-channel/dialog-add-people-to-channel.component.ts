@@ -20,8 +20,10 @@ export class DialogAddPeopleToChannelComponent {
   createChannelService = inject(CreateChannelService);
   createUserService = inject(CreateUserService);
   matDialog = inject(MatDialog);
+  inputfieldIsDisplayed: boolean = false;
   addPeopleForm = new FormGroup({
     radioAddPeople: new FormControl('', Validators.required),
+    inputAddPeople: new FormControl(''),
   })
 
 
@@ -41,5 +43,15 @@ export class DialogAddPeopleToChannelComponent {
       this.createChannelService.createChannelService(this.data.channelData);
       this.matDialog.closeAll();
     }
+  }
+
+
+  showInputfieldToAddSpecificMembersToChannel(): void {
+    this.inputfieldIsDisplayed = true;
+  }
+
+
+  hideInputfieldToAddSpecificMembersToChannel(): void {
+    this.inputfieldIsDisplayed = false;
   }
 }

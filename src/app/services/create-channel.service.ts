@@ -1,8 +1,9 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, getDocs, orderBy, query } from '@angular/fire/firestore';
+import { DocumentReference, Firestore, addDoc, collection, collectionData, doc, getDocs, orderBy, query } from '@angular/fire/firestore';
 import { Channel } from '../models/channel';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
+import { ChannelMembers } from '../models/channel-members';
 
 
 @Injectable({
@@ -19,14 +20,24 @@ export class CreateChannelService {
 
   createChannelService(channelData: any, allusers?: User[]): void {
     const collectionRef = collection(this.firestore, 'channels');
-    const channelRef = new Channel(channelData, allusers);
+    const channelRef = new Channel(channelData);
     addDoc(collectionRef, channelRef.toJson())
-      .then(() => {
-
+      .then((docRef) => {
+        this.createChannelMembersService(docRef, allusers);
       })
       .catch((error) => {
         console.error(error.message);
       })
+  }
+
+
+  /////////////////////////////////////////////
+  createChannelMembersService(docRef: DocumentReference, allusers: User[] | undefined): void {
+    const chnnelMembersSubCollectionRef = collection(this.firestore, `channels/${docRef.id}/channelMembers`);
+    allusers?.forEach((user) => {
+      const channelMembers = new ChannelMembers(user, user.userId);
+      addDoc(chnnelMembersSubCollectionRef, channelMembers.toJson());
+    });
   }
 
 
@@ -37,7 +48,7 @@ export class CreateChannelService {
       .subscribe(() => {
         this.loadChannels = false;
       })
-    this.allChannelsAsObservable = collectionData(collectionRef) as Observable<Channel[]>;
+    this.allChannelsAsObservable = collectionData(collectionRef, { idField: 'id' }) as Observable<Channel[]>;
   }
 
 

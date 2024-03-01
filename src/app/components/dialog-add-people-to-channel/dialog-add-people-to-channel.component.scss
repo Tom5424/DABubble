@@ -51,8 +51,15 @@ form {
         }
     }
 
-    input {
+    input[type=radio] {
         @include hover();
+    }
+
+    input[type=text] {
+        @include inputfieldOrTextarea(unset, 30px, 15px, 20px, 15px, 20px, 18px, #ffffff);
+        @include inputfieldOrTextareaHover();
+        @include inputfieldOrTextareaFocus();
+        border: 1px solid $lightPurple;
     }
 }
 

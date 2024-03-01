@@ -13,7 +13,6 @@ export class CreateUserService {
   firestore = inject(Firestore);
   allUsersAsObservable!: Observable<User[]>;
   noContactsExistingInDatabase: boolean = false;
-  userId: string = '';
   loadContacts: boolean = false;
 
 
@@ -37,7 +36,7 @@ export class CreateUserService {
       .subscribe(() => {
         this.loadContacts = false;
       })
-    this.allUsersAsObservable = collectionData(collectionRef) as Observable<User[]>;
+    this.allUsersAsObservable = collectionData(collectionRef, { idField: 'id' }) as Observable<User[]>;
   }
 
 
@@ -60,27 +59,22 @@ export class CreateUserService {
 
 
   // updateUsersThatAddedToChannel(userId: string, formValues: any) {
-  //   const collectionRef = collection(this.firestore, 'channels');
+  //   const collectionRef = collection(this.firestore, `channels/${userId}/channelMembers`);
   //   getDocs(collectionRef)
-  //     .then((docs) => {
-  //       docs.forEach((doc) => {
-  //         doc.data()['members'].forEach((doc: User) => {
-  //           this.userId = doc.userId;
-  //         });
-  //         console.log(this.userId);
+  //     .then((channelDatas) => {
+  //       channelDatas.forEach((channelData) => {
+  //         console.log(channelData);
   //       });
-  //       if (this.userId == userId) {
-  //         const docRef = doc(this.firestore, 'users', this.userId);
-  //         updateDoc(docRef, { name: formValues.name });
-  //       }
   //     })
   // }
 
 
-  updateUserOnlineStatusService(userId: string | undefined, userOnlineStatus: boolean): void {
+  updateUserOnlineStatusService(userId: string | undefined, userOnlineStatus: boolean): Promise<void> {
     if (userId) {
       const docRef = doc(this.firestore, 'users', userId);
-      updateDoc(docRef, { isOnline: userOnlineStatus });
+      return updateDoc(docRef, { isOnline: userOnlineStatus });
+    } else {
+      return Promise.resolve();
     }
   }
 

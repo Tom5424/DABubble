@@ -5,14 +5,14 @@ export class Channel {
     channelName: string;
     channelDescription: string | null
     initialLetter: string;
-    members: Array<User>;
+    // members: Array<User>;
 
 
-    constructor(object?: Channel, members?: User[]) {
+    constructor(object?: Channel) {
         this.channelName = object ? object.channelName : '';
         this.channelDescription = object ? object.channelDescription : '';
         this.initialLetter = object ? object.channelName.charAt(0).toLocaleLowerCase() : '';
-        this.members = members ? members : [];
+        // this.members = members ? members : [];
     }
 
 
@@ -21,7 +21,7 @@ export class Channel {
             channelName: this.channelName,
             channelDescription: this.channelDescription,
             initialLetter: this.initialLetter,
-            members: this.members,
+            // members: this.members,
         }
     }
 }
