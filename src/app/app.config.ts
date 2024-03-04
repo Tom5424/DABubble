@@ -7,6 +7,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { environment } from '../environments/environments';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideQuillConfig } from 'ngx-quill'
 
 
 export const appConfig: ApplicationConfig = {
@@ -16,7 +17,8 @@ export const appConfig: ApplicationConfig = {
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
-  ]), provideAnimationsAsync('noop')
+  ]), provideAnimationsAsync('noop'),
+  provideQuillConfig({ modules: { syntax: false, toolbar: [] } })
   ],
 };
 

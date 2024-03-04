@@ -64,6 +64,14 @@ form {
 }
 
 
+quill-editor {
+    width: 500px;
+    max-height: 120px;
+    padding: 10px 0 10px 0;
+    overflow-y: scroll;
+}
+
+
 .containerBtn {
     @include flexEndXAxis();
 

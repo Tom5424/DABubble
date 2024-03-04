@@ -1,4 +1,6 @@
 @import "../node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css"; // Import for Angular Material to make it work
+@import '../node_modules/quill/dist/quill.bubble.css'; // Import for Quill Editor Styles
+@import '../node_modules/quill/dist/quill.snow.css'; // Import for Quill Editor Styles
 @import './scss/variable.scss';
 @import './scss/mixin.scss';
 
@@ -30,12 +32,6 @@ body {
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
-}
-
-
-/* Track */
-::-webkit-scrollbar-track {
-    background-color: $bgColor;
 }
 
 
@@ -92,6 +88,24 @@ body {
     @include flexColumnCenteredXAxis();
     gap: 15px;
     padding: 0 !important;
+}
+
+
+/////////// Custom Styles for Quill Editor 
+.ql-toolbar.ql-snow {
+    display: none;
+}
+
+
+.ql-toolbar.ql-snow+.ql-container.ql-snow {
+    @include inputfieldOrTextareaHover();
+    border: 1px solid $lightPurple;
+    padding: 0;
+}
+
+
+.ql-snow {
+    @include inputfieldOrTextarea(unset, 30px, 15px, 20px, 15px, 20px, 18px, #ffffff);
 }
 
 

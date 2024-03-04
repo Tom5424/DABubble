@@ -29,9 +29,7 @@
 
 
         @if (inputfieldIsDisplayed) {
-        <div>
-            <input type="text" placeholder="Enter Name" formControlName="inputAddPeople">
-        </div>
+        <quill-editor placeholder="Browse Name" (onSelectionChanged)="focusQuillEditor($event)"></quill-editor>
         }
         <!--------------------------------- Radio Button add specific People --------------------------------->
 
