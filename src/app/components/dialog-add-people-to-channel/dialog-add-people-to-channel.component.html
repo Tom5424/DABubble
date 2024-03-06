@@ -1,5 +1,7 @@
 <div class="dialogBox">
 
+    <div [ngClass]="{'overlay': menuUserSelectionIsOpen}" (click)="closeUserMenuSelectionIfClickOutside()"></div>
+
     <div class="dialogBoxUpperPart">
         <p>Add People</p>
 
@@ -22,20 +24,80 @@
         <!--------------------------------- Radio Button add specific People --------------------------------->
         <label for="radioAddSpecificPeople" form="addPeopleForm"
             (click)="showInputfieldToAddSpecificMembersToChannel()">
-            <input type="radio" id="radioAddSpecificPeople" formControlName="radioAddPeople" name="radioAddPeople"
-                value="radioAddSpecificPeople">
+            <input type="radio" id="radioAddSpecificPeople" name="radioAddPeople" value="radioAddSpecificPeople">
             Add certain People
         </label>
-
-
-        @if (inputfieldIsDisplayed) {
-        <quill-editor placeholder="Browse Name" (onSelectionChanged)="focusQuillEditor($event)"></quill-editor>
-        }
         <!--------------------------------- Radio Button add specific People --------------------------------->
 
 
+        <!--------------------------------- Iputfield text -------------------------------->
+        @if (inputFieldIsDisplayed) {
+        <input type="text" formControlName="inputFieldAddPeople" placeholder="Enter Name"
+            (click)="openMenuUserSelection()" (input)="getInputValueFromInputfield()">
+        }
+        <!--------------------------------- Iputfield text -------------------------------->
+
+
+        @if(menuUserSelectionIsOpen) {
+        <div class="containerUserMenuSelection">
+
+            @for (user of createUserService.allUsersAsObservable | async; track $index) {
+            <div class="containerUserNameAndImg" (click)="addUserToChannel(user)"
+                [ngClass]="{'selectedUser': userIsSelected(user)}">
+                @if (noProfileImgExist(user)) {
+                <img class="imgNoSelectedProfile" src="./assets/img/non-user-selected.svg" alt="User Profile Image">
+                }@else {
+                <img class="userImg" src="{{ user.imgUrl }}" alt="User Profile Image">
+                }
+
+                @if (userIsOnline(user)) {
+                <img class="userOnlineStatus" src="./assets/icons/user-is-online-icon.svg" alt="Green Dot">
+                }@else {
+                <img class="userOnlineStatus" src="assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
+                }
+
+                <p>{{ user.name }}</p>
+
+                @if (userIsSelected(user)) {
+                <p class="text">Selected</p>
+                }
+
+            </div>
+            }
+        </div>
+        }
+
+
+        @if (noUserIsSelected()) {
+        <div class="mainContainerAddedUserMenuSelection">
+            @for (addedUsers of addedUsersToTheChannel.slice(0, 2); track $index) {
+            <div class="childContainerAddedUserMenuSelection">
+
+                @if (noProfileImgExist(addedUsers)) {
+                <img class="imgNoSelectedProfileAddedUser" src="./assets/img/non-user-selected.svg"
+                    alt="User Profile Image">
+                }@else {
+                <img class="userImgAddedUser" src="{{ addedUsers.imgUrl }}" alt="User Profile Image">
+                }
+
+                <p>{{ addedUsers.name }}</p>
+                <img class="closeIcon" src="assets/icons/close-icon.svg" alt="Close Icon"
+                    (click)="removeSelectedUser($index)">
+            </div>
+            }
+
+
+            @if (moreThanTwoUsersSelected()) {
+            <p class="text">+ {{ addedUsersToTheChannel.length - 2 }} more</p>
+            }
+        </div>
+        }
+
+
         <div class="containerBtn">
-            <button type="submit" [disabled]="addPeopleForm.invalid" [ngClass]="{'btnDisabled': addPeopleForm.invalid}">
+            <button type="submit"
+                [disabled]="!addPeopleForm.controls.radioAddPeople.value && addedUsersToTheChannel.length == 0"
+                [ngClass]="{'btnDisabled': !addPeopleForm.controls.radioAddPeople.value && addedUsersToTheChannel.length == 0}">
                 Create
             </button>
         </div>

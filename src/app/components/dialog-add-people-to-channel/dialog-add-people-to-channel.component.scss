@@ -9,6 +9,15 @@
 }
 
 
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+
 .dialogBoxUpperPart {
     @include flexCenteredYAxis();
     @include flexSpaceBetween();
@@ -64,11 +73,122 @@ form {
 }
 
 
-quill-editor {
-    width: 500px;
-    max-height: 120px;
-    padding: 10px 0 10px 0;
+.containerUserMenuSelection {
+    @include flexColumn();
+    @include positionAbsolute(230px, unset, 60px, unset);
+    border: 1px solid $lightPurple;
+    height: 60px;
+    width: 300px;
+    gap: 15px;
+    border-radius: 0 20px 20px 20px;
+    padding: 20px;
+    z-index: 1;
+    box-shadow: 0px 2px 10px 0px #00000014;
+    background-color: #ffffff;
     overflow-y: scroll;
+}
+
+
+.containerUserNameAndImg {
+    @include hover();
+    @include flexCenteredYAxis();
+    gap: 15px;
+    position: relative;
+    border-radius: 35px;
+    padding: 4px 20px 4px 20px;
+
+    p {
+        font-size: 18px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow-x: hidden;
+    }
+
+    &:hover {
+        background-color: $bgColor;
+    }
+}
+
+
+.userImg {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+
+.imgNoSelectedProfile {
+    background-color: $purple;
+    width: 38px;
+    padding: 6px;
+    border-radius: 50%;
+}
+
+
+.userOnlineStatus {
+    @include positionAbsolute(unset, 4px, 54px, unset);
+    width: 12px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+}
+
+
+.mainContainerAddedUserMenuSelection {
+    @include flexCenteredYAxis();
+    gap: 10px;
+}
+
+
+.childContainerAddedUserMenuSelection {
+    @include flexCenteredYAxis();
+    background-color: $bgColor;
+    gap: 8px;
+    padding: 3px 10px 3px 10px;
+    border-radius: 35px;
+}
+
+
+.userImgAddedUser {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+
+.imgNoSelectedProfileAddedUser {
+    background-color: $purple;
+    width: 32px;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+
+.closeIcon {
+    @include hover();
+    width: 20px;
+
+    &:hover {
+        filter: brightness(0) saturate(100%) invert(28%) sepia(87%) saturate(2837%) hue-rotate(231deg) brightness(99%) contrast(91%);
+        transform: scale(1.05);
+    }
+}
+
+
+.selectedUser {
+    background-color: $bgColor;
+
+    &:hover {
+        cursor: unset;
+    }
+}
+
+
+.text {
+    color: $middlePurple;
+    font-size: 16px !important;
+    text-overflow: unset !important;
+    white-space: unset !important;
+    overflow-x: unset !important;
 }
 
 

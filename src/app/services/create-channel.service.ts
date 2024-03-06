@@ -18,12 +18,12 @@ export class CreateChannelService {
   loadChannels: boolean = false;
 
 
-  createChannelService(channelData: any, allusers?: User[]): void {
+  createChannelService(channelData: any, users: User[]): void {
     const collectionRef = collection(this.firestore, 'channels');
     const channelRef = new Channel(channelData);
     addDoc(collectionRef, channelRef.toJson())
       .then((docRef) => {
-        this.createChannelMembersService(docRef, allusers);
+        this.createChannelMembersService(docRef, users);
       })
       .catch((error) => {
         console.error(error.message);

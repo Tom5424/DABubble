@@ -27,6 +27,11 @@ body {
 }
 
 
+.d-none {
+    display: none !important;
+}
+
+
 /////////// Custom Styles for the scrollbar
 /* width */
 ::-webkit-scrollbar {
@@ -92,26 +97,21 @@ body {
 
 
 /////////// Custom Styles for Quill Editor 
-.ql-toolbar.ql-snow {
-    display: none;
-}
+// .ql-toolbar.ql-snow {
+//     display: none;
+// }
 
 
-.ql-toolbar.ql-snow+.ql-container.ql-snow {
-    @include inputfieldOrTextareaHover();
-    border: 1px solid $lightPurple;
-    padding: 0;
-}
+// .ql-toolbar.ql-snow+.ql-container.ql-snow {
+//     @include inputfieldOrTextareaHover();
+//     border: 1px solid $lightPurple;
+//     padding: 0;
+// }
 
 
-.ql-snow {
-    @include inputfieldOrTextarea(unset, 30px, 15px, 20px, 15px, 20px, 18px, #ffffff);
-}
-
-
-.d-none {
-    display: none !important;
-}
+// .ql-snow {
+//     @include inputfieldOrTextarea(unset, 30px, 15px, 20px, 15px, 20px, 18px, #ffffff);
+// }
 
 
 /////////// Animation for User Feedback Message 
