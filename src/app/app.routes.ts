@@ -10,6 +10,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { isAuthorizedToGoAvatarpicker } from './router-guards/is-authorized-to-go-Avatarpicker.guard';
 import { isAuthorizedToGoResetPassword } from './router-guards/is-authorized-to-go-reset-password.guard';
 import { MainViewComponent } from './components/main-view/main-view.component';
+import { ChatDirectMessagesComponent } from './components/chat-direct-messages/chat-direct-messages.component';
 
 
 export const routes: Routes = [
@@ -25,7 +26,7 @@ export const routes: Routes = [
     { path: 'forgotPassword', title: 'DABubble - Forgot Password', component: ForgotPasswordComponent },
     { path: 'resetPassword', title: 'DABubble - Reset Password', component: ResetPasswordComponent, canActivate: [isAuthorizedToGoResetPassword] },
 
-    { path: 'mainView', title: 'DABubble - Main View', component: MainViewComponent },
+    { path: 'mainView', title: 'DABubble - Main View', component: MainViewComponent, children: [{ path: 'user/:id', component: ChatDirectMessagesComponent }] },
 
     { path: '**', title: 'DABubble - Page not Found', component: PageNotFoundComponent }
 ];

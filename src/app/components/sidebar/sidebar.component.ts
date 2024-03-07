@@ -6,12 +6,13 @@ import { User } from '../../models/user';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogCreateChannelComponent } from '../dialog-create-channel/dialog-create-channel.component';
 import { CreateChannelService } from '../../services/create-channel.service';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [NgClass, AsyncPipe],
+  imports: [NgClass, AsyncPipe, RouterLink],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })

@@ -68,8 +68,8 @@
 
 
             @if ((filteredUsers | async )?.length == 0) {
-            <!-- Checks if filteredUsers hat a Value. If not the User get the Feedback "Not search results Found" -->
-            <p class="textNotSearchResultsFound">Not search results Found</p>
+            <!-- Checks if filteredUsers hat a Value or Users existing. If not the User get the Feedback "No People found" -->
+            <p class="textNotSearchResultsFound">No People found</p>
             }
         </div>
         }

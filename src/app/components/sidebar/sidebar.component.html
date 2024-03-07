@@ -63,7 +63,7 @@
 
         <ul class="contactList" [ngClass]="{'d-none': contactListAreCollapsed}">
             @for (user of allUser; track $index) {
-            <li>
+            <li routerLink="/mainView/user/{{ user.userId }}">
                 @if (noProfileImgExist(user)) {
                 <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="User Profile Image">
                 }@else {
