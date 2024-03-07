@@ -254,7 +254,7 @@ export class AuthService {
 
   logoutService(): void {
     this.user.isOnline = false;
-    this.createUserService.updateUserOnlineStatusService(this.auth.currentUser?.uid, this.user.isOnline)
+    this.createUserService.updateUserOnlineStatusService(this.auth.currentUser?.uid, this.user.isOnline, this.auth.currentUser?.isAnonymous)
       .then(() => {
         this.deleteGuestUserAfterLogoutService();
         return signOut(this.auth);

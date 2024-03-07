@@ -69,8 +69,8 @@ export class CreateUserService {
   // }
 
 
-  updateUserOnlineStatusService(userId: string | undefined, userOnlineStatus: boolean): Promise<void> {
-    if (userId) {
+  updateUserOnlineStatusService(userId: string | undefined, userOnlineStatus: boolean, guestUserIsLoggedIn?: boolean): Promise<void> {
+    if (userId && !guestUserIsLoggedIn) {
       const docRef = doc(this.firestore, 'users', userId);
       return updateDoc(docRef, { isOnline: userOnlineStatus });
     } else {

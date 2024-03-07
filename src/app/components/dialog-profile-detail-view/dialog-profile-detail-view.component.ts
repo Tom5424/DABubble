@@ -1,16 +1,16 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { MatDialog, MatDialogClose } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../../services/auth.service';
 import { DialogEditProfileComponent } from '../dialog-edit-profile/dialog-edit-profile.component';
 import { NgClass, NgStyle } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { DialogAccountDeletedComponent } from '../dialog-account-deleted/dialog-account-deleted.component';
+import { DialogConfirmedAccountDeletionComponent } from '../dialog-confirmed-account-deletion/dialog-confirmed-account-deletion.component';
 
 
 @Component({
   selector: 'app-dialog-profile-detail-view',
   standalone: true,
-  imports: [MatDialogClose, MatTooltipModule, NgClass, NgStyle],
+  imports: [MatTooltipModule, NgClass, NgStyle],
   templateUrl: './dialog-profile-detail-view.component.html',
   styleUrl: './dialog-profile-detail-view.component.scss'
 })
@@ -44,11 +44,7 @@ export class DialogProfileDetailViewComponent implements OnInit {
   }
 
 
-  deleteUser(): void {
-    this.authService.deleteUserService(this.authService.auth.currentUser);
-    this.matDialog.closeAll();
-    setTimeout(() => {
-      this.matDialog.open(DialogAccountDeletedComponent);
-    }, 850);
+  openDialogToConfirmAccountDeletion(): void {
+    this.matDialog.open(DialogConfirmedAccountDeletionComponent);
   }
 }
