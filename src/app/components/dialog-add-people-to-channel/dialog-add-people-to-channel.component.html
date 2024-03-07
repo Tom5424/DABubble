@@ -33,7 +33,7 @@
         <!--------------------------------- Iputfield text -------------------------------->
         @if (inputFieldIsDisplayed) {
         <input type="text" formControlName="inputFieldAddPeople" placeholder="Enter Name"
-            (click)="openMenuUserSelection()" (input)="getInputValueFromInputfield()">
+            (click)="openMenuUserSelection()">
         }
         <!--------------------------------- Iputfield text -------------------------------->
 
@@ -41,7 +41,7 @@
         @if(menuUserSelectionIsOpen) {
         <div class="containerUserMenuSelection">
 
-            @for (user of createUserService.allUsersAsObservable | async; track $index) {
+            @for (user of filteredUsers | async; track $index) {
             <div class="containerUserNameAndImg" (click)="addUserToChannel(user)"
                 [ngClass]="{'selectedUser': userIsSelected(user)}">
                 @if (noProfileImgExist(user)) {
@@ -61,8 +61,13 @@
                 @if (userIsSelected(user)) {
                 <p class="text">Selected</p>
                 }
-
             </div>
+            }
+
+
+            @if ((filteredUsers | async )?.length == 0) {
+            <!-- Checks if filteredUsers hat a Value. If not the User get the Feedback "Not search results Found" -->
+            <p class="textNotSearchResultsFound">Not search results Found</p>
             }
         </div>
         }

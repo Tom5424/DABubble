@@ -192,6 +192,12 @@ form {
 }
 
 
+.textNotSearchResultsFound {
+    text-align: center;
+    font-size: 18px;
+}
+
+
 .containerBtn {
     @include flexEndXAxis();
 

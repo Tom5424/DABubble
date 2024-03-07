@@ -22,6 +22,7 @@ export class SidebarComponent implements OnInit {
   createChannelService = inject(CreateChannelService);
   authService = inject(AuthService);
   matDialog = inject(MatDialog);
+  allUser: User[] = [];
   channelListAreCollapsed: boolean = false;
   contactListAreCollapsed: boolean = false;
 
@@ -29,8 +30,16 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.createUserService.checkIfContactsExistingInDatabaseService();
     this.createChannelService.checkIfChannelsExistingInDatabaseService();
-    this.createUserService.getAllUserService();
     this.createChannelService.getAllChannelsService();
+    this.getAllUsers();
+  }
+
+
+  getAllUsers() {
+    this.createUserService.getAllUserService()
+      .subscribe((userData) => {
+        this.allUser = userData;
+      })
   }
 
 
@@ -82,7 +91,4 @@ export class SidebarComponent implements OnInit {
   contactsAreLoading(): boolean {
     return (this.createUserService.loadContacts) ? true : false;
   }
-
-
-  //Todo: Check if user and contacts existing in Database after delete (No Channels Existing, No Contacts Existing).
 }

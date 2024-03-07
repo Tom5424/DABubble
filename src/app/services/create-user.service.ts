@@ -29,14 +29,14 @@ export class CreateUserService {
   }
 
 
-  getAllUserService(): void {
+  getAllUserService(): Observable<User[]> {
     this.loadContacts = true;
     const collectionRef = query(collection(this.firestore, 'users'), orderBy('initialLetter'));
     collectionData(collectionRef)
       .subscribe(() => {
         this.loadContacts = false;
       })
-    this.allUsersAsObservable = collectionData(collectionRef, { idField: 'id' }) as Observable<User[]>;
+    return collectionData(collectionRef, { idField: 'id' }) as Observable<User[]>;
   }
 
 

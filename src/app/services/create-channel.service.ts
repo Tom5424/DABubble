@@ -32,7 +32,7 @@ export class CreateChannelService {
 
 
   /////////////////////////////////////////////
-  createChannelMembersService(docRef: DocumentReference, allusers: User[] | undefined): void {
+  createChannelMembersService(docRef: DocumentReference, allusers: User[]): void {
     const chnnelMembersSubCollectionRef = collection(this.firestore, `channels/${docRef.id}/channelMembers`);
     allusers?.forEach((user) => {
       const channelMembers = new ChannelMembers(user, user.userId);

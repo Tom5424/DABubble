@@ -4,7 +4,7 @@ import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angula
 import { AsyncPipe, NgClass } from '@angular/common';
 import { CreateChannelService } from '../../services/create-channel.service';
 import { CreateUserService } from '../../services/create-user.service';
-import { take } from 'rxjs';
+import { Observable, map, startWith } from 'rxjs';
 import { User } from '../../models/user';
 
 
@@ -24,6 +24,8 @@ export class DialogAddPeopleToChannelComponent {
   inputFieldIsDisplayed: boolean = false;
   menuUserSelectionIsOpen: boolean = false;
   addedUsersToTheChannel: User[] = [];
+  allUsers: User[] = [];
+  filteredUsers!: Observable<User[]>;
   addPeopleForm = new FormGroup({
     radioAddPeople: new FormControl('', Validators.required),
     inputFieldAddPeople: new FormControl(''),
@@ -31,21 +33,51 @@ export class DialogAddPeopleToChannelComponent {
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { channelData: any }) {
-
+    this.getAllUsers();
   }
 
 
-  createChannel() {
+  getAllUsers(): void {
+    this.createUserService.getAllUserService()
+      .subscribe((userData) => {
+        this.allUsers = userData;
+      })
+    this.getInputvalue();
+  }
+
+
+  getInputvalue(): void {
+    this.filteredUsers = this.addPeopleForm.controls.inputFieldAddPeople.valueChanges.pipe(
+      startWith(''),
+      map((value) => this.filterUserBasedOnInputvalue(value || ''))
+    );
+  }
+
+
+  filterUserBasedOnInputvalue(value: string): User[] {
+    const seacrchValue = value.toLowerCase();
+    return this.allUsers.filter((user) => user.name?.toLowerCase().startsWith(seacrchValue));
+  }
+
+
+  createChannel(): void {
     if (this.addPeopleForm.controls.radioAddPeople.value == 'radioAddAllPeople') {
-      this.createUserService.allUsersAsObservable.pipe(take(1))
-        .subscribe((allusers) => {
-          this.createChannelService.createChannelService(this.data.channelData, allusers);
-          this.matDialog.closeAll();
-        })
+      this.addAllUsersToChannel();
     } else {
-      this.createChannelService.createChannelService(this.data.channelData, this.addedUsersToTheChannel);
-      this.matDialog.closeAll();
+      this.addSpecificUsersToChannel();
     }
+  }
+
+
+  addAllUsersToChannel(): void {
+    this.createChannelService.createChannelService(this.data.channelData, this.allUsers);
+    this.matDialog.closeAll();
+  }
+
+
+  addSpecificUsersToChannel(): void {
+    this.createChannelService.createChannelService(this.data.channelData, this.addedUsersToTheChannel);
+    this.matDialog.closeAll();
   }
 
 
@@ -59,11 +91,6 @@ export class DialogAddPeopleToChannelComponent {
     this.addPeopleForm.controls.inputFieldAddPeople.reset();
     this.addedUsersToTheChannel = [];
     this.inputFieldIsDisplayed = false;
-  }
-
-
-  getInputValueFromInputfield() {
-
   }
 
 
@@ -97,6 +124,7 @@ export class DialogAddPeopleToChannelComponent {
     if (!userInArray) {
       this.addedUsersToTheChannel.push(user);
       this.menuUserSelectionIsOpen = false;
+      this.addPeopleForm.controls.inputFieldAddPeople.reset();
     }
   }
 
