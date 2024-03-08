@@ -6,13 +6,13 @@ import { User } from '../../models/user';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogCreateChannelComponent } from '../dialog-create-channel/dialog-create-channel.component';
 import { CreateChannelService } from '../../services/create-channel.service';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [NgClass, AsyncPipe, RouterLink],
+  imports: [NgClass, AsyncPipe, RouterLink, RouterLinkActive],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
@@ -29,14 +29,14 @@ export class SidebarComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.createUserService.checkIfContactsExistingInDatabaseService();
+    this.createUserService.checkIfUserExistingInDatabaseService();
     this.createChannelService.checkIfChannelsExistingInDatabaseService();
     this.createChannelService.getAllChannelsService();
     this.getAllUsers();
   }
 
 
-  getAllUsers() {
+  getAllUsers(): void {
     this.createUserService.getAllUserService()
       .subscribe((userData) => {
         this.allUser = userData;

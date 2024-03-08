@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, collection, collectionData, doc, setDoc, getDocs, updateDoc, deleteDoc, query, orderBy } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, doc, setDoc, getDocs, updateDoc, deleteDoc, query, orderBy, getDoc } from '@angular/fire/firestore';
 import { User } from '../models/user';
 import { Observable } from 'rxjs';
 
@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 export class CreateUserService {
   firestore = inject(Firestore);
   allUsersAsObservable!: Observable<User[]>;
+  user!: User;
   noContactsExistingInDatabase: boolean = false;
   loadContacts: boolean = false;
 
@@ -40,7 +41,19 @@ export class CreateUserService {
   }
 
 
-  checkIfContactsExistingInDatabaseService(): void {
+  getSingelUserService(userId: string | null): void {
+    this.loadContacts = true;
+    if (userId) {
+      const docRef = doc(this.firestore, 'users', userId);
+      getDoc(docRef).then((userData) => {
+        this.user = userData.data() as User;
+        this.loadContacts = false;
+      })
+    }
+  }
+
+
+  checkIfUserExistingInDatabaseService(): void {
     const collectionRef = collection(this.firestore, 'users');
     getDocs(collectionRef)
       .then((data) => {

@@ -1,29 +1,66 @@
 <div class="mainContainerChatDirectMessages">
 
+    <!--------------------------------- Container Chat upper Part--------------------------------->
     <div class="containerChatDirectMessagesUpperPart">
 
+        @if (contactAreLoading()) {
+        <img class="spinnerIconChatDirectMessagesUpperPart" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
+
+        }@else {
+
         <div class="containerUserImageAndNameUpperPart">
-            <img class="" src="assets/img/avatar-1.svg" alt="User Profile Image">
+            @if (noProfileImgExist()) {
+            <img class="imgNoSelectedProfileChatDirectMessagesUpperPart" src="assets/img/non-user-selected.svg"
+                alt="User Profile Image">
+            }@else {
+            <img src="{{ createUserService.user.imgUrl }}" alt="User Profile Image">
+            }
+
+            @if (userIsOnline()) {
             <img src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
+            }@else {
+            <img src="./assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
+            }
 
-            <!-- <img src="./assets/icons/user-is-offline-icon.svg" alt="Gray Dot"> -->
-            <p>Tom</p>
+            <p>{{ createUserService.user.name }}</p>
         </div>
-
+        }
     </div>
+    <!--------------------------------- Container Chat upper Part--------------------------------->
+
+
+    <!--------------------------------- Container Chat Lower Part--------------------------------->
+    @if (contactAreLoading()) {
+    <div class="containerSpinnerIconChatDirectMessagesLowerPart">
+        <img class="spinnerIcon" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
+    </div>
+
+    }@else {
 
     <div class="containerChatDirectMessagesLowerPart">
 
         <div class="containerUserImageAndNameLowerPart">
-            <img src="assets/img/avatar-1.svg" alt="User Profile Image">
-            <p>Tom</p>
+            @if (noProfileImgExist()) {
+            <img class="imgNoSelectedProfileChatDirectMessagesLowerPart" src="assets/img/non-user-selected.svg"
+                alt="User Profile Image">
+            }@else {
+            <img class="imgSelectedProfileChatDirectMessagesLowerPart" src="{{ createUserService.user.imgUrl }}"
+                alt="User Profile Image">
+            }
+
+            <p>{{ createUserService.user.name }}</p>
         </div>
         <!---------- &#64; means => @ Symbol  ---------->
-        <p class="text">This conversation is only between you and <mark>&#64;Tom</mark>.</p>
+        <p class="text">
+            This conversation is only between you and <mark>&#64;{{ createUserService.user.name }}</mark>.
+        </p>
+
 
         <div class="containerQuillEditor">
 
-            <quill-editor placeholder="Message to Tom" (onSelectionChanged)="focusQuillEditor($event)"></quill-editor>
+            <quill-editor placeholder="Message to {{ createUserService.user.name }}"
+                (onSelectionChanged)="focusQuillEditor($event)">
+            </quill-editor>
 
             <div class="mainContainerIcons">
 
@@ -50,5 +87,7 @@
         </div>
 
     </div>
+    }
+    <!--------------------------------- Container Chat Lower Part--------------------------------->
 
 </div>

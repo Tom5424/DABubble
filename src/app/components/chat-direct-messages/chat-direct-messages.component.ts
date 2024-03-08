@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
+import { CreateUserService } from '../../services/create-user.service';
 
 
 @Component({
@@ -11,7 +13,33 @@ import { QuillModule } from 'ngx-quill';
 })
 
 
-export class ChatDirectMessagesComponent {
+export class ChatDirectMessagesComponent implements OnInit {
+  createUserService = inject(CreateUserService);
+  activatedRoute = inject(ActivatedRoute);
+  userId: string | null = '';
+
+
+  ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe((params) => {
+      this.userId = params.get('id');
+      this.createUserService.getSingelUserService(this.userId)
+    })
+  }
+
+
+  noProfileImgExist(): boolean {
+    return (!this.createUserService.user.imgUrl) ? true : false;
+  }
+
+
+  userIsOnline(): boolean {
+    return (this.createUserService.user.isOnline) ? true : false;
+  }
+
+
+  contactAreLoading(): boolean {
+    return (this.createUserService.loadContacts) ? true : false;
+  }
 
 
   focusQuillEditor(event: { editor: any, range: any, oldRange: any }): void {

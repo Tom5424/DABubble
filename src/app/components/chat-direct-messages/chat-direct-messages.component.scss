@@ -18,6 +18,11 @@
 }
 
 
+.spinnerIconChatDirectMessagesUpperPart {
+    width: 75px;
+}
+
+
 .containerUserImageAndNameUpperPart {
     @include flexCenteredYAxis();
     @include hover();
@@ -33,7 +38,7 @@
     }
 
     img:nth-of-type(2) {
-        @include positionAbsolute(53px, unset, 42px, unset);
+        @include positionAbsolute(50px, unset, 47px, unset);
         width: 12px;
         border-radius: 50%;
         border: 2px solid #ffffff;
@@ -50,9 +55,27 @@
 }
 
 
+.imgNoSelectedProfileChatDirectMessagesUpperPart {
+    background-color: $purple;
+    width: 38px !important;
+    height: 38px !important;
+    padding: 6px;
+}
+
+
+.containerSpinnerIconChatDirectMessagesLowerPart {
+    @include flexCenteredXAxis();
+    height: 480px;
+
+    img {
+        width: 250px;
+    }
+}
+
+
 .containerChatDirectMessagesLowerPart {
-    background-color: #ffffff;
     border-radius: 0 0 30px 30px;
+    background-color: #ffffff;
 }
 
 
@@ -62,17 +85,27 @@
     margin-top: 128px;
     gap: 25px;
 
-    img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-    }
-
     p {
         font-size: 24px;
         font-weight: 700;
         margin: 0;
     }
+}
+
+
+.imgNoSelectedProfileChatDirectMessagesLowerPart {
+    background-color: $purple;
+    padding: 8px;
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+}
+
+
+.imgSelectedProfileChatDirectMessagesLowerPart {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
 }
 
 
@@ -94,7 +127,7 @@
 
 
 .containerQuillEditor {
-    padding: 30px 0 25px 0;
+    padding: 30px 0 40px 0;
     position: relative;
 }
 

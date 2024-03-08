@@ -281,3 +281,14 @@ nav {
     font-size: 18px;
     padding-left: 25px;
 }
+
+
+.activeLink {
+    background-color: $bgColor;
+    color: $middlePurple;
+    font-weight: 700;
+
+    &:hover {
+        cursor: unset !important;
+    }
+}

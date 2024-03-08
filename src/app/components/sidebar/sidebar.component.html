@@ -63,7 +63,7 @@
 
         <ul class="contactList" [ngClass]="{'d-none': contactListAreCollapsed}">
             @for (user of allUser; track $index) {
-            <li routerLink="/mainView/user/{{ user.userId }}">
+            <li routerLink="/mainView/user/{{ user.userId }}" routerLinkActive="activeLink">
                 @if (noProfileImgExist(user)) {
                 <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="User Profile Image">
                 }@else {
@@ -73,7 +73,7 @@
                 @if (userIsOnline(user)) {
                 <img src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
                 }@else {
-                <img src="./assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
+                <img src="assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
                 }
 
                 <p>{{ user.name }}</p>
@@ -92,7 +92,7 @@
 
             @if (contactsAreLoading()) {
             <div class="containerSpinnerIcon">
-                <img src="./assets/icons/spinner-icon.svg" alt="Spinner Icon">
+                <img src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
             </div>
             }
         </ul>
