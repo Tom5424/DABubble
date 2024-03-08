@@ -8,7 +8,7 @@
 
         }@else {
 
-        <div class="containerUserImageAndNameUpperPart">
+        <div class="containerUserImageAndNameUpperPart" (click)="openProfileDetailView()">
             @if (noProfileImgExist()) {
             <img class="imgNoSelectedProfileChatDirectMessagesUpperPart" src="assets/img/non-user-selected.svg"
                 alt="User Profile Image">

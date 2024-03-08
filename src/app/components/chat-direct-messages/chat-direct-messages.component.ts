@@ -2,6 +2,8 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
 import { CreateUserService } from '../../services/create-user.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogProfileDetailViewInDirectMessagesComponent } from '../dialog-profile-detail-view-in-direct-messages/dialog-profile-detail-view-in-direct-messages.component';
 
 
 @Component({
@@ -16,6 +18,7 @@ import { CreateUserService } from '../../services/create-user.service';
 export class ChatDirectMessagesComponent implements OnInit {
   createUserService = inject(CreateUserService);
   activatedRoute = inject(ActivatedRoute);
+  matDialog = inject(MatDialog);
   userId: string | null = '';
 
 
@@ -24,6 +27,11 @@ export class ChatDirectMessagesComponent implements OnInit {
       this.userId = params.get('id');
       this.createUserService.getSingelUserService(this.userId)
     })
+  }
+
+
+  openProfileDetailView(): void {
+    this.matDialog.open(DialogProfileDetailViewInDirectMessagesComponent, { autoFocus: false });
   }
 
 
