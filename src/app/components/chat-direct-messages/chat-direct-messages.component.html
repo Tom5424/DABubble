@@ -15,14 +15,38 @@
     <div class="containerChatDirectMessagesLowerPart">
 
         <div class="containerUserImageAndNameLowerPart">
-            <img class="" src="assets/img/avatar-1.svg" alt="User Profile Image">
+            <img src="assets/img/avatar-1.svg" alt="User Profile Image">
             <p>Tom</p>
         </div>
         <!---------- &#64; means => @ Symbol  ---------->
         <p class="text">This conversation is only between you and <mark>&#64;Tom</mark>.</p>
 
         <div class="containerQuillEditor">
-            <quill-editor placeholder="Message to Tom"></quill-editor>
+
+            <quill-editor placeholder="Message to Tom" (onSelectionChanged)="focusQuillEditor($event)"></quill-editor>
+
+            <div class="mainContainerIcons">
+
+                <div class="containerIcons">
+                    <div class="containerSingleIcon">
+                        <img class="plusIcon" src="assets/icons/plus-icon-gray.svg" alt="Plus Icon">
+                    </div>
+
+                    <hr>
+
+                    <div class="containerSingleIcon">
+                        <img src="assets/icons/smiley-icon.svg" alt="Smiley Icon">
+                    </div>
+
+                    <div class="containerSingleIcon">
+                        <img src="assets/icons/@-icon.svg" alt="@ Icon">
+                    </div>
+                </div>
+
+                <img src="assets/icons/send-message-icon-light-purble.svg" alt="Send Icon">
+
+            </div>
+
         </div>
 
     </div>

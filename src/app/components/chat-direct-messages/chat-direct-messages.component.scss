@@ -11,6 +11,7 @@
 
 .containerChatDirectMessagesUpperPart {
     @include flex();
+    background-color: #ffffff;
     box-shadow: 0px 2px 10px 0px #00000014;
     padding: 18px 20px 18px 20px;
     border-radius: 30px 30px 0 0;
@@ -58,7 +59,7 @@
 .containerUserImageAndNameLowerPart {
     @include flexEndYAxis();
     padding-left: 45px;
-    margin-top: 138px;
+    margin-top: 128px;
     gap: 25px;
 
     img {
@@ -94,11 +95,57 @@
 
 .containerQuillEditor {
     padding: 30px 0 25px 0;
+    position: relative;
 }
 
 
 quill-editor {
     width: 500px;
-    height: 120px;
+    height: 130px;
     padding-left: 45px;
+}
+
+
+.mainContainerIcons {
+    @include flexSpaceBetween();
+    margin: -55px 70px 0 60px;
+    position: relative;
+    background-color: #ffffff;
+}
+
+
+.containerIcons {
+    @include flex();
+    gap: 5px;
+
+
+    hr {
+        background-color: $lightPurple;
+        width: 1px;
+        margin: 0;
+        border: unset;
+    }
+}
+
+
+.containerSingleIcon {
+    @include hover();
+    @include flex();
+    border-radius: 50%;
+
+    img {
+
+        &:hover {
+            filter: brightness(0) saturate(100%) invert(32%) sepia(74%) saturate(1212%) hue-rotate(215deg) brightness(97%) contrast(107%);
+        }
+    }
+
+    &:hover {
+        background-color: $bgColor;
+    }
+}
+
+
+.plusIcon {
+    width: 35px;
 }

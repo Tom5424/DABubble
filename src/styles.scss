@@ -114,6 +114,12 @@ body {
 }
 
 
+.ql-editor p {
+    height: 65px;
+    overflow-y: scroll;
+}
+
+
 /////////// Animation for User Feedback Message 
 @keyframes slideInLeft {
     from {
