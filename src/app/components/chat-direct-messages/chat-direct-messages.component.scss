@@ -3,7 +3,7 @@
 
 
 .mainContainerChatDirectMessages {
-    width: 600px;
+    width: 750px;
     border-radius: 30px;
     background-color: #ffffff;
 }
@@ -145,7 +145,7 @@
 
 
 quill-editor {
-    width: 500px;
+    width: 650px;
     height: 130px;
     padding-left: 45px;
 }
@@ -154,6 +154,7 @@ quill-editor {
 .mainContainerIcons {
     @include flexSpaceBetween();
     margin: -55px 70px 0 60px;
+    padding-bottom: 11px;
     position: relative;
     background-color: #ffffff;
 }
@@ -193,4 +194,21 @@ quill-editor {
 
 .plusIcon {
     width: 35px;
+}
+
+
+button {
+    @include hover();
+    background-color: #ffffff;
+    border: unset;
+
+    img {
+        filter: brightness(0) saturate(100%) invert(32%) sepia(36%) saturate(5695%) hue-rotate(229deg) brightness(91%) contrast(108%);
+    }
+}
+
+
+.disabledSendBtn {
+    @include hoverDisabled();
+    filter: brightness(0) saturate(100%) invert(45%) sepia(28%) saturate(1754%) hue-rotate(205deg) brightness(110%) contrast(91%) !important;
 }

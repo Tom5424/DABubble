@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogClose } from '@angular/material/dialog';
 import { AuthService } from '../../services/auth.service';
 import { DialogEditProfileComponent } from '../dialog-edit-profile/dialog-edit-profile.component';
 import { NgClass, NgStyle } from '@angular/common';
@@ -10,7 +10,7 @@ import { DialogConfirmedAccountDeletionComponent } from '../dialog-confirmed-acc
 @Component({
   selector: 'app-dialog-profile-detail-view',
   standalone: true,
-  imports: [MatTooltipModule, NgClass, NgStyle],
+  imports: [MatDialogClose, MatTooltipModule, NgClass, NgStyle],
   templateUrl: './dialog-profile-detail-view.component.html',
   styleUrl: './dialog-profile-detail-view.component.scss'
 })

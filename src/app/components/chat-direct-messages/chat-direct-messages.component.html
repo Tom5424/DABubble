@@ -44,7 +44,7 @@
     <div class="containerChatDirectMessagesLowerPart">
 
         <div class="containerUserImageAndNameLowerPart"
-            [ngStyle]="userIdMatchesWithIdFromLoggedinUser() ? {'margin-top': '82px'} : {'margin-top': '128px'}">
+            [ngStyle]="userIdMatchesWithIdFromLoggedinUser() ? {'margin-top': '94px'} : {'margin-top': '118px'}">
 
             @if (noProfileImgExist()) {
             <img class="imgNoSelectedProfileChatDirectMessagesLowerPart" src="assets/img/non-user-selected.svg"
@@ -80,31 +80,38 @@
 
         <div class="containerQuillEditor">
 
-            <quill-editor placeholder="Message to {{ createUserService.user.name }}"
-                (onSelectionChanged)="focusQuillEditor($event)">
-            </quill-editor>
+            <form [formGroup]="addMessageForm" (ngSubmit)="sendDirectMessage()"
+                (keyup)="sendDirectMessageIfPressOnEnterKey($event)">
 
-            <div class="mainContainerIcons">
+                <quill-editor placeholder="Message to {{ createUserService.user.name }}"
+                    formControlName="inputfieldQuillEditor">
+                </quill-editor>
 
-                <div class="containerIcons">
-                    <div class="containerSingleIcon">
-                        <img class="plusIcon" src="assets/icons/plus-icon-gray.svg" alt="Plus Icon">
+                <div class="mainContainerIcons">
+
+                    <div class="containerIcons">
+                        <div class="containerSingleIcon">
+                            <img class="plusIcon" src="assets/icons/plus-icon-gray.svg" alt="Plus Icon">
+                        </div>
+
+                        <hr>
+
+                        <div class="containerSingleIcon">
+                            <img src="assets/icons/smiley-icon.svg" alt="Smiley Icon">
+                        </div>
+
+                        <div class="containerSingleIcon">
+                            <img src="assets/icons/@-icon.svg" alt="@ Icon">
+                        </div>
                     </div>
 
-                    <hr>
 
-                    <div class="containerSingleIcon">
-                        <img src="assets/icons/smiley-icon.svg" alt="Smiley Icon">
-                    </div>
-
-                    <div class="containerSingleIcon">
-                        <img src="assets/icons/@-icon.svg" alt="@ Icon">
-                    </div>
+                    <button type="submit" [disabled]="filteredInpuvalueWithRegex == 0 || addMessageForm.invalid">
+                        <img src="assets/icons/send-message-icon-light-purble.svg" alt="Send Icon"
+                            [ngClass]="{'disabledSendBtn': filteredInpuvalueWithRegex == 0 || addMessageForm.invalid}">
+                    </button>
                 </div>
-
-                <img src="assets/icons/send-message-icon-light-purble.svg" alt="Send Icon">
-
-            </div>
+            </form>
 
         </div>
 

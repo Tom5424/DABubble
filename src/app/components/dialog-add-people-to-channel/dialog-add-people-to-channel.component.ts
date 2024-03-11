@@ -6,6 +6,7 @@ import { CreateChannelService } from '../../services/create-channel.service';
 import { CreateUserService } from '../../services/create-user.service';
 import { Observable, map, startWith } from 'rxjs';
 import { User } from '../../models/user';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -18,6 +19,7 @@ import { User } from '../../models/user';
 
 
 export class DialogAddPeopleToChannelComponent {
+  authService = inject(AuthService);
   createChannelService = inject(CreateChannelService);
   createUserService = inject(CreateUserService);
   matDialog = inject(MatDialog);
@@ -78,6 +80,11 @@ export class DialogAddPeopleToChannelComponent {
   addSpecificUsersToChannel(): void {
     this.createChannelService.createChannelService(this.data.channelData, this.addedUsersToTheChannel);
     this.matDialog.closeAll();
+  }
+
+
+  userIdMatchesWithIdFromLoggedinUser(userId: string): boolean {
+    return (userId !== this.authService.auth.currentUser?.uid) ? true : false;
   }
 
 

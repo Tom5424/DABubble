@@ -40,7 +40,7 @@ export class DialogProfileDetailViewInChatComponent {
   }
 
 
-  writeMesssage(): void {
+  writeMesssageToUser(): void {
     this.matDialog.closeAll();
     this.router.navigate(['/mainView/user/', this.data.userData.userId]);
   }
