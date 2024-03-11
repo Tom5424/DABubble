@@ -54,8 +54,8 @@
 
 
 .dialogBoxMiddlePart {
-    @include flexSpaceBetween();
-    @include flexCenteredYAxis();
+    @include flex();
+    gap: 15px;
 
     p {
         font-size: 32px;

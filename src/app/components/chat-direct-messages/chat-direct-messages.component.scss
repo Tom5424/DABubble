@@ -82,8 +82,7 @@
 .containerUserImageAndNameLowerPart {
     @include flexEndYAxis();
     padding-left: 45px;
-    margin-top: 128px;
-    gap: 25px;
+    gap: 15px;
 
     p {
         font-size: 24px;
@@ -106,6 +105,19 @@
     width: 100px;
     height: 100px;
     border-radius: 50%;
+}
+
+
+.textInfoLoggedinUser {
+    color: $textGray;
+    padding-left: 45px;
+    font-size: 20px;
+
+    mark {
+        color: $textGray;
+        font-weight: 700;
+        background-color: unset;
+    }
 }
 
 

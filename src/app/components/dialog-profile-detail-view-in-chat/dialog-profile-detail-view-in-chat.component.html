@@ -10,31 +10,34 @@
 
 
     <div class="containerProfileImg">
-        <!-- @if (noProfileImgExist()) { -->
-        <!-- <img class="imgNoSelectedProfile" src="/assets/img/non-user-selected.svg" alt="Profile Image"> -->
-        <!-- }@else { -->
-        <img src="assets/img/avatar-1.svg" alt="Profile Image">
-        <!-- } -->
+        @if (noProfileImgExist()) {
+        <img class="imgNoSelectedProfile" src="/assets/img/non-user-selected.svg" alt="Profile Image">
+        }@else {
+        <img src="{{ data.userData.imgUrl }}" alt="Profile Image">
+        }
     </div>
 
 
     <div class="dialogBoxMiddlePart">
-        <p>Tom</p>
+        <p>{{ data.userData.name }}</p>
+
+        @if(userIdMatchesWithIdFromLoggedinUser()) {
+        <p class="text">
+            (You)
+        </p>
+        }
     </div>
 
 
     <div class="dialogBoxUserOnlineStatus">
-        <!-- @if (guestUserIsLoggedIn()) { -->
-
-        <!-- }@else { -->
-
+        @if (userIsOnline()) {
         <img src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
-        <!-- <img src="assets/icons/user-is-offline-icon.svg" alt="Gray Dot"> -->
+        <p [ngStyle]="userIsOnline() ? {'color': '#92C83E'} : {'color': '#686868'}">Online</p>
 
-        <p>
-            Online
-        </p>
-        <!-- } -->
+        }@else {
+        <img src="assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
+        <p [ngStyle]="userIsOnline() ? {'color': '#92C83E'} : {'color': '#686868'}">Offline</p>
+        }
     </div>
 
 
@@ -45,12 +48,12 @@
 
 
     <p class="emailAddress">
-        sadsa&#64;sd.com
+        {{ data.userData.email }}
     </p>
 
 
     <div class="containerBtnAndText">
-        <button type="button">
+        <button type="button" (click)="writeMesssage()">
             <img src="assets/icons/speech-bubble-icon.svg" alt="Speech Bubble Icon">
             Message
         </button>

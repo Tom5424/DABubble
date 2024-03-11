@@ -23,6 +23,10 @@
             }
 
             <p>{{ createUserService.user.name }}</p>
+
+            @if (userIdMatchesWithIdFromLoggedinUser()) {
+            <p>(You)</p>
+            }
         </div>
         }
     </div>
@@ -39,7 +43,9 @@
 
     <div class="containerChatDirectMessagesLowerPart">
 
-        <div class="containerUserImageAndNameLowerPart">
+        <div class="containerUserImageAndNameLowerPart"
+            [ngStyle]="userIdMatchesWithIdFromLoggedinUser() ? {'margin-top': '82px'} : {'margin-top': '128px'}">
+
             @if (noProfileImgExist()) {
             <img class="imgNoSelectedProfileChatDirectMessagesLowerPart" src="assets/img/non-user-selected.svg"
                 alt="User Profile Image">
@@ -49,11 +55,27 @@
             }
 
             <p>{{ createUserService.user.name }}</p>
+
+            @if (userIdMatchesWithIdFromLoggedinUser()) {
+            <p>(You)</p>
+            }
         </div>
-        <!---------- &#64; means => @ Symbol  ---------->
-        <p class="text">
-            This conversation is only between you and <mark>&#64;{{ createUserService.user.name }}</mark>.
+
+
+        @if (userIdMatchesWithIdFromLoggedinUser()) {
+        <p class="textInfoLoggedinUser">
+            <mark>This space is just for you.</mark> Take notes, list your to-dos, or keep links and files handy.
+            You can also discuss things with yourself here.
         </p>
+        }@else {
+        <p class="text">
+            This conversation is only between you and
+            <mark (click)="openProfileDetailView()">
+                <!---------- &#64; means => @ Symbol  ---------->
+                &#64;{{ createUserService.user.name }}.
+            </mark>
+        </p>
+        }
 
 
         <div class="containerQuillEditor">

@@ -3,13 +3,15 @@ import { ActivatedRoute } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
 import { CreateUserService } from '../../services/create-user.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogProfileDetailViewInDirectMessagesComponent } from '../dialog-profile-detail-view-in-direct-messages/dialog-profile-detail-view-in-direct-messages.component';
+import { DialogProfileDetailViewInChatComponent } from '../dialog-profile-detail-view-in-chat/dialog-profile-detail-view-in-chat.component';
+import { AuthService } from '../../services/auth.service';
+import { NgStyle } from '@angular/common';
 
 
 @Component({
   selector: 'app-chat-direct-messages',
   standalone: true,
-  imports: [QuillModule],
+  imports: [QuillModule, NgStyle],
   templateUrl: './chat-direct-messages.component.html',
   styleUrl: './chat-direct-messages.component.scss'
 })
@@ -17,6 +19,7 @@ import { DialogProfileDetailViewInDirectMessagesComponent } from '../dialog-prof
 
 export class ChatDirectMessagesComponent implements OnInit {
   createUserService = inject(CreateUserService);
+  authService = inject(AuthService);
   activatedRoute = inject(ActivatedRoute);
   matDialog = inject(MatDialog);
   userId: string | null = '';
@@ -31,7 +34,7 @@ export class ChatDirectMessagesComponent implements OnInit {
 
 
   openProfileDetailView(): void {
-    this.matDialog.open(DialogProfileDetailViewInDirectMessagesComponent, { autoFocus: false });
+    this.matDialog.open(DialogProfileDetailViewInChatComponent, { data: { userData: this.createUserService.user }, autoFocus: false });
   }
 
 
@@ -68,5 +71,10 @@ export class ChatDirectMessagesComponent implements OnInit {
 
   quillEditorIsNotFocused(event: { editor: any, range: any, oldRange: any }): boolean {
     return (event.range == null) ? true : false;
+  }
+
+
+  userIdMatchesWithIdFromLoggedinUser(): boolean {
+    return (this.createUserService.user.userId == this.authService.auth.currentUser?.uid) ? true : false;
   }
 }
