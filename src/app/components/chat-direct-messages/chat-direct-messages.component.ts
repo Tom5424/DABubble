@@ -5,14 +5,15 @@ import { CreateUserService } from '../../services/create-user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogProfileDetailViewInChatComponent } from '../dialog-profile-detail-view-in-chat/dialog-profile-detail-view-in-chat.component';
 import { AuthService } from '../../services/auth.service';
-import { NgClass, NgStyle } from '@angular/common';
+import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { CreateDirectMessageService } from '../../services/create-direct-message.service';
 
 
 @Component({
   selector: 'app-chat-direct-messages',
   standalone: true,
-  imports: [QuillModule, NgStyle, NgClass, ReactiveFormsModule],
+  imports: [QuillModule, NgStyle, NgClass, ReactiveFormsModule, AsyncPipe],
   templateUrl: './chat-direct-messages.component.html',
   styleUrl: './chat-direct-messages.component.scss'
 })
@@ -21,6 +22,7 @@ import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angula
 export class ChatDirectMessagesComponent implements OnInit {
   createUserService = inject(CreateUserService);
   authService = inject(AuthService);
+  createDirectMessage = inject(CreateDirectMessageService);
   activatedRoute = inject(ActivatedRoute);
   matDialog = inject(MatDialog);
   userId: string | null = '';
@@ -37,7 +39,9 @@ export class ChatDirectMessagesComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.userId = params.get('id');
       this.createUserService.getSingelUserService(this.userId)
-    })
+    });
+    this.createDirectMessage.checkIfDirectMessagesExistingInDatabaseService();
+    this.createDirectMessage.getDirectMessagesService();
   }
 
 
@@ -48,9 +52,11 @@ export class ChatDirectMessagesComponent implements OnInit {
 
   sendDirectMessage(): void {
     this.inputValue = this.addMessageForm.controls.inputfieldQuillEditor.value;
+    const inputValueWithoutHTMLTags = this.inputValue?.replace(/<[^>]*>/g, ''); // The regular expression removes the HTML tags from the string that come from the Quill Editor
     this.filteredInpuvalueWithRegex = this.inputValue?.replace(this.regex, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
     if (this.filteredInpuvalueWithRegex && this.filteredInpuvalueWithRegex > 0) {
-      console.log(this.addMessageForm.controls.inputfieldQuillEditor.value);
+      this.createDirectMessage.createDirectMessageService(this.createUserService.user, inputValueWithoutHTMLTags || null);
+      this.createDirectMessage.checkIfDirectMessagesExistingInDatabaseService();
       this.addMessageForm.reset();
     }
   }
@@ -58,9 +64,11 @@ export class ChatDirectMessagesComponent implements OnInit {
 
   sendDirectMessageIfPressOnEnterKey(event: KeyboardEvent): void {
     this.inputValue = this.addMessageForm.controls.inputfieldQuillEditor.value;
+    const inputValueWithoutHTMLTags = this.inputValue?.replace(/<[^>]*>/g, ''); // The regular expression removes the HTML tags from the string that come from the Quill Editor
     this.filteredInpuvalueWithRegex = this.inputValue?.replace(this.regex, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
     if (event?.key == 'Enter' && this.filteredInpuvalueWithRegex && this.filteredInpuvalueWithRegex > 0) {
-      console.log(this.addMessageForm.controls.inputfieldQuillEditor.value);
+      this.createDirectMessage.createDirectMessageService(this.createUserService.user, inputValueWithoutHTMLTags || null);
+      this.createDirectMessage.checkIfDirectMessagesExistingInDatabaseService();
       this.addMessageForm.reset();
     }
   }
@@ -78,6 +86,11 @@ export class ChatDirectMessagesComponent implements OnInit {
 
   contactAreLoading(): boolean {
     return (this.createUserService.loadContacts) ? true : false;
+  }
+
+
+  checkIfDirectMessageExistingInDatabase(): boolean {
+    return (this.createDirectMessage.noDirectMessageExistingInDatabase) ? true : false;
   }
 
 
