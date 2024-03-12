@@ -27,7 +27,6 @@ export class ChatDirectMessagesComponent implements OnInit {
   matDialog = inject(MatDialog);
   userId: string | null = '';
   inputValue: string | null = '';
-  regex: RegExp = /(<([^>]+)>)/ig;
   filteredInpuvalueWithRegex: number | undefined;
   keyEnterWasPressed: boolean = false;
   addMessageForm = new FormGroup({
@@ -53,7 +52,7 @@ export class ChatDirectMessagesComponent implements OnInit {
   sendDirectMessage(): void {
     this.inputValue = this.addMessageForm.controls.inputfieldQuillEditor.value;
     const inputValueWithoutHTMLTags = this.inputValue?.replace(/<[^>]*>/g, ''); // The regular expression removes the HTML tags from the string that come from the Quill Editor
-    this.filteredInpuvalueWithRegex = this.inputValue?.replace(this.regex, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
+    this.filteredInpuvalueWithRegex = this.inputValue?.replace(/(<([^>]+)>)/ig, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
     if (this.filteredInpuvalueWithRegex && this.filteredInpuvalueWithRegex > 0) {
       this.createDirectMessage.createDirectMessageService(this.createUserService.user, inputValueWithoutHTMLTags || null);
       this.createDirectMessage.checkIfDirectMessagesExistingInDatabaseService();
@@ -65,7 +64,7 @@ export class ChatDirectMessagesComponent implements OnInit {
   sendDirectMessageIfPressOnEnterKey(event: KeyboardEvent): void {
     this.inputValue = this.addMessageForm.controls.inputfieldQuillEditor.value;
     const inputValueWithoutHTMLTags = this.inputValue?.replace(/<[^>]*>/g, ''); // The regular expression removes the HTML tags from the string that come from the Quill Editor
-    this.filteredInpuvalueWithRegex = this.inputValue?.replace(this.regex, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
+    this.filteredInpuvalueWithRegex = this.inputValue?.replace(/(<([^>]+)>)/ig, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
     if (event?.key == 'Enter' && this.filteredInpuvalueWithRegex && this.filteredInpuvalueWithRegex > 0) {
       this.createDirectMessage.createDirectMessageService(this.createUserService.user, inputValueWithoutHTMLTags || null);
       this.createDirectMessage.checkIfDirectMessagesExistingInDatabaseService();

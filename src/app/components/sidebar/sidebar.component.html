@@ -10,92 +10,10 @@
 
     <div class="scrollingContainer">
 
-        <div class="containerSidebarMiddlePart">
-            <div class="childContainerSidebarMiddlePart" (click)="foldInChannelList()">
-                <img src="assets/icons/arrow-icon-dropdown.svg" alt="Arrow Icon"
-                    [ngClass]="{'rotateArrowIcon': channelListAreCollapsed}">
-
-                <img src="assets/icons/three-circles-icon.svg" alt="Three Circle Icon">
-                <p>Channels</p>
-            </div>
-
-            <div class="containerPlusIcon" (click)="openDialogCreateChannel()">
-                <img src="assets/icons/plus-icon.svg" alt="Plus Icon">
-            </div>
-        </div>
+        <app-channels-in-sidebar></app-channels-in-sidebar>
 
 
-        <ul class="channelList" [ngClass]="{'d-none': channelListAreCollapsed}">
-            @for(channel of createChannelService.allChannelsAsObservable | async; track $index) {
-            <li>
-                <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
-                <p>{{ channel.channelName }}</p>
-            </li>
-            }
-
-
-            @if (checkIfChannelsExistingInDatabase()) {
-            <p class="text">No Channels Existing</p>
-            }
-
-
-            @if (channelsAreLoading()) {
-            <div class="containerSpinnerIcon">
-                <img src="./assets/icons/spinner-icon.svg" alt="Spinner Icon">
-            </div>
-            }@else {
-            <div class="containerIconAndText" (click)="openDialogCreateChannel()">
-                <img src="assets/icons/plus-icon-with-circle.svg" alt="Plus Icon">
-                <p>Add Channel</p>
-            </div>
-            }
-        </ul>
-
-
-        <div class="containerSidebarLowerPart" (click)="foldInContactList()">
-            <img src="assets/icons/arrow-icon-dropdown.svg" alt="Arrow Icon"
-                [ngClass]="{'rotateArrowIcon': contactListAreCollapsed}">
-
-            <img src="assets/icons/user-icon-with-circle-black.svg" alt="User Icon">
-            <p>Direct Messages</p>
-        </div>
-
-
-        <ul class="contactList" [ngClass]="{'d-none': contactListAreCollapsed}">
-            @for (user of allUser; track $index) {
-            <li routerLink="/mainView/user/{{ user.userId }}" routerLinkActive="activeUserDirectMessages">
-                @if (noProfileImgExist(user)) {
-                <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="User Profile Image">
-                }@else {
-                <img src="{{ user.imgUrl }}" alt="User Profile Image">
-                }
-
-                @if (userIsOnline(user)) {
-                <img src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
-                }@else {
-                <img src="assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
-                }
-
-                <p>{{ user.name }}</p>
-
-                @if (userIdMatchesWithIdFromLoggedinUser(user)) {
-                <p>(You)</p>
-                }
-            </li>
-            }
-
-
-            @if (checkIfContactsExistingInDatabase()) {
-            <p class="text">No Contacts Existing</p>
-            }
-
-
-            @if (contactsAreLoading()) {
-            <div class="containerSpinnerIcon">
-                <img src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
-            </div>
-            }
-        </ul>
+        <app-contacts-in-sidebar></app-contacts-in-sidebar>
 
     </div>
 </nav>

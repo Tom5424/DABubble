@@ -1,0 +1,40 @@
+<div class="containerSidebarMiddlePart">
+    <div class="childContainerSidebarMiddlePart" (click)="foldInChannelList()">
+        <img src="assets/icons/arrow-icon-dropdown.svg" alt="Arrow Icon"
+            [ngClass]="{'rotateArrowIcon': channelListAreCollapsed}">
+
+        <img src="assets/icons/three-circles-icon.svg" alt="Three Circle Icon">
+        <p>Channels</p>
+    </div>
+
+    <div class="containerPlusIcon" (click)="openDialogCreateChannel()">
+        <img src="assets/icons/plus-icon.svg" alt="Plus Icon">
+    </div>
+</div>
+
+
+<ul class="channelList" [ngClass]="{'d-none': channelListAreCollapsed}">
+    @for(channel of createChannelService.allChannelsAsObservable | async; track $index) {
+    <li>
+        <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
+        <p>{{ channel.channelName }}</p>
+    </li>
+    }
+
+
+    @if (checkIfChannelsExistingInDatabase()) {
+    <p class="text">No Channels Existing</p>
+    }
+
+
+    @if (channelsAreLoading()) {
+    <div class="containerSpinnerIcon">
+        <img src="./assets/icons/spinner-icon.svg" alt="Spinner Icon">
+    </div>
+    }@else {
+    <div class="containerIconAndText" (click)="openDialogCreateChannel()">
+        <img src="assets/icons/plus-icon-with-circle.svg" alt="Plus Icon">
+        <p>Add Channel</p>
+    </div>
+    }
+</ul>
