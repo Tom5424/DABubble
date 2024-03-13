@@ -43,77 +43,52 @@
 
     <div class="containerChatDirectMessagesLowerPart">
 
-        @if (checkIfUserHaveAlreadyMessages()) {
-
-        <div class="containerUserImageAndNameLowerPart"
-            [ngStyle]="userIdMatchesWithIdFromLoggedinUser() ? {'margin-top': '94px'} : {'margin-top': '118px'}">
-
-            @if (noProfileImgExist()) {
-            <img class="imgNoSelectedProfileChatDirectMessagesLowerPart" src="assets/img/non-user-selected.svg"
-                alt="User Profile Image">
-            }@else {
-            <img class="imgSelectedProfileChatDirectMessagesLowerPart" src="{{ createUserService.user.imgUrl }}"
-                alt="User Profile Image">
-            }
-
-            <p>{{ createUserService.user.name }}</p>
-
-            @if (userIdMatchesWithIdFromLoggedinUser()) {
-            <p>(You)</p>
-            }
-        </div>
-
-
-        @if (userIdMatchesWithIdFromLoggedinUser()) {
-        <p class="textInfoLoggedinUser">
-            <mark>This space is just for you.</mark> Take notes, list your to-dos, or keep links and files handy.
-            You can also discuss things with yourself here.
-        </p>
-        }@else {
-        <p class="text">
-            This conversation is only between you and
-            <mark (click)="openProfileDetailView()">
-                <!---------- &#64; means => @ Symbol  ---------->
-                &#64;{{ createUserService.user.name }}.
-            </mark>
-        </p>
-        }
-
-        }@else {
-
-
+        <!-- @if (checkIfUserHaveAlreadyMessages()) { -->
         <div class="scrollingContainer">
-            @for (directMessage of createDirectMessage.directMessagesAsObservable | async; track $index) {
 
-            <div class="mainContainerDirectMessage">
-                @if (noProfileImgExistInChat(directMessage.userThatSendedMessage)) {
-                <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="Profile Image">
+            <div class="containerUserImageAndNameLowerPart"
+                [ngStyle]="userIdMatchesWithIdFromLoggedinUser() ? {'margin-top': '94px'} : {'margin-top': '118px'}">
+
+                @if (noProfileImgExist()) {
+                <img class="imgNoSelectedProfileChatDirectMessagesLowerPart" src="assets/img/non-user-selected.svg"
+                    alt="User Profile Image">
                 }@else {
-                <img src="{{ directMessage.userThatSendedMessage?.imgUrl }}" alt="Profile Image">
+                <img class="imgSelectedProfileChatDirectMessagesLowerPart" src="{{ createUserService.user.imgUrl }}"
+                    alt="User Profile Image">
                 }
 
-                <div>
+                <p>{{ createUserService.user.name }}</p>
 
-                    <div class="containerDirectMessageUpperPart">
-                        <p>
-                            {{ directMessage.userThatSendedMessage?.name }}
-                        </p>
-                        <p>12:55 Uhr</p>
-                    </div>
-
-                    <p class="messageText">{{ directMessage.messageText }}</p>
-
-                    <div class="containerDirectMessageLowerPart">
-                        <p>2 Answers</p>
-                        <p>Last Answer 12:55 Uhr</p>
-                    </div>
-
-                </div>
+                @if (userIdMatchesWithIdFromLoggedinUser()) {
+                <p>(You)</p>
+                }
             </div>
 
+
+            @if (userIdMatchesWithIdFromLoggedinUser()) {
+            <p class="textInfoLoggedinUser">
+                <mark>This space is just for you.</mark> Take notes, list your to-dos, or keep links and files handy.
+                You can also discuss things with yourself here.
+            </p>
+            }@else {
+            <p class="text">
+                This conversation is only between you and
+                <mark (click)="openProfileDetailView()">
+                    <!---------- &#64; means => @ Symbol  ---------->
+                    &#64;{{ createUserService.user.name }}.
+                </mark>
+            </p>
             }
+
+
+            @for (directMessage of createDirectMessageService.directMessagesAsObservable | async; track $index) {
+            <app-direct-message [directMessage]="directMessage"></app-direct-message>
+            }
+
+
+            <!-- }@else { -->
         </div>
-        }
+        <!-- } -->
 
 
         <div class="containerQuillEditor">

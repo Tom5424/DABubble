@@ -148,6 +148,12 @@
 }
 
 
+@mixin flexStartXAxis() {
+    @include flex();
+    justify-content: flex-start;
+}
+
+
 @mixin flexEndXAxis() {
     @include flex();
     justify-content: flex-end;

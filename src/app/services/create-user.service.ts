@@ -93,18 +93,18 @@ export class CreateUserService {
   }
 
 
-  updateUserHaveAtLeastOneMessageService(userId: string | null, userHaveAtLeastOneMessage: boolean): void {
-    setTimeout(() => {
-      this.load = true;
-    }, 400);
-    if (userId) {
-      const docRef = doc(this.firestore, 'users', userId);
-      updateDoc(docRef, { haveAtLeastOneMessage: userHaveAtLeastOneMessage })
-        .then(() => {
-          this.load = false;
-        })
-    }
-  }
+  // updateUserHaveAtLeastOneMessageService(userId: string | null, userHaveAtLeastOneMessage: boolean): void {
+  //   setTimeout(() => {
+  //     this.load = true;
+  //   }, 400);
+  //   if (userId) {
+  //     const docRef = doc(this.firestore, 'users', userId);
+  //     updateDoc(docRef, { haveAtLeastOneMessage: userHaveAtLeastOneMessage })
+  //       .then(() => {
+  //         this.load = false;
+  //       })
+  //   }
+  // }
 
 
   deleteUserService(userId: string): void {

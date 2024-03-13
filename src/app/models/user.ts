@@ -6,7 +6,7 @@ export class User {
     initialLetter: string | undefined;
     userId: string;
     isOnline: boolean | undefined;
-    haveAtLeastOneMessage: boolean | undefined;
+    // haveAtLeastOneMessage: boolean | undefined;
 
 
     constructor(object?: User, userId?: string) {

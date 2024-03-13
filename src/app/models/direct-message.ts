@@ -2,7 +2,7 @@ import { User } from "./user";
 
 
 export class DirectMessage {
-    senderTime: Date | null = new Date();
+    senderTime: number = Date.now();
     messageText: string;
     receiverId: string;
     directMessageId: string | undefined;
@@ -10,7 +10,7 @@ export class DirectMessage {
 
 
     constructor(userThatSendedMessage?: any, receiverId?: string | null, messageText?: string | null) {
-        this.senderTime = this.senderTime ? this.senderTime : null;
+        this.senderTime = this.senderTime ? this.senderTime : 0;
         this.messageText = messageText ? messageText : '';
         this.receiverId = receiverId ? receiverId : '';
         this.userThatSendedMessage = userThatSendedMessage ? userThatSendedMessage : null;

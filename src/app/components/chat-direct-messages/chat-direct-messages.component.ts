@@ -8,13 +8,13 @@ import { AuthService } from '../../services/auth.service';
 import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CreateDirectMessageService } from '../../services/create-direct-message.service';
-import { User } from '../../models/user';
+import { DirectMessageComponent } from '../direct-message/direct-message.component';
 
 
 @Component({
   selector: 'app-chat-direct-messages',
   standalone: true,
-  imports: [QuillModule, NgStyle, NgClass, ReactiveFormsModule, AsyncPipe],
+  imports: [QuillModule, NgStyle, NgClass, ReactiveFormsModule, AsyncPipe, DirectMessageComponent],
   templateUrl: './chat-direct-messages.component.html',
   styleUrl: './chat-direct-messages.component.scss'
 })
@@ -23,7 +23,7 @@ import { User } from '../../models/user';
 export class ChatDirectMessagesComponent implements OnInit {
   createUserService = inject(CreateUserService);
   authService = inject(AuthService);
-  createDirectMessage = inject(CreateDirectMessageService);
+  createDirectMessageService = inject(CreateDirectMessageService);
   activatedRoute = inject(ActivatedRoute);
   matDialog = inject(MatDialog);
   userId: string | null = '';
@@ -39,7 +39,7 @@ export class ChatDirectMessagesComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.userId = params.get('id');
       this.createUserService.getSingelUserService(this.userId)
-      this.createDirectMessage.getDirectMessagesService(this.userId);
+      this.createDirectMessageService.getDirectMessagesService(this.userId);
     });
   }
 
@@ -54,8 +54,8 @@ export class ChatDirectMessagesComponent implements OnInit {
     const inputValueWithoutHTMLTags = this.inputValue?.replace(/<[^>]*>/g, ''); // The regular expression removes the HTML tags from the string that come from the Quill Editor
     this.filteredInpuvalueWithRegex = this.inputValue?.replace(/(<([^>]+)>)/ig, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
     if (this.filteredInpuvalueWithRegex && this.filteredInpuvalueWithRegex > 0) {
-      this.createDirectMessage.createDirectMessageService(this.authService.user, this.userId, inputValueWithoutHTMLTags || null);
-      this.createUserService.updateUserHaveAtLeastOneMessageService(this.userId, true);
+      this.createDirectMessageService.createDirectMessageService(this.authService.user, this.userId, inputValueWithoutHTMLTags || null);
+      // this.createUserService.updateUserHaveAtLeastOneMessageService(this.userId, true);
       this.addMessageForm.reset();
     }
   }
@@ -66,8 +66,8 @@ export class ChatDirectMessagesComponent implements OnInit {
     const inputValueWithoutHTMLTags = this.inputValue?.replace(/<[^>]*>/g, ''); // The regular expression removes the HTML tags from the string that come from the Quill Editor
     this.filteredInpuvalueWithRegex = this.inputValue?.replace(/(<([^>]+)>)/ig, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
     if (event?.key == 'Enter' && this.filteredInpuvalueWithRegex && this.filteredInpuvalueWithRegex > 0) {
-      this.createDirectMessage.createDirectMessageService(this.authService.user, this.userId, inputValueWithoutHTMLTags || null);
-      this.createUserService.updateUserHaveAtLeastOneMessageService(this.userId, true);
+      this.createDirectMessageService.createDirectMessageService(this.authService.user, this.userId, inputValueWithoutHTMLTags || null);
+      // this.createUserService.updateUserHaveAtLeastOneMessageService(this.userId, true);
       this.addMessageForm.reset();
     }
   }
@@ -78,24 +78,19 @@ export class ChatDirectMessagesComponent implements OnInit {
   }
 
 
-  noProfileImgExistInChat(user: User | null): boolean {
-    return (!user?.imgUrl) ? true : false;
-  }
-
-
   userIsOnline(): boolean {
     return (this.createUserService.user.isOnline) ? true : false;
   }
 
 
   chatAreLoading(): boolean {
-    return (this.createDirectMessage.loadChat) ? true : false;
+    return (this.createDirectMessageService.loadChat) ? true : false;
   }
 
 
-  checkIfUserHaveAlreadyMessages(): boolean {
-    return (!this.createUserService.load && !this.createUserService.user.haveAtLeastOneMessage) ? true : false;
-  }
+  // checkIfUserHaveAlreadyMessages(): boolean {
+  //   return (!this.createUserService.load && !this.createUserService.user.haveAtLeastOneMessage) ? true : false;
+  // }
 
 
   focusQuillEditor(event: { editor: any, range: any, oldRange: any }): void {
