@@ -3,7 +3,7 @@
     <!--------------------------------- Container Chat upper Part--------------------------------->
     <div class="containerChatDirectMessagesUpperPart">
 
-        @if (contactAreLoading()) {
+        @if (chatAreLoading()) {
         <img class="spinnerIconChatDirectMessagesUpperPart" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
 
         }@else {
@@ -34,7 +34,7 @@
 
 
     <!--------------------------------- Container Chat Lower Part--------------------------------->
-    @if (contactAreLoading()) {
+    @if (chatAreLoading()) {
     <div class="containerSpinnerIconChatDirectMessagesLowerPart">
         <img class="spinnerIcon" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
     </div>
@@ -43,7 +43,7 @@
 
     <div class="containerChatDirectMessagesLowerPart">
 
-        @if (checkIfDirectMessageExistingInDatabase()) {
+        @if (checkIfUserHaveAlreadyMessages()) {
 
         <div class="containerUserImageAndNameLowerPart"
             [ngStyle]="userIdMatchesWithIdFromLoggedinUser() ? {'margin-top': '94px'} : {'margin-top': '118px'}">
@@ -79,12 +79,12 @@
         </p>
         }
 
-        }
+        }@else {
 
-        @if(!checkIfDirectMessageExistingInDatabase()) {
 
         <div class="scrollingContainer">
             @for (directMessage of createDirectMessage.directMessagesAsObservable | async; track $index) {
+
             <div class="mainContainerDirectMessage">
                 @if (noProfileImgExistInChat(directMessage.userThatSendedMessage)) {
                 <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="Profile Image">
@@ -110,6 +110,7 @@
 
                 </div>
             </div>
+
             }
         </div>
         }

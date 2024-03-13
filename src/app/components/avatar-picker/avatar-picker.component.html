@@ -11,7 +11,7 @@
 
         <div class="avatarPickerBox">
             <div routerLink="/signup" class="containerArrowIcon">
-                <img src="./assets/icons/arrow-icon.svg" alt="Arrow Icon">
+                <img src="assets/icons/arrow-icon.svg" alt="Arrow Icon">
             </div>
 
 
@@ -19,13 +19,13 @@
 
 
             @if (noAvatarIsSelected()) {
-            <img class="imgNonSelectedAvatar" src="./assets/img/non-user-selected.svg" alt="Image non selected Avatar">
+            <img class="imgNonSelectedAvatar" src="assets/img/non-user-selected.svg" alt="Image non selected Avatar">
 
             }@else if(avatarIsSelected()){
             <img class="avatarImages" src="{{ storageService.selectedImageAvatarUrl }}" alt="Avatar Image">
 
             }@else if(imageUploadingIsInProgress()){
-            <img class="spinnerIcon" src="./assets/icons/spinner-icon.svg" alt="Spinner Icon">
+            <img class="spinnerIcon" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
 
             }@else if(imageIsUploaded()){
             <img class="uploadedImg" src="{{ storageService.urlFromUploadedImg }}" alt="Uploaded Image">

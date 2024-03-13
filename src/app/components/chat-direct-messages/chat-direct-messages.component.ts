@@ -39,9 +39,8 @@ export class ChatDirectMessagesComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.userId = params.get('id');
       this.createUserService.getSingelUserService(this.userId)
+      this.createDirectMessage.getDirectMessagesService(this.userId);
     });
-    this.createDirectMessage.checkIfDirectMessagesExistingInDatabaseService();
-    this.createDirectMessage.getDirectMessagesService();
   }
 
 
@@ -55,8 +54,8 @@ export class ChatDirectMessagesComponent implements OnInit {
     const inputValueWithoutHTMLTags = this.inputValue?.replace(/<[^>]*>/g, ''); // The regular expression removes the HTML tags from the string that come from the Quill Editor
     this.filteredInpuvalueWithRegex = this.inputValue?.replace(/(<([^>]+)>)/ig, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
     if (this.filteredInpuvalueWithRegex && this.filteredInpuvalueWithRegex > 0) {
-      this.createDirectMessage.createDirectMessageService(this.authService.user, inputValueWithoutHTMLTags || null);
-      this.createDirectMessage.checkIfDirectMessagesExistingInDatabaseService();
+      this.createDirectMessage.createDirectMessageService(this.authService.user, this.userId, inputValueWithoutHTMLTags || null);
+      this.createUserService.updateUserHaveAtLeastOneMessageService(this.userId, true);
       this.addMessageForm.reset();
     }
   }
@@ -67,8 +66,8 @@ export class ChatDirectMessagesComponent implements OnInit {
     const inputValueWithoutHTMLTags = this.inputValue?.replace(/<[^>]*>/g, ''); // The regular expression removes the HTML tags from the string that come from the Quill Editor
     this.filteredInpuvalueWithRegex = this.inputValue?.replace(/(<([^>]+)>)/ig, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
     if (event?.key == 'Enter' && this.filteredInpuvalueWithRegex && this.filteredInpuvalueWithRegex > 0) {
-      this.createDirectMessage.createDirectMessageService(this.authService.user, inputValueWithoutHTMLTags || null);
-      this.createDirectMessage.checkIfDirectMessagesExistingInDatabaseService();
+      this.createDirectMessage.createDirectMessageService(this.authService.user, this.userId, inputValueWithoutHTMLTags || null);
+      this.createUserService.updateUserHaveAtLeastOneMessageService(this.userId, true);
       this.addMessageForm.reset();
     }
   }
@@ -89,13 +88,13 @@ export class ChatDirectMessagesComponent implements OnInit {
   }
 
 
-  contactAreLoading(): boolean {
-    return (this.createUserService.loadContacts) ? true : false;
+  chatAreLoading(): boolean {
+    return (this.createDirectMessage.loadChat) ? true : false;
   }
 
 
-  checkIfDirectMessageExistingInDatabase(): boolean {
-    return (this.createDirectMessage.noDirectMessageExistingInDatabase) ? true : false;
+  checkIfUserHaveAlreadyMessages(): boolean {
+    return (!this.createUserService.load && !this.createUserService.user.haveAtLeastOneMessage) ? true : false;
   }
 
 
