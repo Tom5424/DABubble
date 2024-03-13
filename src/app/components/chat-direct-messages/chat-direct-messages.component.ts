@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth.service';
 import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CreateDirectMessageService } from '../../services/create-direct-message.service';
+import { User } from '../../models/user';
 
 
 @Component({
@@ -54,7 +55,7 @@ export class ChatDirectMessagesComponent implements OnInit {
     const inputValueWithoutHTMLTags = this.inputValue?.replace(/<[^>]*>/g, ''); // The regular expression removes the HTML tags from the string that come from the Quill Editor
     this.filteredInpuvalueWithRegex = this.inputValue?.replace(/(<([^>]+)>)/ig, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
     if (this.filteredInpuvalueWithRegex && this.filteredInpuvalueWithRegex > 0) {
-      this.createDirectMessage.createDirectMessageService(this.createUserService.user, inputValueWithoutHTMLTags || null);
+      this.createDirectMessage.createDirectMessageService(this.authService.user, inputValueWithoutHTMLTags || null);
       this.createDirectMessage.checkIfDirectMessagesExistingInDatabaseService();
       this.addMessageForm.reset();
     }
@@ -66,7 +67,7 @@ export class ChatDirectMessagesComponent implements OnInit {
     const inputValueWithoutHTMLTags = this.inputValue?.replace(/<[^>]*>/g, ''); // The regular expression removes the HTML tags from the string that come from the Quill Editor
     this.filteredInpuvalueWithRegex = this.inputValue?.replace(/(<([^>]+)>)/ig, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
     if (event?.key == 'Enter' && this.filteredInpuvalueWithRegex && this.filteredInpuvalueWithRegex > 0) {
-      this.createDirectMessage.createDirectMessageService(this.createUserService.user, inputValueWithoutHTMLTags || null);
+      this.createDirectMessage.createDirectMessageService(this.authService.user, inputValueWithoutHTMLTags || null);
       this.createDirectMessage.checkIfDirectMessagesExistingInDatabaseService();
       this.addMessageForm.reset();
     }
@@ -75,6 +76,11 @@ export class ChatDirectMessagesComponent implements OnInit {
 
   noProfileImgExist(): boolean {
     return (!this.createUserService.user.imgUrl) ? true : false;
+  }
+
+
+  noProfileImgExistInChat(user: User | null): boolean {
+    return (!user?.imgUrl) ? true : false;
   }
 
 

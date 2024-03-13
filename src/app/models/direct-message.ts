@@ -7,7 +7,7 @@ export class DirectMessage {
     userThatSendedMessage: User | null;
 
 
-    constructor(userThatSendedMessage?: User, messageText?: any) {
+    constructor(userThatSendedMessage?: any, messageText?: string | null) {
         this.senderTime = this.senderTime ? this.senderTime : null;
         this.messageText = messageText ? messageText : '';
         this.userThatSendedMessage = userThatSendedMessage ? userThatSendedMessage : null;

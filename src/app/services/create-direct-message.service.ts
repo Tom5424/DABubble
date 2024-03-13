@@ -16,9 +16,17 @@ export class CreateDirectMessageService {
   noDirectMessageExistingInDatabase: boolean = false;
 
 
-  createDirectMessageService(user: User, message: string | null): void {
+  createDirectMessageService(user: User, messageText: string | null): void {
+    const userData = {  // Created a custom User Object here to get the logged in User so that the correct Messages are displayed by the correct User. And prevents error Messages.
+      email: user.email,
+      isOnline: user.isOnline,
+      name: user.name,
+      imgUrl: user.imgUrl,
+      initialLetter: user.initialLetter,
+      userId: user.userId
+    }
     const collectionRef = collection(this.firestore, 'directMessages');
-    const directMessageRef = new DirectMessage(user, message);
+    const directMessageRef = new DirectMessage(userData, messageText);
     addDoc(collectionRef, directMessageRef.toJson())
       .then(() => {
 
