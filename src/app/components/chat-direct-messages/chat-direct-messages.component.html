@@ -44,7 +44,7 @@
     <div class="containerChatDirectMessagesLowerPart">
 
         <!-- @if (checkIfUserHaveAlreadyMessages()) { -->
-        <div class="scrollingContainer">
+        <div class="scrollingContainer" #scrollingContainer>
 
             <div class="containerUserImageAndNameLowerPart"
                 [ngStyle]="userIdMatchesWithIdFromLoggedinUser() ? {'margin-top': '94px'} : {'margin-top': '118px'}">
@@ -82,7 +82,7 @@
 
 
             @for (directMessage of createDirectMessageService.directMessagesAsObservable | async; track $index) {
-            <app-direct-message [directMessage]="directMessage"></app-direct-message>
+            <app-message [directMessage]="directMessage"></app-message>
             }
 
 

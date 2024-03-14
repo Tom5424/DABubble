@@ -1,0 +1,36 @@
+<div [ngClass]="{'mainContainerDirectMessageOwnMessage': userIdMatchesWithIdFromLoggedinUser(), 
+    'mainContainerDirectMessageFromOtherUser': !userIdMatchesWithIdFromLoggedinUser()}">
+
+    @if (noProfileImgExistInMessage()) {
+    <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="Profile Image">
+    }@else {
+    <img src="{{ directMessage.userThatSendedMessage?.imgUrl }}" alt="Profile Image">
+    }
+
+    <div>
+
+        <div [ngClass]="{'containerDirectMessageUpperPartOwnMessage': userIdMatchesWithIdFromLoggedinUser(), 
+            'containerDirectMessageUpperPartFromOtherUser': !userIdMatchesWithIdFromLoggedinUser()}">
+
+            <p>
+                {{ directMessage.userThatSendedMessage?.name }}
+            </p>
+
+            <p>{{ directMessage.senderTime | date: 'HH:mm' }} Uhr</p>
+
+        </div>
+
+        <p [ngClass]="{'messageTextOwnMessage': userIdMatchesWithIdFromLoggedinUser(), 
+            'messageTextFromOtherUser': !userIdMatchesWithIdFromLoggedinUser()}">
+            {{ directMessage.messageText }}
+        </p>
+
+        @if (userIdMatchesWithIdFromLoggedinUser()) {
+        <div class="containerDirectMessageLowerPart">
+            <p>2 Answers</p>
+            <p>Last Answer 12:55 Uhr</p>
+        </div>
+        }
+
+    </div>
+</div>

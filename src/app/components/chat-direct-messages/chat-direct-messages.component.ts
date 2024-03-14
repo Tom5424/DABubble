@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, inject, Renderer2 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
 import { CreateUserService } from '../../services/create-user.service';
@@ -8,13 +8,13 @@ import { AuthService } from '../../services/auth.service';
 import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CreateDirectMessageService } from '../../services/create-direct-message.service';
-import { DirectMessageComponent } from '../direct-message/direct-message.component';
+import { MessageComponent } from '../message/message.component';
 
 
 @Component({
   selector: 'app-chat-direct-messages',
   standalone: true,
-  imports: [QuillModule, NgStyle, NgClass, ReactiveFormsModule, AsyncPipe, DirectMessageComponent],
+  imports: [QuillModule, NgStyle, NgClass, ReactiveFormsModule, AsyncPipe, MessageComponent],
   templateUrl: './chat-direct-messages.component.html',
   styleUrl: './chat-direct-messages.component.scss'
 })
@@ -26,6 +26,8 @@ export class ChatDirectMessagesComponent implements OnInit {
   createDirectMessageService = inject(CreateDirectMessageService);
   activatedRoute = inject(ActivatedRoute);
   matDialog = inject(MatDialog);
+  renderer2 = inject(Renderer2);
+  @ViewChild('scrollingContainer') scrollingContainer!: ElementRef
   userId: string | null = '';
   inputValue: string | null = '';
   filteredInpuvalueWithRegex: number | undefined;
@@ -56,6 +58,7 @@ export class ChatDirectMessagesComponent implements OnInit {
     if (this.filteredInpuvalueWithRegex && this.filteredInpuvalueWithRegex > 0) {
       this.createDirectMessageService.createDirectMessageService(this.authService.user, this.userId, inputValueWithoutHTMLTags || null);
       // this.createUserService.updateUserHaveAtLeastOneMessageService(this.userId, true);
+      this.scrollToBottomAfterSendMessage();
       this.addMessageForm.reset();
     }
   }
@@ -68,6 +71,7 @@ export class ChatDirectMessagesComponent implements OnInit {
     if (event?.key == 'Enter' && this.filteredInpuvalueWithRegex && this.filteredInpuvalueWithRegex > 0) {
       this.createDirectMessageService.createDirectMessageService(this.authService.user, this.userId, inputValueWithoutHTMLTags || null);
       // this.createUserService.updateUserHaveAtLeastOneMessageService(this.userId, true);
+      this.scrollToBottomAfterSendMessage();
       this.addMessageForm.reset();
     }
   }
@@ -116,5 +120,13 @@ export class ChatDirectMessagesComponent implements OnInit {
 
   userIdMatchesWithIdFromLoggedinUser(): boolean {
     return (this.createUserService.user.userId == this.authService.auth.currentUser?.uid) ? true : false;
+  }
+
+
+  scrollToBottomAfterSendMessage(): void {
+    setTimeout(() => { // Uses setTimeout to always scroll to the bottom
+      const scrollingContainer = this.scrollingContainer.nativeElement;
+      this.renderer2.setProperty(scrollingContainer, 'scrollTop', scrollingContainer.scrollHeight);
+    }, 50);
   }
 }
