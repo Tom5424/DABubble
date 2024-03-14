@@ -24,14 +24,18 @@
 
 
 .mainContainerDirectMessageOwnMessage {
-    @include hover();
     @include flex();
     gap: 30px;
     margin-top: 44px;
     padding: 10px 45px 10px 45px;
+    position: relative;
 
     &:hover {
         background-color: $bgColor;
+
+        .containerReactionBar {
+            display: flex;
+        }
 
         .messageTextOwnMessage {
             background-color: #ffffff !important;
@@ -47,15 +51,19 @@
 
 
 .mainContainerDirectMessageFromOtherUser {
-    @include hover();
     @include flex();
     flex-direction: row-reverse;
     gap: 30px;
     margin-top: 44px;
     padding: 10px 45px 10px 45px;
+    position: relative;
 
     &:hover {
         background-color: $bgColor;
+
+        .containerReactionBar {
+            display: flex;
+        }
     }
 
     img {
@@ -160,4 +168,51 @@
     p {
         margin: 0;
     }
+}
+
+
+.containerReactionBar {
+    @include positionAbsolute(unset, 124px, unset, unset);
+    @include flexCenteredYAxis();
+    border: 1px solid $lightPurple;
+    display: none;
+    gap: 5px;
+    height: 40px;
+    border-radius: 25px 25px 0 25px;
+    padding: 3px 15px 3px 20px;
+    background-color: #ffffff;
+
+    img {
+        padding: 8px;
+        width: 23px;
+        height: 23px;
+    }
+}
+
+
+.singleIcon {
+    @include iconHover();
+}
+
+
+.containerSingleIcon {
+    @include flex();
+    @include iconHover();
+
+    img {
+
+        &:hover {
+            filter: brightness(0) saturate(100%) invert(32%) sepia(76%) saturate(3470%) hue-rotate(230deg) brightness(98%) contrast(93%);
+        }
+    }
+}
+
+
+.containerReactionBarLeftSide {
+    left: 40px;
+}
+
+
+.containerReactionBarRightSide {
+    right: 40px;
 }

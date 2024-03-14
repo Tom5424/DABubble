@@ -34,11 +34,13 @@
 
 <div [ngClass]="{'mainContainerDirectMessageOwnMessage': userIdMatchesWithIdFromLoggedinUser(), 
     'mainContainerDirectMessageFromOtherUser': !userIdMatchesWithIdFromLoggedinUser()}">
+
     @if (noProfileImgExistInMessage()) {
     <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="Profile Image">
     }@else {
     <img src="{{ directMessage.userThatSendedMessage?.imgUrl }}" alt="Profile Image">
     }
+
 
     <div>
 
@@ -58,12 +60,32 @@
             {{ directMessage.messageText }}
         </p>
 
-        @if (userIdMatchesWithIdFromLoggedinUser()) {
         <div class="containerDirectMessageLowerPart">
             <p>2 Answers</p>
             <p>Last Answer 12:55 Uhr</p>
         </div>
-        }
 
+    </div>
+
+
+    <div [ngClass]="{'containerReactionBarRightSide':  userIdMatchesWithIdFromLoggedinUser(), 
+        'containerReactionBarLeftSide': !userIdMatchesWithIdFromLoggedinUser()}" class="containerReactionBar">
+
+        <img class="singleIcon" src="assets/icons/check-emoji-icon.svg" alt="Check Icon">
+        <img class="singleIcon" src="assets/icons/raising-both-hands-emoji-icon.svg" alt="Raising both Hands Icon">
+
+        <div class="containerSingleIcon">
+            <img src="assets/icons/add-emojis-icon.svg" alt="Add Emoji Icon">
+        </div>
+
+        <div class="containerSingleIcon">
+            <img src="assets/icons/open-thread-icon.svg" alt="Open Thread Icon">
+        </div>
+
+        @if (userIdMatchesWithIdFromLoggedinUser()) {
+        <div class="containerSingleIcon">
+            <img src="assets/icons/more-options-icon.svg" alt="More Options Icon">
+        </div>
+        }
     </div>
 </div>
