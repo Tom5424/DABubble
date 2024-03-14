@@ -81,8 +81,16 @@
             }
 
 
+            <div class="containerTimeWhenTheMessageWasSent">
+                <hr>
+                <p>{{ senderTimeFromSendedMessage | customDate }}</p>
+                <hr>
+            </div>
+
             @for (directMessage of createDirectMessageService.directMessagesAsObservable | async; track $index) {
-            <app-message [directMessage]="directMessage"></app-message>
+            <app-message [directMessage]="directMessage"
+                (getSenderTimeFromSendedMessage)="setSenderTimeFromSendedMessage($event)">
+            </app-message>
             }
 
 

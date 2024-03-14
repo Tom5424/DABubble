@@ -18,6 +18,18 @@
 }
 
 
+.scrollingContainer {
+    height: 282px;
+    margin-top: 10px;
+    overflow-y: hidden;
+
+    &:hover {
+        transition: all 225ms ease-in-out;
+        overflow-y: scroll;
+    }
+}
+
+
 .spinnerIconChatDirectMessagesUpperPart {
     width: 75px;
 }
@@ -138,14 +150,26 @@
 }
 
 
-.scrollingContainer {
-    height: 282px;
-    margin-top: 10px;
-    overflow-y: hidden;
+.containerTimeWhenTheMessageWasSent {
+    @include flexCenteredInTheMiddle();
+    margin-top: 44px;
 
-    &:hover {
-        transition: all 225ms ease-in-out;
-        overflow-y: scroll;
+    hr {
+        background-color: $lightPurple;
+        width: 240px;
+        height: 1px;
+        margin: 0;
+        border: unset;
+    }
+
+    p {
+        border: 1px solid $lightPurple;
+        min-width: 25%;
+        margin: 0;
+        border-radius: 30px;
+        padding: 5px 15px 5px 15px;
+        font-size: 18px;
+        text-align: center;
     }
 }
 

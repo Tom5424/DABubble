@@ -1,6 +1,39 @@
+<!-- <div class="containerTimeWhenTheMessageWasSent">
+    <hr [ngStyle]="isToday() ? {'width': '300px'} : {'width': '250px'}">
+    @if (isToday()) {
+    <p>Today</p>
+    }@else if(!isToday()){
+    <p>Yesterday</p>
+    }@else {
+    <p>{{ directMessage.senderTime | date: 'EEEE, dd LLLL' }}</p>
+    }
+    <hr [ngStyle]="isToday() ? {'width': '300px'} : {'width': '250px'}">
+</div> -->
+
+
+<!-- @if (isToday()) {
+<div class="containerTimeWhenTheMessageWasSent">
+    <hr [ngStyle]="isToday() ? {'width': '300px'} : {'width': '250px'}">
+    <p>Today</p>
+    <hr [ngStyle]="isToday() ? {'width': '300px'} : {'width': '250px'}">
+</div>
+}@else if (!isToday()) {
+<div class="containerTimeWhenTheMessageWasSent">
+    <hr [ngStyle]="isToday() ? {'width': '300px'} : {'width': '250px'}">
+    <p>Yesterday</p>
+    <hr [ngStyle]="isToday() ? {'width': '300px'} : {'width': '250px'}">
+</div>
+}@else {
+<div class="containerTimeWhenTheMessageWasSent">
+    <hr [ngStyle]="isToday() ? {'width': '300px'} : {'width': '250px'}">
+    <p>{{ directMessage.senderTime | date: 'EEEE, dd LLLL' }}</p>
+    <hr [ngStyle]="isToday() ? {'width': '300px'} : {'width': '250px'}">
+</div>
+} -->
+
+
 <div [ngClass]="{'mainContainerDirectMessageOwnMessage': userIdMatchesWithIdFromLoggedinUser(), 
     'mainContainerDirectMessageFromOtherUser': !userIdMatchesWithIdFromLoggedinUser()}">
-
     @if (noProfileImgExistInMessage()) {
     <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="Profile Image">
     }@else {

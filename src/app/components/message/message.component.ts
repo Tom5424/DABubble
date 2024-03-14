@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { CreateDirectMessageService } from '../../services/create-direct-message.service';
 import { DatePipe, NgClass } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
@@ -14,10 +14,18 @@ import { DirectMessage } from '../../models/direct-message';
 })
 
 
-export class MessageComponent {
+export class MessageComponent implements OnInit {
   createDirectMessageService = inject(CreateDirectMessageService);
   authService = inject(AuthService);
   @Input() directMessage!: DirectMessage;
+  @Output() getSenderTimeFromSendedMessage = new EventEmitter();
+
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.getSenderTimeFromSendedMessage.emit(this.directMessage);
+    }, 0);
+  }
 
 
   noProfileImgExistInMessage(): boolean {

@@ -9,12 +9,14 @@ import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CreateDirectMessageService } from '../../services/create-direct-message.service';
 import { MessageComponent } from '../message/message.component';
+import { DirectMessage } from '../../models/direct-message';
+import { CustomDatePipe } from '../../pipes/custom-date.pipe';
 
 
 @Component({
   selector: 'app-chat-direct-messages',
   standalone: true,
-  imports: [QuillModule, NgStyle, NgClass, ReactiveFormsModule, AsyncPipe, MessageComponent],
+  imports: [QuillModule, NgStyle, NgClass, ReactiveFormsModule, AsyncPipe, MessageComponent, CustomDatePipe],
   templateUrl: './chat-direct-messages.component.html',
   styleUrl: './chat-direct-messages.component.scss'
 })
@@ -31,6 +33,7 @@ export class ChatDirectMessagesComponent implements OnInit {
   userId: string | null = '';
   inputValue: string | null = '';
   filteredInpuvalueWithRegex: number | undefined;
+  senderTimeFromSendedMessage: number = 0;
   keyEnterWasPressed: boolean = false;
   addMessageForm = new FormGroup({
     inputfieldQuillEditor: new FormControl('', Validators.required)
@@ -128,5 +131,10 @@ export class ChatDirectMessagesComponent implements OnInit {
       const scrollingContainer = this.scrollingContainer.nativeElement;
       this.renderer2.setProperty(scrollingContainer, 'scrollTop', scrollingContainer.scrollHeight);
     }, 50);
+  }
+
+
+  setSenderTimeFromSendedMessage(directMessage: DirectMessage): void {
+    this.senderTimeFromSendedMessage = directMessage.senderTime;
   }
 }

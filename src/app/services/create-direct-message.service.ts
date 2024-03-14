@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, query, where } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, orderBy, query, where } from '@angular/fire/firestore';
 import { DirectMessage } from '../models/direct-message';
 import { User } from '../models/user';
 import { Observable } from 'rxjs';
@@ -39,7 +39,7 @@ export class CreateDirectMessageService {
 
   getDirectMessagesService(receiverId: string | null): void {
     this.loadChat = true;
-    const collectionRef = query(collection(this.firestore, 'directMessages'), where('receiverId', '==', receiverId));
+    const collectionRef = query(collection(this.firestore, 'directMessages'), where('receiverId', '==', receiverId), orderBy('senderTime'));
     collectionData(collectionRef).subscribe(() => {
       this.loadChat = false;
     })
