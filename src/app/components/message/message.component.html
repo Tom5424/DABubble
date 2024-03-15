@@ -1,39 +1,6 @@
-<!-- <div class="containerTimeWhenTheMessageWasSent">
-    <hr [ngStyle]="isToday() ? {'width': '300px'} : {'width': '250px'}">
-    @if (isToday()) {
-    <p>Today</p>
-    }@else if(!isToday()){
-    <p>Yesterday</p>
-    }@else {
-    <p>{{ directMessage.senderTime | date: 'EEEE, dd LLLL' }}</p>
-    }
-    <hr [ngStyle]="isToday() ? {'width': '300px'} : {'width': '250px'}">
-</div> -->
-
-
-<!-- @if (isToday()) {
-<div class="containerTimeWhenTheMessageWasSent">
-    <hr [ngStyle]="isToday() ? {'width': '300px'} : {'width': '250px'}">
-    <p>Today</p>
-    <hr [ngStyle]="isToday() ? {'width': '300px'} : {'width': '250px'}">
-</div>
-}@else if (!isToday()) {
-<div class="containerTimeWhenTheMessageWasSent">
-    <hr [ngStyle]="isToday() ? {'width': '300px'} : {'width': '250px'}">
-    <p>Yesterday</p>
-    <hr [ngStyle]="isToday() ? {'width': '300px'} : {'width': '250px'}">
-</div>
-}@else {
-<div class="containerTimeWhenTheMessageWasSent">
-    <hr [ngStyle]="isToday() ? {'width': '300px'} : {'width': '250px'}">
-    <p>{{ directMessage.senderTime | date: 'EEEE, dd LLLL' }}</p>
-    <hr [ngStyle]="isToday() ? {'width': '300px'} : {'width': '250px'}">
-</div>
-} -->
-
-
 <div [ngClass]="{'mainContainerDirectMessageOwnMessage': userIdMatchesWithIdFromLoggedinUser(), 
-    'mainContainerDirectMessageFromOtherUser': !userIdMatchesWithIdFromLoggedinUser()}">
+    'mainContainerDirectMessageFromOtherUser': !userIdMatchesWithIdFromLoggedinUser()}"
+    (mouseleave)="closeMenuMoreOptionIfHoverOutside()">
 
     @if (noProfileImgExistInMessage()) {
     <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="Profile Image">
@@ -55,19 +22,43 @@
 
         </div>
 
+
+        @if (!messageIsInEditMode) {
         <p [ngClass]="{'messageTextOwnMessage': userIdMatchesWithIdFromLoggedinUser(), 
             'messageTextFromOtherUser': !userIdMatchesWithIdFromLoggedinUser()}">
             {{ directMessage.messageText }}
         </p>
+        }
+
+
+        <!--------------------------------- Inputfield to Edit Message --------------------------------->
+        @if (messageIsInEditMode) {
+        <form [formGroup]="editMessageForm" (ngSubmit)="editMessage()">
+            <input type="text" placeholder="{{ directMessage.messageText }}" formControlName="inputfieldEditMessage">
+
+            <div class="containerIcons">
+                <button type="submit" [disabled]="editMessageForm.invalid">
+                    <img src="assets/icons/check-icon.svg" alt="Check Icon"
+                        [ngClass]="{'disabledBtn': editMessageForm.invalid}">
+                </button>
+                |
+                <button type="button">
+                    <img src="assets/icons/close-icon.svg" alt="Close Icon" (click)="closeEditModeFromMessage()">
+                </button>
+            </div>
+        </form>
+        }
+        <!--------------------------------- Inputfield to Edit Message --------------------------------->
+
 
         <div class="containerDirectMessageLowerPart">
             <p>2 Answers</p>
             <p>Last Answer 12:55 Uhr</p>
         </div>
-
     </div>
 
 
+    <!--------------------------------- Reaction Bar --------------------------------->
     <div [ngClass]="{'containerReactionBarRightSide':  userIdMatchesWithIdFromLoggedinUser(), 
         'containerReactionBarLeftSide': !userIdMatchesWithIdFromLoggedinUser()}" class="containerReactionBar">
 
@@ -83,9 +74,20 @@
         </div>
 
         @if (userIdMatchesWithIdFromLoggedinUser()) {
-        <div class="containerSingleIcon">
+        <div class="containerSingleIcon" (click)="openMenuMoreOptions()">
             <img src="assets/icons/more-options-icon.svg" alt="More Options Icon">
         </div>
         }
     </div>
+    <!--------------------------------- Reaction Bar --------------------------------->
+
+
+    <!--------------------------------- Menu more Options --------------------------------->
+    @if(menuMoreOptionsAreOpen) {
+    <div class="containerMenuMoreOptions">
+        <p (click)="openEditModeFromMessage()">Edit Message</p>
+        <p>Delete Message</p>
+    </div>
+    }
+    <!--------------------------------- Menu more Options --------------------------------->
 </div>

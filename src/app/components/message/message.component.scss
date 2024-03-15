@@ -2,27 +2,6 @@
 @import '../../../scss/mixin.scss';
 
 
-// .containerTimeWhenTheMessageWasSent {
-//     @include flexCenteredInTheMiddle();
-//     margin-top: 44px;
-
-//     hr {
-//         background-color: $lightPurple;
-//         height: 1px;
-//         margin: 0;
-//         border: unset;
-//     }
-
-//     p {
-//         border: 1px solid $lightPurple;
-//         margin: 0;
-//         border-radius: 30px;
-//         padding: 5px 15px 5px 15px;
-//         font-size: 18px;
-//     }
-// }
-
-
 .mainContainerDirectMessageOwnMessage {
     @include flex();
     gap: 30px;
@@ -144,6 +123,54 @@
 }
 
 
+form {
+    padding: 20px 0 20px 0;
+    position: relative;
+
+    input {
+        @include inputfieldOrTextarea(470px, 30px, 12px, 82px, 12px, 12px, 18px, #ffffff);
+        @include inputfieldOrTextareaHover();
+        @include inputfieldOrTextareaFocus();
+        border: 1px solid $lightPurple;
+    }
+}
+
+
+.containerIcons {
+    @include positionAbsolute(28px, unset, unset, 15px);
+    @include flexCenteredYAxis();
+    gap: 5px;
+
+
+    button:nth-of-type(1) {
+
+        img {
+            width: 28px;
+            height: 28px;
+        }
+    }
+
+    button:nth-of-type(2) {
+
+        img {
+            width: 23px;
+            height: 23px;
+        }
+    }
+
+    button {
+        @include flexCenteredYAxis();
+        padding: 0;
+        background-color: unset;
+        border: unset;
+
+        img {
+            @include hover();
+        }
+    }
+}
+
+
 .containerDirectMessageLowerPart {
     @include flex();
     align-items: baseline;
@@ -172,7 +199,7 @@
 
 
 .containerReactionBar {
-    @include positionAbsolute(unset, 124px, unset, unset);
+    @include positionAbsolute(-20px, unset, unset, unset);
     @include flexCenteredYAxis();
     border: 1px solid $lightPurple;
     display: none;
@@ -215,4 +242,34 @@
 
 .containerReactionBarRightSide {
     right: 40px;
+}
+
+
+.containerMenuMoreOptions {
+    @include positionAbsolute(30px, unset, unset, 40px);
+    width: 200px;
+    border-radius: 30px 0 30px 30px;
+    padding: 10px 20px 10px 20px;
+    box-shadow: 0px 6px 14px 0px #00000033;
+    background-color: #ffffff;
+
+    p {
+        @include hover();
+        margin: 0;
+        font-size: 20px;
+        border-radius: 100px;
+        padding: 10px 20px 10px 20px;
+
+        &:hover {
+            background-color: $bgColor;
+            color: $middlePurple;
+            font-weight: 700;
+        }
+    }
+}
+
+
+.disabledBtn {
+    @include hoverDisabled();
+    filter: brightness(0) saturate(100%) invert(97%) sepia(0%) saturate(112%) hue-rotate(239deg) brightness(91%) contrast(84%);
 }

@@ -60,7 +60,6 @@ export class ChatDirectMessagesComponent implements OnInit {
     this.filteredInpuvalueWithRegex = this.inputValue?.replace(/(<([^>]+)>)/ig, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
     if (this.filteredInpuvalueWithRegex && this.filteredInpuvalueWithRegex > 0) {
       this.createDirectMessageService.createDirectMessageService(this.authService.user, this.userId, inputValueWithoutHTMLTags || null);
-      // this.createUserService.updateUserHaveAtLeastOneMessageService(this.userId, true);
       this.scrollToBottomAfterSendMessage();
       this.addMessageForm.reset();
     }
@@ -73,7 +72,6 @@ export class ChatDirectMessagesComponent implements OnInit {
     this.filteredInpuvalueWithRegex = this.inputValue?.replace(/(<([^>]+)>)/ig, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
     if (event?.key == 'Enter' && this.filteredInpuvalueWithRegex && this.filteredInpuvalueWithRegex > 0) {
       this.createDirectMessageService.createDirectMessageService(this.authService.user, this.userId, inputValueWithoutHTMLTags || null);
-      // this.createUserService.updateUserHaveAtLeastOneMessageService(this.userId, true);
       this.scrollToBottomAfterSendMessage();
       this.addMessageForm.reset();
     }
@@ -93,11 +91,6 @@ export class ChatDirectMessagesComponent implements OnInit {
   chatAreLoading(): boolean {
     return (this.createDirectMessageService.loadChat) ? true : false;
   }
-
-
-  // checkIfUserHaveAlreadyMessages(): boolean {
-  //   return (!this.createUserService.load && !this.createUserService.user.haveAtLeastOneMessage) ? true : false;
-  // }
 
 
   focusQuillEditor(event: { editor: any, range: any, oldRange: any }): void {
@@ -137,4 +130,28 @@ export class ChatDirectMessagesComponent implements OnInit {
   setSenderTimeFromSendedMessage(directMessage: DirectMessage): void {
     this.senderTimeFromSendedMessage = directMessage.senderTime;
   }
+
+
+  // isToday(): boolean {
+  //   const today = new Date();
+  //   const dateWhenTheMessagewasSend = new Date(this.senderTimeFromSendedMessage);
+  //   return today.toDateString() === dateWhenTheMessagewasSend.toDateString();
+  // }
+
+
+  // isYesterday(): boolean {
+  //   const yesterday = new Date();
+  //   const dateWhenTheMessagewasSend = new Date(this.senderTimeFromSendedMessage);
+  //   yesterday.setDate(yesterday.getDate() - 1);
+  //   return yesterday.toDateString() === dateWhenTheMessagewasSend.toDateString();
+  // }
+
+
+  // isOlderThanTwoDays(): boolean {
+  //   const today = new Date();
+  //   const twoDaysAgo = new Date(today);
+  //   const dateWhenTheMessagewasSend = new Date(this.senderTimeFromSendedMessage);
+  //   twoDaysAgo.setDate(today.getDate() - 2);
+  //   return dateWhenTheMessagewasSend < twoDaysAgo;
+  // }
 }

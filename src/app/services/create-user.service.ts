@@ -15,7 +15,6 @@ export class CreateUserService {
   user!: User;
   noContactsExistingInDatabase: boolean = false;
   loadContacts: boolean = false;
-  load: boolean = false;
 
 
   createUserService(userId: string, user: User): void {
@@ -91,20 +90,6 @@ export class CreateUserService {
       return Promise.resolve();
     }
   }
-
-
-  // updateUserHaveAtLeastOneMessageService(userId: string | null, userHaveAtLeastOneMessage: boolean): void {
-  //   setTimeout(() => {
-  //     this.load = true;
-  //   }, 400);
-  //   if (userId) {
-  //     const docRef = doc(this.firestore, 'users', userId);
-  //     updateDoc(docRef, { haveAtLeastOneMessage: userHaveAtLeastOneMessage })
-  //       .then(() => {
-  //         this.load = false;
-  //       })
-  //   }
-  // }
 
 
   deleteUserService(userId: string): void {

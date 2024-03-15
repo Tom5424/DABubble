@@ -43,7 +43,6 @@
 
     <div class="containerChatDirectMessagesLowerPart">
 
-        <!-- @if (checkIfUserHaveAlreadyMessages()) { -->
         <div class="scrollingContainer" #scrollingContainer>
 
             <div class="containerUserImageAndNameLowerPart"
@@ -81,22 +80,51 @@
             }
 
 
-            <div class="containerTimeWhenTheMessageWasSent">
+            <!-- <div class="containerTimeWhenTheMessageWasSent">
                 <hr>
                 <p>{{ senderTimeFromSendedMessage | customDate }}</p>
                 <hr>
+            </div> -->
+
+            <!-- @if (isToday()) {
+            <ng-container>
+            <div class="containerTimeWhenTheMessageWasSent">
+                <hr>
+                <p>Today</p>
+                <hr>
             </div>
+            </ng-container>
+            }
+
+            @if (isYesterday()) {
+            <ng-container>
+            <div class="containerTimeWhenTheMessageWasSent">
+                <hr>
+                <p>Yesterday</p>
+                <hr>
+            </div>
+            </ng-container>
+            }
+
+            @if(!isToday() && !isYesterday()) {
+            <ng-container>
+            <div class="containerTimeWhenTheMessageWasSent">
+                <hr>
+                <p>{{ this.senderTimeFromSendedMessage | date: 'EEEE, dd LLLL' }}</p>
+                <hr>
+            </div>
+            </ng-container>
+            }
+ -->
 
             @for (directMessage of createDirectMessageService.directMessagesAsObservable | async; track $index) {
-            <app-message [directMessage]="directMessage"
+            <app-message [directMessage]="directMessage" [directMessageId]="directMessage.id"
                 (getSenderTimeFromSendedMessage)="setSenderTimeFromSendedMessage($event)">
             </app-message>
             }
 
 
-            <!-- }@else { -->
         </div>
-        <!-- } -->
 
 
         <div class="containerQuillEditor">
