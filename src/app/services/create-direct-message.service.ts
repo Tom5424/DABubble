@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, doc, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
 import { DirectMessage } from '../models/direct-message';
 import { User } from '../models/user';
 import { Observable } from 'rxjs';
@@ -50,5 +50,11 @@ export class CreateDirectMessageService {
   updateDirectMessageService(messageId: string, inputValue: string | null): void {
     const docRef = doc(this.firestore, 'directMessages', messageId);
     updateDoc(docRef, { messageText: inputValue });
+  }
+
+
+  deleteDirectMessageService(messageId: string): void {
+    const docRef = doc(this.firestore, 'directMessages', messageId);
+    deleteDoc(docRef);
   }
 }

@@ -67,8 +67,14 @@ export class MessageComponent implements OnInit {
   }
 
 
-  editMessage() {
+  editMessage(): void {
     this.createDirectMessageService.updateDirectMessageService(this.directMessageId, this.editMessageForm.controls.inputfieldEditMessage.value);
     this.closeEditModeFromMessage();
+  }
+
+
+  deleteMessage(): void {
+    this.createDirectMessageService.deleteDirectMessageService(this.directMessageId);
+    this.menuMoreOptionsAreOpen = false;
   }
 }
