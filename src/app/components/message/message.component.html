@@ -1,6 +1,6 @@
 <div [ngClass]="{'mainContainerDirectMessageOwnMessage': userIdMatchesWithIdFromLoggedinUser(), 
     'mainContainerDirectMessageFromOtherUser': !userIdMatchesWithIdFromLoggedinUser()}"
-    (mouseleave)="closeMenuMoreOptionIfHoverOutside()">
+    (mouseleave)="closeOpenMenusInMessageIfHoverOutside()">
 
     @if (noProfileImgExistInMessage()) {
     <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="Profile Image">
@@ -9,7 +9,7 @@
     }
 
 
-    <div>
+    <div [ngClass]="{'container': !userIdMatchesWithIdFromLoggedinUser()}">
 
         <div [ngClass]="{'containerDirectMessageUpperPartOwnMessage': userIdMatchesWithIdFromLoggedinUser(), 
             'containerDirectMessageUpperPartFromOtherUser': !userIdMatchesWithIdFromLoggedinUser()}">
@@ -51,21 +51,48 @@
         <!--------------------------------- Inputfield to Edit Message --------------------------------->
 
 
-        <div class="containerDirectMessageLowerPart">
-            <p>2 Answers</p>
-            <p>Last Answer 12:55 Uhr</p>
+        <div [ngClass]="{'row': userIdMatchesWithIdFromLoggedinUser(), 'rowReverse': !userIdMatchesWithIdFromLoggedinUser()}"
+            class="mainContainerDirectMessageLowerPart">
+
+            <div class="childContainerDirectMessageLowerPart">
+                <p>2 Answers</p>
+                <p>Last Answer 12:55 Uhr</p>
+            </div>
+
+
+            <!--------------------------------- Selected Emojis --------------------------------->
+            <div class="containerSelctedEmojis">
+                @for (selctedEmoji of directMessage.selectedEmojis; track $index) {
+                <div class="containerSingleEmojiAndNumber" (click)="selectEmoji(selctedEmoji)">
+                    <img src="{{ selctedEmoji }}" alt="Emoji Icon">
+                    <p>1</p>
+                </div>
+                }
+            </div>
+            <!--------------------------------- Selected Emojis --------------------------------->
         </div>
     </div>
 
 
     <!--------------------------------- Reaction Bar --------------------------------->
+
+    <!--------------------------------- Bar to select Emojis --------------------------------->
+    @if(barToSelectEmojisAreOpen) {
+    <div [ngClass]="{'containerReactionBarRightSide': userIdMatchesWithIdFromLoggedinUser(), 
+        'containerReactionBarLeftSide': !userIdMatchesWithIdFromLoggedinUser()}" class="containerReactionBar"
+        style="top: 30px;">
+
+        @for(imgUrl of imgUrls; track $index) {
+        <img class="singleIcon" src="{{ imgUrl }}" alt="Emoji Icon" (click)="selectEmoji(imgUrl)">
+        }
+    </div>
+    }
+    <!--------------------------------- Bar to select Emojis --------------------------------->
+
     <div [ngClass]="{'containerReactionBarRightSide':  userIdMatchesWithIdFromLoggedinUser(), 
         'containerReactionBarLeftSide': !userIdMatchesWithIdFromLoggedinUser()}" class="containerReactionBar">
 
-        <img class="singleIcon" src="assets/icons/check-emoji-icon.svg" alt="Check Icon">
-        <img class="singleIcon" src="assets/icons/raising-both-hands-emoji-icon.svg" alt="Raising both Hands Icon">
-
-        <div class="containerSingleIcon">
+        <div class="containerSingleIcon" (click)="openBarToSelectEmojis()">
             <img src="assets/icons/add-emojis-icon.svg" alt="Add Emoji Icon">
         </div>
 

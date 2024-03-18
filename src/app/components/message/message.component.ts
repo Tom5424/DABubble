@@ -23,6 +23,9 @@ export class MessageComponent implements OnInit {
   @Output() getSenderTimeFromSendedMessage = new EventEmitter();
   menuMoreOptionsAreOpen: boolean = false;
   messageIsInEditMode: boolean = false;
+  barToSelectEmojisAreOpen: boolean = false;
+  imgUrls: string[] = ['assets/icons/check-emoji-icon.svg', 'assets/icons/raising-both-hands-emoji-icon.svg', 'assets/icons/nerd-emoji-icon.svg', 'assets/icons/rocket-emoji-icon.svg'];
+  selectedEmojis: string[] = [];
   editMessageForm = new FormGroup({
     inputfieldEditMessage: new FormControl('', Validators.required),
   })
@@ -50,20 +53,48 @@ export class MessageComponent implements OnInit {
   }
 
 
-  closeMenuMoreOptionIfHoverOutside(): void {
+  closeOpenMenusInMessageIfHoverOutside(): void {
     this.menuMoreOptionsAreOpen = false;
+    this.barToSelectEmojisAreOpen = false;
   }
 
 
   openEditModeFromMessage(): void {
     this.messageIsInEditMode = true;
     this.menuMoreOptionsAreOpen = false;
+    this.barToSelectEmojisAreOpen = false;
   }
 
 
   closeEditModeFromMessage(): void {
     this.messageIsInEditMode = false;
     this.editMessageForm.reset();
+  }
+
+
+  openBarToSelectEmojis(): void {
+    this.barToSelectEmojisAreOpen = !this.barToSelectEmojisAreOpen;
+    this.menuMoreOptionsAreOpen = false;
+  }
+
+
+  checkIfTheMessageHaveAlreadyEmojis(): void {
+    if (!this.directMessage.selectedEmojis || this.directMessage.selectedEmojis.length == 0) {
+      this.directMessage.selectedEmojis = [];
+    }
+  }
+
+
+  selectEmoji(selectedEmoji: string): void {
+    this.checkIfTheMessageHaveAlreadyEmojis();
+    let index = this.directMessage.selectedEmojis.indexOf(selectedEmoji);
+    if (index == -1) {
+      this.directMessage.selectedEmojis.push(selectedEmoji);
+      this.createDirectMessageService.updateDirectMessageEmojisService(this.directMessageId, this.directMessage.selectedEmojis);
+    } else {
+      this.directMessage.selectedEmojis.splice(index, 1);
+      this.createDirectMessageService.updateDirectMessageEmojisService(this.directMessageId, this.directMessage.selectedEmojis);
+    }
   }
 
 

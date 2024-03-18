@@ -127,12 +127,14 @@ export class DialogAddPeopleToChannelComponent {
 
 
   addUserToChannel(user: User): void {
-    const userInArray = this.addedUsersToTheChannel.find((existingUser) => existingUser.userId == user.userId);
-    if (!userInArray) {
+    const index = this.addedUsersToTheChannel.indexOf(user);
+    if (index == -1) {
       this.addedUsersToTheChannel.push(user);
-      this.menuUserSelectionIsOpen = false;
-      this.addPeopleForm.controls.inputFieldAddPeople.reset();
+    } else {
+      this.addedUsersToTheChannel.splice(index, 1)
     }
+    this.menuUserSelectionIsOpen = false;
+    this.addPeopleForm.controls.inputFieldAddPeople.reset();
   }
 
 

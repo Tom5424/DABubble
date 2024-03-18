@@ -6,6 +6,7 @@ export class DirectMessage {
     messageText: string;
     receiverId: string;
     directMessageId: string | undefined;
+    selectedEmojis: string[] = [];
     userThatSendedMessage: User | null;
 
 

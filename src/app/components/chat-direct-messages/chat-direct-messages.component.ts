@@ -5,7 +5,7 @@ import { CreateUserService } from '../../services/create-user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogProfileDetailViewInChatComponent } from '../dialog-profile-detail-view-in-chat/dialog-profile-detail-view-in-chat.component';
 import { AuthService } from '../../services/auth.service';
-import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
+import { AsyncPipe, DatePipe, NgClass, NgStyle } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CreateDirectMessageService } from '../../services/create-direct-message.service';
 import { MessageComponent } from '../message/message.component';
@@ -16,7 +16,7 @@ import { CustomDatePipe } from '../../pipes/custom-date.pipe';
 @Component({
   selector: 'app-chat-direct-messages',
   standalone: true,
-  imports: [QuillModule, NgStyle, NgClass, ReactiveFormsModule, AsyncPipe, MessageComponent, CustomDatePipe],
+  imports: [QuillModule, NgStyle, NgClass, ReactiveFormsModule, AsyncPipe, DatePipe, MessageComponent, CustomDatePipe],
   templateUrl: './chat-direct-messages.component.html',
   styleUrl: './chat-direct-messages.component.scss'
 })
@@ -132,18 +132,18 @@ export class ChatDirectMessagesComponent implements OnInit {
   }
 
 
-  // isToday(): boolean {
+  // isToday(senderTimeFromSendedMessage: number): boolean {
   //   const today = new Date();
-  //   const dateWhenTheMessagewasSend = new Date(this.senderTimeFromSendedMessage);
-  //   return today.toDateString() === dateWhenTheMessagewasSend.toDateString();
+  //   const dateWhenTheMessageWasSent = new Date(senderTimeFromSendedMessage);
+  //   return today.toDateString() === dateWhenTheMessageWasSent.toDateString();
   // }
 
 
-  // isYesterday(): boolean {
+  // isYesterday(senderTimeFromSendedMessage: number): boolean {
   //   const yesterday = new Date();
-  //   const dateWhenTheMessagewasSend = new Date(this.senderTimeFromSendedMessage);
   //   yesterday.setDate(yesterday.getDate() - 1);
-  //   return yesterday.toDateString() === dateWhenTheMessagewasSend.toDateString();
+  //   const dateWhenTheMessageWasSent = new Date(senderTimeFromSendedMessage);
+  //   return yesterday.toDateString() === dateWhenTheMessageWasSent.toDateString();
   // }
 
 

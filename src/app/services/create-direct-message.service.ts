@@ -53,6 +53,12 @@ export class CreateDirectMessageService {
   }
 
 
+  updateDirectMessageEmojisService(messageId: string, selectedEmojis: string[]): void {
+    const docRef = doc(this.firestore, 'directMessages', messageId);
+    updateDoc(docRef, { selectedEmojis: selectedEmojis });
+  }
+
+
   deleteDirectMessageService(messageId: string): void {
     const docRef = doc(this.firestore, 'directMessages', messageId);
     deleteDoc(docRef);
