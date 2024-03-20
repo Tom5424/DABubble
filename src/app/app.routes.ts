@@ -31,7 +31,8 @@ export const routes: Routes = [
         path: 'mainView', title: 'DABubble - Main View', component: MainViewComponent,
         children: [{
             path: 'directMessage/:id', component: ChatDirectMessagesComponent,
-            children: [{ path: 'thread/:id', component: ThreadComponent }]
+            children:
+                [{ path: 'thread/:id', component: ThreadComponent }]
         }]
     },
 

@@ -12,6 +12,9 @@ export class DirectMessage {
     // rocketEmojiAmount!: number;
     userThatSendedMessage: User | null;
     userEmojis: { [userId: string]: string } = {};
+    // addedEmojis: [
+    //     {  emojiUrl: '' UsersWhoHaveUsedTheEmoji: [] }
+    // ]
 
 
     constructor(userThatSendedMessage: any, receiverId?: string | null, messageText?: string | null) {

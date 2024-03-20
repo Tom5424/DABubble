@@ -4,6 +4,7 @@
 
 .flex {
     @include flex();
+    gap: 10px;
 }
 
 
