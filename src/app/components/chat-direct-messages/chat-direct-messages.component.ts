@@ -11,6 +11,7 @@ import { CreateDirectMessageService } from '../../services/create-direct-message
 import { MessageComponent } from '../message/message.component';
 import { DirectMessage } from '../../models/direct-message';
 import { CustomDatePipe } from '../../pipes/custom-date.pipe';
+import { WorkspaceMenuService } from '../../services/workspace-menu.service';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class ChatDirectMessagesComponent implements OnInit {
   activatedRoute = inject(ActivatedRoute);
   matDialog = inject(MatDialog);
   renderer2 = inject(Renderer2);
+  workspaceMenu = inject(WorkspaceMenuService);
   @ViewChild('scrollingContainer') scrollingContainer!: ElementRef
   userId: string | null = '';
   inputValue: string | null = '';

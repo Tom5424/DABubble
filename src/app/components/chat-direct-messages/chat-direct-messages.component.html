@@ -1,4 +1,4 @@
-<div class="mainContainerChatDirectMessages">
+<div class="mainContainerChatDirectMessages" [ngClass]="{'chatFullView':  workspaceMenu.sidebarIsHidden}">
 
     <!--------------------------------- Container Chat upper Part--------------------------------->
     <div class="containerChatDirectMessagesUpperPart">
@@ -133,7 +133,8 @@
                 (keyup)="sendDirectMessageIfPressOnEnterKey($event)">
 
                 <quill-editor placeholder="Message to {{ createUserService.user.name }}"
-                    formControlName="inputfieldQuillEditor" (onSelectionChanged)="focusQuillEditor($event)">
+                    formControlName="inputfieldQuillEditor" (onSelectionChanged)="focusQuillEditor($event)"
+                    [ngClass]="{'quillEditorFullView':  workspaceMenu.sidebarIsHidden}">
                 </quill-editor>
 
                 <div class="mainContainerIcons">

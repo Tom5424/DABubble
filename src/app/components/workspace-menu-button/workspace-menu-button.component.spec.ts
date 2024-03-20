@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WorspaceMenuButtonComponent } from './worspace-menu-button.component';
+import { WorkspaceMenuButtonComponent } from './workspace-menu-button.component';
 
 describe('WorspaceMenuButtonComponent', () => {
-  let component: WorspaceMenuButtonComponent;
-  let fixture: ComponentFixture<WorspaceMenuButtonComponent>;
+  let component: WorkspaceMenuButtonComponent;
+  let fixture: ComponentFixture<WorkspaceMenuButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WorspaceMenuButtonComponent]
+      imports: [WorkspaceMenuButtonComponent]
     })
-    .compileComponents();
-    
-    fixture = TestBed.createComponent(WorspaceMenuButtonComponent);
+      .compileComponents();
+
+    fixture = TestBed.createComponent(WorkspaceMenuButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
