@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc, onSnapshot, where } from '@angular/fire/firestore';
 import { DirectMessage } from '../models/direct-message';
 import { User } from '../models/user';
 import { Observable } from 'rxjs';
@@ -26,7 +26,7 @@ export class CreateDirectMessageService {
       name: user.name,
       imgUrl: user.imgUrl,
       initialLetter: user.initialLetter,
-      userId: user.userId
+      userId: user.userId,
     }
     const collectionRef = collection(this.firestore, 'directMessages');
     const directMessageRef = new DirectMessage(userData, receiverId, messageText);
@@ -53,10 +53,29 @@ export class CreateDirectMessageService {
   }
 
 
-  updateDirectMessageEmojisService(messageId: string, selectedEmojis: string[]): void {
-    const docRef = doc(this.firestore, 'directMessages', messageId);
-    updateDoc(docRef, { selectedEmojis: selectedEmojis });
-  }
+  // updateCheckEmojiAmountService(messageId: string, checkEmojiAmount: number, directMessage: DirectMessage, userId: string, url: string): void {
+  //   directMessage.userEmojis[userId] = userId;
+  //   const docRef = doc(this.firestore, 'directMessages', messageId);
+  //   updateDoc(docRef, { checkEmojiAmount: checkEmojiAmount, userEmojis: directMessage.userEmojis });
+  // }
+
+
+  // updateRaisingBothHandsEmojiAmountService(messageId: string, raisingBothHandsEmojiAmount: number): void {
+  //   const docRef = doc(this.firestore, 'directMessages', messageId);
+  //   updateDoc(docRef, { raisingBothHandsEmojiAmount: raisingBothHandsEmojiAmount });
+  // }
+
+
+  // updateNerdEmojiAmountService(messageId: string, nerdEmojiAmount: number): void {
+  //   const docRef = doc(this.firestore, 'directMessages', messageId);
+  //   updateDoc(docRef, { nerdEmojiAmount: nerdEmojiAmount });
+  // }
+
+
+  // updateRocketEmojiAmountService(messageId: string, rocketEmojiAmount: number): void {
+  //   const docRef = doc(this.firestore, 'directMessages', messageId);
+  //   updateDoc(docRef, { rocketEmojiAmount: rocketEmojiAmount });
+  // }
 
 
   deleteDirectMessageService(messageId: string): void {

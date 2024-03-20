@@ -1,0 +1,38 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+.containerWorkSpaceMenuBtn {
+    @include hover();
+    @include positionAbsolute(unset, 145px, -115px, unset);
+    @include flexCenteredYAxis();
+    gap: 10px;
+    z-index: 1;
+    width: 260px;
+    border-radius: 0 0 30px 30px;
+    padding: 18px 14px 18px 14px;
+    box-shadow: 4px 4px 7px 0px #00000033;
+    background-color: #ffffff;
+    transform: rotate(-90deg);
+
+    &:hover {
+
+        p {
+            color: $middlePurple;
+            font-weight: 700;
+        }
+
+        img {
+            filter: brightness(0) saturate(100%) invert(37%) sepia(82%) saturate(6236%) hue-rotate(234deg) brightness(95%) contrast(99%);
+        }
+    }
+
+    p {
+        font-size: 20px;
+        margin: 0;
+    }
+
+    img {
+        transform: rotate(90deg);
+    }
+}

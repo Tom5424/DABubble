@@ -61,14 +61,33 @@
 
 
             <!--------------------------------- Selected Emojis --------------------------------->
-            <div class="containerSelctedEmojis">
-                @for (selctedEmoji of directMessage.selectedEmojis; track $index) {
-                <div class="containerSingleEmojiAndNumber" (click)="selectEmoji(selctedEmoji)">
-                    <img src="{{ selctedEmoji }}" alt="Emoji Icon">
-                    <p>1</p>
+            <!-- <div class="mainContainerSelctedEmojis">
+                @if (directMessage.checkEmojiAmount >= 1) {
+                <div class="childContainerSelctedEmojis" (click)="selectEmoji('assets/icons/check-emoji-icon.svg')">
+                    <img class="singleIcon" src="assets/icons/check-emoji-icon.svg" alt="Emoji Icon">
+                    <p>{{ directMessage.checkEmojiAmount }}</p>
                 </div>
                 }
-            </div>
+                @if (directMessage.raisingBothHandsEmojiAmount >= 1) {
+                <div class="childContainerSelctedEmojis"
+                    (click)="selectEmoji('assets/icons/raising-both-hands-emoji-icon.svg')">
+                    <img class="singleIcon" src="assets/icons/raising-both-hands-emoji-icon.svg" alt="Emoji Icon">
+                    <p>{{ directMessage.raisingBothHandsEmojiAmount }}</p>
+                </div>
+                }
+                @if (directMessage.nerdEmojiAmount >= 1) {
+                <div class="childContainerSelctedEmojis" (click)="selectEmoji('assets/icons/nerd-emoji-icon.svg')">
+                    <img class="singleIcon" src="assets/icons/nerd-emoji-icon.svg" alt="Emoji Icon">
+                    <p>{{ directMessage.nerdEmojiAmount }}</p>
+                </div>
+                }
+                @if (directMessage.rocketEmojiAmount >= 1) {
+                <div class="childContainerSelctedEmojis" (click)="selectEmoji('assets/icons/rocket-emoji-icon.svg')">
+                    <img class="singleIcon" src="assets/icons/rocket-emoji-icon.svg" alt="Emoji Icon">
+                    <p>{{ directMessage.rocketEmojiAmount }}</p>
+                </div>
+                }
+            </div> -->
             <!--------------------------------- Selected Emojis --------------------------------->
         </div>
     </div>
@@ -82,9 +101,17 @@
         'containerReactionBarLeftSide': !userIdMatchesWithIdFromLoggedinUser()}" class="containerReactionBar"
         style="top: 30px;">
 
-        @for(imgUrl of imgUrls; track $index) {
-        <img class="singleIcon" src="{{ imgUrl }}" alt="Emoji Icon" (click)="selectEmoji(imgUrl)">
-        }
+        <img class="singleIcon" src="assets/icons/check-emoji-icon.svg" alt="Emoji Icon"
+            (click)="selectEmoji('assets/icons/check-emoji-icon.svg')">
+
+        <img class="singleIcon" src="assets/icons/raising-both-hands-emoji-icon.svg" alt="Emoji Icon"
+            (click)="selectEmoji('assets/icons/raising-both-hands-emoji-icon.svg')">
+
+        <img class="singleIcon" src="assets/icons/nerd-emoji-icon.svg" alt="Emoji Icon"
+            (click)="selectEmoji('assets/icons/nerd-emoji-icon.svg')">
+
+        <img class="singleIcon" src="assets/icons/rocket-emoji-icon.svg" alt="Emoji Icon"
+            (click)="selectEmoji('assets/icons/rocket-emoji-icon.svg')">
     </div>
     }
     <!--------------------------------- Bar to select Emojis --------------------------------->
