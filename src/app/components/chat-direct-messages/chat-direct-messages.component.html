@@ -1,59 +1,26 @@
-<div class="mainContainerChatDirectMessages" [ngClass]="{'chatFullView':  workspaceMenu.sidebarIsHidden}">
+<div class="flex">
+    <div class="mainContainerChatDirectMessages" [ngClass]="{'chatFullView':  workspaceMenu.sidebarIsHidden}">
 
-    <!--------------------------------- Container Chat upper Part--------------------------------->
-    <div class="containerChatDirectMessagesUpperPart">
+        <!--------------------------------- Container Chat upper Part--------------------------------->
+        <div class="containerChatDirectMessagesUpperPart">
 
-        @if (chatAreLoading()) {
-        <img class="spinnerIconChatDirectMessagesUpperPart" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
+            @if (chatAreLoading()) {
+            <img class="spinnerIconChatDirectMessagesUpperPart" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
 
-        }@else {
-
-        <div class="containerUserImageAndNameUpperPart" (click)="openProfileDetailView()">
-            @if (noProfileImgExist()) {
-            <img class="imgNoSelectedProfileChatDirectMessagesUpperPart" src="assets/img/non-user-selected.svg"
-                alt="User Profile Image">
             }@else {
-            <img src="{{ createUserService.user.imgUrl }}" alt="User Profile Image">
-            }
 
-            @if (userIsOnline()) {
-            <img src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
-            }@else {
-            <img src="./assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
-            }
-
-            <p>{{ createUserService.user.name }}</p>
-
-            @if (userIdMatchesWithIdFromLoggedinUser()) {
-            <p>(You)</p>
-            }
-        </div>
-        }
-    </div>
-    <!--------------------------------- Container Chat upper Part--------------------------------->
-
-
-    <!--------------------------------- Container Chat Lower Part--------------------------------->
-    @if (chatAreLoading()) {
-    <div class="containerSpinnerIconChatDirectMessagesLowerPart">
-        <img class="spinnerIcon" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
-    </div>
-
-    }@else {
-
-    <div class="containerChatDirectMessagesLowerPart">
-
-        <div class="scrollingContainer" #scrollingContainer>
-
-            <div class="containerUserImageAndNameLowerPart"
-                [ngStyle]="userIdMatchesWithIdFromLoggedinUser() ? {'margin-top': '94px'} : {'margin-top': '118px'}">
-
+            <div class="containerUserImageAndNameUpperPart" (click)="openProfileDetailView()">
                 @if (noProfileImgExist()) {
-                <img class="imgNoSelectedProfileChatDirectMessagesLowerPart" src="assets/img/non-user-selected.svg"
+                <img class="imgNoSelectedProfileChatDirectMessagesUpperPart" src="assets/img/non-user-selected.svg"
                     alt="User Profile Image">
                 }@else {
-                <img class="imgSelectedProfileChatDirectMessagesLowerPart" src="{{ createUserService.user.imgUrl }}"
-                    alt="User Profile Image">
+                <img src="{{ createUserService.user.imgUrl }}" alt="User Profile Image">
+                }
+
+                @if (userIsOnline()) {
+                <img src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
+                }@else {
+                <img src="./assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
                 }
 
                 <p>{{ createUserService.user.name }}</p>
@@ -62,31 +29,66 @@
                 <p>(You)</p>
                 }
             </div>
-
-
-            @if (userIdMatchesWithIdFromLoggedinUser()) {
-            <p class="textInfoLoggedinUser">
-                <mark>This space is just for you.</mark> Take notes, list your to-dos, or keep links and files handy.
-                You can also discuss things with yourself here.
-            </p>
-            }@else {
-            <p class="text">
-                This conversation is only between you and
-                <mark (click)="openProfileDetailView()">
-                    <!---------- &#64; means => @ Symbol  ---------->
-                    &#64;{{ createUserService.user.name }}.
-                </mark>
-            </p>
             }
+        </div>
+        <!--------------------------------- Container Chat upper Part--------------------------------->
 
 
-            <!-- <div class="containerTimeWhenTheMessageWasSent">
+        <!--------------------------------- Container Chat Lower Part--------------------------------->
+        @if (chatAreLoading()) {
+        <div class="containerSpinnerIconChatDirectMessagesLowerPart">
+            <img class="spinnerIcon" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
+        </div>
+
+        }@else {
+
+        <div class="containerChatDirectMessagesLowerPart">
+
+            <div class="scrollingContainer" #scrollingContainer>
+
+                <div class="containerUserImageAndNameLowerPart"
+                    [ngStyle]="userIdMatchesWithIdFromLoggedinUser() ? {'margin-top': '94px'} : {'margin-top': '118px'}">
+
+                    @if (noProfileImgExist()) {
+                    <img class="imgNoSelectedProfileChatDirectMessagesLowerPart" src="assets/img/non-user-selected.svg"
+                        alt="User Profile Image">
+                    }@else {
+                    <img class="imgSelectedProfileChatDirectMessagesLowerPart" src="{{ createUserService.user.imgUrl }}"
+                        alt="User Profile Image">
+                    }
+
+                    <p>{{ createUserService.user.name }}</p>
+
+                    @if (userIdMatchesWithIdFromLoggedinUser()) {
+                    <p>(You)</p>
+                    }
+                </div>
+
+
+                @if (userIdMatchesWithIdFromLoggedinUser()) {
+                <p class="textInfoLoggedinUser">
+                    <mark>This space is just for you.</mark> Take notes, list your to-dos, or keep links and files
+                    handy.
+                    You can also discuss things with yourself here.
+                </p>
+                }@else {
+                <p class="text">
+                    This conversation is only between you and
+                    <mark (click)="openProfileDetailView()">
+                        <!---------- &#64; means => @ Symbol  ---------->
+                        &#64;{{ createUserService.user.name }}.
+                    </mark>
+                </p>
+                }
+
+
+                <!-- <div class="containerTimeWhenTheMessageWasSent">
                 <hr>
                 <p>{{ senderTimeFromSendedMessage | customDate }}</p>
                 <hr>
             </div> -->
 
-            <!-- @if (isToday()) {
+                <!-- @if (isToday()) {
             <ng-container>
             <div class="containerTimeWhenTheMessageWasSent">
                 <hr>
@@ -117,56 +119,62 @@
             }
  -->
 
-            @for (directMessage of createDirectMessageService.directMessagesAsObservable | async; track $index) {
-            <app-message [directMessage]="directMessage" [directMessageId]="directMessage.id"
-                (getSenderTimeFromSendedMessage)="setSenderTimeFromSendedMessage($event)">
-            </app-message>
-            }
+                @for (directMessage of createDirectMessageService.directMessagesAsObservable | async; track $index) {
+                <app-message [directMessage]="directMessage" [directMessageId]="directMessage.id"
+                    (getSenderTimeFromSendedMessage)="setSenderTimeFromSendedMessage($event)">
+                </app-message>
+                }
 
 
-        </div>
+            </div>
 
 
-        <div class="containerQuillEditor">
+            <div class="containerQuillEditor">
 
-            <form [formGroup]="addMessageForm" (ngSubmit)="sendDirectMessage()"
-                (keyup)="sendDirectMessageIfPressOnEnterKey($event)">
+                <form [formGroup]="addMessageForm" (ngSubmit)="sendDirectMessage()"
+                    (keyup)="sendDirectMessageIfPressOnEnterKey($event)">
 
-                <quill-editor placeholder="Message to {{ createUserService.user.name }}"
-                    formControlName="inputfieldQuillEditor" (onSelectionChanged)="focusQuillEditor($event)"
-                    [ngClass]="{'quillEditorFullView':  workspaceMenu.sidebarIsHidden}">
-                </quill-editor>
+                    <quill-editor placeholder="Message to {{ createUserService.user.name }}"
+                        formControlName="inputfieldQuillEditor" (onSelectionChanged)="focusQuillEditor($event)"
+                        [ngClass]="{'quillEditorFullView':  workspaceMenu.sidebarIsHidden}">
+                    </quill-editor>
 
-                <div class="mainContainerIcons">
+                    <div class="mainContainerIcons">
 
-                    <div class="containerIcons">
-                        <div class="containerSingleIcon">
-                            <img class="plusIcon" src="assets/icons/plus-icon-gray.svg" alt="Plus Icon">
+                        <div class="containerIcons">
+                            <div class="containerSingleIcon">
+                                <img class="plusIcon" src="assets/icons/plus-icon-gray.svg" alt="Plus Icon">
+                            </div>
+
+                            <hr>
+
+                            <div class="containerSingleIcon">
+                                <img src="assets/icons/smiley-icon.svg" alt="Smiley Icon">
+                            </div>
+
+                            <div class="containerSingleIcon">
+                                <img src="assets/icons/@-icon.svg" alt="@ Icon">
+                            </div>
                         </div>
 
-                        <hr>
 
-                        <div class="containerSingleIcon">
-                            <img src="assets/icons/smiley-icon.svg" alt="Smiley Icon">
-                        </div>
-
-                        <div class="containerSingleIcon">
-                            <img src="assets/icons/@-icon.svg" alt="@ Icon">
-                        </div>
+                        <button type="submit" [disabled]="filteredInpuvalueWithRegex == 0 || addMessageForm.invalid">
+                            <img src="assets/icons/send-message-icon-light-purble.svg" alt="Send Icon"
+                                [ngClass]="{'disabledSendBtn': filteredInpuvalueWithRegex == 0 || addMessageForm.invalid}">
+                        </button>
                     </div>
+                </form>
 
-
-                    <button type="submit" [disabled]="filteredInpuvalueWithRegex == 0 || addMessageForm.invalid">
-                        <img src="assets/icons/send-message-icon-light-purble.svg" alt="Send Icon"
-                            [ngClass]="{'disabledSendBtn': filteredInpuvalueWithRegex == 0 || addMessageForm.invalid}">
-                    </button>
-                </div>
-            </form>
+            </div>
 
         </div>
+        }
+        <!--------------------------------- Container Chat Lower Part--------------------------------->
 
     </div>
-    }
-    <!--------------------------------- Container Chat Lower Part--------------------------------->
 
+
+    <!--------------------------------- Displayed here the opened Thread --------------------------------->
+    <router-outlet></router-outlet>
+    <!--------------------------------- Displayed here the opened Thread --------------------------------->
 </div>

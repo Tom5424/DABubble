@@ -5,12 +5,13 @@ import { AuthService } from '../../services/auth.service';
 import { DirectMessage } from '../../models/direct-message';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CreateUserService } from '../../services/create-user.service';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-message',
   standalone: true,
-  imports: [DatePipe, NgClass, ReactiveFormsModule],
+  imports: [DatePipe, NgClass, ReactiveFormsModule, RouterLink],
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss'
 })
@@ -20,12 +21,14 @@ export class MessageComponent implements OnInit {
   createDirectMessageService = inject(CreateDirectMessageService);
   createUserService = inject(CreateUserService);
   authService = inject(AuthService);
+  activatedRoute = inject(ActivatedRoute);
   @Input() directMessage!: DirectMessage;
   @Input() directMessageId: string = '';
   @Output() getSenderTimeFromSendedMessage = new EventEmitter();
   menuMoreOptionsAreOpen: boolean = false;
   messageIsInEditMode: boolean = false;
   barToSelectEmojisAreOpen: boolean = false;
+  userId: string | null = '';
   // emojiAlreadySelected: boolean = false;
   // imgUrls: string[] = ['assets/icons/check-emoji-icon.svg', 'assets/icons/raising-both-hands-emoji-icon.svg', 'assets/icons/nerd-emoji-icon.svg', 'assets/icons/rocket-emoji-icon.svg'];
   editMessageForm = new FormGroup({
@@ -34,6 +37,9 @@ export class MessageComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe((params) => {
+      this.userId = params.get('id')
+    })
     setTimeout(() => {
       this.getSenderTimeFromSendedMessage.emit(this.directMessage);
     }, 0);
@@ -77,6 +83,11 @@ export class MessageComponent implements OnInit {
   openBarToSelectEmojis(): void {
     this.barToSelectEmojisAreOpen = !this.barToSelectEmojisAreOpen;
     this.menuMoreOptionsAreOpen = false;
+  }
+
+
+  openThreadDirectMessage() {
+
   }
 
 

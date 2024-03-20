@@ -2,6 +2,11 @@
 @import '../../../scss/mixin.scss';
 
 
+.flex {
+    @include flex();
+}
+
+
 .mainContainerChatDirectMessages {
     width: 750px;
     border-radius: 30px;

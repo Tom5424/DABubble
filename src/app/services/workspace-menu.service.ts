@@ -10,7 +10,7 @@ export class WorkspaceMenuService {
   sidebarIsHidden: boolean = false;
 
 
-  toggleSidebarService() {
+  toggleSidebarService(): void {
     this.sidebarIsHidden = !this.sidebarIsHidden;
   }
 }

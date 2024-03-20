@@ -16,7 +16,7 @@ export class WorkspaceMenuButtonComponent {
   workspaceMenu = inject(WorkspaceMenuService);
 
 
-  showSidebar() {
+  showSidebar(): void {
     this.workspaceMenu.toggleSidebarService();
   }
 }

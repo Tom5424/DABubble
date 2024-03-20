@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild, inject, Renderer2 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
 import { CreateUserService } from '../../services/create-user.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,7 +17,7 @@ import { WorkspaceMenuService } from '../../services/workspace-menu.service';
 @Component({
   selector: 'app-chat-direct-messages',
   standalone: true,
-  imports: [QuillModule, NgStyle, NgClass, ReactiveFormsModule, AsyncPipe, DatePipe, MessageComponent, CustomDatePipe],
+  imports: [QuillModule, NgStyle, NgClass, ReactiveFormsModule, AsyncPipe, DatePipe, MessageComponent, CustomDatePipe, RouterOutlet],
   templateUrl: './chat-direct-messages.component.html',
   styleUrl: './chat-direct-messages.component.scss'
 })

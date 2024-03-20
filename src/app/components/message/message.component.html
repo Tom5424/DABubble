@@ -93,8 +93,6 @@
     </div>
 
 
-    <!--------------------------------- Reaction Bar --------------------------------->
-
     <!--------------------------------- Bar to select Emojis --------------------------------->
     @if(barToSelectEmojisAreOpen) {
     <div [ngClass]="{'containerReactionBarRightSide': userIdMatchesWithIdFromLoggedinUser(), 
@@ -116,6 +114,8 @@
     }
     <!--------------------------------- Bar to select Emojis --------------------------------->
 
+
+    <!--------------------------------- Reaction Bar --------------------------------->
     <div [ngClass]="{'containerReactionBarRightSide':  userIdMatchesWithIdFromLoggedinUser(), 
         'containerReactionBarLeftSide': !userIdMatchesWithIdFromLoggedinUser()}" class="containerReactionBar">
 
@@ -123,7 +123,8 @@
             <img src="assets/icons/add-emojis-icon.svg" alt="Add Emoji Icon">
         </div>
 
-        <div class="containerSingleIcon">
+        <div class="containerSingleIcon" (click)="openThreadDirectMessage()"
+            routerLink="/mainView/directMessage/{{ userId }}/thread/{{ directMessageId }}">
             <img src="assets/icons/open-thread-icon.svg" alt="Open Thread Icon">
         </div>
 
