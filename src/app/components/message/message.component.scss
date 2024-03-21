@@ -212,34 +212,34 @@ form {
 }
 
 
-// .mainContainerSelctedEmojis {
-//     @include flex();
-//     gap: 10px;
-// }
+.mainContainerSelctedEmojis {
+    @include flex();
+    gap: 10px;
+}
 
 
-// .childContainerSelctedEmojis {
-//     @include hover();
-//     @include flexCenteredYAxis();
-//     border: 1px solid $lightPurple;
-//     padding: 5px 10px 5px 10px;
-//     border-radius: 20px;
-//     gap: 5px;
-//     background-color: #ffffff;
+.childContainerSelctedEmojis {
+    @include hover();
+    @include flexCenteredYAxis();
+    border: 1px solid $lightPurple;
+    padding: 5px 10px 5px 10px;
+    border-radius: 20px;
+    gap: 5px;
+    background-color: #ffffff;
 
-//     &:hover {
-//         border: 1px solid $darkPurple;
-//     }
+    &:hover {
+        border: 1px solid $darkPurple;
+    }
 
-//     img {
-//         width: 20px;
-//         height: 20px;
-//     }
+    img {
+        width: 20px;
+        height: 20px;
+    }
 
-//     p {
-//         margin: 0;
-//     }
-// }
+    p {
+        margin: 0;
+    }
+}
 
 
 .containerReactionBar {

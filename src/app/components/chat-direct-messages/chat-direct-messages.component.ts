@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, inject, Renderer2 } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject, Renderer2 } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
 import { CreateUserService } from '../../services/create-user.service';
@@ -23,7 +23,7 @@ import { WorkspaceMenuService } from '../../services/workspace-menu.service';
 })
 
 
-export class ChatDirectMessagesComponent implements OnInit {
+export class ChatDirectMessagesComponent {
   createUserService = inject(CreateUserService);
   authService = inject(AuthService);
   createDirectMessageService = inject(CreateDirectMessageService);
@@ -42,7 +42,7 @@ export class ChatDirectMessagesComponent implements OnInit {
   })
 
 
-  ngOnInit(): void {
+  constructor() {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.userId = params.get('id');
       this.createUserService.getSingelUserService(this.userId)

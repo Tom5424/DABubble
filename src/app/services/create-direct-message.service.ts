@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc, onSnapshot, where } from '@angular/fire/firestore';
+import { DocumentReference, Firestore, addDoc, arrayRemove, arrayUnion, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
 import { DirectMessage } from '../models/direct-message';
 import { User } from '../models/user';
 import { Observable } from 'rxjs';
@@ -53,29 +53,56 @@ export class CreateDirectMessageService {
   }
 
 
-  // updateCheckEmojiAmountService(messageId: string, checkEmojiAmount: number, directMessage: DirectMessage, userId: string, url: string): void {
-  //   directMessage.userEmojis[userId] = userId;
-  //   const docRef = doc(this.firestore, 'directMessages', messageId);
-  //   updateDoc(docRef, { checkEmojiAmount: checkEmojiAmount, userEmojis: directMessage.userEmojis });
-  // }
+  updateEmojisService(messageId: string, idFromLoggedinUser: string, emojiUrl: string, directMessage: DirectMessage): void {
+    let indexIdLoggedinUser = 0;
+    const { addedEmojis } = directMessage;
+    const docRef = doc(this.firestore, 'directMessages', messageId);
+    const indexEmojiUrl = directMessage.addedEmojis.findIndex((emoji) => emoji.emojiUrl == emojiUrl);
+    directMessage.addedEmojis.forEach((emoji) => {
+      indexIdLoggedinUser = emoji.usersWhoHaveUsedTheEmoji.indexOf(idFromLoggedinUser);
+    });
+    this.checkEmojiStatusService(indexEmojiUrl, indexIdLoggedinUser, docRef, emojiUrl, idFromLoggedinUser, addedEmojis);
+  }
 
 
-  // updateRaisingBothHandsEmojiAmountService(messageId: string, raisingBothHandsEmojiAmount: number): void {
-  //   const docRef = doc(this.firestore, 'directMessages', messageId);
-  //   updateDoc(docRef, { raisingBothHandsEmojiAmount: raisingBothHandsEmojiAmount });
-  // }
+  checkEmojiStatusService(indexEmojiUrl: number, indexIdLoggedinUser: number, docRef: DocumentReference, emojiUrl: string, idFromLoggedinUser: string, addedEmojis: any): void {
+    if (indexEmojiUrl == -1) {
+      this.addEmojiService(docRef, emojiUrl, idFromLoggedinUser);
+    } else if (addedEmojis[indexEmojiUrl].usersWhoHaveUsedTheEmoji.includes(idFromLoggedinUser)) {
+      this.decreaseEmojiAmountBy1(docRef, addedEmojis, indexEmojiUrl, indexIdLoggedinUser);
+      this.removeEmoji(docRef, addedEmojis, indexEmojiUrl);
+    } else if (!addedEmojis[indexEmojiUrl].usersWhoHaveUsedTheEmoji.includes(idFromLoggedinUser)) {
+      this.increaseEmojiBy1(docRef, addedEmojis, indexEmojiUrl, idFromLoggedinUser);
+    }
+  }
 
 
-  // updateNerdEmojiAmountService(messageId: string, nerdEmojiAmount: number): void {
-  //   const docRef = doc(this.firestore, 'directMessages', messageId);
-  //   updateDoc(docRef, { nerdEmojiAmount: nerdEmojiAmount });
-  // }
+  addEmojiService(docRef: DocumentReference, emojiUrl: string, idFromLoggedinUser: string): void {
+    const emojiData = [{ emojiUrl: emojiUrl, emojiAmount: 1, usersWhoHaveUsedTheEmoji: [idFromLoggedinUser] }];
+    updateDoc(docRef, { addedEmojis: arrayUnion(...emojiData) })
+  }
 
 
-  // updateRocketEmojiAmountService(messageId: string, rocketEmojiAmount: number): void {
-  //   const docRef = doc(this.firestore, 'directMessages', messageId);
-  //   updateDoc(docRef, { rocketEmojiAmount: rocketEmojiAmount });
-  // }
+  decreaseEmojiAmountBy1(docRef: DocumentReference, addedEmojis: any, indexEmojiUrl: number, indexIdLoggedinUser: number): void {
+    addedEmojis[indexEmojiUrl].usersWhoHaveUsedTheEmoji.splice(indexIdLoggedinUser, 1);
+    addedEmojis[indexEmojiUrl] = { ...addedEmojis[indexEmojiUrl], emojiAmount: addedEmojis[indexEmojiUrl].emojiAmount - 1 };
+    updateDoc(docRef, { addedEmojis: addedEmojis });
+  }
+
+
+  removeEmoji(docRef: DocumentReference, addedEmojis: any, indexEmojiUrl: number): void {
+    if (addedEmojis[indexEmojiUrl].emojiAmount == 0) {
+      addedEmojis[indexEmojiUrl] = { ...addedEmojis[indexEmojiUrl], emojiAmount: addedEmojis[indexEmojiUrl].emojiAmount };
+      updateDoc(docRef, { addedEmojis: arrayRemove(addedEmojis[indexEmojiUrl]) });
+    }
+  }
+
+
+  increaseEmojiBy1(docRef: DocumentReference, addedEmojis: any, indexEmojiUrl: number, idFromLoggedinUser: string): void {
+    addedEmojis[indexEmojiUrl].usersWhoHaveUsedTheEmoji.push(idFromLoggedinUser);
+    addedEmojis[indexEmojiUrl] = { ...addedEmojis[indexEmojiUrl], emojiAmount: addedEmojis[indexEmojiUrl].emojiAmount + 1 };
+    updateDoc(docRef, { addedEmojis: addedEmojis });
+  }
 
 
   deleteDirectMessageService(messageId: string): void {

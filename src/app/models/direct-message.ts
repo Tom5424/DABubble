@@ -6,15 +6,8 @@ export class DirectMessage {
     messageText: string;
     receiverId: string;
     directMessageId: string | undefined;
-    // checkEmojiAmount!: number;
-    // raisingBothHandsEmojiAmount!: number;
-    // nerdEmojiAmount!: number;
-    // rocketEmojiAmount!: number;
     userThatSendedMessage: User | null;
-    userEmojis: { [userId: string]: string } = {};
-    // addedEmojis: [
-    //     {  emojiUrl: '' UsersWhoHaveUsedTheEmoji: [] }
-    // ]
+    addedEmojis: { emojiUrl: string, emojiAmount: number, usersWhoHaveUsedTheEmoji: string[] }[] = [];
 
 
     constructor(userThatSendedMessage: any, receiverId?: string | null, messageText?: string | null) {

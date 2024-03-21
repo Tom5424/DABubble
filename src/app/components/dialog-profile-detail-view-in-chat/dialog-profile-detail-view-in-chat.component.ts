@@ -42,6 +42,6 @@ export class DialogProfileDetailViewInChatComponent {
 
   writeMesssageToUser(): void {
     this.matDialog.closeAll();
-    this.router.navigate(['/mainView/user/', this.data.userData.userId]);
+    this.router.navigate(['/mainView/directMessage/', this.data.userData.userId]);
   }
 }
