@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { DocumentReference, Firestore, addDoc, arrayRemove, arrayUnion, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
+import { DocumentReference, Firestore, addDoc, and, arrayRemove, arrayUnion, collection, collectionData, deleteDoc, doc, or, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
 import { DirectMessage } from '../models/direct-message';
 import { User } from '../models/user';
 import { Observable } from 'rxjs';
@@ -19,7 +19,7 @@ export class CreateDirectMessageService {
   loadChat: boolean = false;
 
 
-  createDirectMessageService(user: User, receiverId: string | null, messageText: string | null): void {
+  createDirectMessageService(user: User, receiverId: string | null, senderId: string, messageText: string | null): void {
     const userData = {  // Created a custom User Object here to get the logged in User so that the correct Messages are displayed by the correct User. And prevents error Messages.
       email: user.email,
       isOnline: user.isOnline,
@@ -29,7 +29,7 @@ export class CreateDirectMessageService {
       userId: user.userId,
     }
     const collectionRef = collection(this.firestore, 'directMessages');
-    const directMessageRef = new DirectMessage(userData, receiverId, messageText);
+    const directMessageRef = new DirectMessage(userData, receiverId, senderId, messageText);
     addDoc(collectionRef, directMessageRef.toJson())
       .then(() => {
 
@@ -37,8 +37,26 @@ export class CreateDirectMessageService {
   }
 
 
-  getDirectMessagesService(receiverId: string | null): void {
+  getDirectMessagesService(receiverId: string | null, senderId: string): void {
     this.loadChat = true;
+    if (receiverId == senderId) {
+      this.receivedMessagesThatYouWroteToYourselfService(receiverId, senderId);
+    } else {
+      this.receiveMessagesThatYouDidNotWriteToYourselfService(receiverId);
+    }
+  }
+
+
+  receivedMessagesThatYouWroteToYourselfService(receiverId: string, senderId: string): void {
+    const collectionRef = query(collection(this.firestore, 'directMessages'), and(where('receiverId', '==', receiverId), where('senderId', '==', senderId)), orderBy('senderTime'));
+    collectionData(collectionRef).subscribe(() => {
+      this.loadChat = false;
+    })
+    this.directMessagesAsObservable = collectionData(collectionRef, { idField: 'id' }) as Observable<DirectMessage[]>;
+  }
+
+
+  receiveMessagesThatYouDidNotWriteToYourselfService(receiverId: string | null): void {
     const collectionRef = query(collection(this.firestore, 'directMessages'), where('receiverId', '==', receiverId), orderBy('senderTime'));
     collectionData(collectionRef).subscribe(() => {
       this.loadChat = false;

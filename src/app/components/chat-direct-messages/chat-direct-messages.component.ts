@@ -46,7 +46,7 @@ export class ChatDirectMessagesComponent {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.userId = params.get('id');
       this.createUserService.getSingelUserService(this.userId)
-      this.createDirectMessageService.getDirectMessagesService(this.userId);
+      this.createDirectMessageService.getDirectMessagesService(this.userId, this.authService.user.userId);
     });
   }
 
@@ -61,7 +61,7 @@ export class ChatDirectMessagesComponent {
     const inputValueWithoutHTMLTags = this.inputValue?.replace(/<[^>]*>/g, ''); // The regular expression removes the HTML tags from the string that come from the Quill Editor
     this.filteredInpuvalueWithRegex = this.inputValue?.replace(/(<([^>]+)>)/ig, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
     if (this.filteredInpuvalueWithRegex && this.filteredInpuvalueWithRegex > 0) {
-      this.createDirectMessageService.createDirectMessageService(this.authService.user, this.userId, inputValueWithoutHTMLTags || null);
+      this.createDirectMessageService.createDirectMessageService(this.authService.user, this.userId, this.authService.user.userId, inputValueWithoutHTMLTags || null);
       this.scrollToBottomAfterSendMessage();
       this.addMessageForm.reset();
     }
@@ -73,7 +73,7 @@ export class ChatDirectMessagesComponent {
     const inputValueWithoutHTMLTags = this.inputValue?.replace(/<[^>]*>/g, ''); // The regular expression removes the HTML tags from the string that come from the Quill Editor
     this.filteredInpuvalueWithRegex = this.inputValue?.replace(/(<([^>]+)>)/ig, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
     if (event?.key == 'Enter' && this.filteredInpuvalueWithRegex && this.filteredInpuvalueWithRegex > 0) {
-      this.createDirectMessageService.createDirectMessageService(this.authService.user, this.userId, inputValueWithoutHTMLTags || null);
+      this.createDirectMessageService.createDirectMessageService(this.authService.user, this.userId, this.authService.user.userId, inputValueWithoutHTMLTags || null);
       this.scrollToBottomAfterSendMessage();
       this.addMessageForm.reset();
     }
