@@ -24,7 +24,7 @@
         <button (click)="openProfileEditView()" type="button" [disabled]="guestUserIsLoggedIn()"
             [ngClass]="{'disabledEditButton': guestUserIsLoggedIn()}"
             [matTooltip]="guestUserIsLoggedIn() ? tooltipTextForEditUserBtn : ''" matTooltipPosition="above"
-            matTooltipShowDelay="150" matTooltipHideDelay="150">
+            matTooltipClass="customTooltip" matTooltipShowDelay="150" matTooltipHideDelay="150">
             Edit
         </button>
     </div>
@@ -60,7 +60,7 @@
         <button type="button" (click)="openDialogToConfirmAccountDeletion()" [disabled]="guestUserIsLoggedIn()"
             [ngClass]="{'btnDisabled': guestUserIsLoggedIn()}"
             [matTooltip]="guestUserIsLoggedIn() ? tooltipTextForDeleteUserBtn : ''" matTooltipPosition="above"
-            matTooltipShowDelay="150" matTooltipHideDelay="150">
+            matTooltipClass="customTooltip" matTooltipShowDelay="150" matTooltipHideDelay="150">
             Delete Account
         </button>
     </div>

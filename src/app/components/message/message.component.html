@@ -63,8 +63,11 @@
             <!--------------------------------- Selected Emojis --------------------------------->
             <div class="mainContainerSelctedEmojis">
                 @for(addedEmoji of directMessage.addedEmojis; track $index) {
-                <div class="childContainerSelctedEmojis" (click)="selectEmoji(addedEmoji.emojiUrl)">
-                    <img class="singleIcon" src="{{ addedEmoji.emojiUrl }}" alt="Emoji Icon">
+                <div class="childContainerSelctedEmojis" (click)="selectEmoji(addedEmoji.emojiUrl)"
+                    matTooltip="{{ addedEmoji.usersNameWhoHaveUsedTheEmoji  }} has react" matTooltipPosition="above"
+                    matTooltipShowDelay="150" matTooltipHideDelay="150" matTooltipClass="customTooltip">
+
+                    <img src="{{ addedEmoji.emojiUrl }}" alt="Emoji Icon">
                     <p>{{ addedEmoji.emojiAmount }}</p>
                 </div>
                 }

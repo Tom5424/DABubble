@@ -51,16 +51,18 @@ body {
 }
 
 
-/////////// Custom Styles for tooltip 
-.cdk-overlay-container .mat-mdc-tooltip {
-    --mdc-plain-tooltip-container-color: #444DF2;
-    --mdc-plain-tooltip-supporting-text-color: white;
-    --mdc-plain-tooltip-container-shape: 5px;
-    --mdc-plain-tooltip-supporting-text-line-height: 20px;
-    --mdc-plain-tooltip-supporting-text-size: 14px;
-    --mdc-plain-tooltip-supporting-text-weight: 400;
-    --mdc-tooltip-word-break: normal;
-}
+// /////////// Custom Styles for tooltip 
+// ::ng-deep .customTooltip {
+//     --mdc-plain-tooltip-container-color: #444DF2;
+//     // --mdc-plain-tooltip-supporting-text-color: white;
+//     --mdc-plain-tooltip-container-shape: 30px 30px 30px 0;
+//     // --mdc-plain-tooltip-supporting-text-line-height: 20px;
+//     --mdc-plain-tooltip-supporting-text-size: 16px;
+//     padding: 28px;
+
+//     // --mdc-plain-tooltip-supporting-text-weight: 400;
+//     // --mdc-tooltip-word-break: normal;
+// }
 
 
 /////////// Custom Styles for Matdialog 

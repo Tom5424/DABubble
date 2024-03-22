@@ -6,12 +6,13 @@ import { DirectMessage } from '../../models/direct-message';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CreateUserService } from '../../services/create-user.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @Component({
   selector: 'app-message',
   standalone: true,
-  imports: [DatePipe, NgClass, ReactiveFormsModule, RouterLink],
+  imports: [DatePipe, NgClass, ReactiveFormsModule, MatTooltipModule, RouterLink],
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss'
 })
@@ -87,7 +88,7 @@ export class MessageComponent implements OnInit {
   initAddedEmojiFieldInDirectMessage(): void {
     if (!this.directMessage.addedEmojis) {
       this.directMessage.addedEmojis = [
-        { emojiUrl: '', emojiAmount: 0, usersWhoHaveUsedTheEmoji: [] }
+        { emojiUrl: '', emojiAmount: 0, usersIdWhoHaveUsedTheEmoji: [], usersNameWhoHaveUsedTheEmoji: [] }
       ];
     }
   }
@@ -95,7 +96,7 @@ export class MessageComponent implements OnInit {
 
   selectEmoji(emojiUrl: string) {
     this.initAddedEmojiFieldInDirectMessage();
-    this.createDirectMessageService.updateEmojisService(this.directMessageId, this.authService.user.userId, emojiUrl, this.directMessage);
+    this.createDirectMessageService.updateEmojisService(this.directMessageId, this.authService.user.userId, this.authService.user.name, emojiUrl, this.directMessage);
   }
 
 

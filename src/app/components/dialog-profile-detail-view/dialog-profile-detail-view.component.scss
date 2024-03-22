@@ -127,3 +127,14 @@
         cursor: not-allowed !important;
     }
 }
+
+
+/////////// Custom Styles for tooltip 
+::ng-deep .customTooltip {
+    background-color: $darkPurple;
+    border-radius: 30px;
+    padding: 15px 10px 15px 10px;
+    --mdc-plain-tooltip-container-color: #444DF2;
+    --mdc-plain-tooltip-supporting-text-line-height: 20px;
+    --mdc-plain-tooltip-supporting-text-size: 16px;
+}

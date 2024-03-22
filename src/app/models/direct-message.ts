@@ -7,7 +7,7 @@ export class DirectMessage {
     receiverId: string;
     directMessageId: string | undefined;
     userThatSendedMessage: User | null;
-    addedEmojis: { emojiUrl: string, emojiAmount: number, usersWhoHaveUsedTheEmoji: string[] }[] = [];
+    addedEmojis: { emojiUrl: string, emojiAmount: number, usersIdWhoHaveUsedTheEmoji: string[], usersNameWhoHaveUsedTheEmoji: string[] }[] = [];
 
 
     constructor(userThatSendedMessage: any, receiverId?: string | null, messageText?: string | null) {
