@@ -98,6 +98,11 @@ export class ChatDirectMessagesComponent {
   }
 
 
+  imageIsUploading(): boolean {
+    return (this.storageService.uploadImg) ? true : false;
+  }
+
+
   focusQuillEditor(event: { editor: any, range: any, oldRange: any }): void {
     if (this.quillEditorIsFocused(event)) {
       event.editor.container.style.border = '1px solid #535AF1';

@@ -180,14 +180,15 @@
 // }
 
 
-.containerQuillEditor {
+.containerForm {
     @include flexCenteredXAxis();
-    padding: 10px 0 0 0;
+    padding: 0 0 35px 0;
     position: relative;
 }
 
 
 form {
+    @include inputfieldOrTextareaHover();
     border: 1px solid $lightPurple;
     border-radius: 20px;
 
@@ -208,6 +209,12 @@ form {
     @include flex();
     gap: 15px;
     margin: 0px 0px -10px 15px;
+}
+
+
+.spinnerIcon {
+    width: 60px;
+    margin: -38px 0 -10px 0;
 }
 
 

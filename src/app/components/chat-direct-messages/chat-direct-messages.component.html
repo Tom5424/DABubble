@@ -123,8 +123,9 @@
             </div>
 
 
-            <div class="containerQuillEditor"
-                [ngStyle]="{'padding-bottom': storageService.uploadedImages.length > 0 ? '18px' : '46px'}">
+            <div class="containerForm"
+                [ngStyle]="{'padding-top': storageService.uploadedImages.length > 0 || storageService.uploadImg ? '0px' : '30px', 
+                'padding-bottom': storageService.uploadedImages.length > 0 || storageService.uploadImg ? '17px' : '35px'}">
 
                 <form [formGroup]="addMessageForm" (ngSubmit)="sendDirectMessage()"
                     (keyup)="sendDirectMessageIfPressOnEnterKey($event)">
@@ -135,9 +136,12 @@
                     </textarea>
 
 
-                    @if (storageService.uploadedImages.length > 0) {
 
                     <div class="mainContainerUploadedImages">
+                        @if (imageIsUploading()) {
+                        <img class="spinnerIcon" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
+                        }@else {
+
                         @for (uploadedImage of storageService.uploadedImages; track $index) {
                         <div class="childContainerUploadedImages">
                             <img class="closeIcon" src="assets/icons/close-icon.svg" alt="Close Icon"
@@ -146,10 +150,9 @@
                             <img src="{{ uploadedImage }}" alt="Uploaded Image">
                         </div>
                         }
-
+                        }
                     </div>
 
-                    }
                     <!-- <quill-editor placeholder="Message to {{ createUserService.user.name }}"
                         formControlName="inputfieldQuillEditor" (onSelectionChanged)="focusQuillEditor($event)"
                         [ngClass]="{'quillEditorFullView':  workspaceMenu.sidebarIsHidden}">

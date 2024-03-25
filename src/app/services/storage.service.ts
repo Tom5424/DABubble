@@ -53,9 +53,9 @@ export class StorageService {
 
 
   checkDataBeforeUploadService(storageRef: StorageReference, data: UploadResult, file: Blob | Uint8Array | ArrayBuffer): void {
-    let fileExtension = data.metadata.name.split('.');
+    let dataType = data.metadata.contentType;
     let dataSize = data.metadata.size;
-    if (dataSize >= 300000 || (fileExtension[1] !== 'jpg' && fileExtension[1] !== 'png')) {
+    if (dataSize >= 300000 || (dataType !== 'image/jpeg' && dataType !== 'image/png')) {
       this.cancelUploadIfDataIsInvalidService(storageRef, file);
     } else {
       this.getUrlFromUploadedDataService(storageRef);
