@@ -4,6 +4,7 @@ import { User } from "./user";
 export class DirectMessage {
     senderTime: number = Date.now();
     messageText: string;
+    attachedFiles!: string[];
     receiverId: string;
     senderId: string
     directMessageId: string | undefined;
@@ -11,7 +12,7 @@ export class DirectMessage {
     addedEmojis: { emojiUrl: string, emojiAmount: number, usersIdWhoHaveUsedTheEmoji: string[], usersNameWhoHaveUsedTheEmoji: string[] }[] = [];
 
 
-    constructor(userThatSendedMessage: any, receiverId?: string | null, senderId?: string, messageText?: string | null) {
+    constructor(userThatSendedMessage?: any, receiverId?: string | null, senderId?: string, messageText?: string | null) {
         this.senderTime = this.senderTime ? this.senderTime : 0;
         this.messageText = messageText ? messageText : '';
         this.receiverId = receiverId ? receiverId : '';

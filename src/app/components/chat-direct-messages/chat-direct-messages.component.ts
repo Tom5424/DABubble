@@ -12,6 +12,7 @@ import { MessageComponent } from '../message/message.component';
 import { DirectMessage } from '../../models/direct-message';
 import { CustomDatePipe } from '../../pipes/custom-date.pipe';
 import { WorkspaceMenuService } from '../../services/workspace-menu.service';
+import { StorageService } from '../../services/storage.service';
 
 
 @Component({
@@ -27,18 +28,20 @@ export class ChatDirectMessagesComponent {
   createUserService = inject(CreateUserService);
   authService = inject(AuthService);
   createDirectMessageService = inject(CreateDirectMessageService);
+  storageService = inject(StorageService)
   activatedRoute = inject(ActivatedRoute);
   matDialog = inject(MatDialog);
   renderer2 = inject(Renderer2);
   workspaceMenu = inject(WorkspaceMenuService);
-  @ViewChild('scrollingContainer') scrollingContainer!: ElementRef
+  @ViewChild('scrollingContainer') scrollingContainer!: ElementRef;
+  // groupedDates: number[] = [];
   userId: string | null = '';
   inputValue: string | null = '';
   filteredInpuvalueWithRegex: number | undefined;
   senderTimeFromSendedMessage: number = 0;
   keyEnterWasPressed: boolean = false;
   addMessageForm = new FormGroup({
-    inputfieldQuillEditor: new FormControl('', Validators.required)
+    textarea: new FormControl('', Validators.required)
   })
 
 
@@ -57,7 +60,7 @@ export class ChatDirectMessagesComponent {
 
 
   sendDirectMessage(): void {
-    this.inputValue = this.addMessageForm.controls.inputfieldQuillEditor.value;
+    this.inputValue = this.addMessageForm.controls.textarea.value;
     const inputValueWithoutHTMLTags = this.inputValue?.replace(/<[^>]*>/g, ''); // The regular expression removes the HTML tags from the string that come from the Quill Editor
     this.filteredInpuvalueWithRegex = this.inputValue?.replace(/(<([^>]+)>)/ig, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
     if (this.filteredInpuvalueWithRegex && this.filteredInpuvalueWithRegex > 0) {
@@ -69,7 +72,7 @@ export class ChatDirectMessagesComponent {
 
 
   sendDirectMessageIfPressOnEnterKey(event: KeyboardEvent): void {
-    this.inputValue = this.addMessageForm.controls.inputfieldQuillEditor.value;
+    this.inputValue = this.addMessageForm.controls.textarea.value;
     const inputValueWithoutHTMLTags = this.inputValue?.replace(/<[^>]*>/g, ''); // The regular expression removes the HTML tags from the string that come from the Quill Editor
     this.filteredInpuvalueWithRegex = this.inputValue?.replace(/(<([^>]+)>)/ig, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
     if (event?.key == 'Enter' && this.filteredInpuvalueWithRegex && this.filteredInpuvalueWithRegex > 0) {
@@ -134,18 +137,34 @@ export class ChatDirectMessagesComponent {
   }
 
 
-  // isToday(senderTimeFromSendedMessage: number): boolean {
+  selectFile(selectedFile: HTMLInputElement): void {
+    this.storageService.selectFileService(selectedFile);
+  }
+
+
+  removeUploadedImage(indexFromImage: number, imageUrl: string): void {
+    this.storageService.deleteUploadedDataService(imageUrl);
+    this.storageService.uploadedImages.splice(indexFromImage, 1);
+  }
+
+
+  // isToday() {
   //   const today = new Date();
-  //   const dateWhenTheMessageWasSent = new Date(senderTimeFromSendedMessage);
-  //   return today.toDateString() === dateWhenTheMessageWasSent.toDateString();
+  //   const dateWhenTheMessageWasSendVariable = new Date(dateWhenTheMessageWasSend);
+  //   if (!this.alreadyExistingDatesInMessage.includes(dateWhenTheMessageWasSendVariable.toDateString())) {
+  //     this.alreadyExistingDatesInMessage.push(dateWhenTheMessageWasSendVariable.toDateString());
+  //     return today.toDateString() === dateWhenTheMessageWasSendVariable.toDateString();
+  //   } else {
+  //     return false;
+  //   }
   // }
 
 
-  // isYesterday(senderTimeFromSendedMessage: number): boolean {
+  // isYesterday(): boolean {
   //   const yesterday = new Date();
   //   yesterday.setDate(yesterday.getDate() - 1);
-  //   const dateWhenTheMessageWasSent = new Date(senderTimeFromSendedMessage);
-  //   return yesterday.toDateString() === dateWhenTheMessageWasSent.toDateString();
+  //   const dateWhenTheMessageWasSent = new Date(this.senderTimeFromSendedMessage);
+  //   return yesterday.toDateString() == dateWhenTheMessageWasSent.toDateString();
   // }
 
 

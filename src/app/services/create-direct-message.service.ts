@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { DocumentReference, Firestore, addDoc, and, arrayRemove, arrayUnion, collection, collectionData, deleteDoc, doc, or, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
+import { DocumentReference, Firestore, addDoc, and, arrayRemove, arrayUnion, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
 import { DirectMessage } from '../models/direct-message';
 import { User } from '../models/user';
 import { Observable } from 'rxjs';
@@ -42,7 +42,7 @@ export class CreateDirectMessageService {
     if (receiverId == senderId) {
       this.receivedMessagesThatYouWroteToYourselfService(receiverId, senderId);
     } else {
-      this.receiveMessagesThatYouDidNotWriteToYourselfService(receiverId);
+      this.receiveMessagesThatYouDidNotWroteToYourselfService(receiverId);
     }
   }
 
@@ -56,7 +56,7 @@ export class CreateDirectMessageService {
   }
 
 
-  receiveMessagesThatYouDidNotWriteToYourselfService(receiverId: string | null): void {
+  receiveMessagesThatYouDidNotWroteToYourselfService(receiverId: string | null): void {
     const collectionRef = query(collection(this.firestore, 'directMessages'), where('receiverId', '==', receiverId), orderBy('senderTime'));
     collectionData(collectionRef).subscribe(() => {
       this.loadChat = false;
@@ -77,7 +77,7 @@ export class CreateDirectMessageService {
     const { addedEmojis } = directMessage;
     const docRef = doc(this.firestore, 'directMessages', messageId);
     const indexEmojiUrl = directMessage.addedEmojis.findIndex((emoji) => emoji.emojiUrl == emojiUrl);
-    directMessage.addedEmojis.forEach((emoji) => { indexIdLoggedinUser = emoji.usersIdWhoHaveUsedTheEmoji.indexOf(idFromLoggedinUser) });
+    directMessage.addedEmojis.forEach((emoji) => { indexIdLoggedinUser = emoji.usersIdWhoHaveUsedTheEmoji.indexOf(idFromLoggedinUser) })
     directMessage.addedEmojis.forEach((emoji) => { indexNameLoggedinUser = emoji.usersNameWhoHaveUsedTheEmoji.indexOf(nameFromLoggedinUser ? nameFromLoggedinUser : '') })
     this.checkEmojiStatusService(indexEmojiUrl, indexIdLoggedinUser, indexNameLoggedinUser, nameFromLoggedinUser, docRef, emojiUrl, idFromLoggedinUser, addedEmojis);
   }

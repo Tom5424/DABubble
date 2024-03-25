@@ -37,8 +37,8 @@ export class MessageComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
-      this.userId = params.get('id')
-    })
+      this.userId = params.get('id');
+    });
     setTimeout(() => {
       this.getSenderTimeFromSendedMessage.emit(this.directMessage);
     }, 0);

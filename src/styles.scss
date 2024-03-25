@@ -99,27 +99,27 @@ body {
 
 
 /////////// Custom Styles for Quill Editor 
-.ql-toolbar.ql-snow {
-    display: none;
-}
+// .ql-toolbar.ql-snow {
+//     display: none;
+// }
 
 
-.ql-toolbar.ql-snow+.ql-container.ql-snow {
-    @include inputfieldOrTextareaHover();
-    border: 1px solid $lightPurple;
-    padding: 0;
-}
+// .ql-toolbar.ql-snow+.ql-container.ql-snow {
+//     @include inputfieldOrTextareaHover();
+//     border: 1px solid $lightPurple;
+//     padding: 0;
+// }
 
 
-.ql-snow {
-    @include inputfieldOrTextarea(unset, 20px, 15px, 20px, 15px, 20px, 18px, #ffffff);
-}
+// .ql-snow {
+//     @include inputfieldOrTextarea(unset, 20px, 15px, 20px, 15px, 20px, 18px, #ffffff);
+// }
 
 
-.ql-editor p {
-    height: 65px;
-    overflow-y: scroll;
-}
+// .ql-editor p {
+//     height: 65px;
+//     overflow-y: scroll;
+// }
 
 
 /////////// Animation for User Feedback Message 

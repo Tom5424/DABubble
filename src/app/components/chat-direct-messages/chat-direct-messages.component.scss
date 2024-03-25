@@ -182,21 +182,73 @@
 
 .containerQuillEditor {
     @include flexCenteredXAxis();
-    padding: 19px 0 40px 0;
+    padding: 10px 0 0 0;
     position: relative;
 }
 
 
-quill-editor {
-    width: 680px;
-    height: 130px;
+form {
+    border: 1px solid $lightPurple;
+    border-radius: 20px;
+
+    textarea {
+        width: 680px;
+        font-size: 18px;
+        margin: 15px 0 0 15px;
+        padding: 0;
+        font-family: "Figtree", sans-serif;
+        outline: none;
+        resize: none;
+        border: unset;
+    }
 }
+
+
+.mainContainerUploadedImages {
+    @include flex();
+    gap: 15px;
+    margin: 0px 0px -10px 15px;
+}
+
+
+.childContainerUploadedImages {
+    position: relative;
+
+    img {
+        @include hover();
+        width: 45px;
+        height: 45px;
+        border-radius: 8px;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}
+
+
+.closeIcon {
+    @include positionAbsolute(-8px, unset, 36px, unset);
+    width: 18px !important;
+    height: 18px !important;
+    z-index: 1;
+    background-color: #d3d3d3;
+
+    &:hover {
+        opacity: unset !important;
+    }
+}
+
+
+// quill-editor {
+//     width: 680px;
+//     height: 130px;
+// }
 
 
 .mainContainerIcons {
     @include flexSpaceBetween();
-    margin: -55px 20px 0 15px;
-    padding-bottom: 11px;
+    margin: 15px 20px 15px 15px;
     position: relative;
     background-color: #ffffff;
 }
@@ -220,6 +272,11 @@ quill-editor {
     @include hover();
     @include flex();
     border-radius: 50%;
+
+    label {
+        @include flex();
+        @include hover();
+    }
 
     img {
 
@@ -253,6 +310,14 @@ button {
 .disabledSendBtn {
     @include hoverDisabled();
     filter: brightness(0) saturate(100%) invert(45%) sepia(28%) saturate(1754%) hue-rotate(205deg) brightness(110%) contrast(91%) !important;
+}
+
+
+.disabledBtn {
+
+    &:hover {
+        cursor: not-allowed;
+    }
 }
 
 
