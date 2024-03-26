@@ -14,12 +14,13 @@ import { CustomDatePipe } from '../../pipes/custom-date.pipe';
 import { WorkspaceMenuService } from '../../services/workspace-menu.service';
 import { StorageService } from '../../services/storage.service';
 import { DialogUploadedImgFullViewComponent } from '../dialog-uploaded-img-full-view/dialog-uploaded-img-full-view.component';
+import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 
 
 @Component({
   selector: 'app-chat-direct-messages',
   standalone: true,
-  imports: [QuillModule, NgStyle, NgClass, ReactiveFormsModule, AsyncPipe, DatePipe, MessageComponent, CustomDatePipe, RouterOutlet],
+  imports: [QuillModule, PickerComponent, NgStyle, NgClass, ReactiveFormsModule, AsyncPipe, DatePipe, MessageComponent, CustomDatePipe, RouterOutlet],
   templateUrl: './chat-direct-messages.component.html',
   styleUrl: './chat-direct-messages.component.scss'
 })
@@ -38,6 +39,7 @@ export class ChatDirectMessagesComponent {
   // groupedDates: number[] = [];
   userId: string | null = '';
   inputValue: string | null = '';
+  emojiPickerIsDisplayed: boolean = false;
   // filteredInpuvalueWithRegex: number | undefined;
   senderTimeFromSendedMessage: number = 0;
   addMessageForm = new FormGroup({
@@ -148,6 +150,16 @@ export class ChatDirectMessagesComponent {
 
   selectFile(selectedFile: HTMLInputElement): void {
     this.storageService.selectFileService(selectedFile);
+  }
+
+
+  closeEmojiPickerIfClickOutside(): void {
+    this.emojiPickerIsDisplayed = false;
+  }
+
+
+  tootgleEmojiPicker() {
+    this.emojiPickerIsDisplayed = !this.emojiPickerIsDisplayed;
   }
 
 

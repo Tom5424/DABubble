@@ -1,6 +1,7 @@
 @import "../node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css"; // Import for Angular Material to make it work
-@import '../node_modules/quill/dist/quill.bubble.css'; // Import for Quill Editor Styles
-@import '../node_modules/quill/dist/quill.snow.css'; // Import for Quill Editor Styles
+// @import '../node_modules/quill/dist/quill.bubble.css'; // Import for Quill Editor Styles
+// @import '../node_modules/quill/dist/quill.snow.css'; // Import for Quill Editor Styles
+@import '@ctrl/ngx-emoji-mart/picker'; // Styles for Emoji picker
 @import './scss/variable.scss';
 @import './scss/mixin.scss';
 

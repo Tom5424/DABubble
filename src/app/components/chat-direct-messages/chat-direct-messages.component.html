@@ -1,4 +1,6 @@
 <div class="flex">
+    <div [ngClass]="{'overlay': emojiPickerIsDisplayed}" (click)="closeEmojiPickerIfClickOutside()"></div>
+
     <div class="mainContainerChatDirectMessages" [ngClass]="{'chatFullView':  workspaceMenuService.sidebarIsHidden}">
 
         <!--------------------------------- Container Chat upper Part--------------------------------->
@@ -159,6 +161,14 @@
                     </quill-editor> -->
 
 
+                    <!--------------------------------- Emoji Picker --------------------------------->
+                    @if (emojiPickerIsDisplayed) {
+                    <emoji-mart
+                        [style]="{position: 'absolute', bottom: '150px', left: '40px', 'z-index': '1'}"></emoji-mart>
+                    }
+                    <!--------------------------------- Emoji Picker --------------------------------->
+
+
                     <div class="mainContainerIcons">
 
                         <div class="containerIcons">
@@ -174,7 +184,7 @@
 
                             <hr>
 
-                            <div class="containerSingleIcon">
+                            <div class="containerSingleIcon" (click)="tootgleEmojiPicker()">
                                 <img src="assets/icons/smiley-icon.svg" alt="Smiley Icon">
                             </div>
 
