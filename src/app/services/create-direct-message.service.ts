@@ -19,7 +19,7 @@ export class CreateDirectMessageService {
   loadChat: boolean = false;
 
 
-  createDirectMessageService(user: User, receiverId: string | null, senderId: string, messageText: string | null): void {
+  createDirectMessageService(user: User, receiverId: string | null, senderId: string, messageText: string | null, uploadedImages: string[]): void {
     const userData = {  // Created a custom User Object here to get the logged in User so that the correct Messages are displayed by the correct User. And prevents error Messages.
       email: user.email,
       isOnline: user.isOnline,
@@ -29,7 +29,7 @@ export class CreateDirectMessageService {
       userId: user.userId,
     }
     const collectionRef = collection(this.firestore, 'directMessages');
-    const directMessageRef = new DirectMessage(userData, receiverId, senderId, messageText);
+    const directMessageRef = new DirectMessage(userData, receiverId, senderId, messageText, uploadedImages);
     addDoc(collectionRef, directMessageRef.toJson())
       .then(() => {
 

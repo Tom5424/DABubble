@@ -131,6 +131,15 @@
 }
 
 
+.uploadedImage {
+    width: 350px !important;
+    height: 250px !important;
+    margin: 15px 0 15px 0;
+    object-fit: cover;
+    border-radius: unset !important;
+}
+
+
 form {
     padding: 20px 0 20px 0;
     position: relative;

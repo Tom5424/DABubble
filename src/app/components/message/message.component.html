@@ -23,7 +23,7 @@
         </div>
 
 
-        @if (!messageIsInEditMode) {
+        @if (!messageIsInEditMode && directMessage.messageText.trim() !== '') {
         <p [ngClass]="{'messageTextOwnMessage': userIdMatchesWithIdFromLoggedinUser(), 
             'messageTextFromOtherUser': !userIdMatchesWithIdFromLoggedinUser()}">
             {{ directMessage.messageText }}
@@ -49,6 +49,13 @@
         </form>
         }
         <!--------------------------------- Inputfield to Edit Message --------------------------------->
+
+
+        <!--------------------------------- Displayed here the uploaded Images --------------------------------->
+        @for (uploadedImage of directMessage.attachedFiles; track $index) {
+        <img class="uploadedImage" src="{{ uploadedImage }}" alt="Uploaded Image">
+        }
+        <!--------------------------------- Displayed here the uploaded Images --------------------------------->
 
 
         <div [ngClass]="{'row': userIdMatchesWithIdFromLoggedinUser(), 'rowReverse': !userIdMatchesWithIdFromLoggedinUser()}"

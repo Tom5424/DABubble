@@ -1,5 +1,5 @@
 <div class="flex">
-    <div class="mainContainerChatDirectMessages" [ngClass]="{'chatFullView':  workspaceMenu.sidebarIsHidden}">
+    <div class="mainContainerChatDirectMessages" [ngClass]="{'chatFullView':  workspaceMenuService.sidebarIsHidden}">
 
         <!--------------------------------- Container Chat upper Part--------------------------------->
         <div class="containerChatDirectMessagesUpperPart">
@@ -132,7 +132,7 @@
 
 
                     <textarea placeholder="Message to {{ createUserService.user.name }}" formControlName="textarea"
-                        [ngClass]="{'quillEditorFullView':  workspaceMenu.sidebarIsHidden}">
+                        [ngClass]="{'quillEditorFullView':  workspaceMenuService.sidebarIsHidden}">
                     </textarea>
 
 
@@ -184,10 +184,11 @@
                         </div>
 
 
-                        <button type="submit" [disabled]="filteredInpuvalueWithRegex == 0 || addMessageForm.invalid"
-                            [ngClass]="{'disabledBtn': filteredInpuvalueWithRegex == 0 || addMessageForm.invalid}">
+                        <button type="submit"
+                            [disabled]="storageService.uploadedImages.length == 0 && addMessageForm.invalid"
+                            [ngClass]="{'disabledBtn':storageService.uploadedImages.length == 0 && addMessageForm.invalid}">
                             <img src="assets/icons/send-message-icon-light-purble.svg" alt="Send Icon"
-                                [ngClass]="{'disabledSendBtn': filteredInpuvalueWithRegex == 0 || addMessageForm.invalid}">
+                                [ngClass]="{'disabledSendBtn': storageService.uploadedImages.length == 0 && addMessageForm.invalid}">
                         </button>
                     </div>
                 </form>

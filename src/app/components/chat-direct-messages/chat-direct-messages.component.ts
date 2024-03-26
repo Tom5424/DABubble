@@ -29,17 +29,17 @@ export class ChatDirectMessagesComponent {
   authService = inject(AuthService);
   createDirectMessageService = inject(CreateDirectMessageService);
   storageService = inject(StorageService)
+  workspaceMenuService = inject(WorkspaceMenuService);
   activatedRoute = inject(ActivatedRoute);
   matDialog = inject(MatDialog);
   renderer2 = inject(Renderer2);
-  workspaceMenu = inject(WorkspaceMenuService);
   @ViewChild('scrollingContainer') scrollingContainer!: ElementRef;
   // groupedDates: number[] = [];
   userId: string | null = '';
   inputValue: string | null = '';
-  filteredInpuvalueWithRegex: number | undefined;
+  // filteredInpuvalueWithRegex: number | undefined;
   senderTimeFromSendedMessage: number = 0;
-  keyEnterWasPressed: boolean = false;
+  // keyEnterWasPressed: boolean = false;
   addMessageForm = new FormGroup({
     textarea: new FormControl('', Validators.required)
   })
@@ -61,24 +61,28 @@ export class ChatDirectMessagesComponent {
 
   sendDirectMessage(): void {
     this.inputValue = this.addMessageForm.controls.textarea.value;
-    const inputValueWithoutHTMLTags = this.inputValue?.replace(/<[^>]*>/g, ''); // The regular expression removes the HTML tags from the string that come from the Quill Editor
-    this.filteredInpuvalueWithRegex = this.inputValue?.replace(/(<([^>]+)>)/ig, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
-    if (this.filteredInpuvalueWithRegex && this.filteredInpuvalueWithRegex > 0) {
-      this.createDirectMessageService.createDirectMessageService(this.authService.user, this.userId, this.authService.user.userId, inputValueWithoutHTMLTags || null);
+    // const inputValueWithoutHTMLTags = this.inputValue?.replace(/<[^>]*>/g, ''); // The regular expression removes the HTML tags from the string that come from the Quill Editor
+    // this.filteredInpuvalueWithRegex = this.inputValue?.replace(/(<([^>]+)>)/ig, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
+    // if (this.filteredInpuvalueWithRegex && this.filteredInpuvalueWithRegex > 0) {
+    if (this.inputValue?.trim() !== '' || this.storageService.uploadedImages.length >= 1) {
+      this.createDirectMessageService.createDirectMessageService(this.authService.user, this.userId, this.authService.user.userId, this.inputValue, this.storageService.uploadedImages);
       this.scrollToBottomAfterSendMessage();
       this.addMessageForm.reset();
+      this.storageService.uploadedImages = [];
     }
+    // }
   }
 
 
   sendDirectMessageIfPressOnEnterKey(event: KeyboardEvent): void {
     this.inputValue = this.addMessageForm.controls.textarea.value;
-    const inputValueWithoutHTMLTags = this.inputValue?.replace(/<[^>]*>/g, ''); // The regular expression removes the HTML tags from the string that come from the Quill Editor
-    this.filteredInpuvalueWithRegex = this.inputValue?.replace(/(<([^>]+)>)/ig, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
-    if (event?.key == 'Enter' && this.filteredInpuvalueWithRegex && this.filteredInpuvalueWithRegex > 0) {
-      this.createDirectMessageService.createDirectMessageService(this.authService.user, this.userId, this.authService.user.userId, inputValueWithoutHTMLTags || null);
+    // const inputValueWithoutHTMLTags = this.inputValue?.replace(/<[^>]*>/g, ''); // The regular expression removes the HTML tags from the string that come from the Quill Editor
+    // this.filteredInpuvalueWithRegex = this.inputValue?.replace(/(<([^>]+)>)/ig, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
+    if (event?.key == 'Enter' && this.inputValue?.trim() !== '' || this.storageService.uploadedImages.length >= 1) {
+      this.createDirectMessageService.createDirectMessageService(this.authService.user, this.userId, this.authService.user.userId, this.inputValue, this.storageService.uploadedImages);
       this.scrollToBottomAfterSendMessage();
       this.addMessageForm.reset();
+      this.storageService.uploadedImages = [];
     }
   }
 
@@ -103,25 +107,25 @@ export class ChatDirectMessagesComponent {
   }
 
 
-  focusQuillEditor(event: { editor: any, range: any, oldRange: any }): void {
-    if (this.quillEditorIsFocused(event)) {
-      event.editor.container.style.border = '1px solid #535AF1';
-      event.editor.container.style.color = '#000000';
-    } else if (this.quillEditorIsNotFocused(event)) {
-      event.editor.container.style.border = '1px solid #adb0d9';
-      event.editor.container.style.color = '#686868';
-    }
-  }
+  // focusQuillEditor(event: { editor: any, range: any, oldRange: any }): void {
+  //   if (this.quillEditorIsFocused(event)) {
+  //     event.editor.container.style.border = '1px solid #535AF1';
+  //     event.editor.container.style.color = '#000000';
+  //   } else if (this.quillEditorIsNotFocused(event)) {
+  //     event.editor.container.style.border = '1px solid #adb0d9';
+  //     event.editor.container.style.color = '#686868';
+  //   }
+  // }
 
 
-  quillEditorIsFocused(event: { editor: any, range: any, oldRange: any }): boolean {
-    return (event.oldRange == null) ? true : false;
-  }
+  // quillEditorIsFocused(event: { editor: any, range: any, oldRange: any }): boolean {
+  //   return (event.oldRange == null) ? true : false;
+  // }
 
 
-  quillEditorIsNotFocused(event: { editor: any, range: any, oldRange: any }): boolean {
-    return (event.range == null) ? true : false;
-  }
+  // quillEditorIsNotFocused(event: { editor: any, range: any, oldRange: any }): boolean {
+  //   return (event.range == null) ? true : false;
+  // }
 
 
   userIdMatchesWithIdFromLoggedinUser(): boolean {
