@@ -37,7 +37,7 @@
         <!--------------------------------- Container Chat Lower Part--------------------------------->
         @if (chatAreLoading()) {
         <div class="containerSpinnerIconChatDirectMessagesLowerPart">
-            <img class="spinnerIcon" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
+            <img src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
         </div>
 
         }@else {
@@ -47,7 +47,7 @@
             <div class="scrollingContainer" #scrollingContainer>
 
                 <div class="containerUserImageAndNameLowerPart"
-                    [ngStyle]="userIdMatchesWithIdFromLoggedinUser() ? {'margin-top': '94px'} : {'margin-top': '118px'}">
+                    [ngStyle]="userIdMatchesWithIdFromLoggedinUser() ? {'margin-top': '94px'} : {'margin-top': '95px'}">
 
                     @if (noProfileImgExist()) {
                     <img class="imgNoSelectedProfileChatDirectMessagesLowerPart" src="assets/img/non-user-selected.svg"
@@ -124,8 +124,7 @@
 
 
             <div class="containerForm"
-                [ngStyle]="{'padding-top': storageService.uploadedImages.length > 0 || storageService.uploadImg ? '0px' : '30px', 
-                'padding-bottom': storageService.uploadedImages.length > 0 || storageService.uploadImg ? '17px' : '35px'}">
+                [ngStyle]="{'padding': storageService.imgIsUploaded ? '13px 0 9px 0' : '35px 0 35px 0'}">
 
                 <form [formGroup]="addMessageForm" (ngSubmit)="sendDirectMessage()"
                     (keyup)="sendDirectMessageIfPressOnEnterKey($event)">
@@ -145,7 +144,7 @@
                         @for (uploadedImage of storageService.uploadedImages; track $index) {
                         <div class="childContainerUploadedImages">
                             <img class="closeIcon" src="assets/icons/close-icon.svg" alt="Close Icon"
-                                (click)="removeUploadedImage($index, uploadedImage)">
+                                (click)="removeUploadedImage($index)">
 
                             <img src="{{ uploadedImage }}" alt="Uploaded Image"
                                 (click)="openImageDetailView(uploadedImage)">
@@ -186,10 +185,10 @@
 
 
                         <button type="submit"
-                            [disabled]="storageService.uploadedImages.length == 0 && addMessageForm.invalid"
-                            [ngClass]="{'disabledBtn':storageService.uploadedImages.length == 0 && addMessageForm.invalid}">
+                            [disabled]="(storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || addMessageForm.controls.textarea.value?.trim() == null"
+                            [ngClass]="{'disabledBtn': (storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || addMessageForm.controls.textarea.value?.trim() == null}">
                             <img src="assets/icons/send-message-icon-light-purble.svg" alt="Send Icon"
-                                [ngClass]="{'disabledSendBtn': storageService.uploadedImages.length == 0 && addMessageForm.invalid}">
+                                [ngClass]="{'disabledSendBtn': (storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || addMessageForm.controls.textarea.value?.trim() == null}">
                         </button>
                     </div>
                 </form>

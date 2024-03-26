@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Storage, StorageReference, ref, uploadBytes, getDownloadURL, uploadBytesResumable, UploadResult, deleteObject } from '@angular/fire/storage';
+import { Storage, StorageReference, ref, uploadBytes, getDownloadURL, uploadBytesResumable, UploadResult } from '@angular/fire/storage';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogUploadInvalidDataComponent } from '../components/dialog-upload-invalid-data/dialog-upload-invalid-data.component';
 import { Router } from '@angular/router';
@@ -83,12 +83,6 @@ export class StorageService {
       .catch((error) => {
         console.error(error.message);
       })
-  }
-
-
-  deleteUploadedDataService(imageUrl: string): void {
-    const storageRef = ref(this.storage, imageUrl);
-    deleteObject(storageRef);
   }
 
 

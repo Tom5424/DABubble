@@ -182,7 +182,7 @@
 
 .containerForm {
     @include flexCenteredXAxis();
-    padding: 0 0 35px 0;
+    // padding: 33px 0 33px 0;
     position: relative;
 }
 
@@ -209,12 +209,16 @@ form {
     @include flex();
     gap: 15px;
     margin: 0px 0px -10px 15px;
+    position: relative;
 }
 
 
 .spinnerIcon {
-    width: 60px;
-    margin: -38px 0 -10px 0;
+    position: absolute;
+    top: -70px;
+    left: 270px;
+    z-index: 1;
+    width: 120px;
 }
 
 
@@ -255,7 +259,7 @@ form {
 
 .mainContainerIcons {
     @include flexSpaceBetween();
-    margin: 15px 20px 15px 15px;
+    margin: 15px 20px 10px 15px;
     position: relative;
     background-color: #ffffff;
 }

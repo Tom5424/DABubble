@@ -40,7 +40,6 @@ export class ChatDirectMessagesComponent {
   inputValue: string | null = '';
   // filteredInpuvalueWithRegex: number | undefined;
   senderTimeFromSendedMessage: number = 0;
-  // keyEnterWasPressed: boolean = false;
   addMessageForm = new FormGroup({
     textarea: new FormControl('', Validators.required)
   })
@@ -79,7 +78,7 @@ export class ChatDirectMessagesComponent {
     this.inputValue = this.addMessageForm.controls.textarea.value;
     // const inputValueWithoutHTMLTags = this.inputValue?.replace(/<[^>]*>/g, ''); // The regular expression removes the HTML tags from the string that come from the Quill Editor
     // this.filteredInpuvalueWithRegex = this.inputValue?.replace(/(<([^>]+)>)/ig, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
-    if (event?.key == 'Enter' && this.inputValue?.trim() !== '' || this.storageService.uploadedImages.length >= 1) {
+    if ((event?.key == 'Enter' && this.inputValue?.trim() !== '') || (event.key == 'Enter' && this.inputValue?.trim() == '' && this.storageService.uploadedImages.length >= 1)) {
       this.createDirectMessageService.createDirectMessageService(this.authService.user, this.userId, this.authService.user.userId, this.inputValue, this.storageService.uploadedImages);
       this.scrollToBottomAfterSendMessage();
       this.addMessageForm.reset();
@@ -152,9 +151,11 @@ export class ChatDirectMessagesComponent {
   }
 
 
-  removeUploadedImage(indexFromImage: number, imageUrl: string): void {
-    this.storageService.deleteUploadedDataService(imageUrl);
+  removeUploadedImage(indexFromImage: number): void {
     this.storageService.uploadedImages.splice(indexFromImage, 1);
+    if (this.storageService.uploadedImages.length == 0) {
+      this.storageService.imgIsUploaded = false;
+    }
   }
 
 
