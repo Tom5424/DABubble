@@ -13,6 +13,7 @@ import { DirectMessage } from '../../models/direct-message';
 import { CustomDatePipe } from '../../pipes/custom-date.pipe';
 import { WorkspaceMenuService } from '../../services/workspace-menu.service';
 import { StorageService } from '../../services/storage.service';
+import { DialogUploadedImgFullViewComponent } from '../dialog-uploaded-img-full-view/dialog-uploaded-img-full-view.component';
 
 
 @Component({
@@ -154,6 +155,11 @@ export class ChatDirectMessagesComponent {
   removeUploadedImage(indexFromImage: number, imageUrl: string): void {
     this.storageService.deleteUploadedDataService(imageUrl);
     this.storageService.uploadedImages.splice(indexFromImage, 1);
+  }
+
+
+  openImageDetailView(uploadedImage: string): void {
+    this.matDialog.open(DialogUploadedImgFullViewComponent, { data: { uploadedImage: uploadedImage } });
   }
 
 

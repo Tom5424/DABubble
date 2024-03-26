@@ -147,7 +147,8 @@
                             <img class="closeIcon" src="assets/icons/close-icon.svg" alt="Close Icon"
                                 (click)="removeUploadedImage($index, uploadedImage)">
 
-                            <img src="{{ uploadedImage }}" alt="Uploaded Image">
+                            <img src="{{ uploadedImage }}" alt="Uploaded Image"
+                                (click)="openImageDetailView(uploadedImage)">
                         </div>
                         }
                         }

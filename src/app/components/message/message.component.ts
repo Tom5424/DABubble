@@ -7,6 +7,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CreateUserService } from '../../services/create-user.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { DialogUploadedImgFullViewComponent } from '../dialog-uploaded-img-full-view/dialog-uploaded-img-full-view.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -23,6 +25,7 @@ export class MessageComponent implements OnInit {
   createUserService = inject(CreateUserService);
   authService = inject(AuthService);
   activatedRoute = inject(ActivatedRoute);
+  matDialog = inject(MatDialog);
   @Input() directMessage!: DirectMessage;
   @Input() directMessageId: string = '';
   @Output() getSenderTimeFromSendedMessage = new EventEmitter();
@@ -97,6 +100,11 @@ export class MessageComponent implements OnInit {
   selectEmoji(emojiUrl: string) {
     this.initAddedEmojiFieldInDirectMessage();
     this.createDirectMessageService.updateEmojisService(this.directMessageId, this.authService.user.userId, this.authService.user.name, emojiUrl, this.directMessage);
+  }
+
+
+  openImageDetailView(uploadedImage: string): void {
+    this.matDialog.open(DialogUploadedImgFullViewComponent, { data: { uploadedImage: uploadedImage } });
   }
 
 

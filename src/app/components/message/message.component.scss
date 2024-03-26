@@ -132,11 +132,16 @@
 
 
 .uploadedImage {
+    @include hover();
     width: 350px !important;
     height: 250px !important;
     margin: 15px 0 15px 0;
     object-fit: cover;
     border-radius: unset !important;
+
+    &:hover {
+        opacity: 0.8;
+    }
 }
 
 

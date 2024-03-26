@@ -53,7 +53,8 @@
 
         <!--------------------------------- Displayed here the uploaded Images --------------------------------->
         @for (uploadedImage of directMessage.attachedFiles; track $index) {
-        <img class="uploadedImage" src="{{ uploadedImage }}" alt="Uploaded Image">
+        <img class="uploadedImage" src="{{ uploadedImage }}" alt="Uploaded Image"
+            (click)="openImageDetailView(uploadedImage)">
         }
         <!--------------------------------- Displayed here the uploaded Images --------------------------------->
 
