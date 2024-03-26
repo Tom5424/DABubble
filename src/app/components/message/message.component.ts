@@ -6,7 +6,6 @@ import { DirectMessage } from '../../models/direct-message';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CreateUserService } from '../../services/create-user.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { DialogUploadedImgFullViewComponent } from '../dialog-uploaded-img-full-view/dialog-uploaded-img-full-view.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -14,7 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-message',
   standalone: true,
-  imports: [DatePipe, NgClass, ReactiveFormsModule, MatTooltipModule, RouterLink],
+  imports: [DatePipe, NgClass, ReactiveFormsModule, RouterLink],
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss'
 })
@@ -32,6 +31,7 @@ export class MessageComponent implements OnInit {
   menuMoreOptionsAreOpen: boolean = false;
   messageIsInEditMode: boolean = false;
   barToSelectEmojisAreOpen: boolean = false;
+  emojiUrl: string = '';
   userId: string | null = '';
   editMessageForm = new FormGroup({
     inputfieldEditMessage: new FormControl('', Validators.required),
@@ -100,6 +100,21 @@ export class MessageComponent implements OnInit {
   selectEmoji(emojiUrl: string) {
     this.initAddedEmojiFieldInDirectMessage();
     this.createDirectMessageService.updateEmojisService(this.directMessageId, this.authService.user.userId, this.authService.user.name, emojiUrl, this.directMessage);
+  }
+
+
+  displayTooltiAddedEmojip(emojiUrl: string): void {
+    this.emojiUrl = emojiUrl;
+  }
+
+
+  hideTooltipAddedEmoji(): void {
+    this.emojiUrl = '';
+  }
+
+
+  emojiUrlMatchesWithEmojiUrlFromTooltip(emojiUrl: string): boolean {
+    return (emojiUrl == this.emojiUrl) ? true : false;
   }
 
 
