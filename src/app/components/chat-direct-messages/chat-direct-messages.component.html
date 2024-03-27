@@ -163,8 +163,9 @@
 
                     <!--------------------------------- Emoji Picker --------------------------------->
                     @if (emojiPickerIsDisplayed) {
-                    <emoji-mart
-                        [style]="{position: 'absolute', bottom: '150px', left: '40px', 'z-index': '1'}"></emoji-mart>
+                    <emoji-mart [style]="{position: 'absolute', bottom: '150px', left: '40px', 'z-index': '1'}"
+                        (emojiClick)="selectEmoji($event)">
+                    </emoji-mart>
                     }
                     <!--------------------------------- Emoji Picker --------------------------------->
 

@@ -85,6 +85,17 @@ body {
 }
 
 
+/////////// Custom Styles for the Emoji Picker
+.emoji-mart-category .emoji-mart-emoji span {
+    @include hover();
+}
+
+
+.emoji-mart .emoji-mart-emoji {
+    @include hover();
+}
+
+
 /////////// Custom Styles for Quill Editor 
 // .ql-toolbar.ql-snow {
 //     display: none;

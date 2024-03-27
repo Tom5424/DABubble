@@ -15,6 +15,7 @@ import { WorkspaceMenuService } from '../../services/workspace-menu.service';
 import { StorageService } from '../../services/storage.service';
 import { DialogUploadedImgFullViewComponent } from '../dialog-uploaded-img-full-view/dialog-uploaded-img-full-view.component';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
+import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 
 
 @Component({
@@ -38,12 +39,12 @@ export class ChatDirectMessagesComponent {
   @ViewChild('scrollingContainer') scrollingContainer!: ElementRef;
   // groupedDates: number[] = [];
   userId: string | null = '';
-  inputValue: string | null = '';
+  inputValue: string | null | undefined = '';
   emojiPickerIsDisplayed: boolean = false;
   // filteredInpuvalueWithRegex: number | undefined;
   senderTimeFromSendedMessage: number = 0;
   addMessageForm = new FormGroup({
-    textarea: new FormControl('', Validators.required)
+    textarea: new FormControl(this.inputValue, Validators.required)
   })
 
 
@@ -160,6 +161,15 @@ export class ChatDirectMessagesComponent {
 
   tootgleEmojiPicker() {
     this.emojiPickerIsDisplayed = !this.emojiPickerIsDisplayed;
+  }
+
+
+  selectEmoji(event: EmojiEvent): void {
+    this.inputValue = this.addMessageForm.controls.textarea.value;
+    this.inputValue += event.emoji.native ? event.emoji.native : '';
+    this.addMessageForm.patchValue({
+      textarea: this.inputValue,
+    });
   }
 
 
