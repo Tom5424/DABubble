@@ -49,7 +49,7 @@
             <div class="scrollingContainer" #scrollingContainer>
 
                 <div class="containerUserImageAndNameLowerPart"
-                    [ngStyle]="userIdMatchesWithIdFromLoggedinUser() ? {'margin-top': '94px'} : {'margin-top': '95px'}">
+                    [ngStyle]="{'margin-top':  userIdMatchesWithIdFromLoggedinUser() ? '80px' : '110px'}">
 
                     @if (noProfileImgExist()) {
                     <img class="imgNoSelectedProfileChatDirectMessagesLowerPart" src="assets/img/non-user-selected.svg"
@@ -126,7 +126,7 @@
 
 
             <div class="containerForm"
-                [ngStyle]="{'padding': storageService.imgIsUploaded ? '13px 0 9px 0' : '35px 0 35px 0'}">
+                [ngStyle]="{'margin-bottom': storageService.uploadedImages.length >= 1 ? '6px' : '55px'}">
 
                 <form [formGroup]="addMessageForm" (ngSubmit)="sendDirectMessage()"
                     (keyup)="sendDirectMessageIfPressOnEnterKey($event)">
@@ -141,7 +141,7 @@
                     <div class="mainContainerUploadedImages">
                         @if (imageIsUploading()) {
                         <img class="spinnerIcon" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
-                        }@else {
+                        }
 
                         @for (uploadedImage of storageService.uploadedImages; track $index) {
                         <div class="childContainerUploadedImages">
@@ -151,7 +151,6 @@
                             <img src="{{ uploadedImage }}" alt="Uploaded Image"
                                 (click)="openImageDetailView(uploadedImage)">
                         </div>
-                        }
                         }
                     </div>
 
@@ -163,7 +162,7 @@
 
                     <!--------------------------------- Emoji Picker --------------------------------->
                     @if (emojiPickerIsDisplayed) {
-                    <emoji-mart [style]="{position: 'absolute', bottom: '150px', left: '40px', 'z-index': '1'}"
+                    <emoji-mart [style]="{position: 'absolute', bottom: '190px', 'z-index': '1'}"
                         (emojiClick)="selectEmoji($event)">
                     </emoji-mart>
                     }
@@ -196,10 +195,10 @@
 
 
                         <button type="submit"
-                            [disabled]="(storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || addMessageForm.controls.textarea.value?.trim() == null"
-                            [ngClass]="{'disabledBtn': (storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || addMessageForm.controls.textarea.value?.trim() == null}">
+                            [disabled]="(storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '')"
+                            [ngClass]="{'disabledBtn': (storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') }">
                             <img src="assets/icons/send-message-icon-light-purble.svg" alt="Send Icon"
-                                [ngClass]="{'disabledSendBtn': (storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || addMessageForm.controls.textarea.value?.trim() == null}">
+                                [ngClass]="{'disabledSendBtn': (storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '')}">
                         </button>
                     </div>
                 </form>
