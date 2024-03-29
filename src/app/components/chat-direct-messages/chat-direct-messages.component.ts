@@ -10,7 +10,6 @@ import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angula
 import { CreateDirectMessageService } from '../../services/create-direct-message.service';
 import { MessageComponent } from '../message/message.component';
 import { DirectMessage } from '../../models/direct-message';
-import { CustomDatePipe } from '../../pipes/custom-date.pipe';
 import { WorkspaceMenuService } from '../../services/workspace-menu.service';
 import { StorageService } from '../../services/storage.service';
 import { DialogUploadedImgFullViewComponent } from '../dialog-uploaded-img-full-view/dialog-uploaded-img-full-view.component';
@@ -21,7 +20,7 @@ import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 @Component({
   selector: 'app-chat-direct-messages',
   standalone: true,
-  imports: [QuillModule, PickerComponent, NgStyle, NgClass, ReactiveFormsModule, AsyncPipe, DatePipe, MessageComponent, CustomDatePipe, RouterOutlet],
+  imports: [QuillModule, PickerComponent, NgStyle, NgClass, ReactiveFormsModule, AsyncPipe, DatePipe, MessageComponent, RouterOutlet],
   templateUrl: './chat-direct-messages.component.html',
   styleUrl: './chat-direct-messages.component.scss'
 })
@@ -37,12 +36,9 @@ export class ChatDirectMessagesComponent {
   matDialog = inject(MatDialog);
   renderer2 = inject(Renderer2);
   @ViewChild('scrollingContainer') scrollingContainer!: ElementRef;
-  // groupedDates: number[] = [];
   userId: string | null = '';
   inputValue: string | null | undefined = '';
   emojiPickerIsDisplayed: boolean = false;
-  // filteredInpuvalueWithRegex: number | undefined;
-  senderTimeFromSendedMessage: number = 0;
   addMessageForm = new FormGroup({
     textarea: new FormControl(this.inputValue, Validators.required)
   })
@@ -144,11 +140,6 @@ export class ChatDirectMessagesComponent {
   }
 
 
-  setSenderTimeFromSendedMessage(directMessage: DirectMessage): void {
-    this.senderTimeFromSendedMessage = directMessage.senderTime;
-  }
-
-
   selectFile(selectedFile: HTMLInputElement): void {
     this.storageService.selectFileService(selectedFile);
   }
@@ -186,31 +177,17 @@ export class ChatDirectMessagesComponent {
   }
 
 
-  // isToday() {
-  //   const today = new Date();
-  //   const dateWhenTheMessageWasSendVariable = new Date(dateWhenTheMessageWasSend);
-  //   if (!this.alreadyExistingDatesInMessage.includes(dateWhenTheMessageWasSendVariable.toDateString())) {
-  //     this.alreadyExistingDatesInMessage.push(dateWhenTheMessageWasSendVariable.toDateString());
-  //     return today.toDateString() === dateWhenTheMessageWasSendVariable.toDateString();
-  //   } else {
-  //     return false;
-  //   }
-  // }
+  isToday(directMessage: DirectMessage): boolean {
+    const today = new Date();
+    const currentDateMessage = new Date(directMessage.senderTime);
+    return (today.toDateString() == currentDateMessage.toDateString());
+  }
 
 
-  // isYesterday(): boolean {
-  //   const yesterday = new Date();
-  //   yesterday.setDate(yesterday.getDate() - 1);
-  //   const dateWhenTheMessageWasSent = new Date(this.senderTimeFromSendedMessage);
-  //   return yesterday.toDateString() == dateWhenTheMessageWasSent.toDateString();
-  // }
-
-
-  // isOlderThanTwoDays(): boolean {
-  //   const today = new Date();
-  //   const twoDaysAgo = new Date(today);
-  //   const dateWhenTheMessagewasSend = new Date(this.senderTimeFromSendedMessage);
-  //   twoDaysAgo.setDate(today.getDate() - 2);
-  //   return dateWhenTheMessagewasSend < twoDaysAgo;
-  // }
+  isYesterday(directMessage: DirectMessage): boolean {
+    const messageThatOneDayOld = new Date();
+    const currentDateMessage = new Date(directMessage.senderTime);
+    messageThatOneDayOld.setDate(messageThatOneDayOld.getDate() - 1);
+    return (messageThatOneDayOld.toDateString() == currentDateMessage.toDateString());
+  }
 }

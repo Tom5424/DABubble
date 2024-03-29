@@ -48,79 +48,78 @@
 
             <div class="scrollingContainer" #scrollingContainer>
 
-                <div class="containerUserImageAndNameLowerPart"
-                    [ngStyle]="{'margin-top':  userIdMatchesWithIdFromLoggedinUser() ? '80px' : '110px'}">
+                <div>
+                    <div class="containerUserImageAndNameLowerPart"
+                        [ngStyle]="{'margin-top':  userIdMatchesWithIdFromLoggedinUser() ? '80px' : '110px'}">
 
-                    @if (noProfileImgExist()) {
-                    <img class="imgNoSelectedProfileChatDirectMessagesLowerPart" src="assets/img/non-user-selected.svg"
-                        alt="User Profile Image">
-                    }@else {
-                    <img class="imgSelectedProfileChatDirectMessagesLowerPart" src="{{ createUserService.user.imgUrl }}"
-                        alt="User Profile Image">
-                    }
+                        @if (noProfileImgExist()) {
+                        <img class="imgNoSelectedProfileChatDirectMessagesLowerPart"
+                            src="assets/img/non-user-selected.svg" alt="User Profile Image">
+                        }@else {
+                        <img class="imgSelectedProfileChatDirectMessagesLowerPart"
+                            src="{{ createUserService.user.imgUrl }}" alt="User Profile Image">
+                        }
 
-                    <p>{{ createUserService.user.name }}</p>
+                        <p>{{ createUserService.user.name }}</p>
+
+                        @if (userIdMatchesWithIdFromLoggedinUser()) {
+                        <p>(You)</p>
+                        }
+                    </div>
+
 
                     @if (userIdMatchesWithIdFromLoggedinUser()) {
-                    <p>(You)</p>
+                    <p class="textInfoLoggedinUser">
+                        <mark>This space is just for you.</mark> Take notes, list your to-dos, or keep links and files
+                        handy.
+                        You can also discuss things with yourself here.
+                    </p>
+                    }@else {
+                    <p class="text">
+                        This conversation is only between you and
+                        <mark (click)="openProfileDetailView()">
+                            <!---------- &#64; means => @ Symbol  ---------->
+                            &#64;{{ createUserService.user.name }}.
+                        </mark>
+                    </p>
                     }
-                </div>
 
 
-                @if (userIdMatchesWithIdFromLoggedinUser()) {
-                <p class="textInfoLoggedinUser">
-                    <mark>This space is just for you.</mark> Take notes, list your to-dos, or keep links and files
-                    handy.
-                    You can also discuss things with yourself here.
-                </p>
-                }@else {
-                <p class="text">
-                    This conversation is only between you and
-                    <mark (click)="openProfileDetailView()">
-                        <!---------- &#64; means => @ Symbol  ---------->
-                        &#64;{{ createUserService.user.name }}.
-                    </mark>
-                </p>
-                }
+                    @if ((createDirectMessageService.directMessagesAsObservable | async); as directMessages) {
 
+                    @for (directMessage of directMessages; track $index) {
 
-                <!-- <div class="containerTimeWhenTheMessageWasSent">
-                    <hr>
-                    <p>{{ senderTimeFromSendedMessage | customDate }}</p>
-                    <hr>
-                </div> -->
+                    @if (!isToday(directMessage) && !isYesterday(directMessage)) {
+                    <div class="containerTimeWhenTheMessageWasSent">
+                        <hr>
+                        <p>{{ directMessage.senderTime | date: 'EEEE, dd MMMM'}}</p>
+                        <hr>
+                    </div>
+                    }
 
-
-                <!-- @if (isToday()) {
-                <div class="containerTimeWhenTheMessageWasSent">
-                    <hr>
-                    <p>Today</p>
-                    <hr>
-                </div>
-                } -->
-
-                <!-- @if (isYesterday()) {
+                    @if (isYesterday(directMessage)) {
                     <div class="containerTimeWhenTheMessageWasSent">
                         <hr>
                         <p>Yesterday</p>
                         <hr>
                     </div>
                     }
-    
-                    @if(!isToday() && !isYesterday()) {
+
+                    @if (isToday(directMessage)) {
                     <div class="containerTimeWhenTheMessageWasSent">
                         <hr>
-                        <p>{{ this.senderTimeFromSendedMessage | date: 'EEEE, dd LLLL' }}</p>
+                        <p>Today</p>
                         <hr>
-                    </div> -->
+                    </div>
+                    }
 
+                    <app-message [directMessage]="directMessage" [directMessageId]="directMessage.id">
 
-                @for (directMessage of createDirectMessageService.directMessagesAsObservable | async; track $index) {
-                <app-message [directMessage]="directMessage" [directMessageId]="directMessage.id"
-                    (getSenderTimeFromSendedMessage)="setSenderTimeFromSendedMessage($event)">
-                </app-message>
-                }
+                    </app-message>
+                    }
 
+                    }
+                </div>
 
             </div>
 
@@ -195,10 +194,10 @@
 
 
                         <button type="submit"
-                            [disabled]="(storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '')"
-                            [ngClass]="{'disabledBtn': (storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') }">
+                            [disabled]="(storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || (addMessageForm.controls.textarea.value == null && storageService.uploadedImages.length == 0)"
+                            [ngClass]="{'disabledBtn': (storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || (addMessageForm.controls.textarea.value == null && storageService.uploadedImages.length == 0)}">
                             <img src="assets/icons/send-message-icon-light-purble.svg" alt="Send Icon"
-                                [ngClass]="{'disabledSendBtn': (storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '')}">
+                                [ngClass]="{'disabledSendBtn': (storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || (addMessageForm.controls.textarea.value == null && storageService.uploadedImages.length == 0)}">
                         </button>
                     </div>
                 </form>
