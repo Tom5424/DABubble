@@ -258,7 +258,7 @@ form {
 
 
 .containerTooltip {
-    @include positionAbsolute(unset, 40px, -32px, unset);
+    @include positionAbsolute(unset, 40px, -42px, unset);
     @include flexColumnCenteredXAxis();
     background-color: $darkPurple;
     gap: 8px;

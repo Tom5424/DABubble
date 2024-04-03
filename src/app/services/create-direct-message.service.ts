@@ -39,25 +39,7 @@ export class CreateDirectMessageService {
 
   getDirectMessagesService(receiverId: string | null, senderId: string): void {
     this.loadChat = true;
-    if (receiverId == senderId) {
-      this.receivedMessagesThatYouWroteToYourselfService(receiverId, senderId);
-    } else {
-      this.receiveMessagesThatYouDidNotWroteToYourselfService(receiverId);
-    }
-  }
-
-
-  receivedMessagesThatYouWroteToYourselfService(receiverId: string, senderId: string): void {
-    const collectionRef = query(collection(this.firestore, 'directMessages'), and(where('receiverId', '==', receiverId), where('senderId', '==', senderId)), orderBy('senderTime'));
-    collectionData(collectionRef).subscribe(() => {
-      this.loadChat = false;
-    })
-    this.directMessagesAsObservable = collectionData(collectionRef, { idField: 'id' }) as Observable<DirectMessage[]>;
-  }
-
-
-  receiveMessagesThatYouDidNotWroteToYourselfService(receiverId: string | null): void {
-    const collectionRef = query(collection(this.firestore, 'directMessages'), where('receiverId', '==', receiverId), orderBy('senderTime'));
+    const collectionRef = query(collection(this.firestore, 'directMessages'), where('receiverId', 'in', [senderId, receiverId]), where('senderId', 'in', [senderId, receiverId]), orderBy('senderTime'));
     collectionData(collectionRef).subscribe(() => {
       this.loadChat = false;
     })

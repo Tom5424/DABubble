@@ -9,6 +9,8 @@
 
 <ul class="contactList" [ngClass]="{'d-none': contactListAreCollapsed}">
     @for (user of allUser; track $index) {
+
+    @if (!userIdMatchesWithIdFromLoggedinUser(user)) {
     <li routerLink="/mainView/directMessage/{{ user.userId }}" routerLinkActive="activeUserDirectMessages">
         @if (noProfileImgExist(user)) {
         <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="User Profile Image">
@@ -24,10 +26,9 @@
 
         <p>{{ user.name }}</p>
 
-        @if (userIdMatchesWithIdFromLoggedinUser(user)) {
-        <p>(You)</p>
-        }
     </li>
+    }
+
     }
 
 

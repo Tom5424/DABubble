@@ -127,11 +127,6 @@ export class ChatDirectMessagesComponent {
   // }
 
 
-  userIdMatchesWithIdFromLoggedinUser(): boolean {
-    return (this.createUserService.user.userId == this.authService.auth.currentUser?.uid) ? true : false;
-  }
-
-
   scrollToBottomAfterSendMessage(): void {
     setTimeout(() => { // Uses setTimeout to always scroll to the bottom
       const scrollingContainer = this.scrollingContainer.nativeElement;

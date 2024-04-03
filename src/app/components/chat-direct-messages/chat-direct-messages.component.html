@@ -27,9 +27,6 @@
 
                 <p>{{ createUserService.user.name }}</p>
 
-                @if (userIdMatchesWithIdFromLoggedinUser()) {
-                <p>(You)</p>
-                }
             </div>
             }
         </div>
@@ -49,8 +46,7 @@
             <div class="scrollingContainer" #scrollingContainer>
 
                 <div>
-                    <div class="containerUserImageAndNameLowerPart"
-                        [ngStyle]="{'margin-top':  userIdMatchesWithIdFromLoggedinUser() ? '80px' : '110px'}">
+                    <div class="containerUserImageAndNameLowerPart">
 
                         @if (noProfileImgExist()) {
                         <img class="imgNoSelectedProfileChatDirectMessagesLowerPart"
@@ -62,19 +58,9 @@
 
                         <p>{{ createUserService.user.name }}</p>
 
-                        @if (userIdMatchesWithIdFromLoggedinUser()) {
-                        <p>(You)</p>
-                        }
                     </div>
 
 
-                    @if (userIdMatchesWithIdFromLoggedinUser()) {
-                    <p class="textInfoLoggedinUser">
-                        <mark>This space is just for you.</mark> Take notes, list your to-dos, or keep links and files
-                        handy.
-                        You can also discuss things with yourself here.
-                    </p>
-                    }@else {
                     <p class="text">
                         This conversation is only between you and
                         <mark (click)="openProfileDetailView()">
@@ -82,7 +68,6 @@
                             &#64;{{ createUserService.user.name }}.
                         </mark>
                     </p>
-                    }
 
 
                     @if ((createDirectMessageService.directMessagesAsObservable | async); as directMessages) {
