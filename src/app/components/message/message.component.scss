@@ -53,6 +53,11 @@
 }
 
 
+.overlay {
+    @include positionAbsolute(0, 0, 0, 0);
+}
+
+
 .container {
     @include flexColumn();
     @include flexEndYAxis();
@@ -146,49 +151,73 @@
 
 
 form {
-    padding: 20px 0 20px 0;
     position: relative;
+    padding: 20px 0 20px 0;
 
-    input {
-        @include inputfieldOrTextarea(470px, 30px, 12px, 82px, 12px, 12px, 18px, #ffffff);
+    textarea {
+        @include inputfieldOrTextarea(470px, 20px, 20px, 20px, 20px, 20px, 18px, #ffffff);
         @include inputfieldOrTextareaHover();
         @include inputfieldOrTextareaFocus();
         border: 1px solid $lightPurple;
+        font-family: "Figtree", sans-serif;
+        height: 120px;
+        resize: none;
     }
 }
 
 
-.containerIcons {
-    @include positionAbsolute(28px, unset, unset, 15px);
+.containerIconAndBtns {
     @include flexCenteredYAxis();
-    gap: 5px;
+    @include flexSpaceBetween();
+    position: absolute;
+    background-color: #ffffff;
+    width: 90%;
+    margin-left: -10px;
+    margin: -81px 0 0 15px;
+    padding: 15px 20px 15px 0;
+}
 
+
+.containerBtn {
+    @include flex();
+    gap: 32px;
 
     button:nth-of-type(1) {
-
-        img {
-            width: 28px;
-            height: 28px;
-        }
+        @include btnSecondary();
+        @include btnSecondaryHover();
+        @include btnSecondaryActive();
     }
 
     button:nth-of-type(2) {
-
-        img {
-            width: 23px;
-            height: 23px;
-        }
+        @include btnPrimary();
+        @include btnPrimaryHover();
+        @include btnPrimaryActive();
+        border: unset;
     }
 
     button {
-        @include flexCenteredYAxis();
-        padding: 0;
-        background-color: unset;
-        border: unset;
+        padding: 12px 25px 12px 25px;
+        border-radius: 50px;
+    }
+}
 
-        img {
-            @include hover();
+
+.containerSmileyIcon {
+    @include hover();
+    @include flex();
+    border-radius: 50%;
+
+    img {
+        width: 40px;
+        height: 40px;
+
+        &:hover {
+            filter: brightness(0) saturate(100%) invert(32%) sepia(74%) saturate(1212%) hue-rotate(215deg) brightness(97%) contrast(107%);
         }
+    }
+
+    &:hover {
+        background-color: $bgColor;
     }
 }
 
@@ -355,12 +384,6 @@ form {
             font-weight: 700;
         }
     }
-}
-
-
-.disabledBtn {
-    @include hoverDisabled();
-    filter: brightness(0) saturate(100%) invert(97%) sepia(0%) saturate(112%) hue-rotate(239deg) brightness(91%) contrast(84%);
 }
 
 

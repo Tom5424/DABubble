@@ -8,12 +8,14 @@ import { CreateUserService } from '../../services/create-user.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DialogUploadedImgFullViewComponent } from '../dialog-uploaded-img-full-view/dialog-uploaded-img-full-view.component';
 import { MatDialog } from '@angular/material/dialog';
+import { PickerComponent } from '@ctrl/ngx-emoji-mart';
+import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 
 
 @Component({
   selector: 'app-message',
   standalone: true,
-  imports: [DatePipe, NgClass, ReactiveFormsModule, RouterLink],
+  imports: [DatePipe, NgClass, ReactiveFormsModule, RouterLink, PickerComponent],
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss'
 })
@@ -31,10 +33,12 @@ export class MessageComponent implements OnInit {
   menuMoreOptionsAreOpen: boolean = false;
   messageIsInEditMode: boolean = false;
   barToSelectEmojisAreOpen: boolean = false;
+  emojiPickerIsDisplayed: boolean = false;
+  inputValue: string | null = '';
   emojiUrl: string = '';
   userId: string | null = '';
   editMessageForm = new FormGroup({
-    inputfieldEditMessage: new FormControl('', Validators.required),
+    textareaEditMessage: new FormControl(this.inputValue, Validators.required),
   })
 
 
@@ -66,6 +70,25 @@ export class MessageComponent implements OnInit {
   closeOpenMenusInMessageIfHoverOutside(): void {
     this.menuMoreOptionsAreOpen = false;
     this.barToSelectEmojisAreOpen = false;
+  }
+
+
+  closeEmojiPickerIfClickOutside(): void {
+    this.emojiPickerIsDisplayed = false;
+  }
+
+
+  tootgleEmojiPicker() {
+    this.emojiPickerIsDisplayed = !this.emojiPickerIsDisplayed;
+  }
+
+
+  selectEmojiInEmojiPicker(event: EmojiEvent) {
+    this.inputValue = this.editMessageForm.controls.textareaEditMessage.value;
+    this.inputValue += event.emoji.native ? event.emoji.native : '';
+    this.editMessageForm.patchValue({
+      textareaEditMessage: this.inputValue,
+    });
   }
 
 
@@ -124,7 +147,8 @@ export class MessageComponent implements OnInit {
 
 
   editMessage(): void {
-    this.createDirectMessageService.updateDirectMessageService(this.directMessageId, this.editMessageForm.controls.inputfieldEditMessage.value);
+    this.inputValue = this.editMessageForm.controls.textareaEditMessage.value;
+    this.createDirectMessageService.updateDirectMessageService(this.directMessageId, this.inputValue);
     this.closeEditModeFromMessage();
   }
 

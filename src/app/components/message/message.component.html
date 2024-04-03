@@ -1,6 +1,9 @@
+<div [ngClass]="{'overlay': emojiPickerIsDisplayed}" (click)="closeEmojiPickerIfClickOutside()"></div>
+
 <div [ngClass]="{'mainContainerDirectMessageOwnMessage': userIdMatchesWithIdFromLoggedinUser(), 
     'mainContainerDirectMessageFromOtherUser': !userIdMatchesWithIdFromLoggedinUser()}"
     (mouseleave)="closeOpenMenusInMessageIfHoverOutside()">
+
 
     @if (noProfileImgExistInMessage()) {
     <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="Profile Image">
@@ -31,32 +34,50 @@
         }
 
 
-        <!--------------------------------- Inputfield to Edit Message --------------------------------->
+        <!--------------------------------- Textarea to Edit Message --------------------------------->
         @if (messageIsInEditMode) {
         <form [formGroup]="editMessageForm" (ngSubmit)="editMessage()">
-            <input type="text" placeholder="{{ directMessage.messageText }}" formControlName="inputfieldEditMessage">
+            <textarea placeholder="{{ directMessage.messageText }}" formControlName="textareaEditMessage">
 
-            <div class="containerIcons">
-                <button type="submit" [disabled]="editMessageForm.invalid">
-                    <img src="assets/icons/check-icon.svg" alt="Check Icon"
-                        [ngClass]="{'disabledBtn': editMessageForm.invalid}">
-                </button>
-                |
-                <button type="button">
-                    <img src="assets/icons/close-icon.svg" alt="Close Icon" (click)="closeEditModeFromMessage()">
-                </button>
+            </textarea>
+
+
+            <!--------------------------------- Emoji Picker --------------------------------->
+            @if (emojiPickerIsDisplayed) {
+            <emoji-mart [style]="{position: 'absolute', bottom: '0', left: '235px', 'z-index': '1'}"
+                (emojiClick)="selectEmojiInEmojiPicker($event)">
+            </emoji-mart>
+            }
+            <!--------------------------------- Emoji Picker --------------------------------->
+
+
+            <div class="containerIconAndBtns">
+
+                <div class="containerSmileyIcon" (click)="tootgleEmojiPicker()">
+                    <img src="assets/icons/smiley-icon.svg" alt="Smiley Icon">
+                </div>
+
+                <div class="containerBtn">
+                    <button type="button" (click)="closeEditModeFromMessage()">Cancel</button>
+
+                    <button type="submit" [disabled]="editMessageForm.invalid"
+                        [ngClass]="{'btnDisabled': editMessageForm.invalid}">
+                        Save
+                    </button>
+                </div>
+
             </div>
         </form>
         }
-        <!--------------------------------- Inputfield to Edit Message --------------------------------->
+        <!--------------------------------- Textarea to Edit Message --------------------------------->
 
 
-        <!--------------------------------- Displayed here the uploaded Images --------------------------------->
+        <!--------------------------------- Displayed here the uploaded Images in Message --------------------------------->
         @for (uploadedImage of directMessage.attachedFiles; track $index) {
         <img class="uploadedImage" src="{{ uploadedImage }}" alt="Uploaded Image"
             (click)="openImageDetailView(uploadedImage)">
         }
-        <!--------------------------------- Displayed here the uploaded Images --------------------------------->
+        <!--------------------------------- Displayed here the uploaded Images in Message --------------------------------->
 
 
         <div [ngClass]="{'row': userIdMatchesWithIdFromLoggedinUser(), 'rowReverse': !userIdMatchesWithIdFromLoggedinUser()}"

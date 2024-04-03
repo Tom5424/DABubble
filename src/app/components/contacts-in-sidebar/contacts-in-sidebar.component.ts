@@ -52,7 +52,7 @@ export class ContactsInSidebarComponent implements OnInit {
 
 
   userIdMatchesWithIdFromLoggedinUser(user: User): boolean {
-    return user.userId == this.authService.user.userId;
+    return (user.userId == this.authService.user.userId) ? true : false;
   }
 
 
