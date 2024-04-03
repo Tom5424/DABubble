@@ -15,6 +15,7 @@ import { StorageService } from '../../services/storage.service';
 import { DialogUploadedImgFullViewComponent } from '../dialog-uploaded-img-full-view/dialog-uploaded-img-full-view.component';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
+import { User } from '../../models/user';
 
 
 @Component({
@@ -36,9 +37,11 @@ export class ChatDirectMessagesComponent {
   matDialog = inject(MatDialog);
   renderer2 = inject(Renderer2);
   @ViewChild('scrollingContainer') scrollingContainer!: ElementRef;
+  allUsers: User[] = [];
   userId: string | null = '';
   inputValue: string | null | undefined = '';
   emojiPickerIsDisplayed: boolean = false;
+  userMenuSelectionIsOpen: boolean = false;
   addMessageForm = new FormGroup({
     textarea: new FormControl(this.inputValue, Validators.required)
   })
@@ -50,6 +53,15 @@ export class ChatDirectMessagesComponent {
       this.createUserService.getSingelUserService(this.userId)
       this.createDirectMessageService.getDirectMessagesService(this.userId, this.authService.user.userId);
     });
+    this.getAllUsers();
+  }
+
+
+  getAllUsers(): void {
+    this.createUserService.getAllUserService()
+      .subscribe((userData) => {
+        this.allUsers = userData;
+      });
   }
 
 
@@ -106,6 +118,21 @@ export class ChatDirectMessagesComponent {
   }
 
 
+  userIdMatchesWithIdFromLoggedinUser(userId: string | null): boolean {
+    return (userId == this.authService.user.userId) ? true : false;
+  }
+
+
+  noProfileImgExistInUserMenuSelection(userImgUrl: string | null): boolean {
+    return (!userImgUrl) ? true : false;
+  }
+
+
+  userIsOnlineInUserMenuSelection(userIsOnline: boolean | undefined): boolean {
+    return (userIsOnline) ? true : false;
+  }
+
+
   // focusQuillEditor(event: { editor: any, range: any, oldRange: any }): void {
   //   if (this.quillEditorIsFocused(event)) {
   //     event.editor.container.style.border = '1px solid #535AF1';
@@ -140,8 +167,9 @@ export class ChatDirectMessagesComponent {
   }
 
 
-  closeEmojiPickerIfClickOutside(): void {
+  closeEmojiPickerOrOtherMenuIfClickOutside(): void {
     this.emojiPickerIsDisplayed = false;
+    this.userMenuSelectionIsOpen = false;
   }
 
 
@@ -156,6 +184,32 @@ export class ChatDirectMessagesComponent {
     this.addMessageForm.patchValue({
       textarea: this.inputValue,
     });
+  }
+
+
+  addAtLetterToMentionSomebody(atLetter: string): void {
+    this.inputValue = this.addMessageForm.controls.textarea.value;
+    this.inputValue = atLetter;
+    this.addMessageForm.patchValue({
+      textarea: this.inputValue,
+    });
+    this.openUserMenuSelectionToMentionAUser();
+  }
+
+
+  openUserMenuSelectionToMentionAUser(): void {
+    const atLetter = this.inputValue?.match(/^@[^@\s]+(?:\s+|$)/);
+    if (atLetter) {
+      this.userMenuSelectionIsOpen = true;
+    } else {
+      this.userMenuSelectionIsOpen = false;
+    }
+  }
+
+
+  getInputValue(): void {
+    this.inputValue = this.addMessageForm.controls.textarea.value;
+    this.openUserMenuSelectionToMentionAUser();
   }
 
 

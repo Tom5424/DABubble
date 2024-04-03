@@ -1,5 +1,7 @@
 <div class="flex">
-    <div [ngClass]="{'overlay': emojiPickerIsDisplayed}" (click)="closeEmojiPickerIfClickOutside()"></div>
+    <div [ngClass]="{'overlay': emojiPickerIsDisplayed || userMenuSelectionIsOpen}"
+        (click)="closeEmojiPickerOrOtherMenuIfClickOutside()">
+    </div>
 
     <div class="mainContainerChatDirectMessages" [ngClass]="{'chatFullView':  workspaceMenuService.sidebarIsHidden}">
 
@@ -116,10 +118,45 @@
                     (keyup)="sendDirectMessageIfPressOnEnterKey($event)">
 
 
-                    <textarea placeholder="Message to {{ createUserService.user.name }}" formControlName="textarea"
-                        [ngClass]="{'quillEditorFullView':  workspaceMenuService.sidebarIsHidden}">
-                    </textarea>
+                    <!--------------------------------- Menu to Mention Users --------------------------------->
+                    @if (userMenuSelectionIsOpen) {
+                    <div class="containerUserMenuSelection">
 
+
+                        @for (user of allUsers; track $index) {
+
+                        @if (!userIdMatchesWithIdFromLoggedinUser(user.userId)) {
+                        <div class="containerUserNameAndImg">
+
+
+                            @if (noProfileImgExistInUserMenuSelection(user.imgUrl)) {
+                            <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg"
+                                alt="User Profile Image">
+                            }@else {
+                            <img class="userImg" src="{{ user.imgUrl }}" alt="User Profile Image">
+                            }
+
+
+                            @if (userIsOnlineInUserMenuSelection(user.isOnline)) {
+                            <img class="userOnlineStatus" src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
+                            }@else {
+                            <img class="userOnlineStatus" src="assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
+                            }
+
+                            <p>{{ user.name }}</p>
+                        </div>
+                        }
+
+                        }
+                    </div>
+                    }
+                    <!--------------------------------- Menu to Mention Users --------------------------------->
+
+
+                    <textarea placeholder="Message to {{ createUserService.user.name }}" formControlName="textarea"
+                        [ngClass]="{'quillEditorFullView':  workspaceMenuService.sidebarIsHidden}"
+                        (input)="getInputValue()">
+                    </textarea>
 
 
                     <div class="mainContainerUploadedImages">
@@ -172,7 +209,7 @@
                                 <img src="assets/icons/smiley-icon.svg" alt="Smiley Icon">
                             </div>
 
-                            <div class="containerSingleIcon">
+                            <div class="containerSingleIcon" (click)="addAtLetterToMentionSomebody('@')">
                                 <img src="assets/icons/@-icon.svg" alt="@ Icon">
                             </div>
                         </div>

@@ -51,13 +51,13 @@
 
 
                 @if (noProfileImgExist(user)) {
-                <img class="imgNoSelectedProfile" src="./assets/img/non-user-selected.svg" alt="User Profile Image">
+                <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="User Profile Image">
                 }@else {
                 <img class="userImg" src="{{ user.imgUrl }}" alt="User Profile Image">
                 }
 
                 @if (userIsOnline(user)) {
-                <img class="userOnlineStatus" src="./assets/icons/user-is-online-icon.svg" alt="Green Dot">
+                <img class="userOnlineStatus" src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
                 }@else {
                 <img class="userOnlineStatus" src="assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
                 }
