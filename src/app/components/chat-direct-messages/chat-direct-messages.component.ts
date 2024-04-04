@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, inject, Renderer2 } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject, Renderer2, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
 import { CreateUserService } from '../../services/create-user.service';
@@ -27,7 +27,7 @@ import { User } from '../../models/user';
 })
 
 
-export class ChatDirectMessagesComponent {
+export class ChatDirectMessagesComponent implements OnInit {
   createUserService = inject(CreateUserService);
   authService = inject(AuthService);
   createDirectMessageService = inject(CreateDirectMessageService);
@@ -43,17 +43,22 @@ export class ChatDirectMessagesComponent {
   emojiPickerIsDisplayed: boolean = false;
   userMenuSelectionIsOpen: boolean = false;
   addMessageForm = new FormGroup({
-    textarea: new FormControl(this.inputValue, Validators.required)
+    textarea: new FormControl('', Validators.required)
   })
 
 
-  constructor() {
+  ngOnInit(): void {
+    this.getSelectedUserInSidebar();
+    this.getAllUsers();
+  }
+
+
+  getSelectedUserInSidebar(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.userId = params.get('id');
       this.createUserService.getSingelUserService(this.userId)
       this.createDirectMessageService.getDirectMessagesService(this.userId, this.authService.user.userId);
     });
-    this.getAllUsers();
   }
 
 
@@ -61,7 +66,7 @@ export class ChatDirectMessagesComponent {
     this.createUserService.getAllUserService()
       .subscribe((userData) => {
         this.allUsers = userData;
-      });
+      })
   }
 
 
@@ -162,6 +167,16 @@ export class ChatDirectMessagesComponent {
   }
 
 
+  selectUserToMentionHim(userName: string | null): void {
+    this.inputValue = this.addMessageForm.controls.textarea.value;
+    this.inputValue += userName ? userName : '';
+    this.addMessageForm.patchValue({
+      textarea: this.inputValue,
+    });
+    this.userMenuSelectionIsOpen = false;
+  }
+
+
   selectFile(selectedFile: HTMLInputElement): void {
     this.storageService.selectFileService(selectedFile);
   }
@@ -204,12 +219,6 @@ export class ChatDirectMessagesComponent {
     } else {
       this.userMenuSelectionIsOpen = false;
     }
-  }
-
-
-  getInputValue(): void {
-    this.inputValue = this.addMessageForm.controls.textarea.value;
-    this.openUserMenuSelectionToMentionAUser();
   }
 
 

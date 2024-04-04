@@ -126,7 +126,7 @@
                         @for (user of allUsers; track $index) {
 
                         @if (!userIdMatchesWithIdFromLoggedinUser(user.userId)) {
-                        <div class="containerUserNameAndImg">
+                        <div class="containerUserNameAndImg" (click)="selectUserToMentionHim(user.name)">
 
 
                             @if (noProfileImgExistInUserMenuSelection(user.imgUrl)) {
@@ -148,16 +148,15 @@
                         }
 
                         }
+
                     </div>
                     }
                     <!--------------------------------- Menu to Mention Users --------------------------------->
 
 
                     <textarea placeholder="Message to {{ createUserService.user.name }}" formControlName="textarea"
-                        [ngClass]="{'quillEditorFullView':  workspaceMenuService.sidebarIsHidden}"
-                        (input)="getInputValue()">
+                        [ngClass]="{'quillEditorFullView': workspaceMenuService.sidebarIsHidden}">
                     </textarea>
-
 
                     <div class="mainContainerUploadedImages">
                         @if (imageIsUploading()) {
