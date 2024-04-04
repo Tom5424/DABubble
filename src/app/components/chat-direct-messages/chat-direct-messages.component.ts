@@ -189,7 +189,7 @@ export class ChatDirectMessagesComponent {
 
   addAtLetterToMentionSomebody(atLetter: string): void {
     this.inputValue = this.addMessageForm.controls.textarea.value;
-    this.inputValue = atLetter;
+    this.inputValue += atLetter;
     this.addMessageForm.patchValue({
       textarea: this.inputValue,
     });
@@ -198,8 +198,8 @@ export class ChatDirectMessagesComponent {
 
 
   openUserMenuSelectionToMentionAUser(): void {
-    const atLetter = this.inputValue?.match(/^@[^@\s]+(?:\s+|$)/);
-    if (atLetter) {
+    const mentionRegex = this.inputValue?.match(/(?:^|\s|^@)@[^@\s]*(?:\s+@[^@\s]+)*$/);
+    if (mentionRegex) {
       this.userMenuSelectionIsOpen = true;
     } else {
       this.userMenuSelectionIsOpen = false;
