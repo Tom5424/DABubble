@@ -1,6 +1,5 @@
 import { Component, ElementRef, ViewChild, inject, Renderer2, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
-import { QuillModule } from 'ngx-quill';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { CreateUserService } from '../../services/create-user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogProfileDetailViewInChatComponent } from '../dialog-profile-detail-view-in-chat/dialog-profile-detail-view-in-chat.component';
@@ -15,13 +14,12 @@ import { StorageService } from '../../services/storage.service';
 import { DialogUploadedImgFullViewComponent } from '../dialog-uploaded-img-full-view/dialog-uploaded-img-full-view.component';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
-import { User } from '../../models/user';
 
 
 @Component({
   selector: 'app-chat-direct-messages',
   standalone: true,
-  imports: [QuillModule, PickerComponent, NgStyle, NgClass, ReactiveFormsModule, AsyncPipe, DatePipe, MessageComponent, RouterOutlet],
+  imports: [PickerComponent, NgStyle, NgClass, ReactiveFormsModule, AsyncPipe, DatePipe, MessageComponent, RouterOutlet],
   templateUrl: './chat-direct-messages.component.html',
   styleUrl: './chat-direct-messages.component.scss'
 })
@@ -36,12 +34,11 @@ export class ChatDirectMessagesComponent implements OnInit {
   activatedRoute = inject(ActivatedRoute);
   matDialog = inject(MatDialog);
   renderer2 = inject(Renderer2);
+  router = inject(Router);
   @ViewChild('scrollingContainer') scrollingContainer!: ElementRef;
-  allUsers: User[] = [];
   userId: string | null = '';
   inputValue: string | null | undefined = '';
   emojiPickerIsDisplayed: boolean = false;
-  userMenuSelectionIsOpen: boolean = false;
   addMessageForm = new FormGroup({
     textarea: new FormControl('', Validators.required)
   })
@@ -49,7 +46,6 @@ export class ChatDirectMessagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSelectedUserInSidebar();
-    this.getAllUsers();
   }
 
 
@@ -62,14 +58,6 @@ export class ChatDirectMessagesComponent implements OnInit {
   }
 
 
-  getAllUsers(): void {
-    this.createUserService.getAllUserService()
-      .subscribe((userData) => {
-        this.allUsers = userData;
-      })
-  }
-
-
   openProfileDetailView(): void {
     this.matDialog.open(DialogProfileDetailViewInChatComponent, { data: { userData: this.createUserService.user }, autoFocus: false });
   }
@@ -77,23 +65,17 @@ export class ChatDirectMessagesComponent implements OnInit {
 
   sendDirectMessage(): void {
     this.inputValue = this.addMessageForm.controls.textarea.value;
-    // const inputValueWithoutHTMLTags = this.inputValue?.replace(/<[^>]*>/g, ''); // The regular expression removes the HTML tags from the string that come from the Quill Editor
-    // this.filteredInpuvalueWithRegex = this.inputValue?.replace(/(<([^>]+)>)/ig, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
-    // if (this.filteredInpuvalueWithRegex && this.filteredInpuvalueWithRegex > 0) {
     if (this.inputValue?.trim() !== '' || this.storageService.uploadedImages.length >= 1) {
       this.createDirectMessageService.createDirectMessageService(this.authService.user, this.userId, this.authService.user.userId, this.inputValue, this.storageService.uploadedImages);
       this.scrollToBottomAfterSendMessage();
       this.addMessageForm.reset();
       this.storageService.uploadedImages = [];
     }
-    // }
   }
 
 
   sendDirectMessageIfPressOnEnterKey(event: KeyboardEvent): void {
     this.inputValue = this.addMessageForm.controls.textarea.value;
-    // const inputValueWithoutHTMLTags = this.inputValue?.replace(/<[^>]*>/g, ''); // The regular expression removes the HTML tags from the string that come from the Quill Editor
-    // this.filteredInpuvalueWithRegex = this.inputValue?.replace(/(<([^>]+)>)/ig, '').length; // The regular expression checks whether the HTML tags from the Quill Editor are empty. If so, empty messages will be prevented from being sent. 
     if ((event?.key == 'Enter' && this.inputValue?.trim() !== '') || (event.key == 'Enter' && this.inputValue?.trim() == '' && this.storageService.uploadedImages.length >= 1)) {
       this.createDirectMessageService.createDirectMessageService(this.authService.user, this.userId, this.authService.user.userId, this.inputValue, this.storageService.uploadedImages);
       this.scrollToBottomAfterSendMessage();
@@ -123,57 +105,11 @@ export class ChatDirectMessagesComponent implements OnInit {
   }
 
 
-  userIdMatchesWithIdFromLoggedinUser(userId: string | null): boolean {
-    return (userId == this.authService.user.userId) ? true : false;
-  }
-
-
-  noProfileImgExistInUserMenuSelection(userImgUrl: string | null): boolean {
-    return (!userImgUrl) ? true : false;
-  }
-
-
-  userIsOnlineInUserMenuSelection(userIsOnline: boolean | undefined): boolean {
-    return (userIsOnline) ? true : false;
-  }
-
-
-  // focusQuillEditor(event: { editor: any, range: any, oldRange: any }): void {
-  //   if (this.quillEditorIsFocused(event)) {
-  //     event.editor.container.style.border = '1px solid #535AF1';
-  //     event.editor.container.style.color = '#000000';
-  //   } else if (this.quillEditorIsNotFocused(event)) {
-  //     event.editor.container.style.border = '1px solid #adb0d9';
-  //     event.editor.container.style.color = '#686868';
-  //   }
-  // }
-
-
-  // quillEditorIsFocused(event: { editor: any, range: any, oldRange: any }): boolean {
-  //   return (event.oldRange == null) ? true : false;
-  // }
-
-
-  // quillEditorIsNotFocused(event: { editor: any, range: any, oldRange: any }): boolean {
-  //   return (event.range == null) ? true : false;
-  // }
-
-
   scrollToBottomAfterSendMessage(): void {
     setTimeout(() => { // Uses setTimeout to always scroll to the bottom
       const scrollingContainer = this.scrollingContainer.nativeElement;
       this.renderer2.setProperty(scrollingContainer, 'scrollTop', scrollingContainer.scrollHeight);
     }, 50);
-  }
-
-
-  selectUserToMentionHim(userName: string | null): void {
-    this.inputValue = this.addMessageForm.controls.textarea.value;
-    this.inputValue += userName ? userName : '';
-    this.addMessageForm.patchValue({
-      textarea: this.inputValue,
-    });
-    this.userMenuSelectionIsOpen = false;
   }
 
 
@@ -184,7 +120,6 @@ export class ChatDirectMessagesComponent implements OnInit {
 
   closeEmojiPickerOrOtherMenuIfClickOutside(): void {
     this.emojiPickerIsDisplayed = false;
-    this.userMenuSelectionIsOpen = false;
   }
 
 
@@ -202,24 +137,23 @@ export class ChatDirectMessagesComponent implements OnInit {
   }
 
 
-  addAtLetterToMentionSomebody(atLetter: string): void {
-    this.inputValue = this.addMessageForm.controls.textarea.value;
-    this.inputValue += atLetter;
-    this.addMessageForm.patchValue({
-      textarea: this.inputValue,
-    });
-    this.openUserMenuSelectionToMentionAUser();
-  }
+  // addAtLetterToMentionSomebody(atLetter: string): void {
+  //   this.inputValue = this.addMessageForm.controls.textarea.value;
+  //   this.inputValue += atLetter;
+  //   this.addMessageForm.patchValue({
+  //     textarea: this.inputValue,
+  //   });
+  // }
 
 
-  openUserMenuSelectionToMentionAUser(): void {
-    const mentionRegex = this.inputValue?.match(/(?:^|\s|^@)@[^@\s]*(?:\s+@[^@\s]+)*$/);
-    if (mentionRegex) {
-      this.userMenuSelectionIsOpen = true;
-    } else {
-      this.userMenuSelectionIsOpen = false;
-    }
-  }
+  // openUserMenuSelectionToMentionAUser(): void {
+  //   const mentionRegex = this.inputValue?.match(/(?:^|\s|^@)@[^@\s]*(?:\s+@[^@\s]+)*$/);
+  //   if (mentionRegex) {
+  //     this.userMenuSelectionIsOpen = true;
+  //   } else {
+  //     this.userMenuSelectionIsOpen = false;
+  //   }
+  // }
 
 
   removeUploadedImage(indexFromImage: number): void {

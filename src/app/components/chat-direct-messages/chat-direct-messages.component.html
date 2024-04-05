@@ -1,6 +1,5 @@
 <div class="flex">
-    <div [ngClass]="{'overlay': emojiPickerIsDisplayed || userMenuSelectionIsOpen}"
-        (click)="closeEmojiPickerOrOtherMenuIfClickOutside()">
+    <div [ngClass]="{'overlay': emojiPickerIsDisplayed}" (click)="closeEmojiPickerOrOtherMenuIfClickOutside()">
     </div>
 
     <div class="mainContainerChatDirectMessages" [ngClass]="{'chatFullView':  workspaceMenuService.sidebarIsHidden}">
@@ -118,46 +117,12 @@
                     (keyup)="sendDirectMessageIfPressOnEnterKey($event)">
 
 
-                    <!--------------------------------- Menu to Mention Users --------------------------------->
-                    @if (userMenuSelectionIsOpen) {
-                    <div class="containerUserMenuSelection">
-
-
-                        @for (user of allUsers; track $index) {
-
-                        @if (!userIdMatchesWithIdFromLoggedinUser(user.userId)) {
-                        <div class="containerUserNameAndImg" (click)="selectUserToMentionHim(user.name)">
-
-
-                            @if (noProfileImgExistInUserMenuSelection(user.imgUrl)) {
-                            <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg"
-                                alt="User Profile Image">
-                            }@else {
-                            <img class="userImg" src="{{ user.imgUrl }}" alt="User Profile Image">
-                            }
-
-
-                            @if (userIsOnlineInUserMenuSelection(user.isOnline)) {
-                            <img class="userOnlineStatus" src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
-                            }@else {
-                            <img class="userOnlineStatus" src="assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
-                            }
-
-                            <p>{{ user.name }}</p>
-                        </div>
-                        }
-
-                        }
-
-                    </div>
-                    }
-                    <!--------------------------------- Menu to Mention Users --------------------------------->
-
-
                     <textarea placeholder="Message to {{ createUserService.user.name }}" formControlName="textarea"
                         [ngClass]="{'quillEditorFullView': workspaceMenuService.sidebarIsHidden}">
                     </textarea>
 
+
+                    <!--------------------------------- Disaplyed here the uploaded Images --------------------------------->
                     <div class="mainContainerUploadedImages">
                         @if (imageIsUploading()) {
                         <img class="spinnerIcon" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
@@ -173,16 +138,12 @@
                         </div>
                         }
                     </div>
-
-                    <!-- <quill-editor placeholder="Message to {{ createUserService.user.name }}"
-                        formControlName="inputfieldQuillEditor" (onSelectionChanged)="focusQuillEditor($event)"
-                        [ngClass]="{'quillEditorFullView':  workspaceMenu.sidebarIsHidden}">
-                    </quill-editor> -->
+                    <!--------------------------------- Disaplyed here the uploaded Images --------------------------------->
 
 
                     <!--------------------------------- Emoji Picker --------------------------------->
                     @if (emojiPickerIsDisplayed) {
-                    <emoji-mart [style]="{position: 'absolute', bottom: '190px', 'z-index': '1'}"
+                    <emoji-mart [style]="{position: 'absolute', bottom: '130px', 'z-index': '1'}"
                         (emojiClick)="selectEmoji($event)">
                     </emoji-mart>
                     }
@@ -208,9 +169,11 @@
                                 <img src="assets/icons/smiley-icon.svg" alt="Smiley Icon">
                             </div>
 
-                            <div class="containerSingleIcon" (click)="addAtLetterToMentionSomebody('@')">
+                            @if (router.url == '/mainView/directMessage') {
+                            <div class="containerSingleIcon">
                                 <img src="assets/icons/@-icon.svg" alt="@ Icon">
                             </div>
+                            }
                         </div>
 
 
