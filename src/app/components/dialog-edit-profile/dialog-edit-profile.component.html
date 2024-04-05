@@ -44,8 +44,10 @@
 
         <div class="btnContainer">
             <button mat-dialog-close class="btnSecondary" type="button">Cancel</button>
-            <button class="btnPrimary" type="submit" [disabled]="editProfileForm.invalid"
-                [ngClass]="{'btnDisabled': editProfileForm.invalid}">
+
+            <button class="btnPrimary" type="submit"
+                [disabled]="editProfileForm.invalid || editProfileForm.controls.name.value?.trim() == ''"
+                [ngClass]="{'btnDisabled': editProfileForm.invalid || editProfileForm.controls.name.value?.trim() == ''}">
                 Save
             </button>
         </div>

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { CreateDirectMessageService } from '../../services/create-direct-message.service';
-import { DatePipe, NgClass } from '@angular/common';
+import { DatePipe, NgClass, NgStyle } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { DirectMessage } from '../../models/direct-message';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -15,7 +15,7 @@ import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 @Component({
   selector: 'app-message',
   standalone: true,
-  imports: [DatePipe, NgClass, ReactiveFormsModule, RouterLink, PickerComponent],
+  imports: [DatePipe, NgClass, NgStyle, ReactiveFormsModule, RouterLink, PickerComponent],
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss'
 })

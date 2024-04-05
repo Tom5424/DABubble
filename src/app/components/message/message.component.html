@@ -51,7 +51,8 @@
             <!--------------------------------- Emoji Picker --------------------------------->
 
 
-            <div class="containerIconAndBtns">
+            <div class="containerIconAndBtns"
+                [ngStyle]="{'width': directMessage.attachedFiles.length >= 1 ? '80%' : '90%'}">
 
                 <div class="containerSmileyIcon" (click)="tootgleEmojiPicker()">
                     <img src="assets/icons/smiley-icon.svg" alt="Smiley Icon">

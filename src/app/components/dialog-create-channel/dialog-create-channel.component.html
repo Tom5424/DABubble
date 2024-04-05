@@ -54,8 +54,9 @@
 
 
         <div class="containerBtn">
-            <button type="button" (click)="openDialogAddPeople()" [disabled]="createChannelForm.invalid"
-                [ngClass]="{'btnDisabled': createChannelForm.invalid}">
+            <button type="button" (click)="openDialogAddPeople()"
+                [disabled]="createChannelForm.invalid || createChannelForm.controls.channelName.value?.trim() == ''"
+                [ngClass]="{'btnDisabled': createChannelForm.invalid || createChannelForm.controls.channelName.value?.trim() == ''}">
                 Create
             </button>
         </div>

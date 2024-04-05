@@ -41,8 +41,9 @@
                 </button>
 
                 <div class="btnContainer">
-                    <button class="btnPrimary" type="submit" [disabled]="loginForm.invalid"
-                        [ngClass]="{'btnDisabled': loginForm.invalid}">
+                    <button class="btnPrimary" type="submit"
+                        [disabled]="loginForm.invalid || loginForm.controls.password.value?.trim() == ''"
+                        [ngClass]="{'btnDisabled': loginForm.invalid || loginForm.controls.password.value?.trim() == ''}">
                         Log in
                     </button>
                     <button class="btnSecondary" type="button" (click)="loginAsGuest()">Guest Log in</button>

@@ -69,9 +69,13 @@
 
 
                 <div class="btnContainer">
-                    <button type="submit"
-                        [disabled]="signupForm.invalid || !signupForm.controls.checkboxPrivacyPolicy.value"
-                        [ngClass]="{'btnDisabled': signupForm.invalid || !signupForm.controls.checkboxPrivacyPolicy.value}">
+                    <button type="submit" [disabled]="signupForm.invalid || 
+                        !signupForm.controls.checkboxPrivacyPolicy.value ||
+                        signupForm.controls.name.value?.trim() == '' ||
+                        signupForm.controls.password.value?.trim() == ''" [ngClass]="{'btnDisabled': signupForm.invalid || 
+                        !signupForm.controls.checkboxPrivacyPolicy.value ||
+                        signupForm.controls.name.value?.trim() == '' ||
+                        signupForm.controls.password.value?.trim() == ''}">
                         Further
                     </button>
                 </div>

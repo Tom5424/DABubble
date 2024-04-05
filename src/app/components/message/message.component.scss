@@ -136,20 +136,6 @@
 }
 
 
-.uploadedImage {
-    @include hover();
-    width: 350px !important;
-    height: 250px !important;
-    margin: 15px 0 15px 0;
-    object-fit: cover;
-    border-radius: unset !important;
-
-    &:hover {
-        opacity: 0.8;
-    }
-}
-
-
 form {
     position: relative;
     padding: 20px 0 20px 0;
@@ -171,7 +157,6 @@ form {
     @include flexSpaceBetween();
     position: absolute;
     background-color: #ffffff;
-    width: 90%;
     margin-left: -10px;
     margin: -81px 0 0 15px;
     padding: 15px 20px 15px 0;
@@ -198,6 +183,20 @@ form {
     button {
         padding: 12px 25px 12px 25px;
         border-radius: 50px;
+    }
+}
+
+
+.uploadedImage {
+    @include hover();
+    width: 350px !important;
+    height: 250px !important;
+    margin: 15px 0 15px 0;
+    object-fit: cover;
+    border-radius: 8px !important;
+
+    &:hover {
+        opacity: 0.8;
     }
 }
 
