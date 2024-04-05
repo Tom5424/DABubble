@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, inject, Renderer2, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { CreateUserService } from '../../services/create-user.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -25,7 +25,7 @@ import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 })
 
 
-export class ChatDirectMessagesComponent implements OnInit {
+export class ChatDirectMessagesComponent {
   createUserService = inject(CreateUserService);
   authService = inject(AuthService);
   createDirectMessageService = inject(CreateDirectMessageService);
@@ -44,7 +44,7 @@ export class ChatDirectMessagesComponent implements OnInit {
   })
 
 
-  ngOnInit(): void {
+  constructor() {
     this.getSelectedUserInSidebar();
   }
 

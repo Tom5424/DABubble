@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { DocumentReference, Firestore, addDoc, collection, collectionData, doc, getDocs, orderBy, query } from '@angular/fire/firestore';
+import { DocumentReference, Firestore, addDoc, collection, collectionData, getDocs, orderBy, query } from '@angular/fire/firestore';
 import { Channel } from '../models/channel';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
@@ -13,7 +13,7 @@ import { ChannelMembers } from '../models/channel-members';
 
 export class CreateChannelService {
   firestore = inject(Firestore);
-  allChannelsAsObservable!: Observable<Channel[]>;
+  allChannelsAsObservable!: Observable<any[]>;
   noChannelsExistingInDatabase: boolean = false;
   loadChannels: boolean = false;
 

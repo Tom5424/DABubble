@@ -3,12 +3,13 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CreateChannelService } from '../../services/create-channel.service';
 import { DialogCreateChannelComponent } from '../dialog-create-channel/dialog-create-channel.component';
 import { MatDialog } from '@angular/material/dialog';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 
 @Component({
   selector: 'app-channels-in-sidebar',
   standalone: true,
-  imports: [NgClass, AsyncPipe],
+  imports: [NgClass, AsyncPipe, RouterLink, RouterLinkActive],
   templateUrl: './channels-in-sidebar.component.html',
   styleUrl: './channels-in-sidebar.component.scss'
 })

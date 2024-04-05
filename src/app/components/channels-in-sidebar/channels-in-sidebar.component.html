@@ -15,7 +15,7 @@
 
 <ul class="channelList" [ngClass]="{'d-none': channelListAreCollapsed}">
     @for(channel of createChannelService.allChannelsAsObservable | async; track $index) {
-    <li>
+    <li routerLink="/mainView/channel/{{ channel.id }}" routerLinkActive="activeChannel">
         <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
         <p>{{ channel.channelName }}</p>
     </li>

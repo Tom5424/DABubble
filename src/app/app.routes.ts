@@ -11,7 +11,7 @@ import { isAuthorizedToGoAvatarpicker } from './router-guards/is-authorized-to-g
 import { isAuthorizedToGoResetPassword } from './router-guards/is-authorized-to-go-reset-password.guard';
 import { MainViewComponent } from './components/main-view/main-view.component';
 import { ChatDirectMessagesComponent } from './components/chat-direct-messages/chat-direct-messages.component';
-import { ThreadComponent } from './components/thread/thread.component';
+import { ChatChannelMessagesComponent } from './components/chat-channel-messages/chat-channel-messages.component';
 
 
 export const routes: Routes = [
@@ -29,12 +29,15 @@ export const routes: Routes = [
 
     {
         path: 'mainView', title: 'DABubble - Main View', component: MainViewComponent,
-        children: [{
-            path: 'directMessage/:id', component: ChatDirectMessagesComponent,
-            children:
-                [{ path: 'thread/:id', component: ThreadComponent }]
-        }]
+        children: [
+            { path: 'directMessage/:id', component: ChatDirectMessagesComponent },
+            { path: 'channel/:id', component: ChatChannelMessagesComponent },
+        ]
     },
 
     { path: '**', title: 'DABubble - Page not Found', component: PageNotFoundComponent }
 ];
+
+
+// children:
+// [{ path: 'thread/:id', component: ThreadComponent }]
