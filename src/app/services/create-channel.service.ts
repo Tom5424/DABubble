@@ -1,9 +1,8 @@
 import { Injectable, inject } from '@angular/core';
-import { DocumentReference, Firestore, addDoc, collection, collectionData, getDocs, orderBy, query } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, doc, getDoc, getDocs, orderBy, query } from '@angular/fire/firestore';
 import { Channel } from '../models/channel';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
-import { ChannelMembers } from '../models/channel-members';
 
 
 @Injectable({
@@ -14,30 +13,21 @@ import { ChannelMembers } from '../models/channel-members';
 export class CreateChannelService {
   firestore = inject(Firestore);
   allChannelsAsObservable!: Observable<any[]>;
+  channel!: Channel;
   noChannelsExistingInDatabase: boolean = false;
   loadChannels: boolean = false;
 
 
-  createChannelService(channelData: any, users: User[]): void {
+  createChannelService(channelData: any, channelMembers: User[]): void {
     const collectionRef = collection(this.firestore, 'channels');
-    const channelRef = new Channel(channelData);
+    const channelRef = new Channel(channelData, channelMembers);
     addDoc(collectionRef, channelRef.toJson())
-      .then((docRef) => {
-        this.createChannelMembersService(docRef, users);
+      .then(() => {
+
       })
       .catch((error) => {
         console.error(error.message);
       })
-  }
-
-
-  /////////////////////////////////////////////
-  createChannelMembersService(docRef: DocumentReference, allusers: User[]): void {
-    const chnnelMembersSubCollectionRef = collection(this.firestore, `channels/${docRef.id}/channelMembers`);
-    allusers?.forEach((user) => {
-      const channelMembers = new ChannelMembers(user, user.userId);
-      addDoc(chnnelMembersSubCollectionRef, channelMembers.toJson());
-    });
   }
 
 
@@ -49,6 +39,17 @@ export class CreateChannelService {
         this.loadChannels = false;
       })
     this.allChannelsAsObservable = collectionData(collectionRef, { idField: 'id' }) as Observable<Channel[]>;
+  }
+
+
+  getSingleChannelService(channelId: string | null): void {
+    if (channelId) {
+      const docRef = doc(this.firestore, 'channels', channelId);
+      getDoc(docRef)
+        .then((docData) => {
+          this.channel = docData.data() as Channel;
+        })
+    }
   }
 
 

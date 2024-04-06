@@ -42,7 +42,7 @@
 }
 
 
-.parentContainerImages {
+.parentContainerUserImagesAndAddIcon {
     @include flexCenteredYAxis();
     gap: 10px;
 }
@@ -183,7 +183,7 @@
 
 .containerForm {
     @include flexCenteredXAxis();
-    margin-top: 10px;
+    margin-top: 27px;
     padding-bottom: 55px;
 }
 
