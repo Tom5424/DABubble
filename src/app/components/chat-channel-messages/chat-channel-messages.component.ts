@@ -3,12 +3,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CreateChannelService } from '../../services/create-channel.service';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { DialogEditChannelComponent } from '../dialog-edit-channel/dialog-edit-channel.component';
 
 
 @Component({
   selector: 'app-chat-channel-messages',
   standalone: true,
-  imports: [],
+  imports: [MatDialogModule, DialogEditChannelComponent],
   templateUrl: './chat-channel-messages.component.html',
   styleUrl: './chat-channel-messages.component.scss'
 })
@@ -17,6 +19,7 @@ import { AuthService } from '../../services/auth.service';
 export class ChatChannelMessagesComponent implements OnInit {
   createChannelService = inject(CreateChannelService);
   authService = inject(AuthService);
+  matDialog = inject(MatDialog);
   router = inject(Router);
   activatedRoute = inject(ActivatedRoute);
   channelId: string | null = '';
@@ -42,5 +45,10 @@ export class ChatChannelMessagesComponent implements OnInit {
 
   arrayLengthIsEqualOrGreaterThan4(): boolean {
     return (this.createChannelService.channel.channelMembers.length >= 4) ? true : false;
+  }
+
+
+  openDialogToEditChannel(): void {
+    this.matDialog.open(DialogEditChannelComponent);
   }
 }

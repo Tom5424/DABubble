@@ -3,10 +3,10 @@
     <!--------------------------------- Container Chat upper Part--------------------------------->
     <div class="containerChatChannelMessagesUpperPart">
 
-        <div class="containerImageAndChannelNameUpperPart">
+        <div class="containerImageAndChannelNameUpperPart" (click)="openDialogToEditChannel()">
             <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
 
-            <p>{{ createChannelService.channel.channelName }}</p>
+            <!-- <p>{{ createChannelService.channel.channelName }}</p> -->
 
             <img src="assets/icons/arrow-icon-profile.svg" alt="Arrow Icon">
         </div>
@@ -15,10 +15,10 @@
 
             <div class="containerUserImages">
 
-                @if (arrayLengthIsEqualOrGreaterThan4()) {
+                <!-- @if (arrayLengthIsEqualOrGreaterThan4()) { -->
 
                 <!--------------------------------- Cut here the Last User from the Array if the Length is equal or greater than 4. To disaply only the 3 first Users --------------------------------->
-                @for (channelMember of createChannelService.channel.channelMembers.slice(0, -1); track $index) {
+                <!-- @for (channelMember of createChannelService.channel.channelMembers.slice(0, -1); track $index) {
 
                 @if (noProfileImgExist(channelMember)) {
                 <img class="imageNoSelectedUser" src="assets/img/non-user-selected.svg" alt="User Image">
@@ -27,14 +27,14 @@
                 }
 
                 }
-                <p>{{ createChannelService.channel.channelMembers.length }}</p>
+                <p>{{ createChannelService.channel.channelMembers.length }}</p> -->
                 <!--------------------------------- Cut here the Last User from the Array if the Length is equal or greater than 4. To disaply only the 3 first Users --------------------------------->
 
-                }@else {
+                <!-- }@else { -->
 
 
                 <!--------------------------------- If the Array Length is 3 or shorter then display all Users --------------------------------->
-                @for (channelMember of createChannelService.channel.channelMembers; track $index) {
+                <!-- @for (channelMember of createChannelService.channel.channelMembers; track $index) {
 
                 @if (noProfileImgExist(channelMember)) {
                 <img class="imageNoSelectedUser" src="assets/img/non-user-selected.svg" alt="User Image">
@@ -44,7 +44,7 @@
 
                 }
                 <p>{{ createChannelService.channel.channelMembers.length }}</p>
-                }
+                } -->
                 <!--------------------------------- If the Array Length is 3 or shorter then display all Users --------------------------------->
 
             </div>
@@ -64,7 +64,7 @@
         <!-- <div class="scrollingContainer"> -->
         <div class="containerImageAndChannelNameLowerPart">
             <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
-            <p>{{ createChannelService.channel.channelName }}</p>
+            <!-- <p>{{ createChannelService.channel.channelName }}</p> -->
             <img src="assets/icons/arrow-icon-profile.svg" alt="Arrow Icon">
         </div>
 
@@ -72,7 +72,7 @@
         <div class="containerText">
             <p>This is the beginning of the Channel</p>
             <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
-            <mark>{{ createChannelService.channel.channelName }}</mark>
+            <!-- <mark>{{ createChannelService.channel.channelName }}</mark> -->
         </div>
         <!-- </div> -->
 
@@ -80,7 +80,7 @@
 
             <form>
 
-                <textarea placeholder="Message to #{{createChannelService.channel.channelName}}"></textarea>
+                <!-- <textarea placeholder="Message to #{{createChannelService.channel.channelName}}"></textarea> -->
 
 
                 <!--------------------------------- Disaplyed here the uploaded Images --------------------------------->

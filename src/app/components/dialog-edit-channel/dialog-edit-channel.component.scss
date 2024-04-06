@@ -1,0 +1,134 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+.dialogBox {
+    padding: 40px;
+}
+
+
+.dialogBoxUpperPart {
+    @include flexSpaceBetween();
+    @include flexCenteredYAxis();
+    margin-bottom: 18px;
+}
+
+
+.containerChannelNameAndImageUpperPart {
+    @include flexCenteredYAxis();
+    gap: 15px;
+
+    p {
+        font-size: 24px;
+        font-weight: 700;
+        margin: 0;
+    }
+}
+
+
+.containerCloseIcon {
+    @include flex();
+    @include iconHover();
+    border-radius: 50%;
+    padding: 6px;
+
+    &:hover {
+
+        img {
+            filter: brightness(0) saturate(100%) invert(35%) sepia(70%) saturate(4922%) hue-rotate(231deg) brightness(98%) contrast(92%);
+        }
+    }
+}
+
+
+.dialogBoxFirstMiddlePart {
+    border: 1px solid $lightPurple;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+
+.containerText {
+    @include flexSpaceBetween();
+
+    p:nth-of-type(1) {
+        font-weight: 700;
+    }
+
+    p:nth-of-type(2) {
+        @include hover();
+        color: $middlePurple;
+
+        &:hover {
+            font-weight: 700;
+        }
+    }
+
+    p {
+        font-size: 18px;
+        margin-top: 0
+    }
+}
+
+
+.containerChannelNameAndImageMiddlePart {
+    @include flexCenteredYAxis();
+    gap: 10px;
+
+    p {
+        font-size: 18px;
+        margin: 0;
+    }
+}
+
+
+.dialogBoxSecondMiddlePart {
+    border: 1px solid $lightPurple;
+    border-radius: 20px;
+    margin-top: 20px;
+    padding: 20px;
+
+    span {
+        font-size: 18px;
+    }
+
+    hr {
+        background-color: $lightPurple;
+        height: 1px;
+        margin: 28px 0 28px 0;
+        border: unset;
+    }
+}
+
+
+.containerNameWhoCreatedChannel {
+
+    p:nth-of-type(1) {
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    p:nth-of-type(2) {
+        color: $middlePurple;
+        font-size: 24px;
+    }
+}
+
+
+.containerBtn {
+    @include flexEndXAxis();
+    margin-top: 20px;
+
+    button {
+        @include btnPrimary();
+        @include btnPrimaryHover();
+        @include btnPrimaryActive();
+        padding: 12px 25px 12px 25px;
+        border-radius: 25px;
+        border: unset;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
