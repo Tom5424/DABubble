@@ -50,6 +50,7 @@
 
 .containerText {
     @include flexSpaceBetween();
+    @include flexStartYAxis();
 
     p:nth-of-type(1) {
         font-weight: 700;
@@ -68,6 +69,18 @@
         font-size: 18px;
         margin-top: 0
     }
+
+    button {
+        @include hover();
+        color: $middlePurple;
+        font-size: 18px;
+        background-color: unset;
+        border: unset;
+
+        &:hover {
+            font-weight: 700;
+        }
+    }
 }
 
 
@@ -78,6 +91,14 @@
     p {
         font-size: 18px;
         margin: 0;
+    }
+
+    input {
+        @include inputfieldOrTextarea(800px, 40px, 18px, 20px, 18px, 20px, 18px, #ffffff);
+        @include inputfieldOrTextareaHover();
+        @include inputfieldOrTextareaFocus();
+        border: 1px solid $lightPurple;
+        outline: none;
     }
 }
 
@@ -90,6 +111,15 @@
 
     span {
         font-size: 18px;
+    }
+
+    input {
+        @include inputfieldOrTextarea(784px, 40px, 18px, 20px, 18px, 20px, 18px, #ffffff);
+        @include inputfieldOrTextareaHover();
+        @include inputfieldOrTextareaFocus();
+        border: 1px solid $lightPurple;
+        outline: none;
+        resize: none;
     }
 
     hr {
@@ -130,5 +160,20 @@
         &:focus {
             outline: none;
         }
+    }
+}
+
+
+.channelNameInEditMode {
+    border: unset;
+}
+
+
+.disabledBtn {
+    color: $textGray !important;
+
+    &:hover {
+        cursor: not-allowed !important;
+        font-weight: normal !important;
     }
 }

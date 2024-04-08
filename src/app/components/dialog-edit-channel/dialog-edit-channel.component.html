@@ -13,44 +13,95 @@
 
     </div>
 
+    <form [formGroup]="editChannelForm">
+        <div class="dialogBoxFirstMiddlePart" [ngClass]="{'channelNameInEditMode': channelNameIsInEditMode}">
 
-    <div class="dialogBoxFirstMiddlePart">
+            <div class="containerText">
+                <p>Channel-Name</p>
 
-        <div class="containerText">
-            <p>Channel-Name</p>
-            <p>Edit</p>
+                @if (!channelNameIsInEditMode) {
+                <p (click)="editChannelName()">Edit</p>
+                }@else {
+                <button type="submit" (click)="saveChangesToEditChannelName()"
+                    [disabled]="editChannelForm.controls.channelName.invalid || editChannelForm.controls.channelName.value?.trim() == ''"
+                    [ngClass]="{'disabledBtn': editChannelForm.controls.channelName.invalid || editChannelForm.controls.channelName.value?.trim() == ''}">
+                    Save
+                </button>
+                }
+            </div>
+
+            <div class="containerChannelNameAndImageMiddlePart">
+                @if (!channelNameIsInEditMode) {
+                <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
+                <p>My Channel</p>
+                }@else {
+                <input type="text" placeholder="Text" formControlName="channelName" [ngClass]="{'errorInputfield': inputFieldChannelNameIsRequired() || 
+                  inputfieldChannelNameIsToShort() || inputfieldChannelNameIsToLong() }">
+                }
+            </div>
+
+
+            @if (inputFieldChannelNameIsRequired()) {
+            <p class="errorMessage" style="margin: 10px 0 0 20px;">
+                Channel Name is required
+            </p>
+            }@else if (inputfieldChannelNameIsToShort()) {
+            <p class="errorMessage" style="margin: 10px 0 0 20px;">
+                Channel Name must be at least 3 Characters long
+            </p>
+            }@else if (inputfieldChannelNameIsToLong()) {
+            <p class="errorMessage" style="margin: 10px 0 0 20px;">
+                Channel Name can be a maximum of 15 characters long
+            </p>
+            }
         </div>
 
-        <div class="containerChannelNameAndImageMiddlePart">
-            <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
-            <p>My Channel</p>
+
+        <div class="dialogBoxSecondMiddlePart" [ngClass]="{'channelNameInEditMode': channelDescriptionIsInEditMode}">
+
+            <div class="containerText">
+                <p>Description</p>
+
+                @if (!channelDescriptionIsInEditMode) {
+                <p (click)="editChannelDescription()">Edit</p>
+                }@else {
+                <button type="submit" (click)="saveChangesToEditChannelDescription()"
+                    [disabled]="editChannelForm.controls.channelDescription.invalid || editChannelForm.controls.channelDescription.value?.trim() == ''"
+                    [ngClass]="{'disabledBtn': editChannelForm.controls.channelDescription.invalid || editChannelForm.controls.channelDescription.value?.trim() == ''}">
+                    Save
+                </button>
+                }
+            </div>
+
+            @if (!channelDescriptionIsInEditMode) {
+            <span>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis soluta consectetur necessitatibus
+                nemo nesciunt quaerat voluptas. Consequatur corrupti id ut. Vel, cumque? Tenetur quod doloribus totam
+                optio temporibus ducimus ab?
+            </span>
+            }@else {
+            <input type="text" placeholder="Text" formControlName="channelDescription"
+                [ngClass]="{'errorInputfield': inputfieldChannelDescriptionIsToLong()}">
+
+
+            @if (inputfieldChannelDescriptionIsToLong()) {
+            <p class="errorMessage" style="margin: 10px 0 0 20px;">
+                Channel Description can be a maximum of 150 characters long
+            </p>
+            }
+            }
+
+            <hr>
+
+            <div class="containerNameWhoCreatedChannel">
+                <p>Created by</p>
+                <p>Tom</p>
+            </div>
         </div>
-    </div>
 
 
-    <div class="dialogBoxSecondMiddlePart">
-
-        <div class="containerText">
-            <p>Description</p>
-            <p>Edit</p>
+        <div class="containerBtn">
+            <button type="submit">Leave Channel</button>
         </div>
-
-        <span>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis soluta consectetur necessitatibus
-            nemo nesciunt quaerat voluptas. Consequatur corrupti id ut. Vel, cumque? Tenetur quod doloribus totam
-            optio temporibus ducimus ab?
-        </span>
-
-        <hr>
-
-        <div class="containerNameWhoCreatedChannel">
-            <p>Created by</p>
-            <p>Tom</p>
-        </div>
-    </div>
-
-
-    <div class="containerBtn">
-        <button type="submit">Leave Channel</button>
-    </div>
+    </form>
 </div>

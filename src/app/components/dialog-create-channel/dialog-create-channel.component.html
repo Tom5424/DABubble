@@ -31,7 +31,7 @@
             Channel Name must be at least 3 Characters long
         </p>
         }@else if (inputfieldChannelNameIsToLong()) {
-        <p style="margin: -5px 0 0 20px; height: unset;" class="errorMessage">
+        <p class="errorMessage" style="margin: -5px 0 0 20px; height: unset;">
             Channel Name can be a maximum of 15 characters long
         </p>
         }
@@ -46,7 +46,7 @@
             [ngClass]="{'errorInputfield': inputfieldChannelDescriptionIsToLong()}">
 
         @if (inputfieldChannelDescriptionIsToLong()) {
-        <p style="margin: -5px 0 0 20px; height: unset;" class="errorMessage">
+        <p class="errorMessage" style="margin: -5px 0 0 20px; height: unset;">
             Channel Description can be a maximum of 150 characters long
         </p>
         }
