@@ -11,38 +11,32 @@
     <ul>
         <div class="scrollingContainer">
 
-            <li>
-                <img src="assets/img/avatar-1.svg" alt="User Image">
-                <img src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
-                <!-- <img src="assets/icons/user-is-offline-icon.svg" alt="Gray Dot"> -->
-                <p>Tom</p>
-            </li>
+            @for (channelMember of data.channelMembers; track $index) {
 
-            <li>
-                <img src="assets/img/avatar-1.svg" alt="User Image">
-                <img src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
-                <!-- <img src="assets/icons/user-is-offline-icon.svg" alt="Gray Dot"> -->
-                <p>Tom</p>
-            </li>
+            @if(!userIdMatchesWithIdFromLoggedinUser(channelMember)) {
 
-            <li>
-                <img src="assets/img/avatar-1.svg" alt="User Image">
-                <img src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
-                <!-- <img src="assets/icons/user-is-offline-icon.svg" alt="Gray Dot"> -->
-                <p>Tom</p>
-            </li>
+            <li (click)="openDetailViewFromSelectedChannelMember(channelMember)">
+                @if (noProfileImgExist(channelMember)) {
+                <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="User Profile Image">
+                }@else {
+                <img src="{{ channelMember.imgUrl }}" alt="User Image">
+                }
 
-            <li>
-                <img src="assets/img/avatar-1.svg" alt="User Image">
+                @if (userIsOnline(channelMember)) {
                 <img src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
-                <!-- <img src="assets/icons/user-is-offline-icon.svg" alt="Gray Dot"> -->
-                <p>Tom</p>
+                }@else {
+                <img src="assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
+                }
+
+                <p>{{ channelMember.name }}</p>
             </li>
-            
+            }
+            }
+
         </div>
 
 
-        <li>
+        <li class="containerLastListElement">
             <div class="containerAddUserIcon">
                 <img src="assets/icons/add-user-icon.svg" alt="Add User Icon">
             </div>

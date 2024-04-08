@@ -13,13 +13,13 @@
         @if (noProfileImgExist()) {
         <img class="imgNoSelectedProfile" src="/assets/img/non-user-selected.svg" alt="Profile Image">
         }@else {
-        <img src="{{ data.userData.imgUrl }}" alt="Profile Image">
+        <img src="{{ data.dataFromSelectedUser.imgUrl }}" alt="Profile Image">
         }
     </div>
 
 
     <div class="dialogBoxMiddlePart">
-        <p>{{ data.userData.name }}</p>
+        <p>{{ data.dataFromSelectedUser.name }}</p>
     </div>
 
 
@@ -42,7 +42,7 @@
 
 
     <p class="emailAddress">
-        {{ data.userData.email }}
+        {{ data.dataFromSelectedUser.email }}
     </p>
 
 

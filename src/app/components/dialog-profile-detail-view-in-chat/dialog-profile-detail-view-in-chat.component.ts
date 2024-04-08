@@ -6,7 +6,7 @@ import { AuthService } from '../../services/auth.service';
 
 
 @Component({
-  selector: 'app-dialog-profile-detail-view-in-direct-messages',
+  selector: 'app-dialog-profile-detail-view-in-chat',
   standalone: true,
   imports: [MatDialogClose, NgStyle],
   templateUrl: './dialog-profile-detail-view-in-chat.component.html',
@@ -20,28 +20,28 @@ export class DialogProfileDetailViewInChatComponent {
   matDialog = inject(MatDialog);
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { userData: any }) {
-
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+    
   }
 
 
   noProfileImgExist(): boolean {
-    return (!this.data.userData.imgUrl) ? true : false;
+    return (!this.data.dataFromSelectedUser.imgUrl) ? true : false;
   }
 
 
   userIsOnline(): boolean {
-    return (this.data.userData.isOnline) ? true : false;
+    return (this.data.dataFromSelectedUser.isOnline) ? true : false;
   }
 
 
   userIdMatchesWithIdFromLoggedinUser(): boolean {
-    return (this.data.userData.userId == this.authService.auth.currentUser?.uid) ? true : false;
+    return (this.data.dataFromSelectedUser.userId == this.authService.auth.currentUser?.uid) ? true : false;
   }
 
 
   writeMesssageToUser(): void {
     this.matDialog.closeAll();
-    this.router.navigate(['/mainView/directMessage/', this.data.userData.userId]);
+    this.router.navigate(['/mainView/directMessage/', this.data.dataFromSelectedUser.userId]);
   }
 }

@@ -59,7 +59,7 @@ export class ChatDirectMessagesComponent {
 
 
   openProfileDetailView(): void {
-    this.matDialog.open(DialogProfileDetailViewInChatComponent, { data: { userData: this.createUserService.user }, autoFocus: false });
+    this.matDialog.open(DialogProfileDetailViewInChatComponent, { data: { dataFromSelectedUser: this.createUserService.user }, autoFocus: false });
   }
 
 
