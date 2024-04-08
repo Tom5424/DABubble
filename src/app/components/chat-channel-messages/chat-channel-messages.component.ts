@@ -5,12 +5,13 @@ import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogEditChannelComponent } from '../dialog-edit-channel/dialog-edit-channel.component';
+import { DialogChannelMembersComponent } from '../dialog-channel-members/dialog-channel-members.component';
 
 
 @Component({
   selector: 'app-chat-channel-messages',
   standalone: true,
-  imports: [MatDialogModule, DialogEditChannelComponent],
+  imports: [MatDialogModule, DialogEditChannelComponent, DialogChannelMembersComponent],
   templateUrl: './chat-channel-messages.component.html',
   styleUrl: './chat-channel-messages.component.scss'
 })
@@ -50,5 +51,10 @@ export class ChatChannelMessagesComponent implements OnInit {
 
   openDialogToEditChannel(): void {
     this.matDialog.open(DialogEditChannelComponent, { data: { channelData: this.createChannelService.channel, channelId: this.channelId } });
+  }
+
+
+  openDialogToShowAllChannelMembers(): void {
+    this.matDialog.open(DialogChannelMembersComponent, { position: { top: '185px', left: '670px' } });
   }
 }

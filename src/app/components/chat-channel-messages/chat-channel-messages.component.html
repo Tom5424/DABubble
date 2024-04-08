@@ -13,28 +13,12 @@
 
         <div class="parentContainerUserImagesAndAddIcon">
 
-            <div class="containerUserImages">
+            <div class="containerUserImages" (click)="openDialogToShowAllChannelMembers()">
 
-                <!-- @if (arrayLengthIsEqualOrGreaterThan4()) { -->
+                @if (arrayLengthIsEqualOrGreaterThan4()) {
 
                 <!--------------------------------- Cut here the Last User from the Array if the Length is equal or greater than 4. To disaply only the 3 first Users --------------------------------->
-                <!-- @for (channelMember of createChannelService.channel.channelMembers.slice(0, -1); track $index) {
-
-                @if (noProfileImgExist(channelMember)) {
-                <img class="imageNoSelectedUser" src="assets/img/non-user-selected.svg" alt="User Image">
-                }@else {
-                <img src="{{ channelMember.imgUrl }}" alt="User Image">
-                }
-
-                }
-                <p>{{ createChannelService.channel.channelMembers.length }}</p> -->
-                <!--------------------------------- Cut here the Last User from the Array if the Length is equal or greater than 4. To disaply only the 3 first Users --------------------------------->
-
-                <!-- }@else { -->
-
-
-                <!--------------------------------- If the Array Length is 3 or shorter then display all Users --------------------------------->
-                <!-- @for (channelMember of createChannelService.channel.channelMembers; track $index) {
+                @for (channelMember of createChannelService.channel.channelMembers.slice(0, -1); track $index) {
 
                 @if (noProfileImgExist(channelMember)) {
                 <img class="imageNoSelectedUser" src="assets/img/non-user-selected.svg" alt="User Image">
@@ -44,7 +28,23 @@
 
                 }
                 <p>{{ createChannelService.channel.channelMembers.length }}</p>
-                } -->
+                <!--------------------------------- Cut here the Last User from the Array if the Length is equal or greater than 4. To disaply only the 3 first Users --------------------------------->
+
+                }@else {
+
+
+                <!--------------------------------- If the Array Length is 3 or shorter then display all Users --------------------------------->
+                @for (channelMember of createChannelService.channel.channelMembers; track $index) {
+
+                @if (noProfileImgExist(channelMember)) {
+                <img class="imageNoSelectedUser" src="assets/img/non-user-selected.svg" alt="User Image">
+                }@else {
+                <img src="{{ channelMember.imgUrl }}" alt="User Image">
+                }
+
+                }
+                <p>{{ createChannelService.channel.channelMembers.length }}</p>
+                }
                 <!--------------------------------- If the Array Length is 3 or shorter then display all Users --------------------------------->
 
             </div>
