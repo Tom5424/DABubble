@@ -1,7 +1,7 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
 
 @Component({
@@ -20,6 +20,11 @@ export class DialogEditChannelComponent {
     channelName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
     channelDescription: new FormControl('', Validators.maxLength(150)),
   })
+
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+    
+  }
 
 
   inputFieldChannelNameIsRequired(): boolean {

@@ -4,7 +4,7 @@
 
         <div class="containerChannelNameAndImageUpperPart">
             <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
-            <p>My Channel</p>
+            <p>{{ data.channelData.channelName }}</p>
         </div>
 
         <div class="containerCloseIcon" mat-dialog-close>
@@ -14,10 +14,10 @@
     </div>
 
     <form [formGroup]="editChannelForm">
-        <div class="dialogBoxFirstMiddlePart" [ngClass]="{'channelNameInEditMode': channelNameIsInEditMode}">
+        <div class="dialogBoxFirstMiddlePart" [ngClass]="{'channelInEditMode': channelNameIsInEditMode}">
 
             <div class="containerText">
-                <p>Channel-Name</p>
+                <p>Channel Name</p>
 
                 @if (!channelNameIsInEditMode) {
                 <p (click)="editChannelName()">Edit</p>
@@ -33,9 +33,10 @@
             <div class="containerChannelNameAndImageMiddlePart">
                 @if (!channelNameIsInEditMode) {
                 <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
-                <p>My Channel</p>
+                <p>{{ data.channelData.channelName }}</p>
                 }@else {
-                <input type="text" placeholder="Text" formControlName="channelName" [ngClass]="{'errorInputfield': inputFieldChannelNameIsRequired() || 
+                <input type="text" placeholder="{{ data.channelData.channelName }}" formControlName="channelName"
+                    [ngClass]="{'errorInputfield': inputFieldChannelNameIsRequired() || 
                   inputfieldChannelNameIsToShort() || inputfieldChannelNameIsToLong() }">
                 }
             </div>
@@ -57,10 +58,10 @@
         </div>
 
 
-        <div class="dialogBoxSecondMiddlePart" [ngClass]="{'channelNameInEditMode': channelDescriptionIsInEditMode}">
+        <div class="dialogBoxSecondMiddlePart" [ngClass]="{'channelInEditMode': channelDescriptionIsInEditMode}">
 
             <div class="containerText">
-                <p>Description</p>
+                <p>Channel Description</p>
 
                 @if (!channelDescriptionIsInEditMode) {
                 <p (click)="editChannelDescription()">Edit</p>
@@ -75,12 +76,11 @@
 
             @if (!channelDescriptionIsInEditMode) {
             <span>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis soluta consectetur necessitatibus
-                nemo nesciunt quaerat voluptas. Consequatur corrupti id ut. Vel, cumque? Tenetur quod doloribus totam
-                optio temporibus ducimus ab?
+                {{ data.channelData.channelDescription ? data.channelData.channelDescription : 'No Channel Description exist' }}
             </span>
             }@else {
-            <input type="text" placeholder="Text" formControlName="channelDescription"
+            <input type="text" placeholder="{{ data.channelData.channelDescription ? data.channelData.channelDescription : 'No Channel Description exist' }}"
+                formControlName="channelDescription"
                 [ngClass]="{'errorInputfield': inputfieldChannelDescriptionIsToLong()}">
 
 
@@ -95,7 +95,7 @@
 
             <div class="containerNameWhoCreatedChannel">
                 <p>Created by</p>
-                <p>Tom</p>
+                <p>{{ data.channelData.userWhoCreatedChannel }}</p>
             </div>
         </div>
 

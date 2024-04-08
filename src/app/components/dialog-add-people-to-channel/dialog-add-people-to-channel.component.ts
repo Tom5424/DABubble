@@ -72,13 +72,13 @@ export class DialogAddPeopleToChannelComponent {
 
 
   addAllUsersToChannel(): void {
-    this.createChannelService.createChannelService(this.data.channelData, this.allUsers);
+    this.createChannelService.createChannelService(this.data.channelData, this.allUsers, this.authService.user.name);
     this.matDialog.closeAll();
   }
 
 
   addSpecificUsersToChannel(): void {
-    this.createChannelService.createChannelService(this.data.channelData, this.addedUsersToTheChannel);
+    this.createChannelService.createChannelService(this.data.channelData, this.addedUsersToTheChannel, this.authService.user.name);
     this.matDialog.closeAll();
   }
 

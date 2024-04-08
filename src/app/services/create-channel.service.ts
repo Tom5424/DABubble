@@ -18,9 +18,9 @@ export class CreateChannelService {
   loadChannels: boolean = false;
 
 
-  createChannelService(channelData: any, channelMembers: User[]): void {
+  createChannelService(channelData: any, channelMembers: User[], userWhoCreatedChannel: string | null): void {
     const collectionRef = collection(this.firestore, 'channels');
-    const channelRef = new Channel(channelData, channelMembers);
+    const channelRef = new Channel(channelData, channelMembers, userWhoCreatedChannel);
     addDoc(collectionRef, channelRef.toJson())
       .then(() => {
 

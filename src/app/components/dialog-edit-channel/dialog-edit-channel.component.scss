@@ -3,6 +3,7 @@
 
 
 .dialogBox {
+    width: 800px;
     padding: 40px;
 }
 
@@ -114,7 +115,7 @@
     }
 
     input {
-        @include inputfieldOrTextarea(784px, 40px, 18px, 20px, 18px, 20px, 18px, #ffffff);
+        @include inputfieldOrTextarea(719px, 40px, 18px, 20px, 18px, 20px, 18px, #ffffff);
         @include inputfieldOrTextareaHover();
         @include inputfieldOrTextareaFocus();
         border: 1px solid $lightPurple;
@@ -164,7 +165,7 @@
 }
 
 
-.channelNameInEditMode {
+.channelInEditMode {
     border: unset;
 }
 
