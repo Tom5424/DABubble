@@ -6,12 +6,13 @@ import { AuthService } from '../../services/auth.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogEditChannelComponent } from '../dialog-edit-channel/dialog-edit-channel.component';
 import { DialogChannelMembersComponent } from '../dialog-channel-members/dialog-channel-members.component';
+import { DialogAddMorePeopleToChannelComponent } from '../dialog-add-more-people-to-channel/dialog-add-more-people-to-channel.component';
 
 
 @Component({
   selector: 'app-chat-channel-messages',
   standalone: true,
-  imports: [MatDialogModule, DialogEditChannelComponent, DialogChannelMembersComponent],
+  imports: [MatDialogModule, DialogEditChannelComponent, DialogChannelMembersComponent, DialogAddMorePeopleToChannelComponent],
   templateUrl: './chat-channel-messages.component.html',
   styleUrl: './chat-channel-messages.component.scss'
 })
@@ -56,5 +57,10 @@ export class ChatChannelMessagesComponent implements OnInit {
 
   openDialogToShowAllChannelMembers(): void {
     this.matDialog.open(DialogChannelMembersComponent, { position: { top: '185px', left: '670px' }, data: { channelMembers: this.createChannelService.channel.channelMembers } });
+  }
+
+
+  openDialogToAddMorePeopleToChannel(): void {
+    this.matDialog.open(DialogAddMorePeopleToChannelComponent, { position: { top: '185px', left: '600px' }, data: { channelName: this.createChannelService.channel.channelName} });
   }
 }
