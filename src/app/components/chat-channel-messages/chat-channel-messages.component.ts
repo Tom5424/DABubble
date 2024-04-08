@@ -61,6 +61,6 @@ export class ChatChannelMessagesComponent implements OnInit {
 
 
   openDialogToAddMorePeopleToChannel(): void {
-    this.matDialog.open(DialogAddMorePeopleToChannelComponent, { position: { top: '185px', left: '600px' }, data: { channelName: this.createChannelService.channel.channelName} });
+    this.matDialog.open(DialogAddMorePeopleToChannelComponent, { position: { top: '185px', left: '560px' }, data: { channelName: this.createChannelService.channel.channelName} });
   }
 }

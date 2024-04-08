@@ -1,5 +1,7 @@
 <div class="dialogBox">
 
+    <div [ngClass]="{'overlay': menuUserSelectionIsOpen}" (click)="closeUserMenuSelectionIfClickOutside()"></div>
+
     <div class="dialogBoxUpperPart">
         <p>Add People</p>
 
@@ -16,7 +18,41 @@
 
 
     <form>
-        <input type="text" placeholder="Enter Name">
+        <input type="text" placeholder="Enter Name" (click)="openMenuUserSelection()">
+
+
+        <!--------------------------------- User selection Menu --------------------------------->
+        @if(menuUserSelectionIsOpen) {
+        <div class="containerUserMenuSelection">
+
+            @for (user of allUsers; track $index) {
+
+            @if (userIdMatchesWithIdFromLoggedinUser(user.userId)) {
+
+            <div class="containerUserNameAndImg">
+
+                @if (noProfileImgExist(user)) {
+                <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="User Profile Image">
+                }@else {
+                <img class="userImg" src="{{ user.imgUrl }}" alt="User Profile Image">
+                }
+
+                @if (userIsOnline(user)) {
+                <img class="userOnlineStatus" src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
+                }@else {
+                <img class="userOnlineStatus" src="assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
+                }
+
+                <p>{{ user.name }}</p>
+
+            </div>
+            }
+
+            }
+        </div>
+        <!--------------------------------- User selection Menu --------------------------------->
+        }
+
 
         <div class="btnContainer">
             <button type="submit">Add</button>

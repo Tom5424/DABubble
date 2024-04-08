@@ -4,6 +4,8 @@ import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogProfileDetailViewInChatComponent } from '../dialog-profile-detail-view-in-chat/dialog-profile-detail-view-in-chat.component';
+import { DialogAddMorePeopleToChannelComponent } from '../dialog-add-more-people-to-channel/dialog-add-more-people-to-channel.component';
+import { CreateChannelService } from '../../services/create-channel.service';
 
 
 @Component({
@@ -17,6 +19,7 @@ import { DialogProfileDetailViewInChatComponent } from '../dialog-profile-detail
 
 export class DialogChannelMembersComponent {
   authService = inject(AuthService);
+  createChannelService = inject(CreateChannelService);
   matDialog = inject(MatDialog);
 
 
@@ -27,6 +30,12 @@ export class DialogChannelMembersComponent {
 
   openDetailViewFromSelectedChannelMember(selectedChannelMember: User): void {
     this.matDialog.open(DialogProfileDetailViewInChatComponent, { data: { dataFromSelectedUser: selectedChannelMember } });
+  }
+
+
+  openDialogToAddMorePeopleToChannel(): void {
+    this.matDialog.closeAll();
+    this.matDialog.open(DialogAddMorePeopleToChannelComponent, { position: { top: '185px', left: '560px'}, data: { channelName: this.createChannelService.channel.channelName } });
   }
 
 
