@@ -20,7 +20,7 @@
                 <p>Channel Name</p>
 
                 @if (!channelNameIsInEditMode) {
-                <p (click)="editChannelName()">Edit</p>
+                <p (click)="openEditModeForChannelName()">Edit</p>
                 }@else {
                 <button type="submit" (click)="saveChangesToEditChannelName()"
                     [disabled]="editChannelForm.controls.channelName.invalid || editChannelForm.controls.channelName.value?.trim() == ''"
@@ -30,6 +30,7 @@
                 }
             </div>
 
+            <!--------------------------------- Inputfield Channel Name --------------------------------->
             <div class="containerChannelNameAndImageMiddlePart">
                 @if (!channelNameIsInEditMode) {
                 <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
@@ -55,6 +56,7 @@
                 Channel Name can be a maximum of 15 characters long
             </p>
             }
+            <!--------------------------------- Inputfield Channel Name --------------------------------->
         </div>
 
 
@@ -64,22 +66,25 @@
                 <p>Channel Description</p>
 
                 @if (!channelDescriptionIsInEditMode) {
-                <p (click)="editChannelDescription()">Edit</p>
+                <p (click)="openEditModeForChannelDescription()">Edit</p>
                 }@else {
                 <button type="submit" (click)="saveChangesToEditChannelDescription()"
-                    [disabled]="editChannelForm.controls.channelDescription.invalid || editChannelForm.controls.channelDescription.value?.trim() == ''"
-                    [ngClass]="{'disabledBtn': editChannelForm.controls.channelDescription.invalid || editChannelForm.controls.channelDescription.value?.trim() == ''}">
+                    [disabled]="editChannelForm.controls.channelDescription.value?.trim() == ''"
+                    [ngClass]="{'disabledBtn': editChannelForm.controls.channelDescription.value?.trim() == ''}">
                     Save
                 </button>
                 }
             </div>
 
+
+            <!--------------------------------- Inputfield Channel Description --------------------------------->
             @if (!channelDescriptionIsInEditMode) {
             <span>
                 {{ data.channelData.channelDescription ? data.channelData.channelDescription : 'No Channel Description exist' }}
             </span>
             }@else {
-            <input type="text" placeholder="{{ data.channelData.channelDescription ? data.channelData.channelDescription : 'No Channel Description exist' }}"
+            <input type="text"
+                placeholder="{{ data.channelData.channelDescription ? data.channelData.channelDescription : 'No Channel Description exist' }}"
                 formControlName="channelDescription"
                 [ngClass]="{'errorInputfield': inputfieldChannelDescriptionIsToLong()}">
 
@@ -90,6 +95,7 @@
             </p>
             }
             }
+            <!--------------------------------- Inputfield Channel Description --------------------------------->
 
             <hr>
 
@@ -101,7 +107,7 @@
 
 
         <div class="containerBtn">
-            <button type="submit">Leave Channel</button>
+            <button type="submit">Delete Channel</button>
         </div>
     </form>
 </div>

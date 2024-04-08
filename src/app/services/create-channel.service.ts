@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, doc, getDoc, getDocs, orderBy, query } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, doc, getDoc, getDocs, onSnapshot, orderBy, query, updateDoc } from '@angular/fire/firestore';
 import { Channel } from '../models/channel';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
@@ -59,5 +59,31 @@ export class CreateChannelService {
       .then((data) => {
         this.noChannelsExistingInDatabase = data.empty;
       })
+  }
+
+
+  updateChannelNameService(channelId: string | null, newChannelName: string | null): void {
+    if (channelId) {
+      const docRef = doc(this.firestore, 'channels', channelId);
+      updateDoc(docRef, { channelName: newChannelName })
+        .then(() => {
+          onSnapshot(docRef, (channelData) => {
+            this.channel.channelName = channelData.data()?.['channelName'];
+          });
+        })
+    }
+  }
+
+
+  updateChannelDescriptionService(channelId: string | null, newChannelDescription: string | null): void {
+    if (channelId) {
+      const docRef = doc(this.firestore, 'channels', channelId);
+      updateDoc(docRef, { channelDescription: newChannelDescription })
+        .then(() => {
+          onSnapshot(docRef, (channelData) => {
+            this.channel.channelDescription = channelData.data()?.['channelDescription'];
+          });
+        })
+    }
   }
 }

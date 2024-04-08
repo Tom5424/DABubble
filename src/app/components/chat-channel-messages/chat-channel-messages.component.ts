@@ -49,6 +49,6 @@ export class ChatChannelMessagesComponent implements OnInit {
 
 
   openDialogToEditChannel(): void {
-    this.matDialog.open(DialogEditChannelComponent, { data: { channelData: this.createChannelService.channel } });
+    this.matDialog.open(DialogEditChannelComponent, { data: { channelData: this.createChannelService.channel, channelId: this.channelId } });
   }
 }

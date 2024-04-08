@@ -1,7 +1,8 @@
 import { NgClass } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { CreateChannelService } from '../../services/create-channel.service';
 
 
 @Component({
@@ -14,6 +15,7 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
 
 export class DialogEditChannelComponent {
+  createChannelService = inject(CreateChannelService);
   channelNameIsInEditMode: boolean = false;
   channelDescriptionIsInEditMode: boolean = false;
   editChannelForm = new FormGroup({
@@ -47,24 +49,26 @@ export class DialogEditChannelComponent {
   }
 
 
-  editChannelName(): void {
+  openEditModeForChannelName(): void {
     this.channelNameIsInEditMode = true;
   }
 
 
   saveChangesToEditChannelName(): void {
-    this.channelNameIsInEditMode = false;
+    this.createChannelService.updateChannelNameService(this.data.channelId, this.editChannelForm.controls.channelName.value);
     this.editChannelForm.controls.channelName.reset();
+    this.channelNameIsInEditMode = false;
   }
 
 
-  editChannelDescription(): void {
+  openEditModeForChannelDescription(): void {
     this.channelDescriptionIsInEditMode = true;
   }
 
 
   saveChangesToEditChannelDescription(): void {
-    this.channelDescriptionIsInEditMode = false;
+    this.createChannelService.updateChannelDescriptionService(this.data.channelId, this.editChannelForm.controls.channelDescription.value);
     this.editChannelForm.controls.channelDescription.reset();
+    this.channelDescriptionIsInEditMode = false;
   }
 }
