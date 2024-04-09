@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, doc, getDoc, getDocs, onSnapshot, orderBy, query, updateDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, arrayUnion, collection, collectionData, doc, getDoc, getDocs, onSnapshot, orderBy, query, updateDoc } from '@angular/fire/firestore';
 import { Channel } from '../models/channel';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
@@ -83,6 +83,19 @@ export class CreateChannelService {
           onSnapshot(docRef, (channelData) => {
             this.channel.channelDescription = channelData.data()?.['channelDescription'];
           });
+        })
+    }
+  }
+
+
+  updateChannelMembersService(channelId: string | null, newChannelMembers: User[]): void {
+    if (channelId) {
+      const docRef = doc(this.firestore, 'channels', channelId);
+      updateDoc(docRef, { channelMembers: arrayUnion(...newChannelMembers) })
+        .then(() => {
+          onSnapshot(docRef, (channelData) => {
+            this.channel.channelMembers = channelData.data()?.['channelMembers'];
+          })
         })
     }
   }

@@ -17,8 +17,10 @@
     </div>
 
 
-    <form>
-        <input type="text" placeholder="Enter Name" (click)="openMenuUserSelection()">
+    <form (ngSubmit)="addMoreMembersToTheChannel()" [formGroup]="addMorePeopleForm">
+
+        <input type="text" placeholder="Enter Name" formControlName="inputFieldAddMorePeople"
+            (click)="openMenuUserSelection()">
 
 
         <!--------------------------------- User selection Menu --------------------------------->
@@ -29,7 +31,8 @@
 
             @if (userIdMatchesWithIdFromLoggedinUser(user.userId)) {
 
-            <div class="containerUserNameAndImg">
+            <div class="containerUserNameAndImg" (click)="addUserToChannel(user)"
+                [ngClass]="{'selectedUser': userIsSelected(user), 'alreadyChannelMember': isAlreadyChannelMember(user.userId)}">
 
                 @if (noProfileImgExist(user)) {
                 <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="User Profile Image">
@@ -45,6 +48,13 @@
 
                 <p>{{ user.name }}</p>
 
+                @if (isAlreadyChannelMember(user.userId)) {
+                <p class="text">Channel Member</p>
+                }
+
+                @if(userIsSelected(user)) {
+                <p class="text">Selected</p>
+                }
             </div>
             }
 
@@ -54,8 +64,40 @@
         }
 
 
+        <!--------------------------------- Container with added User from the User selection Menu --------------------------------->
+        @if (noUserIsSelected()) {
+        <div class="mainContainerAddedUserMenuSelection">
+
+            @for (addedUsers of addedUsersToTheChannel.slice(0, 2); track $index) {
+            <div class="childContainerAddedUserMenuSelection">
+
+                @if (noProfileImgExist(addedUsers)) {
+                <img class="imgNoSelectedProfileAddedUser" src="./assets/img/non-user-selected.svg"
+                    alt="User Profile Image">
+                }@else {
+                <img class="userImgAddedUser" src="{{ addedUsers.imgUrl }}" alt="User Profile Image">
+                }
+
+                <p>{{ addedUsers.name }}</p>
+                <img class="closeIcon" src="assets/icons/close-icon.svg" alt="Close Icon"
+                    (click)="removeSelectedUser($index)">
+            </div>
+            }
+
+
+            @if (moreThanTwoUsersSelected()) {
+            <p class="text">+ {{ addedUsersToTheChannel.length - 2 }} more</p>
+            }
+        </div>
+        }
+        <!--------------------------------- Container with added User from the User selection Menu --------------------------------->
+
+
         <div class="btnContainer">
-            <button type="submit">Add</button>
+            <button type="submit" [disabled]="addedUsersToTheChannel.length == 0"
+                [ngClass]="{'btnDisabled': addedUsersToTheChannel.length == 0}">
+                Add
+            </button>
         </div>
     </form>
 </div>
