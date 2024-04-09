@@ -131,8 +131,14 @@ form {
 
 .text {
     color: $middlePurple;
-    width: 160px;
+    width: 120px;
     font-size: 16px !important;
+}
+
+
+.textNotSearchResultsFound {
+    text-align: center;
+    font-size: 18px;
 }
 
 

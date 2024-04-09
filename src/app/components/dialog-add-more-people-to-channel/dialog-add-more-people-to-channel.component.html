@@ -27,7 +27,7 @@
         @if(menuUserSelectionIsOpen) {
         <div class="containerUserMenuSelection">
 
-            @for (user of allUsers; track $index) {
+            @for (user of filteredUsers | async; track $index) {
 
             @if (userIdMatchesWithIdFromLoggedinUser(user.userId)) {
 
@@ -41,7 +41,7 @@
                 }
 
                 @if (userIsOnline(user)) {
-                <img class="userOnlineStatus" src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
+                <img class="userOnlineStatus" src="assets/icons/-iusers-online-icon.svg" alt="Green Dot">
                 }@else {
                 <img class="userOnlineStatus" src="assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
                 }
@@ -58,6 +58,11 @@
             </div>
             }
 
+            }
+
+            @if ((filteredUsers | async )?.length == 0) {
+            <!-- Checks if filteredUsers hat a Value or Users existing. If not the User get the Feedback "No People found" -->
+            <p class="textNotSearchResultsFound">No People found</p>
             }
         </div>
         <!--------------------------------- User selection Menu --------------------------------->
