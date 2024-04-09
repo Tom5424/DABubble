@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { CreateDirectMessageService } from '../../services/create-direct-message.service';
 import { DatePipe, NgClass, NgStyle } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
@@ -13,15 +13,15 @@ import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 
 
 @Component({
-  selector: 'app-message',
+  selector: 'app-direct-message',
   standalone: true,
   imports: [DatePipe, NgClass, NgStyle, ReactiveFormsModule, RouterLink, PickerComponent],
-  templateUrl: './message.component.html',
-  styleUrl: './message.component.scss'
+  templateUrl: './direct-message.component.html',
+  styleUrl: './direct-message.component.scss'
 })
 
 
-export class MessageComponent implements OnInit {
+export class DirectMessageComponent implements OnInit {
   createDirectMessageService = inject(CreateDirectMessageService);
   createUserService = inject(CreateUserService);
   authService = inject(AuthService);
@@ -29,7 +29,6 @@ export class MessageComponent implements OnInit {
   matDialog = inject(MatDialog);
   @Input() directMessage!: DirectMessage;
   @Input() directMessageId: string = '';
-  @Output() getSenderTimeFromSendedMessage = new EventEmitter();
   menuMoreOptionsAreOpen: boolean = false;
   messageIsInEditMode: boolean = false;
   barToSelectEmojisAreOpen: boolean = false;
@@ -46,9 +45,6 @@ export class MessageComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.userId = params.get('id');
     });
-    setTimeout(() => {
-      this.getSenderTimeFromSendedMessage.emit(this.directMessage);
-    }, 0);
   }
 
 

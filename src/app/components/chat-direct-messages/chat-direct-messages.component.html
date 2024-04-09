@@ -47,6 +47,7 @@
             <div class="scrollingContainer" #scrollingContainer>
 
                 <div>
+
                     <div class="containerUserImageAndNameLowerPart">
 
                         @if (noProfileImgExist()) {
@@ -99,12 +100,13 @@
                     </div>
                     }
 
-                    <app-message [directMessage]="directMessage" [directMessageId]="directMessage.id">
+                    <app-direct-message [directMessage]="directMessage" [directMessageId]="directMessage.id">
 
-                    </app-message>
+                    </app-direct-message>
                     }
 
                     }
+
                 </div>
 
             </div>
@@ -180,6 +182,7 @@
                         <button type="submit"
                             [disabled]="(storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || (addMessageForm.controls.textarea.value == null && storageService.uploadedImages.length == 0)"
                             [ngClass]="{'disabledBtn': (storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || (addMessageForm.controls.textarea.value == null && storageService.uploadedImages.length == 0)}">
+
                             <img src="assets/icons/send-message-icon-light-purble.svg" alt="Send Icon"
                                 [ngClass]="{'disabledSendBtn': (storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || (addMessageForm.controls.textarea.value == null && storageService.uploadedImages.length == 0)}">
                         </button>

@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { DocumentReference, Firestore, addDoc, and, arrayRemove, arrayUnion, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
+import { DocumentReference, Firestore, addDoc, arrayRemove, arrayUnion, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
 import { DirectMessage } from '../models/direct-message';
 import { User } from '../models/user';
 import { Observable } from 'rxjs';
@@ -15,7 +15,6 @@ export class CreateDirectMessageService {
   firestore = inject(Firestore);
   authService = inject(AuthService);
   directMessagesAsObservable!: Observable<any[]>;
-  noDirectMessageExistingInDatabase: boolean = false;
   loadChat: boolean = false;
 
 

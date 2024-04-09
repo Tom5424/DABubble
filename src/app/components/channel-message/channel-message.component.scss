@@ -1,0 +1,396 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+.mainContainerChannelMessageOwnMessage {
+    @include flex();
+    gap: 30px;
+    margin-top: 44px;
+    padding: 10px 45px 10px 45px;
+    position: relative;
+
+    &:hover {
+        background-color: $bgColor;
+
+        .containerReactionBar {
+            display: flex;
+        }
+
+        .messageTextOwnMessage {
+            background-color: #ffffff !important;
+        }
+    }
+
+    img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+    }
+}
+
+
+.mainContainerChannelMessageFromOtherUser {
+    @include flex();
+    flex-direction: row-reverse;
+    gap: 30px;
+    margin-top: 44px;
+    padding: 10px 45px 10px 45px;
+    position: relative;
+
+    &:hover {
+        background-color: $bgColor;
+
+        .containerReactionBar {
+            display: flex;
+        }
+    }
+
+    img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+    }
+}
+
+
+.overlay {
+    @include positionAbsolute(0, 0, 0, 0);
+}
+
+
+.container {
+    @include flexColumn();
+    @include flexEndYAxis();
+}
+
+
+.imgNoSelectedProfile {
+    background-color: $purple;
+    width: 45px !important;
+    height: 45px !important;
+    padding: 6px;
+}
+
+
+.containerChannelMessageUpperPartOwnMessage {
+    @include flex();
+    align-items: baseline;
+    gap: 20px;
+
+    p:nth-of-type(1) {
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    p:nth-of-type(2) {
+        color: $textGray;
+        font-size: 14px;
+    }
+
+    p {
+        margin: 0;
+    }
+}
+
+
+.containerChannelMessageUpperPartFromOtherUser {
+    @include flexStartXAxis();
+    flex-direction: row-reverse;
+    align-items: baseline;
+    gap: 20px;
+
+    p:nth-of-type(1) {
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    p:nth-of-type(2) {
+        color: $textGray;
+        font-size: 14px;
+    }
+
+    p {
+        margin: 0;
+    }
+}
+
+
+.messageTextOwnMessage {
+    background-color: $bgColor;
+    width: fit-content;
+    border-radius: 0px 30px 30px 30px;
+    padding: 15px;
+    font-size: 18px;
+    word-break: break-all;
+}
+
+
+.messageTextFromOtherUser {
+    background-color: $purple;
+    width: fit-content;
+    color: #ffffff;
+    border-radius: 30px 0px 30px 30px;
+    padding: 15px;
+    font-size: 18px;
+    word-break: break-all;
+}
+
+
+form {
+    position: relative;
+    padding: 20px 0 20px 0;
+
+    textarea {
+        @include inputfieldOrTextarea(470px, 20px, 20px, 20px, 20px, 20px, 18px, #ffffff);
+        @include inputfieldOrTextareaHover();
+        @include inputfieldOrTextareaFocus();
+        border: 1px solid $lightPurple;
+        font-family: "Figtree", sans-serif;
+        height: 120px;
+        resize: none;
+    }
+}
+
+
+.containerIconAndBtns {
+    @include flexCenteredYAxis();
+    @include flexSpaceBetween();
+    position: absolute;
+    background-color: #ffffff;
+    margin-left: -10px;
+    margin: -81px 0 0 15px;
+    padding: 15px 20px 15px 0;
+}
+
+
+.containerBtn {
+    @include flex();
+    gap: 32px;
+
+    button:nth-of-type(1) {
+        @include btnSecondary();
+        @include btnSecondaryHover();
+        @include btnSecondaryActive();
+    }
+
+    button:nth-of-type(2) {
+        @include btnPrimary();
+        @include btnPrimaryHover();
+        @include btnPrimaryActive();
+        border: unset;
+    }
+
+    button {
+        padding: 12px 25px 12px 25px;
+        border-radius: 50px;
+    }
+}
+
+
+.uploadedImage {
+    @include hover();
+    width: 350px !important;
+    height: 250px !important;
+    margin: 15px 0 15px 0;
+    object-fit: cover;
+    border-radius: 8px !important;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+
+.containerSmileyIcon {
+    @include hover();
+    @include flex();
+    border-radius: 50%;
+
+    img {
+        width: 40px;
+        height: 40px;
+
+        &:hover {
+            filter: brightness(0) saturate(100%) invert(32%) sepia(74%) saturate(1212%) hue-rotate(215deg) brightness(97%) contrast(107%);
+        }
+    }
+
+    &:hover {
+        background-color: $bgColor;
+    }
+}
+
+
+.mainContainerChannelMessageLowerPart {
+    @include flexCenteredYAxis();
+    gap: 30px;
+}
+
+
+.childContainerChannelMessageLowerPart {
+    @include flex();
+    align-items: baseline;
+    gap: 20px;
+
+    p:nth-of-type(1) {
+        @include hover();
+        color: $middlePurple;
+        width: 90px;
+        font-size: 18px;
+
+        &:hover {
+            font-weight: 700;
+        }
+    }
+
+    p:nth-of-type(2) {
+        color: $textGray;
+        font-size: 14px;
+    }
+
+    p {
+        margin: 0;
+    }
+}
+
+
+.mainContainerSelctedEmojis {
+    @include flex();
+    gap: 10px;
+}
+
+
+.childContainerSelctedEmojis {
+    @include hover();
+    @include flexCenteredYAxis();
+    border: 1px solid $lightPurple;
+    position: relative;
+    padding: 5px 10px 5px 10px;
+    border-radius: 20px;
+    gap: 5px;
+    background-color: #ffffff;
+
+    &:hover {
+        border: 1px solid $darkPurple;
+    }
+
+    img {
+        width: 20px;
+        height: 20px;
+    }
+
+    p {
+        margin: 0;
+    }
+}
+
+
+.containerTooltip {
+    @include positionAbsolute(unset, 40px, -42px, unset);
+    @include flexColumnCenteredXAxis();
+    background-color: $darkPurple;
+    gap: 8px;
+    z-index: 1;
+    padding: 15px 10px 15px 10px;
+    border-radius: 30px;
+
+    p:nth-of-type(1) {
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        width: 120px;
+        word-wrap: break-word;
+        text-align: center;
+        color: #ffffff;
+    }
+
+    p:nth-of-type(2) {
+        color: #ffffff;
+    }
+
+    img {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+
+.containerReactionBar {
+    @include positionAbsolute(-20px, unset, unset, unset);
+    @include flexCenteredYAxis();
+    border: 1px solid $lightPurple;
+    display: none;
+    gap: 5px;
+    height: 40px;
+    border-radius: 25px 25px 0 25px;
+    padding: 3px 15px 3px 20px;
+    background-color: #ffffff;
+
+    img {
+        padding: 8px;
+        width: 23px;
+        height: 23px;
+    }
+}
+
+
+.singleIcon {
+    @include iconHover();
+}
+
+
+.containerSingleIcon {
+    @include flex();
+    @include iconHover();
+
+    img {
+
+        &:hover {
+            filter: brightness(0) saturate(100%) invert(32%) sepia(76%) saturate(3470%) hue-rotate(230deg) brightness(98%) contrast(93%);
+        }
+    }
+}
+
+
+.containerReactionBarLeftSide {
+    left: 40px;
+}
+
+
+.containerReactionBarRightSide {
+    right: 40px;
+}
+
+
+.containerMenuMoreOptions {
+    @include positionAbsolute(30px, unset, unset, 40px);
+    width: 200px;
+    border-radius: 30px 0 30px 30px;
+    padding: 10px 20px 10px 20px;
+    box-shadow: 0px 6px 14px 0px #00000033;
+    background-color: #ffffff;
+
+    p {
+        @include hover();
+        margin: 0;
+        font-size: 20px;
+        border-radius: 100px;
+        padding: 10px 20px 10px 20px;
+
+        &:hover {
+            background-color: $bgColor;
+            color: $middlePurple;
+            font-weight: 700;
+        }
+    }
+}
+
+
+.row {
+    flex-direction: row;
+}
+
+
+.rowReverse {
+    flex-direction: row-reverse;
+}

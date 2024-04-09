@@ -7,7 +7,7 @@ import { AuthService } from '../../services/auth.service';
 import { AsyncPipe, DatePipe, NgClass, NgStyle } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CreateDirectMessageService } from '../../services/create-direct-message.service';
-import { MessageComponent } from '../message/message.component';
+import { DirectMessageComponent} from '../direct-message/direct-message.component';
 import { DirectMessage } from '../../models/direct-message';
 import { WorkspaceMenuService } from '../../services/workspace-menu.service';
 import { StorageService } from '../../services/storage.service';
@@ -19,7 +19,7 @@ import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 @Component({
   selector: 'app-chat-direct-messages',
   standalone: true,
-  imports: [PickerComponent, NgStyle, NgClass, ReactiveFormsModule, AsyncPipe, DatePipe, MessageComponent, RouterOutlet],
+  imports: [PickerComponent, NgStyle, NgClass, ReactiveFormsModule, AsyncPipe, DatePipe, DirectMessageComponent, RouterOutlet],
   templateUrl: './chat-direct-messages.component.html',
   styleUrl: './chat-direct-messages.component.scss'
 })
