@@ -121,7 +121,7 @@ export class ChannelMessageComponent {
 
   selectEmoji(emojiUrl: string) {
     this.initAddedEmojiFieldInChannelMessage();
-    // this.createDirectMessageService.updateEmojisService(this.channelMessageId, this.authService.user.userId, this.authService.user.name, emojiUrl, this.channelMessage);
+    this.createChannelMessageService.updateEmojisService(this.channelMessageId, this.authService.user.userId, this.authService.user.name, emojiUrl, this.channelMessage);
   }
 
 

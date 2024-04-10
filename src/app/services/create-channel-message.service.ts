@@ -1,6 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
-import { AuthService } from './auth.service';
+import { DocumentReference, Firestore, addDoc, arrayRemove, arrayUnion, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { ChannelMessage } from '../models/channel-message';
 import { User } from '../models/user';
@@ -13,7 +12,6 @@ import { User } from '../models/user';
 
 export class CreateChannelMessageService {
   firestore = inject(Firestore);
-  // authService = inject(AuthService);
   channelMessagesAsObservable!: Observable<any[]>;
   loadChat: boolean = false;
 
@@ -49,6 +47,60 @@ export class CreateChannelMessageService {
   updateChannelMessageService(messageId: string, inputValue: string | null): void {
     const docRef = doc(this.firestore, 'channelMessages', messageId);
     updateDoc(docRef, { messageText: inputValue });
+  }
+
+
+  updateEmojisService(messageId: string, idFromLoggedinUser: string, nameFromLoggedinUser: string | null, emojiUrl: string, channelMessage: ChannelMessage): void {
+    let indexIdLoggedinUser = 0;
+    let indexNameLoggedinUser = 0;
+    const { addedEmojis } = channelMessage;
+    const docRef = doc(this.firestore, 'channelMessages', messageId);
+    const indexEmojiUrl = channelMessage.addedEmojis.findIndex((emoji) => emoji.emojiUrl == emojiUrl);
+    channelMessage.addedEmojis.forEach((emoji) => { indexIdLoggedinUser = emoji.usersIdWhoHaveUsedTheEmoji.indexOf(idFromLoggedinUser) })
+    channelMessage.addedEmojis.forEach((emoji) => { indexNameLoggedinUser = emoji.usersNameWhoHaveUsedTheEmoji.indexOf(nameFromLoggedinUser ? nameFromLoggedinUser : '') })
+    this.checkEmojiStatusService(indexEmojiUrl, indexIdLoggedinUser, indexNameLoggedinUser, nameFromLoggedinUser, docRef, emojiUrl, idFromLoggedinUser, addedEmojis);
+  }
+
+
+  checkEmojiStatusService(indexEmojiUrl: number, indexIdLoggedinUser: number, indexNameLoggedinUser: number, nameFromLoggedinUser: string | null, docRef: DocumentReference, emojiUrl: string, idFromLoggedinUser: string, addedEmojis: any): void {
+    if (indexEmojiUrl == -1) {
+      this.addEmojiService(docRef, emojiUrl, idFromLoggedinUser, nameFromLoggedinUser);
+    } else if (addedEmojis[indexEmojiUrl].usersIdWhoHaveUsedTheEmoji.includes(idFromLoggedinUser)) {
+      this.decreaseEmojiAmountBy1(docRef, addedEmojis, indexEmojiUrl, indexIdLoggedinUser, indexNameLoggedinUser);
+      this.removeEmoji(docRef, addedEmojis, indexEmojiUrl);
+    } else if (!addedEmojis[indexEmojiUrl].usersIdWhoHaveUsedTheEmoji.includes(idFromLoggedinUser)) {
+      this.increaseEmojiBy1(docRef, addedEmojis, indexEmojiUrl, idFromLoggedinUser, nameFromLoggedinUser);
+    }
+  }
+
+
+  addEmojiService(docRef: DocumentReference, emojiUrl: string, idFromLoggedinUser: string, nameFromLoggedinUser: string | null): void {
+    const emojiData = [{ emojiUrl: emojiUrl, emojiAmount: 1, usersIdWhoHaveUsedTheEmoji: [idFromLoggedinUser], usersNameWhoHaveUsedTheEmoji: [nameFromLoggedinUser] }];
+    updateDoc(docRef, { addedEmojis: arrayUnion(...emojiData) })
+  }
+
+
+  decreaseEmojiAmountBy1(docRef: DocumentReference, addedEmojis: any, indexEmojiUrl: number, indexIdLoggedinUser: number, indexNameLoggedinUser: number): void {
+    addedEmojis[indexEmojiUrl].usersIdWhoHaveUsedTheEmoji.splice(indexIdLoggedinUser, 1);
+    addedEmojis[indexEmojiUrl].usersNameWhoHaveUsedTheEmoji.splice(indexNameLoggedinUser, 1);
+    addedEmojis[indexEmojiUrl] = { ...addedEmojis[indexEmojiUrl], emojiAmount: addedEmojis[indexEmojiUrl].emojiAmount - 1 };
+    updateDoc(docRef, { addedEmojis: addedEmojis });
+  }
+
+
+  removeEmoji(docRef: DocumentReference, addedEmojis: any, indexEmojiUrl: number): void {
+    if (addedEmojis[indexEmojiUrl].emojiAmount == 0) {
+      addedEmojis[indexEmojiUrl] = { ...addedEmojis[indexEmojiUrl], emojiAmount: addedEmojis[indexEmojiUrl].emojiAmount };
+      updateDoc(docRef, { addedEmojis: arrayRemove(addedEmojis[indexEmojiUrl]) });
+    }
+  }
+
+
+  increaseEmojiBy1(docRef: DocumentReference, addedEmojis: any, indexEmojiUrl: number, idFromLoggedinUser: string, nameFromLoggedinUser: string | null): void {
+    addedEmojis[indexEmojiUrl].usersIdWhoHaveUsedTheEmoji.push(idFromLoggedinUser);
+    addedEmojis[indexEmojiUrl].usersNameWhoHaveUsedTheEmoji.push(nameFromLoggedinUser);
+    addedEmojis[indexEmojiUrl] = { ...addedEmojis[indexEmojiUrl], emojiAmount: addedEmojis[indexEmojiUrl].emojiAmount + 1 };
+    updateDoc(docRef, { addedEmojis: addedEmojis });
   }
 
 

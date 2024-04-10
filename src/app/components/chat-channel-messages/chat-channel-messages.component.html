@@ -100,13 +100,42 @@
                     <mark>{{ createChannelService.channel.channelName }}</mark>
                 </div>
 
+                @if ((createChannelMessageService.channelMessagesAsObservable | async); as channelMessages) {
 
-                @for (channelMessage of createChannelMessageService.channelMessagesAsObservable | async; track $index) {
+                @for (channelMessage of channelMessages; track $index) {
+
+                @if (!isToday(channelMessage) && !isYesterday(channelMessage)) {
+                <div class="containerTimeWhenTheMessageWasSent">
+                    <hr>
+                    <p>{{ channelMessage.senderTime | date: 'EEEE, dd MMMM'}}</p>
+                    <hr>
+                </div>
+                }
+
+                @if (isYesterday(channelMessage)) {
+                <div class="containerTimeWhenTheMessageWasSent">
+                    <hr>
+                    <p>Yesterday</p>
+                    <hr>
+                </div>
+                }
+
+                @if (isToday(channelMessage)) {
+                <div class="containerTimeWhenTheMessageWasSent">
+                    <hr>
+                    <p>Today</p>
+                    <hr>
+                </div>
+                }
+
                 <app-channel-message [channelMessage]="channelMessage" [channelMessageId]="channelMessage.id">
 
                 </app-channel-message>
+
                 }
 
+
+                }
             </div>
 
         </div>
@@ -168,11 +197,9 @@
                             <img src="assets/icons/smiley-icon.svg" alt="Smiley Icon">
                         </div>
 
-                        @if (router.url !== '/mainView/directMessage') {
                         <div class="containerSingleIcon">
                             <img src="assets/icons/@-icon.svg" alt="@ Icon">
                         </div>
-                        }
                     </div>
 
 

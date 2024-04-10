@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CreateChannelService } from '../../services/create-channel.service';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
@@ -12,15 +12,16 @@ import { DialogUploadedImgFullViewComponent } from '../dialog-uploaded-img-full-
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
+import { AsyncPipe, DatePipe, NgClass, NgStyle } from '@angular/common';
 import { CreateChannelMessageService } from '../../services/create-channel-message.service';
 import { ChannelMessageComponent } from '../channel-message/channel-message.component';
+import { ChannelMessage } from '../../models/channel-message';
 
 
 @Component({
   selector: 'app-chat-channel-messages',
   standalone: true,
-  imports: [NgStyle, NgClass, AsyncPipe, MatDialogModule, PickerComponent, ReactiveFormsModule, ChannelMessageComponent, DialogEditChannelComponent, DialogChannelMembersComponent, DialogAddMorePeopleToChannelComponent],
+  imports: [NgStyle, NgClass, AsyncPipe, DatePipe, MatDialogModule, PickerComponent, ReactiveFormsModule, ChannelMessageComponent, DialogEditChannelComponent, DialogChannelMembersComponent, DialogAddMorePeopleToChannelComponent],
   templateUrl: './chat-channel-messages.component.html',
   styleUrl: './chat-channel-messages.component.scss'
 })
@@ -33,7 +34,6 @@ export class ChatChannelMessagesComponent implements OnInit {
   createChannelMessageService = inject(CreateChannelMessageService)
   renderer2 = inject(Renderer2);
   matDialog = inject(MatDialog);
-  router = inject(Router);
   activatedRoute = inject(ActivatedRoute);
   @ViewChild('scrollingContainer') scrollingContainer!: ElementRef;
   emojiPickerIsDisplayed: boolean = false;
@@ -157,5 +157,20 @@ export class ChatChannelMessagesComponent implements OnInit {
 
   openDialogToAddMorePeopleToChannel(): void {
     this.matDialog.open(DialogAddMorePeopleToChannelComponent, { position: { top: '185px', left: '560px' }, data: { channelName: this.createChannelService.channel.channelName, channelMembers: this.createChannelService.channel.channelMembers, channelId: this.channelId } });
+  }
+
+
+  isToday(channelMessage: ChannelMessage): boolean {
+    const today = new Date();
+    const currentDateMessage = new Date(channelMessage.senderTime);
+    return (today.toDateString() == currentDateMessage.toDateString());
+  }
+
+
+  isYesterday(channelMessage: ChannelMessage): boolean {
+    const messageThatOneDayOld = new Date();
+    const currentDateMessage = new Date(channelMessage.senderTime);
+    messageThatOneDayOld.setDate(messageThatOneDayOld.getDate() - 1);
+    return (messageThatOneDayOld.toDateString() == currentDateMessage.toDateString());
   }
 }
