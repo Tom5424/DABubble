@@ -147,13 +147,13 @@ export class ChannelMessageComponent {
 
   editMessage(): void {
     this.inputValue = this.editMessageForm.controls.textareaEditMessage.value;
-    // this.createDirectMessageService.updateDirectMessageService(this.channelMessageId, this.inputValue);
+    this.createChannelMessageService.updateChannelMessageService(this.channelMessageId, this.inputValue);
     this.closeEditModeFromMessage();
   }
 
 
   deleteMessage(): void {
-    // this.createDirectMessageService.deleteDirectMessageService(this.channelMessageId);
+    this.createChannelMessageService.deleteChannelMessageService(this.channelMessageId);
     this.menuMoreOptionsAreOpen = false;
   }
 }

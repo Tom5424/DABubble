@@ -109,7 +109,11 @@
         @include flexCenteredYAxis();
         gap: 10px;
         border-radius: 25px;
-        border: unset;
         padding: 12px 25px 12px 25px;
+        border: unset;
+
+        &:focus {
+            outline: none;
+        }
     }
 }

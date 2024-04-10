@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild, inject, Renderer2 } from '@angular/core';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { CreateUserService } from '../../services/create-user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogProfileDetailViewInChatComponent } from '../dialog-profile-detail-view-in-chat/dialog-profile-detail-view-in-chat.component';
@@ -7,7 +7,7 @@ import { AuthService } from '../../services/auth.service';
 import { AsyncPipe, DatePipe, NgClass, NgStyle } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CreateDirectMessageService } from '../../services/create-direct-message.service';
-import { DirectMessageComponent} from '../direct-message/direct-message.component';
+import { DirectMessageComponent } from '../direct-message/direct-message.component';
 import { DirectMessage } from '../../models/direct-message';
 import { WorkspaceMenuService } from '../../services/workspace-menu.service';
 import { StorageService } from '../../services/storage.service';
@@ -34,7 +34,6 @@ export class ChatDirectMessagesComponent {
   activatedRoute = inject(ActivatedRoute);
   matDialog = inject(MatDialog);
   renderer2 = inject(Renderer2);
-  router = inject(Router);
   @ViewChild('scrollingContainer') scrollingContainer!: ElementRef;
   userId: string | null = '';
   inputValue: string | null | undefined = '';

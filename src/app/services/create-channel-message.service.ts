@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, orderBy, query, where } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 import { ChannelMessage } from '../models/channel-message';
@@ -43,5 +43,17 @@ export class CreateChannelMessageService {
       this.loadChat = false;
     })
     this.channelMessagesAsObservable = collectionData(collectionRef, { idField: 'id' }) as Observable<ChannelMessage[]>;
+  }
+
+
+  updateChannelMessageService(messageId: string, inputValue: string | null): void {
+    const docRef = doc(this.firestore, 'channelMessages', messageId);
+    updateDoc(docRef, { messageText: inputValue });
+  }
+
+
+  deleteChannelMessageService(messageId: string): void {
+    const docRef = doc(this.firestore, 'channelMessages', messageId);
+    deleteDoc(docRef);
   }
 }
