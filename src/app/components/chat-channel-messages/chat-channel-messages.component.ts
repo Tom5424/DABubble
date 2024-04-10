@@ -93,9 +93,9 @@ export class ChatChannelMessagesComponent implements OnInit {
   }
 
 
-  // userIdMatchesWithIdFromLoggedinUser(userId: string): boolean {
-  //   return (userId !== this.authService.auth.currentUser?.uid) ? true : false;
-  // }
+  userIdMatchesWithIdFromLoggedinUser(userId: string): boolean {
+    return (userId !== this.authService.auth.currentUser?.uid) ? true : false;
+  }
 
 
   arrayLengthIsEqualOrGreaterThan4(): boolean {
