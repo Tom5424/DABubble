@@ -23,7 +23,6 @@ export class ContactsInSidebarComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.createUserService.checkIfUserExistingInDatabaseService();
     this.getAllUsers();
   }
 
@@ -53,11 +52,6 @@ export class ContactsInSidebarComponent implements OnInit {
 
   userIdMatchesWithIdFromLoggedinUser(user: User): boolean {
     return (user.userId == this.authService.user.userId) ? true : false;
-  }
-
-
-  checkIfContactsExistingInDatabase(): boolean {
-    return (this.createUserService.noContactsExistingInDatabase) ? true : false;
   }
 
 

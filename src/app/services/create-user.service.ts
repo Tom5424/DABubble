@@ -13,7 +13,6 @@ export class CreateUserService {
   firestore = inject(Firestore);
   allUsersAsObservable!: Observable<User[]>;
   user!: User;
-  noContactsExistingInDatabase: boolean = false;
   loadContacts: boolean = false;
 
 
@@ -50,15 +49,6 @@ export class CreateUserService {
         this.loadContacts = false;
       })
     }
-  }
-
-
-  checkIfUserExistingInDatabaseService(): void {
-    const collectionRef = collection(this.firestore, 'users');
-    getDocs(collectionRef)
-      .then((data) => {
-        this.noContactsExistingInDatabase = data.empty;
-      })
   }
 
 

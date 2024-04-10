@@ -1,8 +1,9 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, addDoc, arrayUnion, collection, collectionData, doc, getDoc, getDocs, onSnapshot, orderBy, query, updateDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, arrayUnion, collection, collectionData, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, updateDoc } from '@angular/fire/firestore';
 import { Channel } from '../models/channel';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -12,9 +13,9 @@ import { User } from '../models/user';
 
 export class CreateChannelService {
   firestore = inject(Firestore);
+  router = inject(Router);
   allChannelsAsObservable!: Observable<any[]>;
   channel!: Channel;
-  noChannelsExistingInDatabase: boolean = false;
   loadChannels: boolean = false;
 
 
@@ -22,8 +23,8 @@ export class CreateChannelService {
     const collectionRef = collection(this.firestore, 'channels');
     const channelRef = new Channel(channelData, channelMembers, userWhoCreatedChannel);
     addDoc(collectionRef, channelRef.toJson())
-      .then(() => {
-
+      .then((docData) => {
+        this.router.navigateByUrl('/mainView/channel/' + docData.id);
       })
       .catch((error) => {
         console.error(error.message);
@@ -53,11 +54,11 @@ export class CreateChannelService {
   }
 
 
-  checkIfChannelsExistingInDatabaseService(): void {
+  directToOtherChannelIfDeleteChannel(): void {
     const collectionRef = collection(this.firestore, 'channels');
     getDocs(collectionRef)
       .then((data) => {
-        this.noChannelsExistingInDatabase = data.empty;
+        this.router.navigateByUrl('/mainView/channel/' + data.docs[0].id);
       })
   }
 
@@ -98,5 +99,17 @@ export class CreateChannelService {
           })
         })
     }
+  }
+
+
+  deleteChannelService(messageId: string): void {
+    const docRef = doc(this.firestore, 'channels', messageId);
+    deleteDoc(docRef)
+      .then(() => {
+        this.directToOtherChannelIfDeleteChannel();
+      })
+      .catch((error) => {
+        console.error(error.message);
+      })
   }
 }

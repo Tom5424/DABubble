@@ -1,7 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component, Inject, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CreateChannelService } from '../../services/create-channel.service';
 
 
@@ -16,6 +16,7 @@ import { CreateChannelService } from '../../services/create-channel.service';
 
 export class DialogEditChannelComponent {
   createChannelService = inject(CreateChannelService);
+  matDialog = inject(MatDialog);
   channelNameIsInEditMode: boolean = false;
   channelDescriptionIsInEditMode: boolean = false;
   editChannelForm = new FormGroup({
@@ -70,5 +71,11 @@ export class DialogEditChannelComponent {
     this.createChannelService.updateChannelDescriptionService(this.data.channelId, this.editChannelForm.controls.channelDescription.value);
     this.editChannelForm.controls.channelDescription.reset();
     this.channelDescriptionIsInEditMode = false;
+  }
+
+
+  deleteChannel(): void {
+    this.createChannelService.deleteChannelService(this.data.channelId);
+    this.matDialog.closeAll();
   }
 }

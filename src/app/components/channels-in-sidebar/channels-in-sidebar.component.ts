@@ -22,7 +22,6 @@ export class ChannelsInSidebarComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.createChannelService.checkIfChannelsExistingInDatabaseService();
     this.createChannelService.getAllChannelsService();
   }
 
@@ -34,11 +33,6 @@ export class ChannelsInSidebarComponent implements OnInit {
 
   openDialogCreateChannel(): void {
     this.matDialog.open(DialogCreateChannelComponent);
-  }
-
-
-  checkIfChannelsExistingInDatabase(): boolean {
-    return (this.createChannelService.noChannelsExistingInDatabase) ? true : false;
   }
 
 

@@ -20,10 +20,7 @@
         <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
         <p>{{ channel.channelName }}</p>
     </li>
-    }
-
-
-    @if (checkIfChannelsExistingInDatabase()) {
+    }@empty {
     <p class="text">No Channels Existing</p>
     }
 
