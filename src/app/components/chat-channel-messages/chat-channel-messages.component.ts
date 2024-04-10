@@ -30,8 +30,8 @@ import { ChannelMessage } from '../../models/channel-message';
 export class ChatChannelMessagesComponent implements OnInit {
   createChannelService = inject(CreateChannelService);
   authService = inject(AuthService);
-  storageService = inject(StorageService)
-  createChannelMessageService = inject(CreateChannelMessageService)
+  storageService = inject(StorageService);
+  createChannelMessageService = inject(CreateChannelMessageService);
   renderer2 = inject(Renderer2);
   matDialog = inject(MatDialog);
   activatedRoute = inject(ActivatedRoute);

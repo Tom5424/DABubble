@@ -39,8 +39,7 @@
 
 
         <!--------------------------------- User selection Menu --------------------------------->
-        @if(menuUserSelectionIsOpen) {
-        <div class="containerUserMenuSelection">
+        <div class="containerUserMenuSelection" [ngClass]="{'d-none': !menuUserSelectionIsOpen}">
 
             @for (user of filteredUsers | async; track $index) {
 
@@ -79,7 +78,6 @@
             <p class="textNotSearchResultsFound">No People found</p>
             }
         </div>
-        }
         <!--------------------------------- User selection Menu --------------------------------->
 
 

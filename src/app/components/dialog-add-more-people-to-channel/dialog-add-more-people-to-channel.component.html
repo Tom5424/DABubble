@@ -24,8 +24,7 @@
 
 
         <!--------------------------------- User selection Menu --------------------------------->
-        @if(menuUserSelectionIsOpen) {
-        <div class="containerUserMenuSelection">
+        <div class="containerUserMenuSelection" [ngClass]="{'d-none': !menuUserSelectionIsOpen}">
 
             @for (user of filteredUsers | async; track $index) {
 
@@ -66,7 +65,6 @@
             }
         </div>
         <!--------------------------------- User selection Menu --------------------------------->
-        }
 
 
         <!--------------------------------- Container with added User from the User selection Menu --------------------------------->

@@ -12,6 +12,7 @@ import { isAuthorizedToGoResetPassword } from './router-guards/is-authorized-to-
 import { MainViewComponent } from './components/main-view/main-view.component';
 import { ChatDirectMessagesComponent } from './components/chat-direct-messages/chat-direct-messages.component';
 import { ChatChannelMessagesComponent } from './components/chat-channel-messages/chat-channel-messages.component';
+import { NewMessageComponent } from './components/new-message/new-message.component';
 
 
 export const routes: Routes = [
@@ -32,6 +33,7 @@ export const routes: Routes = [
         children: [
             { path: 'directMessage/:id', component: ChatDirectMessagesComponent },
             { path: 'channel/:id', component: ChatChannelMessagesComponent },
+            { path: 'newMessage', component: NewMessageComponent },
         ]
     },
 

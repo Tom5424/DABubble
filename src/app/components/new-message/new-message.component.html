@@ -1,0 +1,87 @@
+<div class="mainContainerNewMessages">
+    <div [ngClass]="{'overlay': emojiPickerIsDisplayed}" (click)="closeEmojiPickerOrOtherMenuIfClickOutside()"></div>
+
+    <!--------------------------------- Container Chat upper Part--------------------------------->
+    <div class="containerNewMessagesUpperPart">
+        <p>New Message</p>
+        <input type="text" placeholder="At: #channel or @somebody">
+    </div>
+    <!--------------------------------- Container Chat upper Part--------------------------------->
+
+
+    <!--------------------------------- Container Chat Lower Part--------------------------------->
+    <div class="containerNewMessagesLowerPart">
+
+        <div class="containerForm" [ngStyle]="{'padding-bottom': storageService.uploadedImages.length >= 1 ? '11px' : '50px', 
+            'margin-top': storageService.uploadedImages.length >= 1 ? '256px' : '266px'}">
+
+            <form [formGroup]="addMessageForm">
+
+                <textarea placeholder="Start a new Message" formControlName="textarea"></textarea>
+
+
+                <!--------------------------------- Disaplyed here the uploaded Images --------------------------------->
+                <div class="mainContainerUploadedImages">
+                    @if (imageIsUploading()) {
+                    <img class="spinnerIcon" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
+                    }
+
+                    @for (uploadedImage of storageService.uploadedImages; track $index) {
+                    <div class="childContainerUploadedImages">
+                        <img class="closeIcon" src="assets/icons/close-icon.svg" alt="Close Icon"
+                            (click)="removeUploadedImage($index)">
+
+                        <img src="{{ uploadedImage }}" alt="Uploaded Image"
+                            (click)="openImageDetailView(uploadedImage)">
+                    </div>
+                    }
+                </div>
+                <!--------------------------------- Disaplyed here the uploaded Images --------------------------------->
+
+
+                <!--------------------------------- Emoji Picker --------------------------------->
+                @if (emojiPickerIsDisplayed) {
+                <emoji-mart [style]="{position: 'absolute', bottom: '130px', 'z-index': '1'}"
+                    (emojiClick)="selectEmoji($event)">
+                </emoji-mart>
+                }
+                <!--------------------------------- Emoji Picker --------------------------------->
+
+
+                <div class="mainContainerIcons">
+
+                    <div class="containerIcons">
+                        <div class="containerSingleIcon">
+
+                            <label for="uploadFile">
+                                <input type="file" id="uploadFile" #selectedFile hidden
+                                    (change)="selectFile(selectedFile)">
+                                <img class="plusIcon" src="assets/icons/plus-icon-gray.svg" alt="Plus Icon">
+                            </label>
+
+                        </div>
+
+                        <hr>
+
+                        <div class="containerSingleIcon" (click)="tootgleEmojiPicker()">
+                            <img src="assets/icons/smiley-icon.svg" alt="Smiley Icon">
+                        </div>
+                    </div>
+
+
+                    <button type="submit"
+                        [disabled]="(storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || (addMessageForm.controls.textarea.value == null && storageService.uploadedImages.length == 0)"
+                        [ngClass]="{'disabledBtn': (storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || (addMessageForm.controls.textarea.value == null && storageService.uploadedImages.length == 0)}">
+
+                        <img src="assets/icons/send-message-icon-light-purble.svg" alt="Send Icon"
+                            [ngClass]="{'disabledSendBtn': (storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || (addMessageForm.controls.textarea.value == null && storageService.uploadedImages.length == 0)}">
+                    </button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+    <!--------------------------------- Container Chat Lower Part--------------------------------->
+
+</div>

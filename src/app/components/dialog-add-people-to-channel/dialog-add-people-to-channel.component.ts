@@ -43,8 +43,8 @@ export class DialogAddPeopleToChannelComponent {
     this.createUserService.getAllUserService()
       .subscribe((userData) => {
         this.allUsers = userData;
+        this.getInputvalue();
       })
-    this.getInputvalue();
   }
 
 
