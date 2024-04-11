@@ -25,7 +25,8 @@
 
                 @if (userIdMatchesWithIdFromLoggedinUser(user.userId)) {
 
-                <div class="containerUserNameAndImg" [ngClass]="{'d-none': !usersInMenuSelectionAreDisplayed}">
+                <div class="containerUserNameAndImg" (click)="selectUser(user)"
+                    [ngClass]="{'selectedUserOrChannel': checkIfUserAlreadySelected(user)}">
 
                     @if (noProfileImgExist(user)) {
                     <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="User Profile Image">
@@ -40,6 +41,10 @@
                     }
 
                     <p>{{ user.name }}</p>
+
+                    @if (checkIfUserAlreadySelected(user)) {
+                    <p class="textSelected">Selected</p>
+                    }
                 </div>
 
                 }
@@ -61,14 +66,20 @@
                 <p class="text">Channels</p>
 
                 @for (channel of filteredChannels | async; track $index) {
-                <div class="containerChannelNameAndImg" [ngClass]="{'d-none': !channelsInMenuSelectionAreDisplayed}">
+                <div class="containerChannelNameAndImg" (click)="selectChannel(channel)"
+                    [ngClass]="{'selectedUserOrChannel': checkIfChannelAlreadySelected(channel)}">
 
                     <img class="" src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
 
 
                     <p>{{ channel.channelName }}</p>
 
+
+                    @if (checkIfChannelAlreadySelected(channel)) {
+                    <p class="textSelected">Selected</p>
+                    }
                 </div>
+
                 }
 
                 @if ((filteredChannels | async)?.length == 0) {
@@ -82,6 +93,59 @@
             </div>
 
         </form>
+
+        <!--------------------------------- Here will displayed the added Users from the searchbar --------------------------------->
+        @if (selectedUsers.length > 0) {
+        <div class="mainContainerSelectedUsersAndChannels">
+
+            @for (user of selectedUsers.slice(0, 3); track $index) {
+            <div class="containerSelectedUserOrChannel">
+
+                @if (noProfileImgExist(user)) {
+                <img class="imgNoSelectedProfileAddedUser" src="assets/img/non-user-selected.svg"
+                    alt="User Profile Image">
+                }@else {
+                <img class="userImgAddedUser" src="{{ user.imgUrl }}" alt="User Profile Image">
+                }
+
+                <p>{{ user.name }}</p>
+
+                <img class="closeIconSelectedUserOrChannel" src="assets/icons/close-icon.svg" alt="Close Icon"
+                    (click)="removeSelectedUser($index)">
+            </div>
+            }
+
+            @if (selectedUsers.length >= 4) {
+            <p class="textMoreSelcted">+ {{ selectedUsers.length - 3 }} more</p>
+            }
+        </div>
+        }
+        <!--------------------------------- Here will displayed the added Users from the searchbar --------------------------------->
+
+
+        <!--------------------------------- Here will displayed the added Channels from the searchbar --------------------------------->
+        @if (selectedChannels.length > 0) {
+        <div class="mainContainerSelectedUsersAndChannels">
+
+            @for (channel of selectedChannels.slice(0, 3); track $index) {
+            <div class="containerSelectedUserOrChannel">
+
+                <img class="hashtagIcon" src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
+
+                <p>{{ channel.channelName }}</p>
+
+                <img class="closeIconSelectedUserOrChannel" src="assets/icons/close-icon.svg" alt="Close Icon"
+                    (click)="removeSelectedChannel($index)">
+            </div>
+            }
+
+            @if (selectedChannels.length >= 4) {
+            <p class="textMoreSelcted">+ {{ selectedChannels.length - 3 }} more</p>
+            }
+        </div>
+        }
+        <!--------------------------------- Here will displayed the added Channels from the searchbar --------------------------------->
+
 
     </div>
     <!--------------------------------- Container Chat upper Part--------------------------------->

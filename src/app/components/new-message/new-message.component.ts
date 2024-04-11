@@ -29,6 +29,8 @@ export class NewMessageComponent implements OnInit {
   createUserService = inject(CreateUserService);
   authService = inject(AuthService);
   matDialog = inject(MatDialog);
+  selectedUsers: User[] = [];
+  selectedChannels: Channel[] | any = [];
   allUsers: User[] = [];
   allChannels: Channel[] = [];
   filteredUsers!: Observable<User[]>;
@@ -108,6 +110,52 @@ export class NewMessageComponent implements OnInit {
     } else {
       return this.allChannels.filter((channel) => (channel.channelName?.toLowerCase().includes(searchValue)));
     }
+  }
+
+
+  selectUser(selectedUser: User): void {
+    const indexFromSelectedUser = this.selectedUsers.findIndex((user) => user.userId == selectedUser.userId)
+    if (indexFromSelectedUser == -1) {
+      this.selectedUsers.push(selectedUser);
+    } else {
+      this.selectedUsers.splice(indexFromSelectedUser, 1);
+    }
+    this.channelsInMenuSelectionAreDisplayed = false;
+    this.usersInMenuSelectionAreDisplayed = false;
+    this.inputField.reset();
+  }
+
+
+  checkIfUserAlreadySelected(user: User): boolean {
+    return this.selectedUsers.includes(user);
+  }
+
+
+  removeSelectedUser(index: number): void {
+    this.selectedUsers.splice(index, 1);
+  }
+
+
+  selectChannel(selectedChannel: any): void {
+    const indexFromSelectedChannel = this.selectedChannels.findIndex((channel: any) => channel.id == selectedChannel.id)
+    if (indexFromSelectedChannel == -1) {
+      this.selectedChannels.push(selectedChannel);
+    } else {
+      this.selectedChannels.splice(indexFromSelectedChannel, 1);
+    }
+    this.channelsInMenuSelectionAreDisplayed = false;
+    this.usersInMenuSelectionAreDisplayed = false;
+    this.inputField.reset();
+  }
+
+
+  checkIfChannelAlreadySelected(channel: Channel): boolean {
+    return this.selectedChannels.includes(channel);
+  }
+
+
+  removeSelectedChannel(index: number): void {
+    this.selectedChannels.splice(index, 1);
   }
 
 
