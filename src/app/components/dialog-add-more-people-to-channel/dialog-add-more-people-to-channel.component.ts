@@ -56,7 +56,7 @@ export class DialogAddMorePeopleToChannelComponent {
 
   filterUserBasedOnInputvalue(value: string): User[] {
     const searchValue = value.toLowerCase();
-    return this.allUsers.filter((user) => user.name?.toLowerCase().startsWith(searchValue));
+    return this.allUsers.filter((user) => user.name?.toLowerCase().includes(searchValue));
   }
 
 

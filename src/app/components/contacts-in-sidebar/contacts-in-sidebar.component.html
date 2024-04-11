@@ -7,6 +7,13 @@
 </div>
 
 
+@if (contactsAreLoading()) {
+<div class="containerSpinnerIcon">
+    <img src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
+</div>
+
+}@else {
+
 <ul class="contactList" [ngClass]="{'d-none': contactListAreCollapsed}">
     @for (user of allUser; track $index) {
 
@@ -31,11 +38,5 @@
     }@empty {
     <p class="text">No Contacts Existing</p>
     }
-
-
-    @if (contactsAreLoading()) {
-    <div class="containerSpinnerIcon">
-        <img src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
-    </div>
-    }
 </ul>
+}

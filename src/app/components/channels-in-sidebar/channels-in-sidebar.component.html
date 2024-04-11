@@ -13,7 +13,15 @@
 </div>
 
 
+@if (channelsAreLoading()) {
+<div class="containerSpinnerIcon">
+    <img src="./assets/icons/spinner-icon.svg" alt="Spinner Icon">
+</div>
+
+}@else {
+    
 <ul class="channelList" [ngClass]="{'d-none': channelListAreCollapsed}">
+
 
     @for(channel of createChannelService.allChannelsAsObservable | async; track $index) {
     <li routerLink="/mainView/channel/{{ channel.id }}" routerLinkActive="activeChannel">
@@ -25,14 +33,9 @@
     }
 
 
-    @if (channelsAreLoading()) {
-    <div class="containerSpinnerIcon">
-        <img src="./assets/icons/spinner-icon.svg" alt="Spinner Icon">
-    </div>
-    }@else {
     <div class="containerIconAndText" (click)="openDialogCreateChannel()">
         <img src="assets/icons/plus-icon-with-circle.svg" alt="Plus Icon">
         <p>Add Channel</p>
     </div>
-    }
 </ul>
+}
