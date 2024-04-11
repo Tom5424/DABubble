@@ -1,34 +1,139 @@
-import { NgClass, NgStyle } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
 import { StorageService } from '../../services/storage.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DialogUploadedImgFullViewComponent } from '../dialog-uploaded-img-full-view/dialog-uploaded-img-full-view.component';
 import { MatDialog } from '@angular/material/dialog';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
+import { CreateChannelService } from '../../services/create-channel.service';
+import { CreateUserService } from '../../services/create-user.service';
+import { User } from '../../models/user';
+import { Channel } from '../../models/channel';
+import { AuthService } from '../../services/auth.service';
+import { Observable, map, startWith } from 'rxjs';
 
 
 @Component({
   selector: 'app-new-message',
   standalone: true,
-  imports: [NgClass, NgStyle, ReactiveFormsModule, PickerComponent],
+  imports: [NgClass, NgStyle, ReactiveFormsModule, PickerComponent, AsyncPipe],
   templateUrl: './new-message.component.html',
   styleUrl: './new-message.component.scss'
 })
 
 
-export class NewMessageComponent {
+export class NewMessageComponent implements OnInit {
   storageService = inject(StorageService);
+  createChannelService = inject(CreateChannelService);
+  createUserService = inject(CreateUserService);
+  authService = inject(AuthService);
   matDialog = inject(MatDialog);
+  allUsers: User[] = [];
+  allChannels: Channel[] = [];
+  filteredUsers!: Observable<User[]>;
+  filteredChannels!: Observable<Channel[]>;
   inputValue: string | null | undefined = '';
   emojiPickerIsDisplayed: boolean = false;
+  usersInMenuSelectionAreDisplayed: boolean = false;
+  channelsInMenuSelectionAreDisplayed: boolean = false;
   addMessageForm = new FormGroup({
-    textarea: new FormControl('', Validators.required)
+    textarea: new FormControl('', Validators.required),
   })
+  inputField = new FormControl('');
+
+
+  constructor() {
+    this.getAllUsers();
+    this.getAllChannels();
+  }
+
+
+  getAllUsers() {
+    this.createUserService.getAllUserService()
+      .subscribe((userData) => {
+        this.allUsers = userData;
+      });
+  }
+
+
+  getAllChannels() {
+    this.createChannelService.getAllChannelsService()
+      .subscribe((channelData) => {
+        this.allChannels = channelData;
+      });
+  }
+
+
+  ngOnInit(): void {
+    this.getInputvalueToFilterUsers();
+    this.getInputvalueToFilterChannels();
+  }
+
+
+  getInputvalueToFilterUsers() {
+    this.filteredUsers = this.inputField.valueChanges.pipe(
+      startWith(''),
+      map((value) => this.filterUsersBasedOnInputvalue(value || '')),
+    );
+  }
+
+
+  filterUsersBasedOnInputvalue(value: string): User[] {
+    const searchValue = value.trim().toLowerCase();
+    let searchValueWithoutAtSymboyl = '';
+    if (searchValue.startsWith('@')) {
+      searchValueWithoutAtSymboyl = searchValue.trim().replace('@', '');
+      return this.allUsers.filter((user) => (user.name?.toLowerCase().includes(searchValueWithoutAtSymboyl)));
+    } else {
+      return this.allUsers.filter((user) => (user.name?.toLowerCase().includes(searchValue)));
+    }
+  }
+
+
+  getInputvalueToFilterChannels() {
+    this.filteredChannels = this.inputField.valueChanges.pipe(
+      startWith(''),
+      map((value) => this.filterChannelsBasedOnInputvalue(value || '')),
+    );
+  }
+
+
+  filterChannelsBasedOnInputvalue(value: string): Channel[] {
+    const searchValue = value.trim().toLowerCase();
+    let searchValueWithoutHashtagSymbol = '';
+    if (searchValue.startsWith('#')) {
+      searchValueWithoutHashtagSymbol = searchValue.replace('#', '');
+      return this.allChannels.filter((channel) => (channel.channelName?.toLowerCase().includes(searchValueWithoutHashtagSymbol)));
+    } else {
+      return this.allChannels.filter((channel) => (channel.channelName?.toLowerCase().includes(searchValue)));
+    }
+  }
+
+
+  openUserAndChannelMenuSelection(): void {
+    this.usersInMenuSelectionAreDisplayed = true;
+    this.channelsInMenuSelectionAreDisplayed = true;
+  }
 
 
   imageIsUploading(): boolean {
     return (this.storageService.uploadImg) ? true : false;
+  }
+
+
+  noProfileImgExist(user: User): boolean {
+    return (!user.imgUrl) ? true : false;
+  }
+
+
+  userIsOnline(user: User): boolean {
+    return (user.isOnline) ? true : false;
+  }
+
+
+  userIdMatchesWithIdFromLoggedinUser(userId: string): boolean {
+    return (userId !== this.authService.auth.currentUser?.uid) ? true : false;
   }
 
 
@@ -47,6 +152,9 @@ export class NewMessageComponent {
 
   closeEmojiPickerOrOtherMenuIfClickOutside(): void {
     this.emojiPickerIsDisplayed = false;
+    this.usersInMenuSelectionAreDisplayed = false;
+    this.channelsInMenuSelectionAreDisplayed = false;
+    this.inputField.reset();
   }
 
 

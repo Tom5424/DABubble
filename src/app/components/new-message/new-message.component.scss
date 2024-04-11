@@ -22,6 +22,7 @@
     border-radius: 30px 30px 0 0;
     padding: 32px 45px 20px 45px;
     box-shadow: 0px 2px 10px 0px #00000014;
+    position: relative;
 
     p {
         font-size: 24px;
@@ -29,13 +30,121 @@
         margin: 0;
     }
 
-    input {
-        @include inputfieldOrTextarea(unset, 30px, 15px, 20px, 15px, 20px, 18px, #ffffff);
-        @include inputfieldOrTextareaHover();
-        @include inputfieldOrTextareaFocus();
-        border: 1px solid $lightPurple;
-        outline: none;
+    form {
+        display: unset;
+        border: unset;
+        position: unset;
+        width: unset;
+        border: unset;
+
+        &:hover {
+            border: unset !important;
+        }
+
+        input {
+            @include inputfieldOrTextarea(90%, 30px, 15px, 20px, 15px, 20px, 18px, #ffffff);
+            @include inputfieldOrTextareaHover();
+            @include inputfieldOrTextareaFocus();
+            border: 1px solid $lightPurple;
+            outline: none;
+        }
     }
+}
+
+
+.containerUserAndChannelMenuSelection {
+    @include flexColumn();
+    @include positionAbsolute(120px, unset, 65px, unset);
+    border: 1px solid $lightPurple;
+    max-height: 145px;
+    width: 400px;
+    gap: 15px;
+    border-radius: 0 20px 20px 20px;
+    padding: 20px;
+    z-index: 1;
+    box-shadow: 0px 2px 10px 0px #00000014;
+    background-color: #ffffff;
+    overflow-y: scroll;
+}
+
+
+.containerUserNameAndImg {
+    @include hover();
+    @include flexCenteredYAxis();
+    gap: 15px;
+    position: relative;
+    border-radius: 35px;
+    padding: 4px 20px 4px 20px;
+
+    p {
+        font-size: 18px;
+        margin: 18px 0 18px 0;
+        font-weight: normal;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow-x: hidden;
+    }
+
+    &:hover {
+        background-color: $bgColor;
+    }
+}
+
+
+.userImg {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+
+.imgNoSelectedProfile {
+    background-color: $purple;
+    width: 38px;
+    padding: 6px;
+    border-radius: 50%;
+}
+
+
+.userOnlineStatus {
+    @include positionAbsolute(unset, 4px, 54px, unset);
+    width: 12px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+}
+
+
+.containerChannelNameAndImg {
+    @include hover();
+    @include flexCenteredYAxis();
+    gap: 15px;
+    padding: 4px 20px 4px 20px;
+    border-radius: 35px;
+
+    p {
+        font-size: 18px;
+        margin: 18px 0 18px 0;
+        font-weight: normal;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow-x: hidden;
+    }
+
+    &:hover {
+        background-color: $bgColor;
+    }
+}
+
+
+.textNotSearchResultsFound {
+    font-size: 18px !important;
+    text-align: center;
+    font-weight: normal !important;
+}
+
+
+.text {
+    font-size: 18px !important;
 }
 
 

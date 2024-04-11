@@ -1,10 +1,88 @@
 <div class="mainContainerNewMessages">
-    <div [ngClass]="{'overlay': emojiPickerIsDisplayed}" (click)="closeEmojiPickerOrOtherMenuIfClickOutside()"></div>
+
+    <div [ngClass]="{'overlay': emojiPickerIsDisplayed || usersInMenuSelectionAreDisplayed || channelsInMenuSelectionAreDisplayed}"
+        (click)="closeEmojiPickerOrOtherMenuIfClickOutside()">
+    </div>
 
     <!--------------------------------- Container Chat upper Part--------------------------------->
     <div class="containerNewMessagesUpperPart">
         <p>New Message</p>
-        <input type="text" placeholder="At: #channel or @somebody">
+
+        <form>
+            <input type="text" placeholder="At: #channel or @somebody" [formControl]="inputField"
+                (click)="openUserAndChannelMenuSelection()">
+
+
+            <div class="containerUserAndChannelMenuSelection"
+                [ngClass]="{'d-none': !usersInMenuSelectionAreDisplayed && !channelsInMenuSelectionAreDisplayed}">
+
+                <!--------------------------------- Here will displayed the Users --------------------------------->
+                @if (usersInMenuSelectionAreDisplayed) {
+
+                <p class="text">People</p>
+
+                @for (user of filteredUsers | async; track $index) {
+
+                @if (userIdMatchesWithIdFromLoggedinUser(user.userId)) {
+
+                <div class="containerUserNameAndImg" [ngClass]="{'d-none': !usersInMenuSelectionAreDisplayed}">
+
+                    @if (noProfileImgExist(user)) {
+                    <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="User Profile Image">
+                    }@else {
+                    <img class="userImg" src="{{ user.imgUrl }}" alt="User Profile Image">
+                    }
+
+                    @if (userIsOnline(user)) {
+                    <img class="userOnlineStatus" src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
+                    }@else {
+                    <img class="userOnlineStatus" src="assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
+                    }
+
+                    <p>{{ user.name }}</p>
+                </div>
+
+                }
+
+                }
+
+                @if ((filteredUsers | async)?.length == 0) {
+                <!-- Checks if filteredUsers hat a Value or Users existing. If not the User get the Feedback "No People found" -->
+                <p class="textNotSearchResultsFound">No People Found</p>
+                }
+
+                }
+                <!--------------------------------- Here will displayed the Users --------------------------------->
+
+
+                <!--------------------------------- Here will displayed the Channels --------------------------------->
+                @if (channelsInMenuSelectionAreDisplayed) {
+
+                <p class="text">Channels</p>
+
+                @for (channel of filteredChannels | async; track $index) {
+                <div class="containerChannelNameAndImg" [ngClass]="{'d-none': !channelsInMenuSelectionAreDisplayed}">
+
+                    <img class="" src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
+
+
+                    <p>{{ channel.channelName }}</p>
+
+                </div>
+                }
+
+                @if ((filteredChannels | async)?.length == 0) {
+                <!-- Checks if filteredChannels hat a Value or Channels existing. If not the User get the Feedback "No Channels found" -->
+                <p class="textNotSearchResultsFound">No Channels Found</p>
+                }
+
+                }
+                <!--------------------------------- Here will displayed the Channels --------------------------------->
+
+            </div>
+
+        </form>
+
     </div>
     <!--------------------------------- Container Chat upper Part--------------------------------->
 

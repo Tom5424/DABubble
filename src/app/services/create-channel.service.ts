@@ -32,14 +32,14 @@ export class CreateChannelService {
   }
 
 
-  getAllChannelsService(): void {
+  getAllChannelsService(): Observable<Channel[]> {
     this.loadChannels = true;
     const collectionRef = query(collection(this.firestore, 'channels'), orderBy('initialLetter'));
     collectionData(collectionRef)
       .subscribe(() => {
         this.loadChannels = false;
       })
-    this.allChannelsAsObservable = collectionData(collectionRef, { idField: 'id' }) as Observable<Channel[]>;
+    return this.allChannelsAsObservable = collectionData(collectionRef, { idField: 'id' }) as Observable<Channel[]>;
   }
 
 
