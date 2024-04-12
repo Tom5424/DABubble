@@ -157,7 +157,7 @@
         <div class="containerForm" [ngStyle]="{'padding-bottom': storageService.uploadedImages.length >= 1 ? '11px' : '50px', 
             'margin-top': storageService.uploadedImages.length >= 1 ? '256px' : '266px'}">
 
-            <form [formGroup]="addMessageForm">
+            <form [formGroup]="addMessageForm" (ngSubmit)="sendMessage()">
 
                 <textarea placeholder="Start a new Message" formControlName="textarea"></textarea>
 
@@ -211,12 +211,17 @@
                     </div>
 
 
-                    <button type="submit"
-                        [disabled]="(storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || (addMessageForm.controls.textarea.value == null && storageService.uploadedImages.length == 0)"
-                        [ngClass]="{'disabledBtn': (storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || (addMessageForm.controls.textarea.value == null && storageService.uploadedImages.length == 0)}">
+                    <button type="submit" [disabled]="(storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || 
+                        (selectedUsers.length == 0 && selectedChannels.length == 0) ||
+                        (addMessageForm.controls.textarea.value == null && storageService.uploadedImages.length == 0)"
+                        [ngClass]="{'disabledBtn': (storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') ||
+                         (selectedUsers.length == 0 && selectedChannels.length == 0) ||
+                         (addMessageForm.controls.textarea.value == null && storageService.uploadedImages.length == 0)}">
 
-                        <img src="assets/icons/send-message-icon-light-purble.svg" alt="Send Icon"
-                            [ngClass]="{'disabledSendBtn': (storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || (addMessageForm.controls.textarea.value == null && storageService.uploadedImages.length == 0)}">
+                        <img src="assets/icons/send-message-icon-light-purble.svg" alt="Send Icon" [ngClass]="{'disabledSendBtn': (storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || 
+                            (selectedUsers.length == 0 && selectedChannels.length == 0) ||
+                            (addMessageForm.controls.textarea.value == null && storageService.uploadedImages.length == 0) 
+                          }">
                     </button>
                 </div>
             </form>

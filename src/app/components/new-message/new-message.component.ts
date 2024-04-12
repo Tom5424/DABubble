@@ -113,6 +113,11 @@ export class NewMessageComponent implements OnInit {
   }
 
 
+  sendMessage(): void {
+    
+  }
+
+
   selectUser(selectedUser: User): void {
     const indexFromSelectedUser = this.selectedUsers.findIndex((user) => user.userId == selectedUser.userId)
     if (indexFromSelectedUser == -1) {
