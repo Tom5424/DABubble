@@ -157,7 +157,8 @@
         <div class="containerForm" [ngStyle]="{'padding-bottom': storageService.uploadedImages.length >= 1 ? '11px' : '50px', 
             'margin-top': storageService.uploadedImages.length >= 1 ? '256px' : '266px'}">
 
-            <form [formGroup]="addMessageForm" (ngSubmit)="sendMessage()">
+            <form [formGroup]="addMessageForm" (ngSubmit)="sendMessage()"
+                (keyup)="sendMessageIfPressOnEnterKey($event)">
 
                 <textarea placeholder="Start a new Message" formControlName="textarea"></textarea>
 

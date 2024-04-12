@@ -12,6 +12,8 @@ import { User } from '../../models/user';
 import { Channel } from '../../models/channel';
 import { AuthService } from '../../services/auth.service';
 import { Observable, map, startWith } from 'rxjs';
+import { CreateDirectMessageService } from '../../services/create-direct-message.service';
+import { CreateChannelMessageService } from '../../services/create-channel-message.service';
 
 
 @Component({
@@ -27,6 +29,8 @@ export class NewMessageComponent implements OnInit {
   storageService = inject(StorageService);
   createChannelService = inject(CreateChannelService);
   createUserService = inject(CreateUserService);
+  createDirectMessageService = inject(CreateDirectMessageService);
+  createChannelMessageService = inject(CreateChannelMessageService);
   authService = inject(AuthService);
   matDialog = inject(MatDialog);
   selectedUsers: User[] = [];
@@ -114,7 +118,52 @@ export class NewMessageComponent implements OnInit {
 
 
   sendMessage(): void {
-    
+    this.inputValue = this.addMessageForm.controls.textarea.value;
+    if (this.inputValue?.trim() !== '' || this.storageService.uploadedImages.length >= 1) {
+      if (this.selectedUsers.length >= 1) {
+        this.sendMessageToSelectedUsers(this.inputValue);
+      }
+      if (this.selectedChannels.length >= 1) {
+        this.sendMessageToSelectedChannels(this.inputValue);
+      }
+      this.clearAll();
+    }
+  }
+
+
+  sendMessageIfPressOnEnterKey(event: KeyboardEvent): void {
+    this.inputValue = this.addMessageForm.controls.textarea.value;
+    if ((this.selectedChannels.length >= 1 || this.selectedUsers.length >= 1) && (event?.key == 'Enter' && this.inputValue?.trim() !== '') || (event.key == 'Enter' && this.inputValue?.trim() == '' && this.storageService.uploadedImages.length >= 1)) {
+      if (this.selectedUsers.length >= 1) {
+        this.sendMessageToSelectedUsers(this.inputValue);
+      }
+      if (this.selectedChannels.length >= 1) {
+        this.sendMessageToSelectedChannels(this.inputValue);
+      }
+      this.clearAll();
+    }
+  }
+
+
+  sendMessageToSelectedUsers(inputValue: string | null): void {
+    this.selectedUsers.forEach((selectedUser) => {
+      this.createDirectMessageService.createDirectMessageService(this.authService.user, selectedUser.userId, this.authService.user.userId, inputValue, this.storageService.uploadedImages);
+    });
+  }
+
+
+  sendMessageToSelectedChannels(inputValue: string | null): void {
+    this.selectedChannels.forEach((selectedChannel: any) => {
+      this.createChannelMessageService.createChannelMessageService(this.authService.user, selectedChannel.id, inputValue, this.storageService.uploadedImages);
+    })
+  }
+
+
+  clearAll(): void {
+    this.addMessageForm.reset();
+    this.storageService.uploadedImages = [];
+    this.selectedChannels = [];
+    this.selectedUsers = [];
   }
 
 
