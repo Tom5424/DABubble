@@ -129,7 +129,7 @@
 
     p {
         font-size: 18px;
-        margin: 18px 0 18px 0;
+        margin: 0;
         font-weight: normal;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -154,9 +154,28 @@
 }
 
 
-.mainContainerSelectedUsersAndChannels {
+.containerNewMessagesLowerPart {
+    border-radius: 0 0 30px 30px;
+    background-color: #ffffff;
+    position: relative;
+}
+
+
+.mainContainerSelectedUsers {
     @include flexCenteredYAxis();
     gap: 10px;
+    position: absolute;
+    top: -240px;
+    left: 20px;
+}
+
+
+.mainContainerSelectedChannels {
+    @include flexCenteredYAxis();
+    gap: 10px;
+    position: absolute;
+    top: -190px;
+    left: 20px;
 }
 
 
@@ -210,12 +229,6 @@
     color: $middlePurple;
     font-size: 16px !important;
     font-weight: normal !important;
-}
-
-
-.containerNewMessagesLowerPart {
-    background-color: #ffffff;
-    border-radius: 0 0 30px 30px;
 }
 
 

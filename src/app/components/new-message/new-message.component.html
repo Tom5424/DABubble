@@ -94,9 +94,16 @@
 
         </form>
 
+    </div>
+    <!--------------------------------- Container Chat upper Part--------------------------------->
+
+
+    <!--------------------------------- Container Chat Lower Part--------------------------------->
+    <div class="containerNewMessagesLowerPart">
+
         <!--------------------------------- Here will displayed the added Users from the searchbar --------------------------------->
         @if (selectedUsers.length > 0) {
-        <div class="mainContainerSelectedUsersAndChannels">
+        <div class="mainContainerSelectedUsers">
 
             @for (user of selectedUsers.slice(0, 3); track $index) {
             <div class="containerSelectedUserOrChannel">
@@ -125,7 +132,7 @@
 
         <!--------------------------------- Here will displayed the added Channels from the searchbar --------------------------------->
         @if (selectedChannels.length > 0) {
-        <div class="mainContainerSelectedUsersAndChannels">
+        <div class="mainContainerSelectedChannels">
 
             @for (channel of selectedChannels.slice(0, 3); track $index) {
             <div class="containerSelectedUserOrChannel">
@@ -146,13 +153,6 @@
         }
         <!--------------------------------- Here will displayed the added Channels from the searchbar --------------------------------->
 
-
-    </div>
-    <!--------------------------------- Container Chat upper Part--------------------------------->
-
-
-    <!--------------------------------- Container Chat Lower Part--------------------------------->
-    <div class="containerNewMessagesLowerPart">
 
         <div class="containerForm" [ngStyle]="{'padding-bottom': storageService.uploadedImages.length >= 1 ? '11px' : '50px', 
             'margin-top': storageService.uploadedImages.length >= 1 ? '256px' : '266px'}">

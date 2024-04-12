@@ -36,7 +36,7 @@ export class CreateUserService {
       .subscribe(() => {
         this.loadContacts = false;
       })
-    return collectionData(collectionRef, { idField: 'id' }) as Observable<User[]>;
+    return this.allUsersAsObservable = collectionData(collectionRef, { idField: 'id' }) as Observable<User[]>;
   }
 
 

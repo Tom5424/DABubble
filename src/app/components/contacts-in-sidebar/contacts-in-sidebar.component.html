@@ -7,17 +7,11 @@
 </div>
 
 
-@if (contactsAreLoading()) {
-<div class="containerSpinnerIcon">
-    <img src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
-</div>
-
-}@else {
-
 <ul class="contactList" [ngClass]="{'d-none': contactListAreCollapsed}">
-    @for (user of allUser; track $index) {
+    @for (user of createUserService.allUsersAsObservable | async; track $index) {
 
     @if (!userIdMatchesWithIdFromLoggedinUser(user)) {
+
     <li routerLink="/mainView/directMessage/{{ user.userId }}" routerLinkActive="activeUserDirectMessages">
         @if (noProfileImgExist(user)) {
         <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="User Profile Image">
@@ -36,7 +30,16 @@
     }
 
     }@empty {
+
+    @if (!contactsAreLoading()) {
     <p class="text">No Contacts Existing</p>
     }
+
+    }
+
+    @if (contactsAreLoading()) {
+    <div class="containerSpinnerIcon">
+        <img src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
+    </div>
+    }
 </ul>
-}

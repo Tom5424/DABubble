@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { CreateUserService } from '../../services/create-user.service';
 import { User } from '../../models/user';
@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-contacts-in-sidebar',
   standalone: true,
-  imports: [NgClass, RouterLink, RouterLinkActive],
+  imports: [NgClass, RouterLink, RouterLinkActive, AsyncPipe],
   templateUrl: './contacts-in-sidebar.component.html',
   styleUrl: './contacts-in-sidebar.component.scss'
 })
@@ -23,15 +23,7 @@ export class ContactsInSidebarComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getAllUsers();
-  }
-
-
-  getAllUsers(): void {
-    this.createUserService.getAllUserService()
-      .subscribe((userData) => {
-        this.allUser = userData;
-      })
+    this.createUserService.getAllUserService();
   }
 
 
