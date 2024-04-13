@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { CreateChannelService } from '../../services/create-channel.service';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
@@ -21,7 +21,7 @@ import { ChannelMessage } from '../../models/channel-message';
 @Component({
   selector: 'app-chat-channel-messages',
   standalone: true,
-  imports: [NgStyle, NgClass, AsyncPipe, DatePipe, MatDialogModule, PickerComponent, ReactiveFormsModule, ChannelMessageComponent, DialogEditChannelComponent, DialogChannelMembersComponent, DialogAddMorePeopleToChannelComponent],
+  imports: [RouterOutlet, NgStyle, NgClass, AsyncPipe, DatePipe, MatDialogModule, PickerComponent, ReactiveFormsModule, ChannelMessageComponent, DialogEditChannelComponent, DialogChannelMembersComponent, DialogAddMorePeopleToChannelComponent],
   templateUrl: './chat-channel-messages.component.html',
   styleUrl: './chat-channel-messages.component.scss'
 })

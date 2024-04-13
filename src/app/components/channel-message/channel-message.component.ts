@@ -38,7 +38,7 @@ export class ChannelMessageComponent {
   emojiPickerIsDisplayed: boolean = false;
   inputValue: string | null = '';
   emojiUrl: string = '';
-  userId: string | null = '';
+  channelId: string | null = '';
   editMessageForm = new FormGroup({
     textareaEditMessage: new FormControl(this.inputValue, Validators.required),
   })
@@ -46,7 +46,7 @@ export class ChannelMessageComponent {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
-      this.userId = params.get('id');
+      this.channelId = params.get('id');
     });
   }
 

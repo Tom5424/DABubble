@@ -2,6 +2,12 @@
 @import '../../../scss/mixin.scss';
 
 
+.flex {
+    @include flex();
+    gap: 10px;
+}
+
+
 .mainContainerChatChannelMessages {
     width: 750px;
     border-radius: 30px;
@@ -260,9 +266,7 @@ form {
 
 
 .spinnerIcon {
-    position: absolute;
-    top: -55px;
-    left: 270px;
+    @include positionAbsolute(-55px, unset, 270px, unset);
     z-index: 1;
     width: 120px;
 }

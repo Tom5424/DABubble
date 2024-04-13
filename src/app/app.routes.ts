@@ -13,6 +13,7 @@ import { MainViewComponent } from './components/main-view/main-view.component';
 import { ChatDirectMessagesComponent } from './components/chat-direct-messages/chat-direct-messages.component';
 import { ChatChannelMessagesComponent } from './components/chat-channel-messages/chat-channel-messages.component';
 import { NewMessageComponent } from './components/new-message/new-message.component';
+import { ThreadInDirectMessageComponent } from './components/thread-in-direct-message/thread-in-direct-message.component';
 
 
 export const routes: Routes = [
@@ -31,15 +32,21 @@ export const routes: Routes = [
     {
         path: 'mainView', title: 'DABubble - Main View', component: MainViewComponent,
         children: [
-            { path: 'directMessage/:id', component: ChatDirectMessagesComponent },
-            { path: 'channel/:id', component: ChatChannelMessagesComponent },
+            {
+                path: 'directMessage/:id', component: ChatDirectMessagesComponent, children: [
+                    { path: 'thread/:id', component: ThreadInDirectMessageComponent }
+                ]
+            },
+
+            {
+                path: 'channel/:id', component: ChatChannelMessagesComponent, children: [
+                    // { path: 'thread/:id', component: ThreadComponent }
+                ]
+            },
+
             { path: 'newMessage', component: NewMessageComponent },
         ]
     },
 
     { path: '**', title: 'DABubble - Page not Found', component: PageNotFoundComponent }
 ];
-
-
-// children:
-// [{ path: 'thread/:id', component: ThreadComponent }]

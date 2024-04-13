@@ -1,223 +1,232 @@
-<div class="mainContainerChatChannelMessages">
-    <div [ngClass]="{'overlay': emojiPickerIsDisplayed}" (click)="closeEmojiPickerOrOtherMenuIfClickOutside()"></div>
+<div class="flex">
+    <div class="mainContainerChatChannelMessages">
+        <div [ngClass]="{'overlay': emojiPickerIsDisplayed}" (click)="closeEmojiPickerOrOtherMenuIfClickOutside()">
 
-    <!--------------------------------- Container Chat upper Part--------------------------------->
-    <div class="containerChatChannelMessagesUpperPart">
-
-        @if (chatAreLoading()) {
-        <img class="spinnerIconChatChannelMessagesUpperPart" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
-
-        }@else {
-
-        <div class="containerImageAndChannelNameUpperPart" (click)="openDialogToEditChannel()">
-            <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
-
-            <p>{{ createChannelService.channel.channelName }}</p>
-
-            <img src="assets/icons/arrow-icon-profile.svg" alt="Arrow Icon">
         </div>
-        }
 
-        <div class="parentContainerUserImagesAndAddIcon">
+        <!--------------------------------- Container Chat upper Part--------------------------------->
+        <div class="containerChatChannelMessagesUpperPart">
 
             @if (chatAreLoading()) {
             <img class="spinnerIconChatChannelMessagesUpperPart" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
 
             }@else {
 
-            <div class="containerUserImages" (click)="openDialogToShowAllChannelMembers()">
+            <div class="containerImageAndChannelNameUpperPart" (click)="openDialogToEditChannel()">
+                <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
 
-                @if (arrayLengthIsEqualOrGreaterThan4()) {
+                <p>{{ createChannelService.channel.channelName }}</p>
 
-                <!--------------------------------- Cut here the Last User from the Array if the Length is equal or greater than 4. To disaply only the 3 first Users --------------------------------->
-                @for (channelMember of createChannelService.channel.channelMembers; track $index) {
-
-                @if (userIdMatchesWithIdFromLoggedinUser(channelMember.userId)) {
-
-                @if (noProfileImgExist(channelMember)) {
-                <img class="imageNoSelectedUser" src="assets/img/non-user-selected.svg" alt="User Image">
-                }@else {
-                <img src="{{ channelMember.imgUrl }}" alt="User Image">
-                }
-
-                }
-
-                }
-                <p>{{ createChannelService.channel.channelMembers.length - 1 }}</p>
-                <!--------------------------------- Cut here the Last User from the Array if the Length is equal or greater than 4. To disaply only the 3 first Users --------------------------------->
-
-                }@else {
-
-
-                <!--------------------------------- If the Array Length is 3 or shorter then display all Users --------------------------------->
-                @for (channelMember of createChannelService.channel.channelMembers; track $index) {
-
-                @if (userIdMatchesWithIdFromLoggedinUser(channelMember.userId)) {
-
-                @if (noProfileImgExist(channelMember)) {
-                <img class="imageNoSelectedUser" src="assets/img/non-user-selected.svg" alt="User Image">
-                }@else {
-                <img src="{{ channelMember.imgUrl }}" alt="User Image">
-                }
-
-                }
-
-                }
-                <p>{{ createChannelService.channel.channelMembers.length }}</p>
-                }
-                <!--------------------------------- If the Array Length is 3 or shorter then display all Users --------------------------------->
-
+                <img src="assets/icons/arrow-icon-profile.svg" alt="Arrow Icon">
             </div>
             }
 
-            <div class="containerAddUserIcon" (click)="openDialogToAddMorePeopleToChannel()">
-                <img src="assets/icons/add-user-icon.svg" alt="Add User Icon">
-            </div>
+            <div class="parentContainerUserImagesAndAddIcon">
 
+                @if (chatAreLoading()) {
+                <img class="spinnerIconChatChannelMessagesUpperPart" src="assets/icons/spinner-icon.svg"
+                    alt="Spinner Icon">
+
+                }@else {
+
+                <div class="containerUserImages" (click)="openDialogToShowAllChannelMembers()">
+
+                    @if (arrayLengthIsEqualOrGreaterThan4()) {
+
+                    <!--------------------------------- Cut here the Last User from the Array if the Length is equal or greater than 4. To disaply only the 3 first Users --------------------------------->
+                    @for (channelMember of createChannelService.channel.channelMembers; track $index) {
+
+                    @if (userIdMatchesWithIdFromLoggedinUser(channelMember.userId)) {
+
+                    @if (noProfileImgExist(channelMember)) {
+                    <img class="imageNoSelectedUser" src="assets/img/non-user-selected.svg" alt="User Image">
+                    }@else {
+                    <img src="{{ channelMember.imgUrl }}" alt="User Image">
+                    }
+
+                    }
+
+                    }
+                    <p>{{ createChannelService.channel.channelMembers.length - 1 }}</p>
+                    <!--------------------------------- Cut here the Last User from the Array if the Length is equal or greater than 4. To disaply only the 3 first Users --------------------------------->
+
+                    }@else {
+
+
+                    <!--------------------------------- If the Array Length is 3 or shorter then display all Users --------------------------------->
+                    @for (channelMember of createChannelService.channel.channelMembers; track $index) {
+
+                    @if (userIdMatchesWithIdFromLoggedinUser(channelMember.userId)) {
+
+                    @if (noProfileImgExist(channelMember)) {
+                    <img class="imageNoSelectedUser" src="assets/img/non-user-selected.svg" alt="User Image">
+                    }@else {
+                    <img src="{{ channelMember.imgUrl }}" alt="User Image">
+                    }
+
+                    }
+
+                    }
+                    <p>{{ createChannelService.channel.channelMembers.length }}</p>
+                    }
+                    <!--------------------------------- If the Array Length is 3 or shorter then display all Users --------------------------------->
+
+                </div>
+                }
+
+                <div class="containerAddUserIcon" (click)="openDialogToAddMorePeopleToChannel()">
+                    <img src="assets/icons/add-user-icon.svg" alt="Add User Icon">
+                </div>
+
+            </div>
         </div>
-    </div>
-    <!--------------------------------- Container Chat upper Part--------------------------------->
+        <!--------------------------------- Container Chat upper Part--------------------------------->
 
 
-    <!--------------------------------- Container Chat Lower Part--------------------------------->
-    @if (chatAreLoading()) {
-    <div class="containerSpinnerIconChatChannelMessagesLowerPart">
-        <img src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
-    </div>
-
-    }@else {
-
-    <div class="containerChatChannelMessagesLowerPart">
-
-
-        <div class="scrollingContainer" #scrollingContainer>
-
-            <div>
-
-                <div class="containerImageAndChannelNameLowerPart" (click)="openDialogToEditChannel()">
-                    <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
-                    <p>{{ createChannelService.channel.channelName }}</p>
-                    <img src="assets/icons/arrow-icon-profile.svg" alt="Arrow Icon">
-                </div>
-
-
-                <div class="containerText">
-                    <p>This is the beginning of the Channel</p>
-                    <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
-                    <mark>{{ createChannelService.channel.channelName }}</mark>
-                </div>
-
-                @if ((createChannelMessageService.channelMessagesAsObservable | async); as channelMessages) {
-
-                @for (channelMessage of channelMessages; track $index) {
-
-                @if (!isToday(channelMessage) && !isYesterday(channelMessage)) {
-                <div class="containerTimeWhenTheMessageWasSent">
-                    <hr>
-                    <p>{{ channelMessage.senderTime | date: 'EEEE, dd MMMM'}}</p>
-                    <hr>
-                </div>
-                }
-
-                @if (isYesterday(channelMessage)) {
-                <div class="containerTimeWhenTheMessageWasSent">
-                    <hr>
-                    <p>Yesterday</p>
-                    <hr>
-                </div>
-                }
-
-                @if (isToday(channelMessage)) {
-                <div class="containerTimeWhenTheMessageWasSent">
-                    <hr>
-                    <p>Today</p>
-                    <hr>
-                </div>
-                }
-
-                <app-channel-message [channelMessage]="channelMessage" [channelMessageId]="channelMessage.id">
-
-                </app-channel-message>
-
-                }
-
-
-                }
-            </div>
-
+        <!--------------------------------- Container Chat Lower Part--------------------------------->
+        @if (chatAreLoading()) {
+        <div class="containerSpinnerIconChatChannelMessagesLowerPart">
+            <img src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
         </div>
 
-        <div class="containerForm" [ngStyle]="{'padding-bottom': storageService.uploadedImages.length >= 1 ? '6px' : '50px', 
+        }@else {
+
+        <div class="containerChatChannelMessagesLowerPart">
+
+
+            <div class="scrollingContainer" #scrollingContainer>
+
+                <div>
+
+                    <div class="containerImageAndChannelNameLowerPart" (click)="openDialogToEditChannel()">
+                        <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
+                        <p>{{ createChannelService.channel.channelName }}</p>
+                        <img src="assets/icons/arrow-icon-profile.svg" alt="Arrow Icon">
+                    </div>
+
+
+                    <div class="containerText">
+                        <p>This is the beginning of the Channel</p>
+                        <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
+                        <mark>{{ createChannelService.channel.channelName }}</mark>
+                    </div>
+
+                    @if ((createChannelMessageService.channelMessagesAsObservable | async); as channelMessages) {
+
+                    @for (channelMessage of channelMessages; track $index) {
+
+                    @if (!isToday(channelMessage) && !isYesterday(channelMessage)) {
+                    <div class="containerTimeWhenTheMessageWasSent">
+                        <hr>
+                        <p>{{ channelMessage.senderTime | date: 'EEEE, dd MMMM'}}</p>
+                        <hr>
+                    </div>
+                    }
+
+                    @if (isYesterday(channelMessage)) {
+                    <div class="containerTimeWhenTheMessageWasSent">
+                        <hr>
+                        <p>Yesterday</p>
+                        <hr>
+                    </div>
+                    }
+
+                    @if (isToday(channelMessage)) {
+                    <div class="containerTimeWhenTheMessageWasSent">
+                        <hr>
+                        <p>Today</p>
+                        <hr>
+                    </div>
+                    }
+
+                    <app-channel-message [channelMessage]="channelMessage" [channelMessageId]="channelMessage.id">
+
+                    </app-channel-message>
+
+                    }
+
+
+                    }
+                </div>
+
+            </div>
+
+            <div class="containerForm" [ngStyle]="{'padding-bottom': storageService.uploadedImages.length >= 1 ? '6px' : '50px', 
             'margin-top': storageService.uploadedImages.length >= 1 ? '22px' : '27px'}">
 
-            <form [formGroup]="addMessageForm" (ngSubmit)="sendMessageToChannel()"
-                (keyup)="sendMessageToChannelIfPressOnEnterKey($event)">
+                <form [formGroup]="addMessageForm" (ngSubmit)="sendMessageToChannel()"
+                    (keyup)="sendMessageToChannelIfPressOnEnterKey($event)">
 
-                <textarea placeholder="Message to # {{ createChannelService.channel.channelName }}"
-                    formControlName="textarea">
+                    <textarea placeholder="Message to # {{ createChannelService.channel.channelName }}"
+                        formControlName="textarea">
                 </textarea>
 
-                <!--------------------------------- Disaplyed here the uploaded Images --------------------------------->
-                <div class="mainContainerUploadedImages">
-                    @if (imageIsUploading()) {
-                    <img class="spinnerIcon" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
-                    }
+                    <!--------------------------------- Disaplyed here the uploaded Images --------------------------------->
+                    <div class="mainContainerUploadedImages">
+                        @if (imageIsUploading()) {
+                        <img class="spinnerIcon" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
+                        }
 
-                    @for (uploadedImage of storageService.uploadedImages; track $index) {
-                    <div class="childContainerUploadedImages">
-                        <img class="closeIcon" src="assets/icons/close-icon.svg" alt="Close Icon"
-                            (click)="removeUploadedImage($index)">
+                        @for (uploadedImage of storageService.uploadedImages; track $index) {
+                        <div class="childContainerUploadedImages">
+                            <img class="closeIcon" src="assets/icons/close-icon.svg" alt="Close Icon"
+                                (click)="removeUploadedImage($index)">
 
-                        <img src="{{ uploadedImage }}" alt="Uploaded Image"
-                            (click)="openImageDetailView(uploadedImage)">
+                            <img src="{{ uploadedImage }}" alt="Uploaded Image"
+                                (click)="openImageDetailView(uploadedImage)">
+                        </div>
+                        }
                     </div>
+                    <!--------------------------------- Disaplyed here the uploaded Images --------------------------------->
+
+
+                    <!--------------------------------- Emoji Picker --------------------------------->
+                    @if (emojiPickerIsDisplayed) {
+                    <emoji-mart [style]="{position: 'absolute', bottom: '130px', 'z-index': '1'}"
+                        (emojiClick)="selectEmoji($event)">
+                    </emoji-mart>
                     }
-                </div>
-                <!--------------------------------- Disaplyed here the uploaded Images --------------------------------->
+                    <!--------------------------------- Emoji Picker --------------------------------->
 
 
-                <!--------------------------------- Emoji Picker --------------------------------->
-                @if (emojiPickerIsDisplayed) {
-                <emoji-mart [style]="{position: 'absolute', bottom: '130px', 'z-index': '1'}"
-                    (emojiClick)="selectEmoji($event)">
-                </emoji-mart>
-                }
-                <!--------------------------------- Emoji Picker --------------------------------->
+                    <div class="mainContainerIcons">
 
+                        <div class="containerIcons">
+                            <div class="containerSingleIcon">
 
-                <div class="mainContainerIcons">
+                                <label for="uploadFile">
+                                    <input type="file" id="uploadFile" #selectedFile hidden
+                                        (change)="selectFile(selectedFile)">
+                                    <img class="plusIcon" src="assets/icons/plus-icon-gray.svg" alt="Plus Icon">
+                                </label>
 
-                    <div class="containerIcons">
-                        <div class="containerSingleIcon">
+                            </div>
 
-                            <label for="uploadFile">
-                                <input type="file" id="uploadFile" #selectedFile hidden
-                                    (change)="selectFile(selectedFile)">
-                                <img class="plusIcon" src="assets/icons/plus-icon-gray.svg" alt="Plus Icon">
-                            </label>
+                            <hr>
 
+                            <div class="containerSingleIcon" (click)="tootgleEmojiPicker()">
+                                <img src="assets/icons/smiley-icon.svg" alt="Smiley Icon">
+                            </div>
                         </div>
 
-                        <hr>
 
-                        <div class="containerSingleIcon" (click)="tootgleEmojiPicker()">
-                            <img src="assets/icons/smiley-icon.svg" alt="Smiley Icon">
-                        </div>
+                        <button type="submit"
+                            [disabled]="(storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || (addMessageForm.controls.textarea.value == null && storageService.uploadedImages.length == 0)"
+                            [ngClass]="{'disabledBtn': (storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || (addMessageForm.controls.textarea.value == null && storageService.uploadedImages.length == 0)}">
+
+                            <img src="assets/icons/send-message-icon-light-purble.svg" alt="Send Icon"
+                                [ngClass]="{'disabledSendBtn': (storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || (addMessageForm.controls.textarea.value == null && storageService.uploadedImages.length == 0)}">
+                        </button>
                     </div>
+                </form>
 
-
-                    <button type="submit"
-                        [disabled]="(storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || (addMessageForm.controls.textarea.value == null && storageService.uploadedImages.length == 0)"
-                        [ngClass]="{'disabledBtn': (storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || (addMessageForm.controls.textarea.value == null && storageService.uploadedImages.length == 0)}">
-
-                        <img src="assets/icons/send-message-icon-light-purble.svg" alt="Send Icon"
-                            [ngClass]="{'disabledSendBtn': (storageService.uploadedImages.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || (addMessageForm.controls.textarea.value == null && storageService.uploadedImages.length == 0)}">
-                    </button>
-                </div>
-            </form>
-
+            </div>
         </div>
+
+        }
     </div>
 
-    }
+    <!--------------------------------- Displayed here the opened Thread in Channel Messsages --------------------------------->
+    <router-outlet></router-outlet>
+    <!--------------------------------- Displayed here the opened Thread in Channel Messsages --------------------------------->
 </div>

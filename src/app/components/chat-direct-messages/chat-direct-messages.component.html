@@ -1,5 +1,6 @@
 <div class="flex">
     <div [ngClass]="{'overlay': emojiPickerIsDisplayed}" (click)="closeEmojiPickerOrOtherMenuIfClickOutside()">
+
     </div>
 
     <div class="mainContainerChatDirectMessages" [ngClass]="{'chatFullView':  workspaceMenuService.sidebarIsHidden}">
@@ -192,7 +193,7 @@
     </div>
 
 
-    <!--------------------------------- Displayed here the opened Thread --------------------------------->
+    <!--------------------------------- Displayed here the opened Thread in direct Messages --------------------------------->
     <router-outlet></router-outlet>
-    <!--------------------------------- Displayed here the opened Thread --------------------------------->
+    <!--------------------------------- Displayed here the opened Thread in direct Messages --------------------------------->
 </div>

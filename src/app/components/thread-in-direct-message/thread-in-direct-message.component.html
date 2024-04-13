@@ -1,0 +1,140 @@
+<div class="mainContainerThread">
+
+    <div [ngClass]="{'overlay': emojiPickerIsDisplayed}" (click)="closeEmojiPickerOrOtherMenuIfClickOutside()">
+
+    </div>
+
+    <div class="containerThreadUpperPart">
+
+        <div class="containerTextAndImage">
+            <p>Thread</p>
+
+            <div class="containerCloseIcon">
+                <img src="assets/icons/close-icon.svg" alt="Close Icon">
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="containerThreadLowerPart">
+
+        <div class="scrollingContainer">
+
+            <div class="mainContainerMessage">
+                <img src="/assets/img/avatar-5.svg" alt="User Image">
+
+                <div class="containerMessage">
+
+                    <div class="containerMessageUpperPart">
+                        <p>Tom</p>
+                        <p>15:00 Uhr</p>
+                    </div>
+
+                    <p class="messageText">sdsdsadsasadsa</p>
+                </div>
+            </div>
+
+            <div class="mainContainerMessage">
+                <img src="/assets/img/avatar-5.svg" alt="User Image">
+
+                <div class="containerMessage">
+
+                    <div class="containerMessageUpperPart">
+                        <p>Tom</p>
+                        <p>15:00 Uhr</p>
+                    </div>
+
+                    <p class="messageText">sdsdsadsasadsa</p>
+                </div>
+            </div>
+
+            <div class="mainContainerMessage">
+                <img src="/assets/img/avatar-5.svg" alt="User Image">
+
+                <div class="containerMessage">
+
+                    <div class="containerMessageUpperPart">
+                        <p>Tom</p>
+                        <p>15:00 Uhr</p>
+                    </div>
+
+                    <p class="messageText">sdsdsadsasadsa</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="containerForm" [ngStyle]="{'padding-bottom': storageInThreadService.uploadedImagesInThread.length >= 1 ? '6px' : '56px', 
+            'margin-top': storageInThreadService.uploadedImagesInThread.length >= 1 ? '-11px' : '-12px'}">
+
+            <form [formGroup]="addMessageForm" (ngSubmit)="sendMessage()"
+                (keyup)="sendMessageIfPressOnEnterKey($event)">
+
+                <textarea placeholder="Answer..." formControlName="textarea">
+
+                </textarea>
+
+                <!--------------------------------- Disaplyed here the uploaded Images --------------------------------->
+                <div class="mainContainerUploadedImages">
+                    @if (imageIsUploadingInThread()) {
+                    <img class="spinnerIcon" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
+                    }
+
+                    @for (uploadedImage of storageInThreadService.uploadedImagesInThread; track $index) {
+                    <div class="childContainerUploadedImages">
+                        <img class="closeIcon" src="assets/icons/close-icon.svg" alt="Close Icon"
+                            (click)="removeUploadedImageInThread($index)">
+
+                        <img src="{{ uploadedImage }}" alt="Uploaded Image"
+                            (click)="openImageDetailView(uploadedImage)">
+                    </div>
+                    }
+                </div>
+                <!--------------------------------- Disaplyed here the uploaded Images --------------------------------->
+
+
+                <!--------------------------------- Emoji Picker --------------------------------->
+                @if (emojiPickerIsDisplayed) {
+                <emoji-mart [style]="{position: 'absolute', bottom: '130px', right: '10px', 'z-index': '1'}"
+                    (emojiClick)="selectEmoji($event)">
+                </emoji-mart>
+                }
+                <!--------------------------------- Emoji Picker --------------------------------->
+
+
+                <div class="mainContainerIcons">
+
+                    <div class="containerIcons">
+                        <div class="containerSingleIcon">
+
+                            <label for="uploadFile">
+                                <input type="file" id="uploadFile" (change)="selectFile(selectedFile)" #selectedFile>
+                                <img class="plusIcon" src="assets/icons/plus-icon-gray.svg" alt="Plus Icon">
+                            </label>
+
+                        </div>
+
+                        <hr>
+
+                        <div class="containerSingleIcon" (click)="tootgleEmojiPicker()">
+                            <img src="assets/icons/smiley-icon.svg" alt="Smiley Icon">
+                        </div>
+                    </div>
+
+
+                    <button type="submit"
+                        [disabled]="(storageInThreadService.uploadedImagesInThread.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') ||
+                         (addMessageForm.controls.textarea.value == null && storageInThreadService.uploadedImagesInThread.length == 0)"
+                        [ngClass]="{'disabledBtn': (storageInThreadService.uploadedImagesInThread.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || 
+                        (addMessageForm.controls.textarea.value == null && storageInThreadService.uploadedImagesInThread.length == 0)}">
+
+                        <img src="assets/icons/send-message-icon-light-purble.svg" alt="Send Icon"
+                            [ngClass]="{'disabledSendBtn': (storageInThreadService.uploadedImagesInThread.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || 
+                            (addMessageForm.controls.textarea.value == null && storageInThreadService.uploadedImagesInThread.length == 0)}">
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

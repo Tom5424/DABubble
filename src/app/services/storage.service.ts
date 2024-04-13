@@ -2,7 +2,6 @@ import { Injectable, inject } from '@angular/core';
 import { Storage, StorageReference, ref, uploadBytes, getDownloadURL, uploadBytesResumable, UploadResult } from '@angular/fire/storage';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogUploadInvalidDataComponent } from '../components/dialog-upload-invalid-data/dialog-upload-invalid-data.component';
-import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -13,7 +12,6 @@ import { Router } from '@angular/router';
 export class StorageService {
   storage: Storage = inject(Storage);
   matDialog = inject(MatDialog);
-  router = inject(Router);
   uploadedImages: string[] = [];
   urlFromUploadedImg: string = '';
   selectedImageAvatarUrl: string = '';
