@@ -1,5 +1,5 @@
 import { NgClass, NgStyle } from '@angular/common';
-import { Component, ElementRef, Renderer2, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { CreateDirectMessageService } from '../../services/create-direct-message.service';
@@ -8,30 +8,41 @@ import { MatDialog } from '@angular/material/dialog';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 import { StorageInThreadService } from '../../services/storage-in-thread.service';
-import { StorageService } from '../../services/storage.service';
+import { Router, RouterLink } from '@angular/router';
 
 
 @Component({
-  selector: 'app-thread-in-direct-message',
+  selector: 'app-thread-direct-message',
   standalone: true,
-  imports: [NgClass, NgStyle, ReactiveFormsModule, PickerComponent],
-  templateUrl: './thread-in-direct-message.component.html',
-  styleUrl: './thread-in-direct-message.component.scss'
+  imports: [NgClass, NgStyle, ReactiveFormsModule, PickerComponent, RouterLink],
+  templateUrl: './thread-direct-message.component.html',
+  styleUrl: './thread-direct-message.component.scss'
 })
 
 
-export class ThreadInDirectMessageComponent {
+export class ThreadDirectMessageComponent implements OnInit {
   createDirectMessageService = inject(CreateDirectMessageService);
   authService = inject(AuthService);
   storageInThreadService = inject(StorageInThreadService);
   renderer2 = inject(Renderer2);
   matDialog = inject(MatDialog);
+  router = inject(Router);
   @ViewChild('scrollingContainer') scrollingContainer!: ElementRef;
   emojiPickerIsDisplayed: boolean = false;
+  barToSelectEmojisAreOpen: boolean = false;
+  menuMoreOptionsAreOpen: boolean = false;
   inputValue: string | null | undefined = '';
+  directMesageId: string = '';
   addMessageForm = new FormGroup({
     textarea: new FormControl('', Validators.required)
   })
+
+
+  ngOnInit(): void {
+    let url = this.router.url;
+    let splittedUrl = url.split('/');
+    this.directMesageId = splittedUrl[3];
+  }
 
 
   sendMessage(): void {
@@ -61,6 +72,23 @@ export class ThreadInDirectMessageComponent {
       const scrollingContainer = this.scrollingContainer.nativeElement;
       this.renderer2.setProperty(scrollingContainer, 'scrollTop', scrollingContainer.scrollHeight);
     }, 50);
+  }
+
+
+  openBarToSelectEmojis(): void {
+    this.barToSelectEmojisAreOpen = !this.barToSelectEmojisAreOpen;
+    this.menuMoreOptionsAreOpen = false;
+  }
+
+
+  closeOpenMenusInMessageIfHoverOutside(): void {
+    this.barToSelectEmojisAreOpen = false;
+    this.menuMoreOptionsAreOpen = false;
+  }
+
+
+  openMenuMoreOptions(): void {
+    this.menuMoreOptionsAreOpen = !this.menuMoreOptionsAreOpen;
   }
 
 
@@ -104,25 +132,4 @@ export class ThreadInDirectMessageComponent {
   selectFile(selectedFile: HTMLInputElement): void {
     this.storageInThreadService.selectFileInThreadService(selectedFile);
   }
-
-
-  // focusQuillEditor(event: { editor: any, range: any, oldRange: any }): void {
-  //   if (this.quillEditorIsFocused(event)) {
-  //     event.editor.container.style.border = '1px solid #535AF1';
-  //     event.editor.container.style.color = '#000000';
-  //   } else if (this.quillEditorIsNotFocused(event)) {
-  //     event.editor.container.style.border = '1px solid #adb0d9';
-  //     event.editor.container.style.color = '#686868';
-  //   }
-  // }
-
-
-  // quillEditorIsFocused(event: { editor: any, range: any, oldRange: any }): boolean {
-  //   return (event.oldRange == null) ? true : false;
-  // }
-
-
-  // quillEditorIsNotFocused(event: { editor: any, range: any, oldRange: any }): boolean {
-  //   return (event.range == null) ? true : false;
-  // }
 }

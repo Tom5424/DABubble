@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ThreadInDirectMessageComponent } from './thread-in-direct-message.component';
+import { ThreadInDirectMessageComponent } from './thread-direct-message.component';
 
 describe('ThreadComponent', () => {
   let component: ThreadInDirectMessageComponent;

@@ -13,7 +13,7 @@ import { MainViewComponent } from './components/main-view/main-view.component';
 import { ChatDirectMessagesComponent } from './components/chat-direct-messages/chat-direct-messages.component';
 import { ChatChannelMessagesComponent } from './components/chat-channel-messages/chat-channel-messages.component';
 import { NewMessageComponent } from './components/new-message/new-message.component';
-import { ThreadInDirectMessageComponent } from './components/thread-in-direct-message/thread-in-direct-message.component';
+import { ThreadDirectMessageComponent } from './components/thread-direct-message/thread-direct-message.component';
 
 
 export const routes: Routes = [
@@ -34,7 +34,7 @@ export const routes: Routes = [
         children: [
             {
                 path: 'directMessage/:id', component: ChatDirectMessagesComponent, children: [
-                    { path: 'thread/:id', component: ThreadInDirectMessageComponent }
+                    { path: 'thread/:id', component: ThreadDirectMessageComponent }
                 ]
             },
 

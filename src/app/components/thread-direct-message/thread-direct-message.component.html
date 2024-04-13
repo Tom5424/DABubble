@@ -9,7 +9,7 @@
         <div class="containerTextAndImage">
             <p>Thread</p>
 
-            <div class="containerCloseIcon">
+            <div class="containerCloseIcon" routerLink="/mainView/directMessage/{{ directMesageId }}">
                 <img src="assets/icons/close-icon.svg" alt="Close Icon">
             </div>
         </div>
@@ -21,7 +21,50 @@
 
         <div class="scrollingContainer">
 
-            <div class="mainContainerMessage">
+            <div class="mainContainerMessage" (mouseleave)="closeOpenMenusInMessageIfHoverOutside()">
+
+                <!--------------------------------- Reaction Bar --------------------------------->
+                <div class="containerReactionBar">
+
+                    <div class="containerSingleIcon" (click)="openBarToSelectEmojis()">
+                        <img src="assets/icons/add-emojis-icon.svg" alt="Add Emoji Icon">
+                    </div>
+
+                    <!-- @if (userIdMatchesWithIdFromLoggedinUser()) { -->
+                    <div class="containerSingleIcon" (click)="openMenuMoreOptions()">
+                        <img src="assets/icons/more-options-icon.svg" alt="More Options Icon">
+                    </div>
+                    <!-- } -->
+                </div>
+                <!--------------------------------- Reaction Bar --------------------------------->
+
+
+                <!--------------------------------- Menu more Options --------------------------------->
+                @if(menuMoreOptionsAreOpen) {
+                <div class="containerMenuMoreOptions">
+                    <p>Edit Message</p>
+                    <p>Delete Message</p>
+                </div>
+                }
+                <!--------------------------------- Menu more Options --------------------------------->
+
+
+                <!--------------------------------- Bar to select Emojis --------------------------------->
+                @if(barToSelectEmojisAreOpen) {
+                <div class="containerReactionBar" style="top: 30px;">
+
+                    <img class="singleIcon" src="assets/icons/check-emoji-icon.svg" alt="Emoji Icon">
+
+                    <img class="singleIcon" src="assets/icons/raising-both-hands-emoji-icon.svg" alt="Emoji Icon">
+
+                    <img class="singleIcon" src="assets/icons/nerd-emoji-icon.svg" alt="Emoji Icon">
+
+                    <img class="singleIcon" src="assets/icons/rocket-emoji-icon.svg" alt="Emoji Icon">
+                </div>
+                }
+                <!--------------------------------- Bar to select Emojis --------------------------------->
+
+
                 <img src="/assets/img/avatar-5.svg" alt="User Image">
 
                 <div class="containerMessage">
@@ -64,8 +107,8 @@
             </div>
         </div>
 
-        <div class="containerForm" [ngStyle]="{'padding-bottom': storageInThreadService.uploadedImagesInThread.length >= 1 ? '6px' : '56px', 
-            'margin-top': storageInThreadService.uploadedImagesInThread.length >= 1 ? '-11px' : '-12px'}">
+        <div class="containerForm"
+            [ngStyle]="{'padding-bottom': storageInThreadService.uploadedImagesInThread.length >= 1 ? '6px' : '56px'}">
 
             <form [formGroup]="addMessageForm" (ngSubmit)="sendMessage()"
                 (keyup)="sendMessageIfPressOnEnterKey($event)">
