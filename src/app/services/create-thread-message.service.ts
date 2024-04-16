@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
+import { DocumentReference, Firestore, addDoc, arrayRemove, arrayUnion, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
 import { ThreadMessage } from '../models/thread-message';
 import { User } from '../models/user';
 import { Observable } from 'rxjs';
@@ -45,6 +45,60 @@ export class CreateThreadMessageService {
   updateThreadMessageService(directMesageId: string | null, threadMessageId: string, inputValue: string | null): void {
     const docRef = doc(this.firestore, `directMessages/${directMesageId}/threadMessages/${threadMessageId}`);
     updateDoc(docRef, { messageText: inputValue });
+  }
+
+
+  updateEmojisService(directMessageId: string | null, threadMessageId: string, idFromLoggedinUser: string, nameFromLoggedinUser: string | null, emojiUrl: string, threadMessage: ThreadMessage): void {
+    let indexIdLoggedinUser = 0;
+    let indexNameLoggedinUser = 0;
+    const { addedEmojis } = threadMessage;
+    const docRef = doc(this.firestore, `directMessages/${directMessageId}/threadMessages/${threadMessageId}`);
+    const indexEmojiUrl = threadMessage.addedEmojis.findIndex((emoji) => emoji.emojiUrl == emojiUrl);
+    threadMessage.addedEmojis.forEach((emoji) => { indexIdLoggedinUser = emoji.usersIdWhoHaveUsedTheEmoji.indexOf(idFromLoggedinUser) })
+    threadMessage.addedEmojis.forEach((emoji) => { indexNameLoggedinUser = emoji.usersNameWhoHaveUsedTheEmoji.indexOf(nameFromLoggedinUser ? nameFromLoggedinUser : '') })
+    this.checkEmojiStatusService(indexEmojiUrl, indexIdLoggedinUser, indexNameLoggedinUser, nameFromLoggedinUser, docRef, emojiUrl, idFromLoggedinUser, addedEmojis);
+  }
+
+
+  checkEmojiStatusService(indexEmojiUrl: number, indexIdLoggedinUser: number, indexNameLoggedinUser: number, nameFromLoggedinUser: string | null, docRef: DocumentReference, emojiUrl: string, idFromLoggedinUser: string, addedEmojis: any): void {
+    if (indexEmojiUrl == -1) {
+      this.addEmojiService(docRef, emojiUrl, idFromLoggedinUser, nameFromLoggedinUser);
+    } else if (addedEmojis[indexEmojiUrl].usersIdWhoHaveUsedTheEmoji.includes(idFromLoggedinUser)) {
+      this.decreaseEmojiAmountBy1(docRef, addedEmojis, indexEmojiUrl, indexIdLoggedinUser, indexNameLoggedinUser);
+      this.removeEmoji(docRef, addedEmojis, indexEmojiUrl);
+    } else if (!addedEmojis[indexEmojiUrl].usersIdWhoHaveUsedTheEmoji.includes(idFromLoggedinUser)) {
+      this.increaseEmojiBy1(docRef, addedEmojis, indexEmojiUrl, idFromLoggedinUser, nameFromLoggedinUser);
+    }
+  }
+
+
+  addEmojiService(docRef: DocumentReference, emojiUrl: string, idFromLoggedinUser: string, nameFromLoggedinUser: string | null): void {
+    const emojiData = [{ emojiUrl: emojiUrl, emojiAmount: 1, usersIdWhoHaveUsedTheEmoji: [idFromLoggedinUser], usersNameWhoHaveUsedTheEmoji: [nameFromLoggedinUser] }];
+    updateDoc(docRef, { addedEmojis: arrayUnion(...emojiData) })
+  }
+
+
+  decreaseEmojiAmountBy1(docRef: DocumentReference, addedEmojis: any, indexEmojiUrl: number, indexIdLoggedinUser: number, indexNameLoggedinUser: number): void {
+    addedEmojis[indexEmojiUrl].usersIdWhoHaveUsedTheEmoji.splice(indexIdLoggedinUser, 1);
+    addedEmojis[indexEmojiUrl].usersNameWhoHaveUsedTheEmoji.splice(indexNameLoggedinUser, 1);
+    addedEmojis[indexEmojiUrl] = { ...addedEmojis[indexEmojiUrl], emojiAmount: addedEmojis[indexEmojiUrl].emojiAmount - 1 };
+    updateDoc(docRef, { addedEmojis: addedEmojis });
+  }
+
+
+  removeEmoji(docRef: DocumentReference, addedEmojis: any, indexEmojiUrl: number): void {
+    if (addedEmojis[indexEmojiUrl].emojiAmount == 0) {
+      addedEmojis[indexEmojiUrl] = { ...addedEmojis[indexEmojiUrl], emojiAmount: addedEmojis[indexEmojiUrl].emojiAmount };
+      updateDoc(docRef, { addedEmojis: arrayRemove(addedEmojis[indexEmojiUrl]) });
+    }
+  }
+
+
+  increaseEmojiBy1(docRef: DocumentReference, addedEmojis: any, indexEmojiUrl: number, idFromLoggedinUser: string, nameFromLoggedinUser: string | null): void {
+    addedEmojis[indexEmojiUrl].usersIdWhoHaveUsedTheEmoji.push(idFromLoggedinUser);
+    addedEmojis[indexEmojiUrl].usersNameWhoHaveUsedTheEmoji.push(nameFromLoggedinUser);
+    addedEmojis[indexEmojiUrl] = { ...addedEmojis[indexEmojiUrl], emojiAmount: addedEmojis[indexEmojiUrl].emojiAmount + 1 };
+    updateDoc(docRef, { addedEmojis: addedEmojis });
   }
 
 

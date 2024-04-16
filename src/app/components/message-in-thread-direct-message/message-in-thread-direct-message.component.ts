@@ -1,6 +1,6 @@
 import { Component, Input, inject } from '@angular/core';
 import { ThreadMessage } from '../../models/thread-message';
-import { DatePipe, NgClass, NgStyle } from '@angular/common';
+import { AsyncPipe, DatePipe, NgClass, NgStyle } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { DialogUploadedImgFullViewComponent } from '../dialog-uploaded-img-full-view/dialog-uploaded-img-full-view.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,7 +13,7 @@ import { CreateThreadMessageService } from '../../services/create-thread-message
 @Component({
   selector: 'app-message-in-thread-direct-message',
   standalone: true,
-  imports: [DatePipe, NgClass, NgStyle, ReactiveFormsModule, PickerComponent],
+  imports: [AsyncPipe, DatePipe, NgClass, NgStyle, ReactiveFormsModule, PickerComponent],
   templateUrl: './message-in-thread-direct-message.component.html',
   styleUrl: './message-in-thread-direct-message.component.scss'
 })
@@ -24,6 +24,7 @@ export class MessageInThreadDirectMessageComponent {
   createThreadMessageService = inject(CreateThreadMessageService);
   matDialog = inject(MatDialog);
   inputValue: string | null = '';
+  emojiUrl: string = '';
   @Input() threadMessageId: string = '';
   @Input() directMessageId: string | null = '';
   @Input() threadMessage!: ThreadMessage;
@@ -100,6 +101,36 @@ export class MessageInThreadDirectMessageComponent {
 
   openImageDetailView(uploadedImage: string): void {
     this.matDialog.open(DialogUploadedImgFullViewComponent, { data: { uploadedImage: uploadedImage } });
+  }
+
+
+  initAddedEmojiFieldInThreadMessage(): void {
+    if (!this.threadMessage.addedEmojis) {
+      this.threadMessage.addedEmojis = [
+        { emojiUrl: '', emojiAmount: 0, usersIdWhoHaveUsedTheEmoji: [], usersNameWhoHaveUsedTheEmoji: [] }
+      ];
+    }
+  }
+
+
+  selectEmoji(emojiUrl: string) {
+    this.initAddedEmojiFieldInThreadMessage();
+    this.createThreadMessageService.updateEmojisService(this.directMessageId, this.threadMessageId, this.authService.user.userId, this.authService.user.name, emojiUrl, this.threadMessage);
+  }
+
+
+  displayTooltipAddedEmoji(emojiUrl: string): void {
+    this.emojiUrl = emojiUrl;
+  }
+
+
+  hideTooltipAddedEmoji(): void {
+    this.emojiUrl = '';
+  }
+
+
+  emojiUrlMatchesWithEmojiUrlFromTooltip(emojiUrl: string): boolean {
+    return (emojiUrl == this.emojiUrl) ? true : false;
   }
 
 

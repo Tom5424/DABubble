@@ -122,7 +122,7 @@ export class DirectMessageComponent implements OnInit {
   }
 
 
-  displayTooltiAddedEmojip(emojiUrl: string): void {
+  displayTooltipAddedEmoji(emojiUrl: string): void {
     this.emojiUrl = emojiUrl;
   }
 

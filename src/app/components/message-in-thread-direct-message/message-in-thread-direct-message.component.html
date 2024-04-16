@@ -25,7 +25,13 @@
     @if(menuMoreOptionsAreOpen) {
     <div class="containerMenuMoreOptions">
         <p (click)="openEditModeFromMessage()">Edit Message</p>
+
+
+        <!--------------------------------- Removes the delete Option, so that the thread is not empty --------------------------------->
+        @if ((createThreadMessageService.threadMesssagesAsObservable | async)?.length !== 1) {
         <p (click)="deleteMessage()">Delete Message</p>
+        }
+        <!--------------------------------- Removes the delete Option, so that the thread is not empty --------------------------------->
     </div>
     }
     <!--------------------------------- Menu more Options --------------------------------->
@@ -37,13 +43,17 @@
     'containerReactionBarLeftSide': !userIdMatchesWithIdFromLoggedinUser()}" class="containerReactionBar"
         style="top: 30px;">
 
-        <img class="singleIcon" src="assets/icons/check-emoji-icon.svg" alt="Emoji Icon">
+        <img class="singleIcon" src="assets/icons/check-emoji-icon.svg" alt="Emoji Icon"
+            (click)="selectEmoji('assets/icons/check-emoji-icon.svg')">
 
-        <img class="singleIcon" src="assets/icons/raising-both-hands-emoji-icon.svg" alt="Emoji Icon">
+        <img class="singleIcon" src="assets/icons/raising-both-hands-emoji-icon.svg" alt="Emoji Icon"
+            (click)="selectEmoji('assets/icons/raising-both-hands-emoji-icon.svg')">
 
-        <img class="singleIcon" src="assets/icons/nerd-emoji-icon.svg" alt="Emoji Icon">
+        <img class="singleIcon" src="assets/icons/nerd-emoji-icon.svg" alt="Emoji Icon"
+            (click)="selectEmoji('assets/icons/nerd-emoji-icon.svg')">
 
-        <img class="singleIcon" src="assets/icons/rocket-emoji-icon.svg" alt="Emoji Icon">
+        <img class="singleIcon" src="assets/icons/rocket-emoji-icon.svg" alt="Emoji Icon"
+            (click)="selectEmoji('assets/icons/rocket-emoji-icon.svg')">
     </div>
     }
     <!--------------------------------- Bar to select Emojis --------------------------------->
@@ -72,6 +82,34 @@
         </p>
         }
 
+
+        <!--------------------------------- Selected Emojis --------------------------------->
+        <div class="mainContainerSelctedEmojis" [ngClass]="{'marginLeft': userIdMatchesWithIdFromLoggedinUser(),
+           'marginRight': !userIdMatchesWithIdFromLoggedinUser()}">
+
+            @for(addedEmoji of threadMessage.addedEmojis; track $index) {
+            <div class="childContainerSelctedEmojis" (click)="selectEmoji(addedEmoji.emojiUrl)"
+                (mouseenter)="displayTooltipAddedEmoji(addedEmoji.emojiUrl)" (mouseleave)="hideTooltipAddedEmoji()">
+
+                <img src="{{ addedEmoji.emojiUrl }}" alt="Emoji Icon">
+                <p>{{ addedEmoji.emojiAmount }}</p>
+
+
+                <!--------------------------------- Emoji Tooltip --------------------------------->
+                @if(emojiUrlMatchesWithEmojiUrlFromTooltip(addedEmoji.emojiUrl)) {
+                <div class="containerTooltip">
+                    <img src="{{ addedEmoji.emojiUrl }}" alt="Emoji Icon">
+                    <p>{{ addedEmoji.usersNameWhoHaveUsedTheEmoji }}</p>
+                    <p>has react</p>
+                </div>
+                }
+                <!--------------------------------- Emoji Tooltip --------------------------------->
+
+            </div>
+            }
+        </div>
+        <!--------------------------------- Selected Emojis --------------------------------->
+        
 
         <!--------------------------------- Textarea to Edit Message --------------------------------->
         @if (messageIsInEditMode) {

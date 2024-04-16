@@ -77,6 +77,67 @@
 }
 
 
+.mainContainerSelctedEmojis {
+    @include flex();
+    gap: 10px;
+}
+
+
+.childContainerSelctedEmojis {
+    @include hover();
+    @include flexCenteredYAxis();
+    border: 1px solid $lightPurple;
+    position: relative;
+    padding: 5px 10px 5px 10px;
+    border-radius: 20px;
+    gap: 5px;
+    background-color: #ffffff;
+
+    &:hover {
+        border: 1px solid $darkPurple;
+    }
+
+    img {
+        width: 20px;
+        height: 20px;
+    }
+
+    p {
+        margin: 0;
+    }
+}
+
+
+.containerTooltip {
+    @include positionAbsolute(unset, 40px, -42px, unset);
+    @include flexColumnCenteredXAxis();
+    background-color: $darkPurple;
+    gap: 8px;
+    z-index: 1;
+    padding: 15px 10px 15px 10px;
+    border-radius: 30px;
+
+    p:nth-of-type(1) {
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        width: 120px;
+        word-wrap: break-word;
+        text-align: center;
+        color: #ffffff;
+    }
+
+    p:nth-of-type(2) {
+        color: #ffffff;
+    }
+
+    img {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+
 .singleIcon {
     @include iconHover();
 }
@@ -308,4 +369,14 @@ form {
 
 .containerReactionBarRightSide {
     right: 15px;
+}
+
+
+.marginLeft {
+    margin-left: -60px;
+}
+
+
+.marginRight {
+    margin-right: -60px;
 }

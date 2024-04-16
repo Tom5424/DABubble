@@ -95,7 +95,7 @@
             <div class="mainContainerSelctedEmojis">
                 @for(addedEmoji of directMessage.addedEmojis; track $index) {
                 <div class="childContainerSelctedEmojis" (click)="selectEmoji(addedEmoji.emojiUrl)"
-                    (mouseenter)="displayTooltiAddedEmojip(addedEmoji.emojiUrl)" (mouseleave)="hideTooltipAddedEmoji()">
+                    (mouseenter)="displayTooltipAddedEmoji(addedEmoji.emojiUrl)" (mouseleave)="hideTooltipAddedEmoji()">
 
                     <img src="{{ addedEmoji.emojiUrl }}" alt="Emoji Icon">
                     <p>{{ addedEmoji.emojiAmount }}</p>
