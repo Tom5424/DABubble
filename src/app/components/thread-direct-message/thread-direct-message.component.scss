@@ -49,8 +49,13 @@
 
 
 .scrollingContainer {
+    overflow-y: hidden;
     height: 300px;
-    overflow-y: scroll;
+
+    &:hover {
+        transition: all 225ms ease-in-out;
+        overflow-y: scroll;
+    }
 }
 
 

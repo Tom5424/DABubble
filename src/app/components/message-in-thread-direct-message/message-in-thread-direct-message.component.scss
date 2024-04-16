@@ -2,19 +2,43 @@
 @import '../../../scss/mixin.scss';
 
 
-.mainContainerMessage {
+.mainContainerChannelMessageOwnMessage {
     @include flex();
-    gap: 20px;
-    padding: 10px 40px 10px 40px;
-    margin: 40px 0 20px 0;
+    gap: 30px;
+    margin-top: 44px;
+    padding: 10px 25px 10px 25px;
     position: relative;
 
     &:hover {
         background-color: $bgColor;
 
-        .messageText {
-            background-color: #ffffff;
+        .containerReactionBar {
+            display: flex;
         }
+
+        .messageTextOwnMessage {
+            background-color: #ffffff !important;
+        }
+    }
+
+    img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+    }
+}
+
+
+.mainContainerChannelMessageFromOtherUser {
+    @include flex();
+    flex-direction: row-reverse;
+    gap: 30px;
+    margin-top: 44px;
+    padding: 10px 25px 10px 25px;
+    position: relative;
+
+    &:hover {
+        background-color: $bgColor;
 
         .containerReactionBar {
             display: flex;
@@ -22,15 +46,15 @@
     }
 
     img {
-        border-radius: 50%;
         width: 60px;
         height: 60px;
+        border-radius: 50%;
     }
 }
 
 
 .containerReactionBar {
-    @include positionAbsolute(-20px, unset, unset, 15px);
+    @include positionAbsolute(-20px, unset, unset, unset);
     @include flexCenteredYAxis();
     border: 1px solid $lightPurple;
     display: none;
@@ -50,6 +74,63 @@
 
 .singleIcon {
     @include iconHover();
+}
+
+
+.container {
+    @include flexColumn();
+    @include flexEndYAxis();
+}
+
+
+.imgNoSelectedProfile {
+    background-color: $purple;
+    width: 45px !important;
+    height: 45px !important;
+    padding: 6px;
+}
+
+
+.containerChannelMessageUpperPartOwnMessage {
+    @include flex();
+    align-items: baseline;
+    gap: 20px;
+
+    p:nth-of-type(1) {
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    p:nth-of-type(2) {
+        color: $textGray;
+        font-size: 14px;
+    }
+
+    p {
+        margin: 0;
+    }
+}
+
+
+.containerChannelMessageUpperPartFromOtherUser {
+    @include flexStartXAxis();
+    flex-direction: row-reverse;
+    align-items: baseline;
+    gap: 20px;
+
+    p:nth-of-type(1) {
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    p:nth-of-type(2) {
+        color: $textGray;
+        font-size: 14px;
+    }
+
+    p {
+        margin: 0;
+    }
 }
 
 
@@ -78,33 +159,38 @@
 }
 
 
-.containerMessageUpperPart {
-    @include flex();
-    align-items: baseline;
-    gap: 20px;
-
-    p:nth-of-type(1) {
-        font-size: 18px;
-        font-weight: 700;
-    }
-
-    p:nth-of-type(2) {
-        color: $textGray;
-        font-size: 14px;
-    }
-
-    p {
-        margin: 0;
-    }
+.messageTextOwnMessage {
+    background-color: $bgColor;
+    width: fit-content;
+    border-radius: 0px 30px 30px 30px;
+    padding: 15px;
+    font-size: 18px;
+    word-break: break-all;
 }
 
 
-.messageText {
-    background-color: $bgColor;
-    border-radius: 0 20px 20px 20px;
+.messageTextFromOtherUser {
+    background-color: $purple;
+    width: fit-content;
+    color: #ffffff;
+    border-radius: 30px 0px 30px 30px;
     padding: 15px;
     font-size: 18px;
-    width: fit-content;
+    word-break: break-all;
+}
+
+
+.uploadedImage {
+    @include hover();
+    width: 200px !important;
+    height: 200px !important;
+    margin: 15px 0 15px 0;
+    object-fit: cover;
+    border-radius: 8px !important;
+
+    &:hover {
+        opacity: 0.8;
+    }
 }
 
 
@@ -137,3 +223,15 @@
         background-color: $bgColor;
     }
 }
+
+
+.containerReactionBarLeftSide {
+    left: 15px;
+}
+
+
+.containerReactionBarRightSide {
+    right: 15px;
+}
+
+// 272

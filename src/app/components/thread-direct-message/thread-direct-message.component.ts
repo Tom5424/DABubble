@@ -1,37 +1,39 @@
-import { NgClass, NgStyle } from '@angular/common';
+import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
 import { Component, ElementRef, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { CreateDirectMessageService } from '../../services/create-direct-message.service';
 import { DialogUploadedImgFullViewComponent } from '../dialog-uploaded-img-full-view/dialog-uploaded-img-full-view.component';
 import { MatDialog } from '@angular/material/dialog';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 import { StorageInThreadService } from '../../services/storage-in-thread.service';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MessageInThreadDirectMessageComponent } from '../message-in-thread-direct-message/message-in-thread-direct-message.component';
+import { CreateThreadMessageService } from '../../services/create-thread-message.service';
 
 
 @Component({
   selector: 'app-thread-direct-message',
   standalone: true,
-  imports: [NgClass, NgStyle, ReactiveFormsModule, PickerComponent, RouterLink, MessageInThreadDirectMessageComponent],
+  imports: [NgClass, NgStyle, ReactiveFormsModule, PickerComponent, RouterLink, MessageInThreadDirectMessageComponent, AsyncPipe],
   templateUrl: './thread-direct-message.component.html',
   styleUrl: './thread-direct-message.component.scss'
 })
 
 
 export class ThreadDirectMessageComponent implements OnInit {
-  createDirectMessageService = inject(CreateDirectMessageService);
+  createThreadMessageService = inject(CreateThreadMessageService);
   authService = inject(AuthService);
   storageInThreadService = inject(StorageInThreadService);
   renderer2 = inject(Renderer2);
   matDialog = inject(MatDialog);
   router = inject(Router);
+  activatedRoute = inject(ActivatedRoute);
   @ViewChild('scrollingContainer') scrollingContainer!: ElementRef;
   emojiPickerIsDisplayed: boolean = false;
   inputValue: string | null | undefined = '';
   directMesageId: string = '';
+  threadMessageId: string | null = '';
   addMessageForm = new FormGroup({
     textarea: new FormControl('', Validators.required)
   })
@@ -41,13 +43,17 @@ export class ThreadDirectMessageComponent implements OnInit {
     let url = this.router.url;
     let splittedUrl = url.split('/');
     this.directMesageId = splittedUrl[3];
+    this.activatedRoute.paramMap.subscribe((params) => {
+      this.threadMessageId = params.get('id');
+      this.createThreadMessageService.getThreadMessagesService(this.threadMessageId);
+    });
   }
 
 
   sendMessage(): void {
     this.inputValue = this.addMessageForm.controls.textarea.value;
     if (this.inputValue?.trim() !== '' || this.storageInThreadService.uploadedImagesInThread.length >= 1) {
-      this.createDirectMessageService.createDirectMessageService(this.authService.user, this.directMesageId, this.authService.user.userId, this.inputValue, this.storageInThreadService.uploadedImagesInThread);
+      this.createThreadMessageService.createThreadMessageService(this.authService.user, this.threadMessageId, this.inputValue, this.storageInThreadService.uploadedImagesInThread);
       this.scrollToBottomAfterSendMessage();
       this.addMessageForm.reset();
       this.storageInThreadService.uploadedImagesInThread = [];
@@ -58,7 +64,7 @@ export class ThreadDirectMessageComponent implements OnInit {
   sendMessageIfPressOnEnterKey(event: KeyboardEvent) {
     this.inputValue = this.addMessageForm.controls.textarea.value;
     if ((event?.key == 'Enter' && this.inputValue?.trim() !== '') || (event.key == 'Enter' && this.inputValue?.trim() == '' && this.storageInThreadService.uploadedImagesInThread.length >= 1)) {
-      this.createDirectMessageService.createDirectMessageService(this.authService.user, this.directMesageId, this.authService.user.userId, this.inputValue, this.storageInThreadService.uploadedImagesInThread);
+      this.createThreadMessageService.createThreadMessageService(this.authService.user, this.threadMessageId, this.inputValue, this.storageInThreadService.uploadedImagesInThread);
       this.scrollToBottomAfterSendMessage();
       this.addMessageForm.reset();
       this.storageInThreadService.uploadedImagesInThread = [];

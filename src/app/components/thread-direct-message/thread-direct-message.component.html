@@ -19,9 +19,15 @@
 
     <div class="containerThreadLowerPart">
 
-        <div class="scrollingContainer">
+        <div class="scrollingContainer" #scrollingContainer>
 
-            <app-message-in-thread-direct-message></app-message-in-thread-direct-message>
+            @for (threadMessage of createThreadMessageService.threadMesssagesAsObservable | async; track $index) {
+
+            <app-message-in-thread-direct-message [threadMessageId]="threadMessage.id" [threadMessage]="threadMessage">
+
+            </app-message-in-thread-direct-message>
+
+            }
 
         </div>
 

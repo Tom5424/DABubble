@@ -4,6 +4,7 @@ import { DirectMessage } from '../models/direct-message';
 import { User } from '../models/user';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
+import { CreateThreadMessageService } from './create-thread-message.service';
 
 
 @Injectable({
@@ -14,6 +15,7 @@ import { AuthService } from './auth.service';
 export class CreateDirectMessageService {
   firestore = inject(Firestore);
   authService = inject(AuthService);
+  createThreadMessageService = inject(CreateThreadMessageService);
   directMessagesAsObservable!: Observable<any[]>;
   loadChat: boolean = false;
 
@@ -30,8 +32,8 @@ export class CreateDirectMessageService {
     const collectionRef = collection(this.firestore, 'directMessages');
     const directMessageRef = new DirectMessage(userData, receiverId, senderId, messageText, uploadedImages);
     addDoc(collectionRef, directMessageRef.toJson())
-      .then(() => {
-
+      .then((doc) => {
+        this.createThreadMessageService.createThreadMessageService(user, doc.id, messageText, uploadedImages);
       })
   }
 
