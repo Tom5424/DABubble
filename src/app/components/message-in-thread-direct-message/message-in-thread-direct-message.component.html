@@ -1,3 +1,5 @@
+<div [ngClass]="{'overlay': emojiPickerIsDisplayed}" (click)="closeEmojiPickerIfClickOutside()"></div>
+
 <div class="mainContainerMessage" [ngClass]="{'mainContainerChannelMessageOwnMessage': userIdMatchesWithIdFromLoggedinUser(), 
     'mainContainerChannelMessageFromOtherUser': !userIdMatchesWithIdFromLoggedinUser()}"
     (mouseleave)="closeOpenMenusInMessageIfHoverOutside()">
@@ -22,8 +24,8 @@
     <!--------------------------------- Menu more Options --------------------------------->
     @if(menuMoreOptionsAreOpen) {
     <div class="containerMenuMoreOptions">
-        <p>Edit Message</p>
-        <p>Delete Message</p>
+        <p (click)="openEditModeFromMessage()">Edit Message</p>
+        <p (click)="deleteMessage()">Delete Message</p>
     </div>
     }
     <!--------------------------------- Menu more Options --------------------------------->
@@ -63,12 +65,52 @@
             <p>{{ threadMessage.senderTime | date: 'HH:mm' }} Uhr</p>
         </div>
 
-        @if (threadMessage.messageText.trim() !== '') {
+        @if (!messageIsInEditMode && threadMessage.messageText.trim() !== '') {
         <p [ngClass]="{'messageTextOwnMessage': userIdMatchesWithIdFromLoggedinUser(), 
            'messageTextFromOtherUser': !userIdMatchesWithIdFromLoggedinUser()}">
             {{ threadMessage.messageText }}
         </p>
         }
+
+
+        <!--------------------------------- Textarea to Edit Message --------------------------------->
+        @if (messageIsInEditMode) {
+        <form [formGroup]="editMessageForm" (ngSubmit)="editMessage()">
+            <textarea placeholder="{{ threadMessage.messageText }}" formControlName="textareaEditMessage">
+
+            </textarea>
+
+
+            <!--------------------------------- Emoji Picker --------------------------------->
+            @if (emojiPickerIsDisplayed) {
+            <emoji-mart [style]="{position: 'absolute', top: '270px', right: '10px', 'z-index': '1', width: '280px'}"
+                (emojiClick)="selectEmojiInEmojiPicker($event)">
+            </emoji-mart>
+            }
+            <!--------------------------------- Emoji Picker -----  ---------------------------->
+
+
+            <div class="containerIconAndBtns"
+                [ngStyle]="{'width': threadMessage.attachedFiles.length >= 1 ? '80%' : '90%'}">
+
+                <div class="containerSmileyIcon" (click)="tootgleEmojiPicker()">
+                    <img src="assets/icons/smiley-icon.svg" alt="Smiley Icon">
+                </div>
+
+                <div class="containerBtn">
+                    <button type="button" (click)="closeEditModeFromMessage()">Cancel</button>
+
+                    <button type="submit"
+                        [disabled]="editMessageForm.invalid || editMessageForm.controls.textareaEditMessage.value?.trim() == ''"
+                        [ngClass]="{'btnDisabled': editMessageForm.invalid || editMessageForm.controls.textareaEditMessage.value?.trim() == ''}">
+                        Save
+                    </button>
+                </div>
+
+            </div>
+        </form>
+        }
+        <!--------------------------------- Textarea to Edit Message --------------------------------->
 
 
         <!--------------------------------- Displayed here the uploaded Images in Message --------------------------------->

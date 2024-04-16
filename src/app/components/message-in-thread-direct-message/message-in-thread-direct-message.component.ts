@@ -1,15 +1,19 @@
 import { Component, Input, inject } from '@angular/core';
 import { ThreadMessage } from '../../models/thread-message';
-import { DatePipe, NgClass } from '@angular/common';
+import { DatePipe, NgClass, NgStyle } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { DialogUploadedImgFullViewComponent } from '../dialog-uploaded-img-full-view/dialog-uploaded-img-full-view.component';
 import { MatDialog } from '@angular/material/dialog';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { PickerComponent } from '@ctrl/ngx-emoji-mart';
+import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
+import { CreateThreadMessageService } from '../../services/create-thread-message.service';
 
 
 @Component({
   selector: 'app-message-in-thread-direct-message',
   standalone: true,
-  imports: [DatePipe, NgClass],
+  imports: [DatePipe, NgClass, NgStyle, ReactiveFormsModule, PickerComponent],
   templateUrl: './message-in-thread-direct-message.component.html',
   styleUrl: './message-in-thread-direct-message.component.scss'
 })
@@ -17,11 +21,19 @@ import { MatDialog } from '@angular/material/dialog';
 
 export class MessageInThreadDirectMessageComponent {
   authService = inject(AuthService);
+  createThreadMessageService = inject(CreateThreadMessageService);
   matDialog = inject(MatDialog);
+  inputValue: string | null = '';
   @Input() threadMessageId: string = '';
+  @Input() directMessageId: string | null = '';
   @Input() threadMessage!: ThreadMessage;
   barToSelectEmojisAreOpen: boolean = false;
   menuMoreOptionsAreOpen: boolean = false;
+  messageIsInEditMode: boolean = false;
+  emojiPickerIsDisplayed: boolean = false;
+  editMessageForm = new FormGroup({
+    textareaEditMessage: new FormControl(this.inputValue, Validators.required),
+  })
 
 
   closeOpenMenusInMessageIfHoverOutside(): void {
@@ -38,6 +50,51 @@ export class MessageInThreadDirectMessageComponent {
 
   openMenuMoreOptions(): void {
     this.menuMoreOptionsAreOpen = !this.menuMoreOptionsAreOpen;
+  }
+
+
+  openEditModeFromMessage(): void {
+    this.messageIsInEditMode = true;
+    this.menuMoreOptionsAreOpen = false;
+    this.barToSelectEmojisAreOpen = false;
+  }
+
+
+  tootgleEmojiPicker() {
+    this.emojiPickerIsDisplayed = !this.emojiPickerIsDisplayed;
+  }
+
+
+  editMessage(): void {
+    this.inputValue = this.editMessageForm.controls.textareaEditMessage.value;
+    this.createThreadMessageService.updateThreadMessageService(this.directMessageId, this.threadMessageId, this.inputValue);
+    this.closeEditModeFromMessage();
+  }
+
+
+  deleteMessage(): void {
+    this.createThreadMessageService.deleteThreadMessageService(this.directMessageId, this.threadMessageId);
+    this.menuMoreOptionsAreOpen = false;
+  }
+
+
+  closeEditModeFromMessage(): void {
+    this.messageIsInEditMode = false;
+    this.editMessageForm.reset();
+  }
+
+
+  closeEmojiPickerIfClickOutside(): void {
+    this.emojiPickerIsDisplayed = false;
+  }
+
+
+  selectEmojiInEmojiPicker(event: EmojiEvent) {
+    this.inputValue = this.editMessageForm.controls.textareaEditMessage.value;
+    this.inputValue += event.emoji.native ? event.emoji.native : '';
+    this.editMessageForm.patchValue({
+      textareaEditMessage: this.inputValue,
+    });
   }
 
 

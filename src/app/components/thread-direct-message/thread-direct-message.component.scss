@@ -51,6 +51,7 @@
 .scrollingContainer {
     overflow-y: hidden;
     height: 300px;
+    padding-bottom: 25px;
 
     &:hover {
         transition: all 225ms ease-in-out;
@@ -61,7 +62,6 @@
 
 .containerForm {
     @include flexCenteredXAxis();
-    margin-top: 18px;
 }
 
 

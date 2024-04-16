@@ -23,7 +23,8 @@
 
             @for (threadMessage of createThreadMessageService.threadMesssagesAsObservable | async; track $index) {
 
-            <app-message-in-thread-direct-message [threadMessageId]="threadMessage.id" [threadMessage]="threadMessage">
+            <app-message-in-thread-direct-message [directMessageId]="threadMessageId"
+                [threadMessageId]="threadMessage.id" [threadMessage]="threadMessage">
 
             </app-message-in-thread-direct-message>
 
@@ -31,8 +32,8 @@
 
         </div>
 
-        <div class="containerForm"
-            [ngStyle]="{'padding-bottom': storageInThreadService.uploadedImagesInThread.length >= 1 ? '6px' : '56px'}">
+        <div class="containerForm" [ngStyle]="{'padding-bottom': storageInThreadService.uploadedImagesInThread.length >= 1 ? '6px' : '31px', 
+            'margin-top': storageInThreadService.uploadedImagesInThread.length >= 1 ? '-6px' : '18px'}">
 
             <form [formGroup]="addMessageForm" (ngSubmit)="sendMessage()"
                 (keyup)="sendMessageIfPressOnEnterKey($event)">

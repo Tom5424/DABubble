@@ -53,6 +53,11 @@
 }
 
 
+.overlay {
+    @include positionAbsolute(0, 0, 0, 0);
+}
+
+
 .containerReactionBar {
     @include positionAbsolute(-20px, unset, unset, unset);
     @include flexCenteredYAxis();
@@ -180,6 +185,57 @@
 }
 
 
+form {
+    position: relative;
+    padding: 20px 0 20px 0;
+
+    textarea {
+        @include inputfieldOrTextarea(180px, 20px, 20px, 20px, 20px, 20px, 18px, #ffffff);
+        @include inputfieldOrTextareaHover();
+        @include inputfieldOrTextareaFocus();
+        border: 1px solid $lightPurple;
+        font-family: "Figtree", sans-serif;
+        height: 200px;
+        resize: none;
+    }
+}
+
+
+.containerIconAndBtns {
+    @include flexCenteredYAxis();
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 20px;
+    margin: -81px 0 0 2px;
+    padding: 16px 20px 16px 0;
+}
+
+
+.containerBtn {
+    @include flex();
+    gap: 12px;
+
+    button:nth-of-type(1) {
+        @include btnSecondary();
+        @include btnSecondaryHover();
+        @include btnSecondaryActive();
+    }
+
+    button:nth-of-type(2) {
+        @include btnPrimary();
+        @include btnPrimaryHover();
+        @include btnPrimaryActive();
+        border: unset;
+    }
+
+    button {
+        font-size: 16px !important;
+        padding: 12px 15px 12px 15px;
+        border-radius: 50px;
+    }
+}
+
+
 .uploadedImage {
     @include hover();
     width: 200px !important;
@@ -190,6 +246,26 @@
 
     &:hover {
         opacity: 0.8;
+    }
+}
+
+
+.containerSmileyIcon {
+    @include hover();
+    @include flex();
+    border-radius: 50%;
+
+    img {
+        width: 40px;
+        height: 40px;
+
+        &:hover {
+            filter: brightness(0) saturate(100%) invert(32%) sepia(74%) saturate(1212%) hue-rotate(215deg) brightness(97%) contrast(107%);
+        }
+    }
+
+    &:hover {
+        background-color: $bgColor;
     }
 }
 
@@ -233,5 +309,3 @@
 .containerReactionBarRightSide {
     right: 15px;
 }
-
-// 272

@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, orderBy, query, where } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
 import { ThreadMessage } from '../models/thread-message';
 import { User } from '../models/user';
 import { Observable } from 'rxjs';
@@ -39,5 +39,17 @@ export class CreateThreadMessageService {
 
     })
     this.threadMesssagesAsObservable = collectionData(subCollectionRef, { idField: 'id' }) as Observable<ThreadMessage[]>;
+  }
+
+
+  updateThreadMessageService(directMesageId: string | null, threadMessageId: string, inputValue: string | null): void {
+    const docRef = doc(this.firestore, `directMessages/${directMesageId}/threadMessages/${threadMessageId}`);
+    updateDoc(docRef, { messageText: inputValue });
+  }
+
+
+  deleteThreadMessageService(directMesageId: string | null, threadMessageId: string): void {
+    const docRef = doc(this.firestore, `directMessages/${directMesageId}/threadMessages/${threadMessageId}`);
+    deleteDoc(docRef);
   }
 }
