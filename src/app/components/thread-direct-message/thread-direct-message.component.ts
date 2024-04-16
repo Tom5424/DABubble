@@ -79,6 +79,11 @@ export class ThreadDirectMessageComponent implements OnInit {
     }, 50);
   }
 
+  
+  chatAreLoading(): boolean {
+    return (this.createThreadMessageService.loadChat) ? true : false;
+  }
+
 
   imageIsUploadingInThread(): boolean {
     return (this.storageInThreadService.uploadImgInThread) ? true : false;

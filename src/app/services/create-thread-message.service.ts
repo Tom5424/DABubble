@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 export class CreateThreadMessageService {
   firestore = inject(Firestore);
   threadMesssagesAsObservable!: Observable<any[]>;
+  loadChat: boolean = false;
 
 
   createThreadMessageService(user: User, receiverId: string | null, messageText: string | null | undefined, uploadedImages: string[]): void {
@@ -34,9 +35,10 @@ export class CreateThreadMessageService {
 
 
   getThreadMessagesService(receiverId: string | null): void {
+    this.loadChat = true;
     const subCollectionRef = query(collection(this.firestore, `directMessages/${receiverId}/threadMessages`), where('receiverId', '==', receiverId), orderBy('senderTime'));
     collectionData(subCollectionRef, { idField: 'id' }).subscribe(() => {
-
+      this.loadChat = false;
     })
     this.threadMesssagesAsObservable = collectionData(subCollectionRef, { idField: 'id' }) as Observable<ThreadMessage[]>;
   }

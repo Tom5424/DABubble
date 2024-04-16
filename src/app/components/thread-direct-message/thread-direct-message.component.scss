@@ -60,6 +60,12 @@
 }
 
 
+.containerSpinnerIcon {
+    @include flexCenteredXAxis();
+    padding-top: 80px;
+}
+
+
 .containerForm {
     @include flexCenteredXAxis();
 }

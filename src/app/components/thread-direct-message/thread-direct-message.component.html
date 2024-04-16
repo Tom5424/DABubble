@@ -20,6 +20,11 @@
     <div class="containerThreadLowerPart">
 
         <div class="scrollingContainer" #scrollingContainer>
+            @if(chatAreLoading()) {
+            <div class="containerSpinnerIcon">
+                <img src="assets/icons/spinner-icon.svg" alt="Sinner Icon">
+            </div>
+            }@else {
 
             @for (threadMessage of createThreadMessageService.threadMesssagesAsObservable | async; track $index) {
 
@@ -29,7 +34,8 @@
             </app-message-in-thread-direct-message>
 
             }
-
+            
+            }
         </div>
 
         <div class="containerForm" [ngStyle]="{'padding-bottom': storageInThreadService.uploadedImagesInThread.length >= 1 ? '6px' : '31px', 
