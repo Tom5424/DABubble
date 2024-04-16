@@ -9,7 +9,7 @@ import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 import { StorageInThreadService } from '../../services/storage-in-thread.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MessageInThreadDirectMessageComponent } from '../message-in-thread-direct-message/message-in-thread-direct-message.component';
-import { CreateThreadMessageService } from '../../services/create-thread-message.service';
+import { CreateThreadMessageInDirectMessageService } from '../../services/create-thread-message-in-direct-message.service';
 
 
 @Component({
@@ -22,7 +22,7 @@ import { CreateThreadMessageService } from '../../services/create-thread-message
 
 
 export class ThreadDirectMessageComponent implements OnInit {
-  createThreadMessageService = inject(CreateThreadMessageService);
+  createThreadMessageInDirectMessageService = inject(CreateThreadMessageInDirectMessageService);
   authService = inject(AuthService);
   storageInThreadService = inject(StorageInThreadService);
   renderer2 = inject(Renderer2);
@@ -45,7 +45,7 @@ export class ThreadDirectMessageComponent implements OnInit {
     this.directMesageId = splittedUrl[3];
     this.activatedRoute.paramMap.subscribe((params) => {
       this.threadMessageId = params.get('id');
-      this.createThreadMessageService.getThreadMessagesService(this.threadMessageId);
+      this.createThreadMessageInDirectMessageService.getThreadMessagesService(this.threadMessageId);
     });
   }
 
@@ -53,7 +53,7 @@ export class ThreadDirectMessageComponent implements OnInit {
   sendMessage(): void {
     this.inputValue = this.addMessageForm.controls.textarea.value;
     if (this.inputValue?.trim() !== '' || this.storageInThreadService.uploadedImagesInThread.length >= 1) {
-      this.createThreadMessageService.createThreadMessageService(this.authService.user, this.threadMessageId, this.inputValue, this.storageInThreadService.uploadedImagesInThread);
+      this.createThreadMessageInDirectMessageService.createThreadMessageService(this.authService.user, this.threadMessageId, this.inputValue, this.storageInThreadService.uploadedImagesInThread);
       this.scrollToBottomAfterSendMessage();
       this.addMessageForm.reset();
       this.storageInThreadService.uploadedImagesInThread = [];
@@ -64,7 +64,7 @@ export class ThreadDirectMessageComponent implements OnInit {
   sendMessageIfPressOnEnterKey(event: KeyboardEvent) {
     this.inputValue = this.addMessageForm.controls.textarea.value;
     if ((event?.key == 'Enter' && this.inputValue?.trim() !== '') || (event.key == 'Enter' && this.inputValue?.trim() == '' && this.storageInThreadService.uploadedImagesInThread.length >= 1)) {
-      this.createThreadMessageService.createThreadMessageService(this.authService.user, this.threadMessageId, this.inputValue, this.storageInThreadService.uploadedImagesInThread);
+      this.createThreadMessageInDirectMessageService.createThreadMessageService(this.authService.user, this.threadMessageId, this.inputValue, this.storageInThreadService.uploadedImagesInThread);
       this.scrollToBottomAfterSendMessage();
       this.addMessageForm.reset();
       this.storageInThreadService.uploadedImagesInThread = [];
@@ -81,7 +81,7 @@ export class ThreadDirectMessageComponent implements OnInit {
 
   
   chatAreLoading(): boolean {
-    return (this.createThreadMessageService.loadChat) ? true : false;
+    return (this.createThreadMessageInDirectMessageService.loadChat) ? true : false;
   }
 
 

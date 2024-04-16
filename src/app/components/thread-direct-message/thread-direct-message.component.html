@@ -26,7 +26,7 @@
             </div>
             }@else {
 
-            @for (threadMessage of createThreadMessageService.threadMesssagesAsObservable | async; track $index) {
+            @for (threadMessage of createThreadMessageInDirectMessageService.threadMesssagesAsObservable | async; track $index) {
 
             <app-message-in-thread-direct-message [directMessageId]="threadMessageId"
                 [threadMessageId]="threadMessage.id" [threadMessage]="threadMessage">

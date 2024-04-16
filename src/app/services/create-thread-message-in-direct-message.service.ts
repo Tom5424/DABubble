@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 
 
-export class CreateThreadMessageService {
+export class CreateThreadMessageInDirectMessageService {
   firestore = inject(Firestore);
   threadMesssagesAsObservable!: Observable<any[]>;
   loadChat: boolean = false;

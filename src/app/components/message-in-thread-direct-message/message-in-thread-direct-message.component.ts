@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
-import { CreateThreadMessageService } from '../../services/create-thread-message.service';
+import { CreateThreadMessageInDirectMessageService } from '../../services/create-thread-message-in-direct-message.service';
 
 
 @Component({
@@ -21,7 +21,7 @@ import { CreateThreadMessageService } from '../../services/create-thread-message
 
 export class MessageInThreadDirectMessageComponent {
   authService = inject(AuthService);
-  createThreadMessageService = inject(CreateThreadMessageService);
+  createThreadMessageInDirectMessageService = inject(CreateThreadMessageInDirectMessageService);
   matDialog = inject(MatDialog);
   inputValue: string | null = '';
   emojiUrl: string = '';
@@ -68,13 +68,13 @@ export class MessageInThreadDirectMessageComponent {
 
   editMessage(): void {
     this.inputValue = this.editMessageForm.controls.textareaEditMessage.value;
-    this.createThreadMessageService.updateThreadMessageService(this.directMessageId, this.threadMessageId, this.inputValue);
+    this.createThreadMessageInDirectMessageService.updateThreadMessageService(this.directMessageId, this.threadMessageId, this.inputValue);
     this.closeEditModeFromMessage();
   }
 
 
   deleteMessage(): void {
-    this.createThreadMessageService.deleteThreadMessageService(this.directMessageId, this.threadMessageId);
+    this.createThreadMessageInDirectMessageService.deleteThreadMessageService(this.directMessageId, this.threadMessageId);
     this.menuMoreOptionsAreOpen = false;
   }
 
@@ -115,7 +115,7 @@ export class MessageInThreadDirectMessageComponent {
 
   selectEmoji(emojiUrl: string) {
     this.initAddedEmojiFieldInThreadMessage();
-    this.createThreadMessageService.updateEmojisService(this.directMessageId, this.threadMessageId, this.authService.user.userId, this.authService.user.name, emojiUrl, this.threadMessage);
+    this.createThreadMessageInDirectMessageService.updateEmojisService(this.directMessageId, this.threadMessageId, this.authService.user.userId, this.authService.user.name, emojiUrl, this.threadMessage);
   }
 
 

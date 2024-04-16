@@ -10,7 +10,7 @@ import { DialogUploadedImgFullViewComponent } from '../dialog-uploaded-img-full-
 import { MatDialog } from '@angular/material/dialog';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
-import { CreateThreadMessageService } from '../../services/create-thread-message.service';
+import { CreateThreadMessageInDirectMessageService } from '../../services/create-thread-message-in-direct-message.service';
 import { ThreadMessage } from '../../models/thread-message';
 
 
@@ -25,7 +25,7 @@ import { ThreadMessage } from '../../models/thread-message';
 
 export class DirectMessageComponent implements OnInit {
   createDirectMessageService = inject(CreateDirectMessageService);
-  createThreadMessageService = inject(CreateThreadMessageService);
+  createThreadMessageInDirectMessageService = inject(CreateThreadMessageInDirectMessageService);
   createUserService = inject(CreateUserService);
   authService = inject(AuthService);
   activatedRoute = inject(ActivatedRoute);
@@ -55,7 +55,7 @@ export class DirectMessageComponent implements OnInit {
 
 
   getAllMessagesFromThreadDirectMessge(): void {
-    this.createThreadMessageService.getThreadMessagesService(this.directMessageId).
+    this.createThreadMessageInDirectMessageService.getThreadMessagesService(this.directMessageId).
       subscribe((threadMessages) => {
         this.messageAmountFromThreadDirectMessages = threadMessages.length;
         this.getLatestMessageFromThreadDirectMessage(threadMessages);

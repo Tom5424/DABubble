@@ -28,7 +28,7 @@
 
 
         <!--------------------------------- Removes the delete Option, so that the thread is not empty --------------------------------->
-        @if ((createThreadMessageService.threadMesssagesAsObservable | async)?.length !== 1) {
+        @if ((createThreadMessageInDirectMessageService.threadMesssagesAsObservable | async)?.length !== 1) {
         <p (click)="deleteMessage()">Delete Message</p>
         }
         <!--------------------------------- Removes the delete Option, so that the thread is not empty --------------------------------->
