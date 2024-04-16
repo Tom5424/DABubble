@@ -34,13 +34,13 @@ export class CreateThreadMessageService {
   }
 
 
-  getThreadMessagesService(receiverId: string | null): void {
+  getThreadMessagesService(receiverId: string | null): Observable<ThreadMessage[]> {
     this.loadChat = true;
     const subCollectionRef = query(collection(this.firestore, `directMessages/${receiverId}/threadMessages`), where('receiverId', '==', receiverId), orderBy('senderTime'));
     collectionData(subCollectionRef, { idField: 'id' }).subscribe(() => {
       this.loadChat = false;
     })
-    this.threadMesssagesAsObservable = collectionData(subCollectionRef, { idField: 'id' }) as Observable<ThreadMessage[]>;
+    return this.threadMesssagesAsObservable = collectionData(subCollectionRef, { idField: 'id' }) as Observable<ThreadMessage[]>;
   }
 
 

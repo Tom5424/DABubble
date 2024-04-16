@@ -10,6 +10,8 @@ import { DialogUploadedImgFullViewComponent } from '../dialog-uploaded-img-full-
 import { MatDialog } from '@angular/material/dialog';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
+import { CreateThreadMessageService } from '../../services/create-thread-message.service';
+import { ThreadMessage } from '../../models/thread-message';
 
 
 @Component({
@@ -23,12 +25,15 @@ import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 
 export class DirectMessageComponent implements OnInit {
   createDirectMessageService = inject(CreateDirectMessageService);
+  createThreadMessageService = inject(CreateThreadMessageService);
   createUserService = inject(CreateUserService);
   authService = inject(AuthService);
   activatedRoute = inject(ActivatedRoute);
   matDialog = inject(MatDialog);
   @Input() directMessage!: DirectMessage;
   @Input() directMessageId: string = '';
+  messageAmountFromThreadDirectMessages: number = 0;
+  latestMessageInThreadDirectMessage: number = 0;
   menuMoreOptionsAreOpen: boolean = false;
   messageIsInEditMode: boolean = false;
   barToSelectEmojisAreOpen: boolean = false;
@@ -44,7 +49,25 @@ export class DirectMessageComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.userId = params.get('id');
+      this.getAllMessagesFromThreadDirectMessge();
     });
+  }
+
+
+  getAllMessagesFromThreadDirectMessge(): void {
+    this.createThreadMessageService.getThreadMessagesService(this.directMessageId).
+      subscribe((threadMessages) => {
+        this.messageAmountFromThreadDirectMessages = threadMessages.length;
+        this.getLatestMessageFromThreadDirectMessage(threadMessages);
+      })
+  }
+
+
+  getLatestMessageFromThreadDirectMessage(threadMessages: ThreadMessage[]): void {
+    if (threadMessages.length > 0) {
+      const latestMessage = threadMessages[threadMessages.length - 1];
+      this.latestMessageInThreadDirectMessage = latestMessage.senderTime;
+    }
   }
 
 

@@ -86,8 +86,10 @@
             class="mainContainerDirectMessageLowerPart">
 
             <div class="childContainerDirectMessageLowerPart">
-                <p>2 Answers</p>
-                <p>Last Answer 12:55 Uhr</p>
+                <p routerLink="/mainView/directMessage/{{ userId }}/thread/{{ directMessageId }}">
+                    {{ messageAmountFromThreadDirectMessages }} Answers
+                </p>
+                <p>Last Answer {{ latestMessageInThreadDirectMessage | date: 'HH:mm' }} Uhr</p>
             </div>
 
 
