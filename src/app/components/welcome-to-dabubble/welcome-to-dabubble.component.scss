@@ -1,0 +1,25 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+.mainContainerWelcomeToDabubble {
+    @include flexColumn();
+    @include flexCenteredInTheMiddle();
+    background-color: #ffffff;
+    height: 77vh;
+    border-radius: 30px;
+    margin: 0 15px 0 15px;
+    padding: 25px;
+
+    h1 {
+        color: $darkPurple;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    p {
+        font-size: 20px;
+    }
+}
