@@ -25,4 +25,22 @@
     }@else if (authService.passwordReseted) {
     <p class="popSuccessfully">Login</p>
     }
+
+    @if(createDirectMessageService.directMessagesSuccessfullySend || createChannelMessageService.channelMessagesSuccessfullySend) {
+
+    <div class="containerUserFeedbackMessage">
+        <p>Your Messages was send to:</p>
+
+        <div class="containerText">
+            @for (user of selectedUsers; track $index) {
+            <p>&#64;{{ user.name + ' ' }}</p>
+            }
+
+            @for (channel of selectedChannels; track $index) {
+            <p>#{{ channel.channelName + ' ' }}</p>
+            }
+        </div>
+    </div>
+
+    }
 </div>

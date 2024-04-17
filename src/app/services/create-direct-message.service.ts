@@ -18,6 +18,7 @@ export class CreateDirectMessageService {
   createThreadMessageInDirectMessageService = inject(CreateThreadMessageInDirectMessageService);
   directMessagesAsObservable!: Observable<any[]>;
   loadChat: boolean = false;
+  directMessagesSuccessfullySend: boolean = false;
 
 
   createDirectMessageService(user: User, receiverId: string | null, senderId: string, messageText: string | null | undefined, uploadedImages: string[]): void {
@@ -34,7 +35,16 @@ export class CreateDirectMessageService {
     addDoc(collectionRef, directMessageRef.toJson())
       .then((doc) => {
         this.createThreadMessageInDirectMessageService.createThreadMessageService(user, doc.id, messageText, uploadedImages);
+        this.directMessagesSuccessfullySendFromNewMessage();
       })
+  }
+
+
+  directMessagesSuccessfullySendFromNewMessage(): void {
+    this.directMessagesSuccessfullySend = true;
+    setTimeout(() => {
+      this.directMessagesSuccessfullySend = false;
+    }, 2500);
   }
 
 

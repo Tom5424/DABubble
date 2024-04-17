@@ -14,12 +14,13 @@ import { AuthService } from '../../services/auth.service';
 import { Observable, map, startWith } from 'rxjs';
 import { CreateDirectMessageService } from '../../services/create-direct-message.service';
 import { CreateChannelMessageService } from '../../services/create-channel-message.service';
+import { UserFeedbackMessageComponent } from '../user-feedback-message/user-feedback-message.component';
 
 
 @Component({
   selector: 'app-new-message',
   standalone: true,
-  imports: [NgClass, NgStyle, ReactiveFormsModule, PickerComponent, AsyncPipe],
+  imports: [NgClass, NgStyle, ReactiveFormsModule, PickerComponent, AsyncPipe, UserFeedbackMessageComponent],
   templateUrl: './new-message.component.html',
   styleUrl: './new-message.component.scss'
 })

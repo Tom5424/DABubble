@@ -14,6 +14,7 @@ export class CreateChannelMessageService {
   firestore = inject(Firestore);
   channelMessagesAsObservable!: Observable<any[]>;
   loadChat: boolean = false;
+  channelMessagesSuccessfullySend: boolean = false;
 
 
   createChannelMessageService(user: User, receiverId: string | null, messageText: string | null | undefined, uploadedImages: string[]): void {
@@ -29,8 +30,17 @@ export class CreateChannelMessageService {
     const channelMessageRef = new ChannelMessage(userData, receiverId, messageText, uploadedImages);
     addDoc(collectionRef, channelMessageRef.toJson())
       .then(() => {
-
+        this.channelMessagesSuccessfullySendFromNewMessage();
       })
+  }
+
+
+
+  channelMessagesSuccessfullySendFromNewMessage(): void {
+    this.channelMessagesSuccessfullySend = true;
+    setTimeout(() => {
+      this.channelMessagesSuccessfullySend = false;
+    }, 2500);
   }
 
 

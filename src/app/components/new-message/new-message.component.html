@@ -232,4 +232,12 @@
     </div>
     <!--------------------------------- Container Chat Lower Part--------------------------------->
 
+
+    <!--------------------------------- Displayed here the Feedback for the User to which Channel or Users the new Message are written -------------------------------->
+    <app-user-feedback-message
+        [ngClass]="{'d-none': !createDirectMessageService.directMessagesSuccessfullySend && !createChannelMessageService.channelMessagesSuccessfullySend}"
+        [selectedUsers]="selectedUsers" [selectedChannels]="selectedChannels">
+
+    </app-user-feedback-message>
+    <!--------------------------------- Displayed here the Feedback for the User to which Channel or Users the new Message are written -------------------------------->
 </div>
