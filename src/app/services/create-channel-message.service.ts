@@ -35,7 +35,6 @@ export class CreateChannelMessageService {
   }
 
 
-
   channelMessagesSuccessfullySendFromNewMessage(): void {
     this.channelMessagesSuccessfullySend = true;
     setTimeout(() => {

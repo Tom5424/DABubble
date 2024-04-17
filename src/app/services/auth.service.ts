@@ -150,6 +150,7 @@ export class AuthService {
         this.user.isOnline = true;
         this.createUserService.updateUserOnlineStatusService(userCredential.user.uid, this.user.isOnline);
         this.saveUserOnlineStatusService();
+        localStorage.setItem('loggedinUser', JSON.stringify(userCredential.user));
         this.displayUserFeedbackIfLoginSuccessfullyService();
       })
       .catch((error) => {
@@ -203,6 +204,7 @@ export class AuthService {
         this.getDataFromLoggedInUserService();
         this.createUserService.createUserService(userCredential.user.uid, this.user);
         this.createUserService.updateUserOnlineStatusService(this.auth.currentUser?.uid, this.user.isOnline);
+        localStorage.setItem('loggedinUser', JSON.stringify(userCredential.user));
         this.displayUserFeedbackIfLoginWithGoogleSuccessfullyService();
       })
       .catch((error) => {
@@ -227,6 +229,7 @@ export class AuthService {
       .then((userCredential) => {
         this.storageService.getRandomAvatarImgForGuestUserService();
         this.updateProfileGuestService(userCredential.user);
+        localStorage.setItem('loggedinUser', JSON.stringify(userCredential.user));
         this.displayUserFeedbackIfLoginAsGuestSuccessfullyService();
       })
       .catch((error) => {
@@ -257,6 +260,7 @@ export class AuthService {
     this.createUserService.updateUserOnlineStatusService(this.auth.currentUser?.uid, this.user.isOnline, this.auth.currentUser?.isAnonymous)
       .then(() => {
         this.deleteGuestUserAfterLogoutService();
+        localStorage.removeItem('loggedinUser');
         return signOut(this.auth);
       })
       .then(() => {

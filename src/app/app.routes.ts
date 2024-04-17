@@ -32,7 +32,7 @@ export const routes: Routes = [
     { path: 'resetPassword', title: 'DABubble - Reset Password', component: ResetPasswordComponent, canActivate: [isAuthorizedToGoResetPassword] },
 
     {
-        path: 'mainView', title: 'DABubble - Main View', component: MainViewComponent,
+        path: 'mainView', title: 'DABubble - Main View', component: MainViewComponent, canActivate: [isAutohorizedToGoMainViewGuard],
         children: [
             {
                 path: 'directMessage/:id', component: ChatDirectMessagesComponent, children: [

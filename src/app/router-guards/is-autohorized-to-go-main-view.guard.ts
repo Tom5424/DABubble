@@ -1,14 +1,19 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
 
 
 export const isAutohorizedToGoMainViewGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
-  const authService = inject(AuthService);
+  const loggedinUserAsString = localStorage.getItem('loggedinUser');
+  let loggedinUser;
 
 
-  if (authService.user.name == '' && authService.user.email == '') {
+  if (loggedinUserAsString) {
+    loggedinUser = JSON.parse(loggedinUserAsString);
+  }
+
+
+  if (loggedinUser.displayName == '' && loggedinUser.email == '') {
     router.navigateByUrl('/login');
     return false;
   } else {
