@@ -5,5 +5,5 @@
 main {
     @include flex();
     background-color: $bgColor;
-    gap: 10px;
+    padding-bottom: 12px;
 }

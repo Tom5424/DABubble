@@ -4,7 +4,6 @@
 
 .flex {
     @include flex();
-    gap: 10px;
 }
 
 
@@ -15,8 +14,9 @@
 
 
 .mainContainerChatDirectMessages {
-    width: 750px;
+    width: 100%;
     border-radius: 30px;
+    margin: 0 15px 0 15px;
     background-color: #ffffff;
 }
 
@@ -161,7 +161,7 @@
 
     hr {
         background-color: $lightPurple;
-        width: 240px;
+        width: 32%;
         height: 1px;
         margin: 0;
         border: unset;
@@ -321,9 +321,4 @@ button {
     &:hover {
         cursor: not-allowed;
     }
-}
-
-
-.chatFullView {
-    width: 97vw;
 }
