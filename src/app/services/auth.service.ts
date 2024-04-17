@@ -181,7 +181,7 @@ export class AuthService {
     this.loginSuccessfully = true;
     setTimeout(() => {
       this.loginSuccessfully = false;
-      this.router.navigateByUrl('/mainView');
+      this.router.navigateByUrl('/mainView/welcomeToDABubble');
     }, 1400)
   }
 
@@ -217,7 +217,7 @@ export class AuthService {
     this.loginSuccessfully = true;
     setTimeout(() => {
       this.loginSuccessfully = false;
-      this.router.navigateByUrl('/mainView');
+      this.router.navigateByUrl('/mainView/welcomeToDABubble');
     }, 1400)
   }
 
@@ -247,7 +247,7 @@ export class AuthService {
     this.loginSuccessfully = true;
     setTimeout(() => {
       this.loginSuccessfully = false;
-      this.router.navigateByUrl('/mainView');
+      this.router.navigateByUrl('/mainView/welcomeToDABubble');
     }, 1400)
   }
 

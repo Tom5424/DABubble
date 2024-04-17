@@ -15,6 +15,7 @@ import { ChatChannelMessagesComponent } from './components/chat-channel-messages
 import { NewMessageComponent } from './components/new-message/new-message.component';
 import { ThreadDirectMessageComponent } from './components/thread-direct-message/thread-direct-message.component';
 import { WelcomeToDabubbleComponent } from './components/welcome-to-dabubble/welcome-to-dabubble.component';
+import { isAutohorizedToGoMainViewGuard } from './router-guards/is-autohorized-to-go-main-view.guard';
 
 
 export const routes: Routes = [
@@ -31,7 +32,7 @@ export const routes: Routes = [
     { path: 'resetPassword', title: 'DABubble - Reset Password', component: ResetPasswordComponent, canActivate: [isAuthorizedToGoResetPassword] },
 
     {
-        path: 'mainView', title: 'DABubble - Main View', component: MainViewComponent,
+        path: 'mainView', title: 'DABubble - Main View', component: MainViewComponent, canActivate: [isAutohorizedToGoMainViewGuard],
         children: [
             {
                 path: 'directMessage/:id', component: ChatDirectMessagesComponent, children: [

@@ -186,7 +186,7 @@
 
 @mixin flexColumn() {
     @include flex();
-    flex-direction: column
+    flex-direction: column;
 }
 
 
