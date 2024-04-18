@@ -16,6 +16,7 @@ import { NewMessageComponent } from './components/new-message/new-message.compon
 import { ThreadDirectMessageComponent } from './components/thread-direct-message/thread-direct-message.component';
 import { WelcomeToDabubbleComponent } from './components/welcome-to-dabubble/welcome-to-dabubble.component';
 import { isAutohorizedToGoMainViewGuard } from './router-guards/is-autohorized-to-go-main-view.guard';
+import { ThreadChannelMessageComponent } from './components/thread-channel-message/thread-channel-message.component';
 
 
 export const routes: Routes = [
@@ -41,7 +42,9 @@ export const routes: Routes = [
             },
 
             {
-                path: 'channel/:id', component: ChatChannelMessagesComponent,
+                path: 'channel/:id', component: ChatChannelMessagesComponent, children: [
+                    { path: 'thread/:id', component: ThreadChannelMessageComponent }
+                ]
             },
 
             { path: 'newMessage', component: NewMessageComponent },

@@ -13,7 +13,7 @@ export const isAutohorizedToGoMainViewGuard: CanActivateFn = (route, state) => {
   }
 
 
-  if (loggedinUser.displayName == '' && loggedinUser.email == '') {
+  if (!loggedinUser) {
     router.navigateByUrl('/login');
     return false;
   } else {

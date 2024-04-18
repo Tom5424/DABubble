@@ -1,39 +1,36 @@
-import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
+import { NgClass, NgStyle } from '@angular/common';
 import { Component, ElementRef, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { StorageInThreadService } from '../../services/storage-in-thread.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { DialogUploadedImgFullViewComponent } from '../dialog-uploaded-img-full-view/dialog-uploaded-img-full-view.component';
 import { MatDialog } from '@angular/material/dialog';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
-import { StorageInThreadService } from '../../services/storage-in-thread.service';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { MessageInThreadDirectMessageComponent } from '../message-in-thread-direct-message/message-in-thread-direct-message.component';
-import { CreateThreadMessageInDirectMessageService } from '../../services/create-thread-message-in-direct-message.service';
 
 
 @Component({
-  selector: 'app-thread-direct-message',
+  selector: 'app-thread-channel-message',
   standalone: true,
-  imports: [NgClass, NgStyle, ReactiveFormsModule, PickerComponent, RouterLink, MessageInThreadDirectMessageComponent, AsyncPipe],
-  templateUrl: './thread-direct-message.component.html',
-  styleUrl: './thread-direct-message.component.scss'
+  imports: [NgClass, NgStyle, RouterLink, ReactiveFormsModule, PickerComponent],
+  templateUrl: './thread-channel-message.component.html',
+  styleUrl: './thread-channel-message.component.scss'
 })
 
 
-export class ThreadDirectMessageComponent implements OnInit {
-  createThreadMessageInDirectMessageService = inject(CreateThreadMessageInDirectMessageService);
-  authService = inject(AuthService);
+export class ThreadChannelMessageComponent implements OnInit {
   storageInThreadService = inject(StorageInThreadService);
+  authService = inject(AuthService);
   renderer2 = inject(Renderer2);
   matDialog = inject(MatDialog);
   router = inject(Router);
   activatedRoute = inject(ActivatedRoute);
   @ViewChild('scrollingContainer') scrollingContainer!: ElementRef;
-  emojiPickerIsDisplayed: boolean = false;
-  inputValue: string | null | undefined = '';
-  directMesageId: string = '';
+  channelMessageId: string = '';
   threadMessageId: string | null = '';
+  inputValue: string | null | undefined = '';
+  emojiPickerIsDisplayed: boolean = false;
   addMessageForm = new FormGroup({
     textarea: new FormControl('', Validators.required)
   })
@@ -48,14 +45,14 @@ export class ThreadDirectMessageComponent implements OnInit {
   getUrlFromRoute(): void {
     let url = this.router.url;
     let splittedUrl = url.split('/');
-    this.directMesageId = splittedUrl[3];
+    this.channelMessageId = splittedUrl[3];
   }
 
 
   getIdFromActivatedRoute(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.threadMessageId = params.get('id');
-      this.createThreadMessageInDirectMessageService.getThreadMessagesService(this.threadMessageId);
+      // this.createThreadMessageInDirectMessageService.getThreadMessagesService(this.threadMessageId);
     });
   }
 
@@ -63,7 +60,7 @@ export class ThreadDirectMessageComponent implements OnInit {
   sendMessage(): void {
     this.inputValue = this.addMessageForm.controls.textarea.value;
     if (this.inputValue?.trim() !== '' || this.storageInThreadService.uploadedImagesInThread.length >= 1) {
-      this.createThreadMessageInDirectMessageService.createThreadMessageService(this.authService.user, this.threadMessageId, this.inputValue, this.storageInThreadService.uploadedImagesInThread);
+      // this.createThreadMessageInDirectMessageService.createThreadMessageService(this.authService.user, this.threadMessageId, this.inputValue, this.storageInThreadService.uploadedImagesInThread);
       this.scrollToBottomAfterSendMessage();
       this.addMessageForm.reset();
       this.storageInThreadService.uploadedImagesInThread = [];
@@ -74,7 +71,7 @@ export class ThreadDirectMessageComponent implements OnInit {
   sendMessageIfPressOnEnterKey(event: KeyboardEvent) {
     this.inputValue = this.addMessageForm.controls.textarea.value;
     if ((event?.key == 'Enter' && this.inputValue?.trim() !== '') || (event.key == 'Enter' && this.inputValue?.trim() == '' && this.storageInThreadService.uploadedImagesInThread.length >= 1)) {
-      this.createThreadMessageInDirectMessageService.createThreadMessageService(this.authService.user, this.threadMessageId, this.inputValue, this.storageInThreadService.uploadedImagesInThread);
+      // this.createThreadMessageInDirectMessageService.createThreadMessageService(this.authService.user, this.threadMessageId, this.inputValue, this.storageInThreadService.uploadedImagesInThread);
       this.scrollToBottomAfterSendMessage();
       this.addMessageForm.reset();
       this.storageInThreadService.uploadedImagesInThread = [];
@@ -90,8 +87,8 @@ export class ThreadDirectMessageComponent implements OnInit {
   }
 
 
-  chatAreLoading(): boolean {
-    return (this.createThreadMessageInDirectMessageService.loadChat) ? true : false;
+  closeEmojiPickerOrOtherMenuIfClickOutside(): void {
+    this.emojiPickerIsDisplayed = false;
   }
 
 
@@ -122,17 +119,12 @@ export class ThreadDirectMessageComponent implements OnInit {
   }
 
 
-  tootgleEmojiPicker() {
-    this.emojiPickerIsDisplayed = !this.emojiPickerIsDisplayed;
-  }
-
-
-  closeEmojiPickerOrOtherMenuIfClickOutside(): void {
-    this.emojiPickerIsDisplayed = false;
-  }
-
-
   selectFile(selectedFile: HTMLInputElement): void {
     this.storageInThreadService.selectFileInThreadService(selectedFile);
+  }
+
+
+  tootgleEmojiPicker() {
+    this.emojiPickerIsDisplayed = !this.emojiPickerIsDisplayed;
   }
 }
