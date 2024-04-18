@@ -25,7 +25,6 @@ export class CreateChannelMessageService {
       isOnline: user.isOnline,
       name: user.name,
       imgUrl: user.imgUrl,
-      initialLetter: user.initialLetter,
       userId: user.userId,
     }
     const collectionRef = collection(this.firestore, 'channelMessages');

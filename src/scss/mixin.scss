@@ -131,7 +131,7 @@
 @mixin errorMessage() {
     color: $rosaError;
     height: 0;
-    font-size: 14px;
+    font-size: 14px !important;
     margin: -15px 400px 0 0;
     padding: 0;
 }

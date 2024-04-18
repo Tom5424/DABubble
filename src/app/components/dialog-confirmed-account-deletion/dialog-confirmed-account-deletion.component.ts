@@ -22,7 +22,9 @@ export class DialogConfirmedAccountDeletionComponent {
     this.authService.deleteUserService(this.authService.auth.currentUser);
     this.matDialog.closeAll();
     setTimeout(() => {
-      this.matDialog.open(DialogAccountDeletedComponent);
+      if (!this.authService.userMustReauthenticate) {
+        this.matDialog.open(DialogAccountDeletedComponent);
+      }
     }, 850);
   }
 }

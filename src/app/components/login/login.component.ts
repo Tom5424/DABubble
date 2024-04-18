@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
   router = inject(Router);
   routingService = inject(RoutingService);
   authService = inject(AuthService);
-
   loginForm = new FormGroup({
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),

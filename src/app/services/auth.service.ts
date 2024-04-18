@@ -1,9 +1,11 @@
 import { Injectable, inject } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInAnonymously, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, confirmPasswordReset, updateProfile, onAuthStateChanged, signOut, deleteUser } from "@angular/fire/auth";
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInAnonymously, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, confirmPasswordReset, updateProfile, onAuthStateChanged, signOut, deleteUser, reauthenticateWithCredential } from "@angular/fire/auth";
 import { User } from '../models/user';
 import { Router } from '@angular/router';
 import { StorageService } from './storage.service';
 import { CreateUserService } from './create-user.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogReauthenticateUserComponent } from '../components/dialog-reauthenticate-user/dialog-reauthenticate-user.component';
 
 
 @Injectable({
@@ -16,7 +18,9 @@ export class AuthService {
   createUserService = inject(CreateUserService);
   auth = inject(Auth);
   router = inject(Router);
+  matDialog = inject(MatDialog);
   user: User = new User();
+  userMustReauthenticate: boolean = false;
   accountIsCreated: boolean = false;
   accountIsCreatedFailed: boolean = false;
   loginSuccessfully: boolean = false;
@@ -284,7 +288,9 @@ export class AuthService {
         this.router.navigateByUrl('/login');
       })
       .catch((error) => {
-        console.error(error.message);
+        this.userMustReauthenticate = true;
+        this.matDialog.open(DialogReauthenticateUserComponent);
+        console.error('Please reauthenticate your Account', error.message);
       })
   }
 

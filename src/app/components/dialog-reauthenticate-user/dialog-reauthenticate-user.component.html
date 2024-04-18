@@ -1,0 +1,42 @@
+<div class="dialogBox">
+    <h1>Please reauthenticate your Account!</h1>
+
+    <p>
+        After a certain Time you must reauthenticate your Account.
+        <br>
+
+        Please reauthenticate your account to continue the deletion Process.
+    </p>
+
+    <form (ngSubmit)="reauthenticateUser()" [formGroup]="reauthenticateForm">
+        <!--------------------------------- Inputfield Email --------------------------------->
+        <input class="inputFieldEmail" type="email" placeholder="examplename@email.com" formControlName="email"
+            [ngClass]="{'errorInputfield': inputfieldEmailIsRequired()}">
+
+        @if (inputfieldEmailIsRequired()) {
+        <p style="margin-right: 600px;" class="errorMessage">Email is required</p>
+        }
+        <!--------------------------------- Inputfield Email --------------------------------->
+
+
+        <!--------------------------------- Inputfield Password --------------------------------->
+        <input class="inputFieldPassword" type="password" placeholder="Password" formControlName="password"
+            [ngClass]="{'errorInputfield': inputfieldPasswordIsRequired()}">
+
+        @if (inputfieldPasswordIsRequired()) {
+        <p style="margin-right: 575px;" class="errorMessage">Password is required</p>
+        }
+        <!--------------------------------- Inputfield Password --------------------------------->
+
+
+        <div class="btnContainer">
+            <button class="btnPrimary" type="submit"
+                [disabled]="reauthenticateForm.invalid || reauthenticateForm.controls.password.value?.trim() == ''"
+                [ngClass]="{'btnDisabled': reauthenticateForm.invalid || reauthenticateForm.controls.password.value?.trim() == ''}">
+                Reauthenticate
+            </button>
+
+            <button class="btnSecondary" type="button" matDialogClose>Cancel</button>
+        </div>
+    </form>
+</div>
