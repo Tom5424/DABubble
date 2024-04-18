@@ -1,10 +1,7 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
-import { CreateDirectMessageService } from '../../services/create-direct-message.service';
+import { Component, Input, inject } from '@angular/core';
 import { DatePipe, NgClass, NgStyle } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
-import { DirectMessage } from '../../models/direct-message';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CreateUserService } from '../../services/create-user.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DialogUploadedImgFullViewComponent } from '../dialog-uploaded-img-full-view/dialog-uploaded-img-full-view.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,6 +9,8 @@ import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 import { CreateChannelMessageService } from '../../services/create-channel-message.service';
 import { ChannelMessage } from '../../models/channel-message';
+import { CreateThreadMessageInChannelMessageService } from '../../services/create-thread-message-in-channel-message.service';
+import { ThreadMessage } from '../../models/thread-message';
 
 
 
@@ -25,8 +24,8 @@ import { ChannelMessage } from '../../models/channel-message';
 
 
 export class ChannelMessageComponent {
+  createThreadMessageInChannelMessageService = inject(CreateThreadMessageInChannelMessageService);
   createChannelMessageService = inject(CreateChannelMessageService);
-  // createUserService = inject(CreateUserService);
   authService = inject(AuthService);
   activatedRoute = inject(ActivatedRoute);
   matDialog = inject(MatDialog);
@@ -39,6 +38,8 @@ export class ChannelMessageComponent {
   inputValue: string | null = '';
   emojiUrl: string = '';
   channelId: string | null = '';
+  messageAmountFromThreadChannelMessages: number = 0;
+  latestMessageInThreadChannelMessage: number = 0;
   editMessageForm = new FormGroup({
     textareaEditMessage: new FormControl(this.inputValue, Validators.required),
   })
@@ -47,7 +48,25 @@ export class ChannelMessageComponent {
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.channelId = params.get('id');
+      this.getAllMessagesFromThreadChannelMessage();
     });
+  }
+
+
+  getAllMessagesFromThreadChannelMessage(): void {
+    this.createThreadMessageInChannelMessageService.getThreadMessagesService(this.channelMessageId).
+      subscribe((threadMessages) => {
+        this.messageAmountFromThreadChannelMessages = threadMessages.length;
+        this.getLatestMessageFromThreadDirectMessage(threadMessages);
+      })
+  }
+
+
+  getLatestMessageFromThreadDirectMessage(threadMessages: ThreadMessage[]): void {
+    if (threadMessages.length > 0) {
+      const latestMessage = threadMessages[threadMessages.length - 1];
+      this.latestMessageInThreadChannelMessage = latestMessage.senderTime;
+    }
   }
 
 

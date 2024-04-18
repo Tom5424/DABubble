@@ -49,12 +49,12 @@ export class DirectMessageComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.userId = params.get('id');
-      this.getAllMessagesFromThreadDirectMessge();
+      this.getAllMessagesFromThreadDirectMessage();
     });
   }
 
 
-  getAllMessagesFromThreadDirectMessge(): void {
+  getAllMessagesFromThreadDirectMessage(): void {
     this.createThreadMessageInDirectMessageService.getThreadMessagesService(this.directMessageId).
       subscribe((threadMessages) => {
         this.messageAmountFromThreadDirectMessages = threadMessages.length;

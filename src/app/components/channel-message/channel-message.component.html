@@ -86,8 +86,10 @@
             class="mainContainerChannelMessageLowerPart">
 
             <div class="childContainerChannelMessageLowerPart">
-                <p routerLink="/mainView/channel/{{ channelId }}/thread/{{ channelMessageId }}">2 Answers</p>
-                <p>Last Answer 12:55 Uhr</p>
+                <p routerLink="/mainView/channel/{{ channelId }}/thread/{{ channelMessageId }}">
+                    {{ messageAmountFromThreadChannelMessages }} Answers
+                </p>
+                <p>Last Answer {{ latestMessageInThreadChannelMessage | date: 'HH:mm' }} Uhr</p>
             </div>
 
 
