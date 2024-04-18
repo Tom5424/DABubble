@@ -44,7 +44,17 @@ export class ChatDirectMessagesComponent {
 
 
   constructor() {
-    this.getSelectedUserInSidebar();
+    this.loadLoggedinUserFromLocaleStorage();
+  }
+
+
+  loadLoggedinUserFromLocaleStorage(): void {
+    const loggedinUserAsString = localStorage.getItem('loggedinUser');
+    if (loggedinUserAsString) {
+      const loggedinUser = JSON.parse(loggedinUserAsString);
+      this.authService.user.userId = loggedinUser.uid;
+      this.getSelectedUserInSidebar();
+    }
   }
 
 
