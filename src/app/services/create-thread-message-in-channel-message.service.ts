@@ -1,9 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { DocumentReference, Firestore, addDoc, arrayRemove, arrayUnion, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { ChannelMessage } from '../models/channel-message';
 import { User } from '../models/user';
-import { CreateThreadMessageInChannelMessageService } from './create-thread-message-in-channel-message.service';
+import { ThreadMessage } from '../models/thread-message';
 
 
 @Injectable({
@@ -11,15 +10,13 @@ import { CreateThreadMessageInChannelMessageService } from './create-thread-mess
 })
 
 
-export class CreateChannelMessageService {
+export class CreateThreadMessageInChannelMessageService {
   firestore = inject(Firestore);
-  createThreadMessageInChannelMessageService = inject(CreateThreadMessageInChannelMessageService);
-  channelMessagesAsObservable!: Observable<any[]>;
+  threadMesssagesAsObservable!: Observable<any[]>;
   loadChat: boolean = false;
-  channelMessagesSuccessfullySend: boolean = false;
 
 
-  createChannelMessageService(user: User, receiverId: string | null, messageText: string | null | undefined, uploadedImages: string[]): void {
+  createThreadMessageService(user: User, receiverId: string | null, messageText: string | null | undefined, uploadedImages: string[]): void {
     const userData = {  // Created a custom User Object here to get the logged in User so that the correct Messages are displayed by the correct User. And prevents error Messages.
       email: user.email,
       isOnline: user.isOnline,
@@ -28,48 +25,39 @@ export class CreateChannelMessageService {
       initialLetter: user.initialLetter,
       userId: user.userId,
     }
-    const collectionRef = collection(this.firestore, 'channelMessages');
-    const channelMessageRef = new ChannelMessage(userData, receiverId, messageText, uploadedImages);
-    addDoc(collectionRef, channelMessageRef.toJson())
-      .then((doc) => {
-        this.createThreadMessageInChannelMessageService.createThreadMessageService(user, doc.id, messageText, uploadedImages);
-        this.channelMessagesSuccessfullySendFromNewMessage();
-      })
+    const subCollectionRef = collection(this.firestore, `channelMessages/${receiverId}/threadMessages`);
+    const threadMessageRef = new ThreadMessage(userData, receiverId, messageText, uploadedImages);
+    addDoc(subCollectionRef, threadMessageRef.toJson())
+      .then(() => {
+
+      });
   }
 
 
-  channelMessagesSuccessfullySendFromNewMessage(): void {
-    this.channelMessagesSuccessfullySend = true;
-    setTimeout(() => {
-      this.channelMessagesSuccessfullySend = false;
-    }, 2500);
-  }
-
-
-  getChannelMessagesService(receiverId: string | null): void {
+  getThreadMessagesService(receiverId: string | null): Observable<ThreadMessage[]> {
     this.loadChat = true;
-    const collectionRef = query(collection(this.firestore, 'channelMessages'), where('receiverId', '==', receiverId), orderBy('senderTime'));
-    collectionData(collectionRef).subscribe(() => {
+    const subCollectionRef = query(collection(this.firestore, `channelMessages/${receiverId}/threadMessages`), where('receiverId', '==', receiverId), orderBy('senderTime'));
+    collectionData(subCollectionRef, { idField: 'id' }).subscribe(() => {
       this.loadChat = false;
     })
-    this.channelMessagesAsObservable = collectionData(collectionRef, { idField: 'id' }) as Observable<ChannelMessage[]>;
+    return this.threadMesssagesAsObservable = collectionData(subCollectionRef, { idField: 'id' }) as Observable<ThreadMessage[]>;
   }
 
 
-  updateChannelMessageService(messageId: string, inputValue: string | null): void {
-    const docRef = doc(this.firestore, 'channelMessages', messageId);
+  updateThreadMessageService(directMesageId: string | null, threadMessageId: string, inputValue: string | null): void {
+    const docRef = doc(this.firestore, `channelMessages/${directMesageId}/threadMessages/${threadMessageId}`);
     updateDoc(docRef, { messageText: inputValue });
   }
 
 
-  updateEmojisService(messageId: string, idFromLoggedinUser: string, nameFromLoggedinUser: string | null, emojiUrl: string, channelMessage: ChannelMessage): void {
+  updateEmojisService(channelMessageId: string | null, threadMessageId: string, idFromLoggedinUser: string, nameFromLoggedinUser: string | null, emojiUrl: string, threadMessage: ThreadMessage): void {
     let indexIdLoggedinUser = 0;
     let indexNameLoggedinUser = 0;
-    const { addedEmojis } = channelMessage;
-    const docRef = doc(this.firestore, 'channelMessages', messageId);
-    const indexEmojiUrl = channelMessage.addedEmojis.findIndex((emoji) => emoji.emojiUrl == emojiUrl);
-    channelMessage.addedEmojis.forEach((emoji) => { indexIdLoggedinUser = emoji.usersIdWhoHaveUsedTheEmoji.indexOf(idFromLoggedinUser) })
-    channelMessage.addedEmojis.forEach((emoji) => { indexNameLoggedinUser = emoji.usersNameWhoHaveUsedTheEmoji.indexOf(nameFromLoggedinUser ? nameFromLoggedinUser : '') })
+    const { addedEmojis } = threadMessage;
+    const docRef = doc(this.firestore, `channelMessages/${channelMessageId}/threadMessages/${threadMessageId}`);
+    const indexEmojiUrl = threadMessage.addedEmojis.findIndex((emoji) => emoji.emojiUrl == emojiUrl);
+    threadMessage.addedEmojis.forEach((emoji) => { indexIdLoggedinUser = emoji.usersIdWhoHaveUsedTheEmoji.indexOf(idFromLoggedinUser) })
+    threadMessage.addedEmojis.forEach((emoji) => { indexNameLoggedinUser = emoji.usersNameWhoHaveUsedTheEmoji.indexOf(nameFromLoggedinUser ? nameFromLoggedinUser : '') })
     this.checkEmojiStatusService(indexEmojiUrl, indexIdLoggedinUser, indexNameLoggedinUser, nameFromLoggedinUser, docRef, emojiUrl, idFromLoggedinUser, addedEmojis);
   }
 
@@ -116,8 +104,8 @@ export class CreateChannelMessageService {
   }
 
 
-  deleteChannelMessageService(messageId: string): void {
-    const docRef = doc(this.firestore, 'channelMessages', messageId);
+  deleteThreadMessageService(directMesageId: string | null, threadMessageId: string): void {
+    const docRef = doc(this.firestore, `channelMessages/${directMesageId}/threadMessages/${threadMessageId}`);
     deleteDoc(docRef);
   }
 }

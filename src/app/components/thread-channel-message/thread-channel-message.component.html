@@ -7,12 +7,17 @@
     <div class="containerThreadUpperPart">
 
         <div class="containerTextAndImage">
-            
+
             <div class="containerImageAndChannelName">
                 <p>Thread</p>
 
                 <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
-                <p>Channel Name</p>
+                @if (chatAreLoading()) {
+                <img class="spinnerIconInThreadUpperPart" src="assets/icons/spinner-icon.svg" alt="Sinner Icon">
+                }@else {
+                <p>{{ createChannelService.channel.channelName }}</p>
+                }
+
             </div>
 
             <div class="containerCloseIcon" routerLink="/mainView/channel/{{ channelMessageId }}">
@@ -26,23 +31,22 @@
     <div class="containerThreadLowerPart">
 
         <div class="scrollingContainer" #scrollingContainer>
-            <!-- @if(chatAreLoading()) {
+            @if(chatAreLoading()) {
             <div class="containerSpinnerIcon">
                 <img src="assets/icons/spinner-icon.svg" alt="Sinner Icon">
             </div>
             }@else {
 
-            @for (threadMessage of createThreadMessageInDirectMessageService.threadMesssagesAsObservable | async; track
-            $index) {
+            @for (threadMessage of createThreadMessageInChannelMessageService.threadMesssagesAsObservable | async; track $index) {
 
-            <app-message-in-thread-direct-message [directMessageId]="threadMessageId"
+            <app-message-in-thread-channel-message [channelMessageId]="threadMessageId"
                 [threadMessageId]="threadMessage.id" [threadMessage]="threadMessage">
 
-            </app-message-in-thread-direct-message>
+            </app-message-in-thread-channel-message>
 
             }
 
-            } -->
+            }
         </div>
 
         <div class="containerForm" [ngStyle]="{'padding-bottom': storageInThreadService.uploadedImagesInThread.length >= 1 ? '6px' : '31px', 

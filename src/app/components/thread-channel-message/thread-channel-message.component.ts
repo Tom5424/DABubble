@@ -1,4 +1,4 @@
-import { NgClass, NgStyle } from '@angular/common';
+import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
 import { Component, ElementRef, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { StorageInThreadService } from '../../services/storage-in-thread.service';
@@ -8,18 +8,23 @@ import { DialogUploadedImgFullViewComponent } from '../dialog-uploaded-img-full-
 import { MatDialog } from '@angular/material/dialog';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
+import { CreateChannelService } from '../../services/create-channel.service';
+import { CreateThreadMessageInChannelMessageService } from '../../services/create-thread-message-in-channel-message.service';
+import { MessageInThreadChannelMessageComponent } from '../message-in-thread-channel-message/message-in-thread-channel-message.component';
 
 
 @Component({
   selector: 'app-thread-channel-message',
   standalone: true,
-  imports: [NgClass, NgStyle, RouterLink, ReactiveFormsModule, PickerComponent],
+  imports: [NgClass, NgStyle, RouterLink, AsyncPipe, ReactiveFormsModule, PickerComponent, MessageInThreadChannelMessageComponent],
   templateUrl: './thread-channel-message.component.html',
   styleUrl: './thread-channel-message.component.scss'
 })
 
 
 export class ThreadChannelMessageComponent implements OnInit {
+  createThreadMessageInChannelMessageService = inject(CreateThreadMessageInChannelMessageService);
+  createChannelService = inject(CreateChannelService);
   storageInThreadService = inject(StorageInThreadService);
   authService = inject(AuthService);
   renderer2 = inject(Renderer2);
@@ -52,7 +57,7 @@ export class ThreadChannelMessageComponent implements OnInit {
   getIdFromActivatedRoute(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.threadMessageId = params.get('id');
-      // this.createThreadMessageInDirectMessageService.getThreadMessagesService(this.threadMessageId);
+      this.createThreadMessageInChannelMessageService.getThreadMessagesService(this.threadMessageId);
     });
   }
 
@@ -60,7 +65,7 @@ export class ThreadChannelMessageComponent implements OnInit {
   sendMessage(): void {
     this.inputValue = this.addMessageForm.controls.textarea.value;
     if (this.inputValue?.trim() !== '' || this.storageInThreadService.uploadedImagesInThread.length >= 1) {
-      // this.createThreadMessageInDirectMessageService.createThreadMessageService(this.authService.user, this.threadMessageId, this.inputValue, this.storageInThreadService.uploadedImagesInThread);
+      this.createThreadMessageInChannelMessageService.createThreadMessageService(this.authService.user, this.threadMessageId, this.inputValue, this.storageInThreadService.uploadedImagesInThread);
       this.scrollToBottomAfterSendMessage();
       this.addMessageForm.reset();
       this.storageInThreadService.uploadedImagesInThread = [];
@@ -71,7 +76,7 @@ export class ThreadChannelMessageComponent implements OnInit {
   sendMessageIfPressOnEnterKey(event: KeyboardEvent) {
     this.inputValue = this.addMessageForm.controls.textarea.value;
     if ((event?.key == 'Enter' && this.inputValue?.trim() !== '') || (event.key == 'Enter' && this.inputValue?.trim() == '' && this.storageInThreadService.uploadedImagesInThread.length >= 1)) {
-      // this.createThreadMessageInDirectMessageService.createThreadMessageService(this.authService.user, this.threadMessageId, this.inputValue, this.storageInThreadService.uploadedImagesInThread);
+      this.createThreadMessageInChannelMessageService.createThreadMessageService(this.authService.user, this.threadMessageId, this.inputValue, this.storageInThreadService.uploadedImagesInThread);
       this.scrollToBottomAfterSendMessage();
       this.addMessageForm.reset();
       this.storageInThreadService.uploadedImagesInThread = [];
@@ -89,6 +94,11 @@ export class ThreadChannelMessageComponent implements OnInit {
 
   closeEmojiPickerOrOtherMenuIfClickOutside(): void {
     this.emojiPickerIsDisplayed = false;
+  }
+
+
+  chatAreLoading(): boolean {
+    return (this.createThreadMessageInChannelMessageService.loadChat) ? true : false;
   }
 
 

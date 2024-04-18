@@ -28,7 +28,7 @@
 
 
         <!--------------------------------- Removes the delete Option, so that the thread is not empty --------------------------------->
-        @if ((createThreadMessageInDirectMessageService.threadMesssagesAsObservable | async)?.length !== 1) {
+        @if ((createThreadMessageInChannelMessageService.threadMesssagesAsObservable | async)?.length !== 1) {
         <p (click)="deleteMessage()">Delete Message</p>
         }
         <!--------------------------------- Removes the delete Option, so that the thread is not empty --------------------------------->
@@ -109,7 +109,7 @@
             }
         </div>
         <!--------------------------------- Selected Emojis --------------------------------->
-        
+
 
         <!--------------------------------- Textarea to Edit Message --------------------------------->
         @if (messageIsInEditMode) {

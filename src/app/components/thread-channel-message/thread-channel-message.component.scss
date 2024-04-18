@@ -32,6 +32,7 @@
 .containerImageAndChannelName {
     @include flexCenteredYAxis();
     gap: 5px;
+    position: relative;
 
     p:nth-of-type(1) {
         font-size: 24px;
@@ -55,6 +56,12 @@
     p {
         margin: 0;
     }
+}
+
+
+.spinnerIconInThreadUpperPart {
+    @include positionAbsolute(-23px, unset, 95px, unset);
+    width: 75px !important;
 }
 
 
