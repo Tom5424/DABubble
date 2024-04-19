@@ -1,5 +1,5 @@
-import { Component, ElementRef, ViewChild, inject, Renderer2 } from '@angular/core';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { Component, ElementRef, ViewChild, inject, Renderer2, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { CreateUserService } from '../../services/create-user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogProfileDetailViewInChatComponent } from '../dialog-profile-detail-view-in-chat/dialog-profile-detail-view-in-chat.component';
@@ -14,6 +14,7 @@ import { StorageService } from '../../services/storage.service';
 import { DialogUploadedImgFullViewComponent } from '../dialog-uploaded-img-full-view/dialog-uploaded-img-full-view.component';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
+import { RoutingService } from '../../services/routing.service';
 
 
 @Component({
@@ -25,13 +26,15 @@ import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 })
 
 
-export class ChatDirectMessagesComponent {
+export class ChatDirectMessagesComponent implements OnInit {
   createUserService = inject(CreateUserService);
   authService = inject(AuthService);
   createDirectMessageService = inject(CreateDirectMessageService);
-  storageService = inject(StorageService)
+  storageService = inject(StorageService);
+  routingService = inject(RoutingService);
   workspaceMenuService = inject(WorkspaceMenuService);
   activatedRoute = inject(ActivatedRoute);
+  router = inject(Router);
   matDialog = inject(MatDialog);
   renderer2 = inject(Renderer2);
   @ViewChild('scrollingContainer') scrollingContainer!: ElementRef;
@@ -48,6 +51,11 @@ export class ChatDirectMessagesComponent {
   }
 
 
+  ngOnInit(): void {
+    this.routingService.savePreviousUrl(this.router.routerState.snapshot.url);
+  }
+
+
   loadLoggedinUserFromLocaleStorage(): void {
     const loggedinUserAsString = localStorage.getItem('loggedinUser');
     if (loggedinUserAsString) {
@@ -61,6 +69,7 @@ export class ChatDirectMessagesComponent {
   getSelectedUserInSidebar(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.userId = params.get('id');
+      this.routingService.savePreviousUrl(this.router.routerState.snapshot.url);
       this.createUserService.getSingelUserService(this.userId)
       this.createDirectMessageService.getDirectMessagesService(this.userId, this.authService.user.userId);
     });

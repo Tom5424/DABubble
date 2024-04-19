@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { RoutingService } from '../../services/routing.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,6 +12,12 @@ import { Component } from '@angular/core';
 })
 
 
-export class WelcomeToDabubbleComponent {
+export class WelcomeToDabubbleComponent implements OnInit {
+  routingService = inject(RoutingService);
+  router = inject(Router);
 
+
+  ngOnInit(): void {
+    this.routingService.savePreviousUrl(this.router.routerState.snapshot.url);
+  }
 }

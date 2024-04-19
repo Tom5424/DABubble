@@ -10,6 +10,7 @@ import { StorageInThreadService } from '../../services/storage-in-thread.service
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MessageInThreadDirectMessageComponent } from '../message-in-thread-direct-message/message-in-thread-direct-message.component';
 import { CreateThreadMessageInDirectMessageService } from '../../services/create-thread-message-in-direct-message.service';
+import { RoutingService } from '../../services/routing.service';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class ThreadDirectMessageComponent implements OnInit {
   createThreadMessageInDirectMessageService = inject(CreateThreadMessageInDirectMessageService);
   authService = inject(AuthService);
   storageInThreadService = inject(StorageInThreadService);
+  routingService = inject(RoutingService);
   renderer2 = inject(Renderer2);
   matDialog = inject(MatDialog);
   router = inject(Router);
@@ -42,6 +44,7 @@ export class ThreadDirectMessageComponent implements OnInit {
   ngOnInit(): void {
     this.getUrlFromRoute();
     this.getIdFromActivatedRoute();
+    this.routingService.savePreviousUrl(this.router.routerState.snapshot.url);
   }
 
 
@@ -55,6 +58,7 @@ export class ThreadDirectMessageComponent implements OnInit {
   getIdFromActivatedRoute(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.threadMessageId = params.get('id');
+      this.routingService.savePreviousUrl(this.router.routerState.snapshot.url);
       this.createThreadMessageInDirectMessageService.getThreadMessagesService(this.threadMessageId);
     });
   }

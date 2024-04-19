@@ -79,10 +79,9 @@ header {
 .btnMatMenu {
     @include hover();
     border-radius: 35px;
-    width: 240px;
     font-size: 24px;
     font-weight: 600;
-    padding: 10px 70px 10px 70px;
+    padding: 10px 25px 10px 25px;
     background-color: #ffffff;
     border: unset;
 

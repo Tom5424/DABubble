@@ -22,7 +22,6 @@ export class SignupComponent implements OnInit {
   router = inject(Router);
   routingService = inject(RoutingService);
   authService = inject(AuthService);
-
   signupForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
     email: new FormControl('', [Validators.required, Validators.email, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]{2,3}$/)]),

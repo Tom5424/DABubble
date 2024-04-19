@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { CreateChannelService } from '../../services/create-channel.service';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
@@ -16,6 +16,7 @@ import { AsyncPipe, DatePipe, NgClass, NgStyle } from '@angular/common';
 import { CreateChannelMessageService } from '../../services/create-channel-message.service';
 import { ChannelMessageComponent } from '../channel-message/channel-message.component';
 import { ChannelMessage } from '../../models/channel-message';
+import { RoutingService } from '../../services/routing.service';
 
 
 @Component({
@@ -32,8 +33,10 @@ export class ChatChannelMessagesComponent implements OnInit {
   authService = inject(AuthService);
   storageService = inject(StorageService);
   createChannelMessageService = inject(CreateChannelMessageService);
+  routingService = inject(RoutingService);
   renderer2 = inject(Renderer2);
   matDialog = inject(MatDialog);
+  router = inject(Router);
   activatedRoute = inject(ActivatedRoute);
   @ViewChild('scrollingContainer') scrollingContainer!: ElementRef;
   emojiPickerIsDisplayed: boolean = false;
@@ -45,8 +48,15 @@ export class ChatChannelMessagesComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.routingService.savePreviousUrl(this.router.routerState.snapshot.url);
+    this.getSelectedChannelInSidebar();
+  }
+
+
+  getSelectedChannelInSidebar(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.channelId = params.get('id');
+      this.routingService.savePreviousUrl(this.router.routerState.snapshot.url);
       this.createChannelService.getSingleChannelService(this.channelId);
       this.createChannelMessageService.getChannelMessagesService(this.channelId);
     })

@@ -29,6 +29,8 @@
 
     <mat-menu #menu="matMenu">
         <button class="btnMatMenu" (click)="openProfileDetailView()">Profile</button>
-        <button (click)="logout()" class="btnMatMenu">Log out</button>
+        <button class="btnMatMenu" (click)="logout()">Log out</button>
+        <button class="btnMatMenu" routerLink="/legalNotice">Legal Notice</button>
+        <button class="btnMatMenu" routerLink="/privacyPolicy">Privacy Policy</button>
     </mat-menu>
 </header>

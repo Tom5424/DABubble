@@ -11,6 +11,7 @@ import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 import { CreateChannelService } from '../../services/create-channel.service';
 import { CreateThreadMessageInChannelMessageService } from '../../services/create-thread-message-in-channel-message.service';
 import { MessageInThreadChannelMessageComponent } from '../message-in-thread-channel-message/message-in-thread-channel-message.component';
+import { RoutingService } from '../../services/routing.service';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class ThreadChannelMessageComponent implements OnInit {
   createChannelService = inject(CreateChannelService);
   storageInThreadService = inject(StorageInThreadService);
   authService = inject(AuthService);
+  routingService = inject(RoutingService);
   renderer2 = inject(Renderer2);
   matDialog = inject(MatDialog);
   router = inject(Router);
@@ -42,6 +44,7 @@ export class ThreadChannelMessageComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.routingService.savePreviousUrl(this.router.routerState.snapshot.url);
     this.getUrlFromRoute();
     this.getIdFromActivatedRoute();
   }
@@ -57,6 +60,7 @@ export class ThreadChannelMessageComponent implements OnInit {
   getIdFromActivatedRoute(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.threadMessageId = params.get('id');
+      this.routingService.savePreviousUrl(this.router.routerState.snapshot.url);
       this.createThreadMessageInChannelMessageService.getThreadMessagesService(this.threadMessageId);
     });
   }

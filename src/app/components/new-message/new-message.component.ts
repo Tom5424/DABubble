@@ -15,6 +15,8 @@ import { Observable, map, startWith } from 'rxjs';
 import { CreateDirectMessageService } from '../../services/create-direct-message.service';
 import { CreateChannelMessageService } from '../../services/create-channel-message.service';
 import { UserFeedbackMessageComponent } from '../user-feedback-message/user-feedback-message.component';
+import { RoutingService } from '../../services/routing.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -33,6 +35,8 @@ export class NewMessageComponent implements OnInit {
   createDirectMessageService = inject(CreateDirectMessageService);
   createChannelMessageService = inject(CreateChannelMessageService);
   authService = inject(AuthService);
+  routingService = inject(RoutingService);
+  router = inject(Router);
   matDialog = inject(MatDialog);
   selectedUsers: User[] = [];
   selectedChannels: Channel[] | any = [];
@@ -51,6 +55,7 @@ export class NewMessageComponent implements OnInit {
 
 
   constructor() {
+    this.routingService.savePreviousUrl(this.router.routerState.snapshot.url);
     this.getAllUsers();
     this.getAllChannels();
   }

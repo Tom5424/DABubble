@@ -72,6 +72,6 @@ export class AvatarPickerComponent implements OnInit {
   createAccount(): void {
     this.authService.saveUserImgUrl(this.storageService.selectedImageAvatarUrl, this.storageService.urlFromUploadedImg);
     this.authService.signupService(this.authService.user.email, this.authService.user.password);
-    this.storageService.urlFromUploadedImg = '';
+    this.storageService.uploadedImages = [];
   }
 }

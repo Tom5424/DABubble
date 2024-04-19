@@ -3,12 +3,13 @@ import { AuthService } from '../../services/auth.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogProfileDetailViewComponent } from '../dialog-profile-detail-view/dialog-profile-detail-view.component';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-header-main-view',
   standalone: true,
-  imports: [MatMenuModule],
+  imports: [MatMenuModule, RouterLink],
   templateUrl: './header-main-view.component.html',
   styleUrl: './header-main-view.component.scss'
 })
