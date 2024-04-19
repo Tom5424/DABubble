@@ -55,6 +55,12 @@ export class CreateChannelMessageService {
   }
 
 
+  getChannelMessagesWithoutParametersService(): Observable<ChannelMessage[]> {
+    const collectionRef = query(collection(this.firestore, 'channelMessages'), orderBy('senderTime'));
+    return this.channelMessagesAsObservable = collectionData(collectionRef, { idField: 'id' }) as Observable<ChannelMessage[]>;
+  }
+
+
   updateChannelMessageService(messageId: string, inputValue: string | null): void {
     const docRef = doc(this.firestore, 'channelMessages', messageId);
     updateDoc(docRef, { messageText: inputValue });

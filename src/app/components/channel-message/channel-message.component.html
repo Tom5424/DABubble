@@ -75,10 +75,12 @@
 
 
         <!--------------------------------- Displayed here the uploaded Images in Message --------------------------------->
-        @for (uploadedImage of channelMessage.attachedFiles; track $index) {
-        <img class="uploadedImage" src="{{ uploadedImage }}" alt="Uploaded Image"
-            (click)="openImageDetailView(uploadedImage)">
-        }
+        <div class="containerUploadedImages">
+            @for (uploadedImage of channelMessage.attachedFiles; track $index) {
+            <img class="uploadedImage" src="{{ uploadedImage }}" alt="Uploaded Image"
+                (click)="openImageDetailView(uploadedImage)">
+            }
+        </div>
         <!--------------------------------- Displayed here the uploaded Images in Message --------------------------------->
 
 

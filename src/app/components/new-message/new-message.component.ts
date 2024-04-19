@@ -61,7 +61,7 @@ export class NewMessageComponent implements OnInit {
   }
 
 
-  getAllUsers() {
+  getAllUsers(): void {
     this.createUserService.getAllUserService()
       .subscribe((userData) => {
         this.allUsers = userData;
@@ -69,7 +69,7 @@ export class NewMessageComponent implements OnInit {
   }
 
 
-  getAllChannels() {
+  getAllChannels(): void {
     this.createChannelService.getAllChannelsService()
       .subscribe((channelData) => {
         this.allChannels = channelData;
@@ -83,7 +83,7 @@ export class NewMessageComponent implements OnInit {
   }
 
 
-  getInputvalueToFilterUsers() {
+  getInputvalueToFilterUsers(): void {
     this.filteredUsers = this.inputField.valueChanges.pipe(
       startWith(''),
       map((value) => this.filterUsersBasedOnInputvalue(value || '')),
@@ -103,7 +103,7 @@ export class NewMessageComponent implements OnInit {
   }
 
 
-  getInputvalueToFilterChannels() {
+  getInputvalueToFilterChannels(): void {
     this.filteredChannels = this.inputField.valueChanges.pipe(
       startWith(''),
       map((value) => this.filterChannelsBasedOnInputvalue(value || '')),

@@ -1,6 +1,169 @@
 <header>
+    <div [ngClass]="{'overlay': menuSelectionIsOpen}" (click)="closeMenuSelectionIfClickOutside()">
+
+    </div>
+
     <img src="./assets/img/da-bubble-logo.svg" alt="DABubble Logo">
-    <input type="text" placeholder="Browse Learn Code">
+    <input type="text" placeholder="Search in DABubble" [formControl]="inputField" (click)="openMenuSelection()">
+
+
+    <div class="containerMenuSelection" [ngClass]="{'d-none': !menuSelectionIsOpen}">
+
+        <!--------------------------------- Here will displayed the Users --------------------------------->
+        <p class="text">People</p>
+
+        @for (user of filteredUsers | async; track $index) {
+
+        @if (userIdMatchesWithIdFromLoggedinUser(user.userId)) {
+
+        <div class="containerUserNameAndImg" routerLink="/mainView/directMessage/{{ user.userId }}"
+            (click)="closeMenuSelection()">
+
+            @if (noProfileImgExistInMenuSelection(user)) {
+            <img class="imgNoSelectedProfileInMenuSelection" src="assets/img/non-user-selected.svg"
+                alt="User Profile Image">
+            }@else {
+            <img class="userImg" src="{{ user.imgUrl }}" alt="User Profile Image">
+            }
+
+            @if (userIsOnlineInMenuSelection(user)) {
+            <img class="userOnlineStatus" src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
+            }@else {
+            <img class="userOnlineStatus" src="assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
+            }
+
+            <p>{{ user.name }}</p>
+
+        </div>
+
+        }
+
+        }
+
+        @if ((filteredUsers | async)?.length == 0) {
+        <!-- Checks if filteredUsers hat a Value or Users existing. If not the User get the Feedback "No People found" -->
+        <p class="textNotSearchResultsFound">No People Found</p>
+        }
+        <!--------------------------------- Here will displayed the Users --------------------------------->
+
+
+        <!--------------------------------- Here will displayed the Channels --------------------------------->
+        <p class="text">Channels</p>
+        @for (channel of filteredChannels | async; track $index) {
+
+        <div class="containerChannelNameAndImg" routerLink="/mainView/channel/{{ channel.id }}"
+            (click)="closeMenuSelection()">
+
+            <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
+
+
+            <p>{{ channel.channelName }}</p>
+
+        </div>
+
+        }
+
+        @if ((filteredChannels | async)?.length == 0) {
+        <!-- Checks if filteredChannels hat a Value or Users existing. If not the User get the Feedback "No Channels found" -->
+        <p class="textNotSearchResultsFound">No Channels Found</p>
+        }
+        <!--------------------------------- Here will displayed the Channels --------------------------------->
+
+
+        <!--------------------------------- Here will displayed the Direct Messages --------------------------------->
+        <p class="text">Direct Messages</p>
+        @for (directMessage of filteredDirectMessages | async; track $index) {
+
+
+        <div class="containerDirectMessagesOrChannelMessages"
+            routerLink="/mainView/directMessage/{{ directMessage.receiverId }}/thread/{{ directMessage.id }}"
+            (click)="closeMenuSelection()">
+
+            @if (noProfileImgExistInMenuSelection(directMessage.userThatSendedMessage)) {
+            <img class="imgNoSelectedProfileInMenuSelection" src="assets/img/non-user-selected.svg"
+                alt="User Profile Image">
+            }@else {
+            <img class="userImg" src="{{ directMessage.userThatSendedMessage?.imgUrl }}" alt="User Profile Image">
+            }
+
+            <div class="wrapperContainer">
+
+                @if ( directMessage.messageText) {
+                <p>{{ directMessage.messageText }}</p>
+                }
+
+                <div class="containerUploadedImages">
+                    @for (uploadedImg of directMessage.attachedFiles; track $index) {
+                    <img class="uploadedImg" src="{{ uploadedImg }}" alt="Uploaded Image">
+                    }
+                </div>
+
+                <div class="containerTimeWhenTheMessageWasSent">
+                    <p>{{ directMessage.userThatSendedMessage?.name }}</p>
+                    <p>{{ directMessage.senderTime | date: 'dd.LL.yy'}}</p>
+                    <p>{{ directMessage.senderTime | date : 'HH:mm'}} Uhr</p>
+                </div>
+
+            </div>
+        </div>
+        }
+
+
+        @if ((filteredDirectMessages | async)?.length == 0) {
+        <!-- Checks if filteredDirectMessages hat a Value or Users existing. If not the User get the Feedback "No Direct Messages found" -->
+        <p class="textNotSearchResultsFound">No Direct Messages Found</p>
+        }
+        <!--------------------------------- Here will displayed the Direct Messages --------------------------------->
+
+
+        <!--------------------------------- Here will displayed the Channel Messages --------------------------------->
+        <p class="text">Channel Messages</p>
+
+        @for (channelMessage of filteredChannelMessages | async; track $index) {
+        <div class="containerDirectMessagesOrChannelMessages"
+            routerLink="/mainView/channel/{{ channelMessage.receiverId }}/thread/{{ channelMessage.id }}"
+            (click)="closeMenuSelection()">
+
+            @if (noProfileImgExistInMenuSelection(channelMessage.userThatSendedMessage)) {
+            <img class="imgNoSelectedProfileInMenuSelection" src="assets/img/non-user-selected.svg"
+                alt="User Profile Image">
+            }@else {
+            <img class="userImg" src="{{ channelMessage.userThatSendedMessage?.imgUrl }}" alt="User Profile Image">
+            }
+
+            <div class="wrapperContainer">
+
+                @if (channelMessage.messageText) {
+                <p>{{ channelMessage.messageText }}</p>
+                }
+
+                <div class="containerUploadedImages">
+                    @for (uploadedImg of channelMessage.attachedFiles; track $index) {
+                    <img class="uploadedImg" src="{{ uploadedImg }}" alt="Uploaded Image">
+                    }
+                </div>
+
+
+                <div class="containerTimeWhenTheMessageWasSent">
+                    <p>{{ channelMessage.userThatSendedMessage?.name }}</p>
+                    <p>{{ channelMessage.senderTime | date: 'dd.LL.yy'}}</p>
+                    <p>{{ channelMessage.senderTime | date : 'HH:mm'}} Uhr</p>
+                </div>
+
+            </div>
+        </div>
+
+        }
+
+        @if ((filteredChannelMessages | async)?.length == 0) {
+        <!-- Checks if filteredChannelMessages hat a Value or Users existing. If not the User get the Feedback "No Channel Messages found" -->
+        <p class="textNotSearchResultsFound">No Channel Messages Found</p>
+        }
+        <!--------------------------------- Here will displayed the Channel Messages --------------------------------->
+
+
+    </div>
+
 
     <div class="containerProfileImgAndName" [matMenuTriggerFor]="menu">
         @if (userDataLoading()) {
@@ -26,6 +189,7 @@
         <img class="arrowIcon" src="./assets/icons/arrow-icon-profile.svg" alt="Arrow Icon">
         }
     </div>
+
 
     <mat-menu #menu="matMenu">
         <button class="btnMatMenu" (click)="openProfileDetailView()">Profile</button>

@@ -57,6 +57,12 @@ export class CreateDirectMessageService {
   }
 
 
+  getDirectMessagesWithoutParametersService(): Observable<DirectMessage[]> {
+    const collectionRef = query(collection(this.firestore, 'directMessages'), orderBy('senderTime'));
+    return this.directMessagesAsObservable = collectionData(collectionRef, { idField: 'id' }) as Observable<DirectMessage[]>;
+  }
+
+
   updateDirectMessageService(messageId: string, inputValue: string | null): void {
     const docRef = doc(this.firestore, 'directMessages', messageId);
     updateDoc(docRef, { messageText: inputValue });
