@@ -4,7 +4,6 @@ import { AuthService } from '../../services/auth.service';
 import { DialogEditProfileComponent } from '../dialog-edit-profile/dialog-edit-profile.component';
 import { NgClass, NgStyle } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { DialogConfirmedAccountDeletionComponent } from '../dialog-confirmed-account-deletion/dialog-confirmed-account-deletion.component';
 
 
 @Component({
@@ -25,7 +24,6 @@ export class DialogProfileDetailViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getDataFromLoggedInUserService();
-    // this.authService.loadUserOnlineStatusService();
   }
 
 
@@ -41,10 +39,5 @@ export class DialogProfileDetailViewComponent implements OnInit {
 
   noProfileImgExist(): boolean {
     return (!this.authService.user.imgUrl) ? true : false;
-  }
-
-
-  openDialogToConfirmAccountDeletion(): void {
-    this.matDialog.open(DialogConfirmedAccountDeletionComponent);
   }
 }

@@ -52,16 +52,7 @@
     </div>
 
 
-    <div class="containerBtnAndText">
-        <p>
-            {{ guestUserIsLoggedIn() ? 'Guest User have no Email' : authService.user.email }}
-        </p>
-
-        <button type="button" (click)="openDialogToConfirmAccountDeletion()" [disabled]="guestUserIsLoggedIn()"
-            [ngClass]="{'btnDisabled': guestUserIsLoggedIn()}"
-            [matTooltip]="guestUserIsLoggedIn() ? tooltipTextForDeleteUserBtn : ''" matTooltipPosition="above"
-            matTooltipClass="customTooltip" matTooltipShowDelay="150" matTooltipHideDelay="150">
-            Delete Account
-        </button>
-    </div>
+    <p class="userEmail">
+        {{ guestUserIsLoggedIn() ? 'Guest User have no Email' : authService.user.email }}
+    </p>
 </div>

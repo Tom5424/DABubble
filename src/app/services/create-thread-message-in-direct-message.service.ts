@@ -22,7 +22,6 @@ export class CreateThreadMessageInDirectMessageService {
       isOnline: user.isOnline,
       name: user.name,
       imgUrl: user.imgUrl,
-      initialLetter: user.initialLetter,
       userId: user.userId,
     }
     const subCollectionRef = collection(this.firestore, `directMessages/${receiverId}/threadMessages`);
