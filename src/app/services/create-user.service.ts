@@ -57,20 +57,12 @@ export class CreateUserService {
     const docRef = doc(this.firestore, 'users', userId);
     updateDoc(docRef, { name: formValues.name, initialLetter: formValues.name.charAt(0).toLocaleLowerCase() })
       .then(() => {
-        // this.updateUsersThatAddedToChannel(userId, formValues);
+
+      })
+      .catch((error) => {
+        console.error(error.message);
       })
   }
-
-
-  // updateUsersThatAddedToChannel(userId: string, formValues: any) {
-  //   const collectionRef = collection(this.firestore, `channels/${userId}/channelMembers`);
-  //   getDocs(collectionRef)
-  //     .then((channelDatas) => {
-  //       channelDatas.forEach((channelData) => {
-  //         console.log(channelData);
-  //       });
-  //     })
-  // }
 
 
   updateUserOnlineStatusService(userId: string | undefined, userOnlineStatus: boolean, guestUserIsLoggedIn?: boolean): Promise<void> {

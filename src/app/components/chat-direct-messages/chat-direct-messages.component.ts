@@ -160,25 +160,6 @@ export class ChatDirectMessagesComponent implements OnInit {
   }
 
 
-  // addAtLetterToMentionSomebody(atLetter: string): void {
-  //   this.inputValue = this.addMessageForm.controls.textarea.value;
-  //   this.inputValue += atLetter;
-  //   this.addMessageForm.patchValue({
-  //     textarea: this.inputValue,
-  //   });
-  // }
-
-
-  // openUserMenuSelectionToMentionAUser(): void {
-  //   const mentionRegex = this.inputValue?.match(/(?:^|\s|^@)@[^@\s]*(?:\s+@[^@\s]+)*$/);
-  //   if (mentionRegex) {
-  //     this.userMenuSelectionIsOpen = true;
-  //   } else {
-  //     this.userMenuSelectionIsOpen = false;
-  //   }
-  // }
-
-
   removeUploadedImage(indexFromImage: number): void {
     this.storageService.uploadedImages.splice(indexFromImage, 1);
     if (this.storageService.uploadedImages.length == 0) {

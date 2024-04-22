@@ -3,7 +3,7 @@
 
     </div>
 
-    <div class="mainContainerChatDirectMessages" [ngClass]="{'chatFullView':  workspaceMenuService.sidebarIsHidden}">
+    <div class="mainContainerChatDirectMessages">
 
         <!--------------------------------- Container Chat upper Part--------------------------------->
         <div class="containerChatDirectMessagesUpperPart">
@@ -120,8 +120,8 @@
                     (keyup)="sendDirectMessageIfPressOnEnterKey($event)">
 
 
-                    <textarea placeholder="Message to {{ createUserService.user.name }}" formControlName="textarea"
-                        [ngClass]="{'quillEditorFullView': workspaceMenuService.sidebarIsHidden}">
+                    <textarea placeholder="Message to {{ createUserService.user.name }}" formControlName="textarea">
+                        
                     </textarea>
 
 

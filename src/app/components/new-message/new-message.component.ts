@@ -280,7 +280,6 @@ export class NewMessageComponent implements OnInit {
   }
 
 
-
   selectFile(selectedFile: HTMLInputElement): void {
     this.storageService.selectFileService(selectedFile);
   }

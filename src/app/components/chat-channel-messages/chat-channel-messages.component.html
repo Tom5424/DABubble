@@ -150,9 +150,9 @@
                 <form [formGroup]="addMessageForm" (ngSubmit)="sendMessageToChannel()"
                     (keyup)="sendMessageToChannelIfPressOnEnterKey($event)">
 
-                    <textarea placeholder="Message to # {{ createChannelService.channel.channelName }}"
+                    <textarea placeholder="Message to #{{ createChannelService.channel.channelName }}"
                         formControlName="textarea">
-                </textarea>
+                    </textarea>
 
                     <!--------------------------------- Disaplyed here the uploaded Images --------------------------------->
                     <div class="mainContainerUploadedImages">

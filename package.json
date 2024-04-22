@@ -23,8 +23,6 @@
     "@angular/router": "^17.1.0",
     "@ctrl/ngx-emoji-mart": "^9.2.0",
     "firebase": "^10.8.0",
-    "ngx-quill": "^25.0.3",
-    "quill": "2.0.0-rc.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

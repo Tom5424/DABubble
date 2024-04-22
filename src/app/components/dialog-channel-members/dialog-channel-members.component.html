@@ -15,6 +15,7 @@
 
             <li (click)="openDetailViewFromSelectedChannelMember(channelMember)"
                 [ngClass]="{'diabledHover': userIdMatchesWithIdFromLoggedinUser(channelMember)}">
+
                 @if (noProfileImgExist(channelMember)) {
                 <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="User Profile Image">
                 }@else {

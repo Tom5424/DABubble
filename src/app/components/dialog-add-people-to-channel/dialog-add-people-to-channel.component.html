@@ -48,7 +48,6 @@
             <div class="containerUserNameAndImg" (click)="addUserToChannel(user)"
                 [ngClass]="{'selectedUser': userIsSelected(user)}">
 
-
                 @if (noProfileImgExist(user)) {
                 <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="User Profile Image">
                 }@else {
