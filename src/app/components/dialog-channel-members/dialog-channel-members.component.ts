@@ -6,12 +6,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogProfileDetailViewInChatComponent } from '../dialog-profile-detail-view-in-chat/dialog-profile-detail-view-in-chat.component';
 import { DialogAddMorePeopleToChannelComponent } from '../dialog-add-more-people-to-channel/dialog-add-more-people-to-channel.component';
 import { CreateChannelService } from '../../services/create-channel.service';
+import { NgClass } from '@angular/common';
 
 
 @Component({
   selector: 'app-dialog-channel-members',
   standalone: true,
-  imports: [MatDialogClose],
+  imports: [NgClass, MatDialogClose],
   templateUrl: './dialog-channel-members.component.html',
   styleUrl: './dialog-channel-members.component.scss'
 })

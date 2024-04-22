@@ -77,8 +77,7 @@
         @if (userIdMatchesWithIdFromLoggedinUser(directMessage.userThatSendedMessage.userId)) {
 
         <div class="containerDirectMessagesOrChannelMessages"
-            routerLink="/mainView/directMessage/{{ directMessage.receiverId }}/thread/{{ directMessage.id }}"
-            (click)="closeMenuSelection()">
+            routerLink="/mainView/directMessage/{{ directMessage.receiverId }}" (click)="closeMenuSelection()">
 
             @if (noProfileImgExistInMenuSelection(directMessage.userThatSendedMessage)) {
             <img class="imgNoSelectedProfileInMenuSelection" src="assets/img/non-user-selected.svg"
@@ -124,8 +123,7 @@
 
         @for (channelMessage of filteredChannelMessages | async; track $index) {
         <div class="containerDirectMessagesOrChannelMessages"
-            routerLink="/mainView/channel/{{ channelMessage.receiverId }}/thread/{{ channelMessage.id }}"
-            (click)="closeMenuSelection()">
+            routerLink="/mainView/channel/{{ channelMessage.receiverId }}" (click)="closeMenuSelection()">
 
             @if (noProfileImgExistInMenuSelection(channelMessage.userThatSendedMessage)) {
             <img class="imgNoSelectedProfileInMenuSelection" src="assets/img/non-user-selected.svg"

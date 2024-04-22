@@ -13,9 +13,8 @@
 
             @for (channelMember of data.channelMembers; track $index) {
 
-            @if(!userIdMatchesWithIdFromLoggedinUser(channelMember)) {
-
-            <li (click)="openDetailViewFromSelectedChannelMember(channelMember)">
+            <li (click)="openDetailViewFromSelectedChannelMember(channelMember)"
+                [ngClass]="{'diabledHover': userIdMatchesWithIdFromLoggedinUser(channelMember)}">
                 @if (noProfileImgExist(channelMember)) {
                 <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="User Profile Image">
                 }@else {
@@ -29,8 +28,12 @@
                 }
 
                 <p>{{ channelMember.name }}</p>
+
+
+                @if(userIdMatchesWithIdFromLoggedinUser(channelMember)) {
+                <p>(You)</p>
+                }
             </li>
-            }
 
             }
 
