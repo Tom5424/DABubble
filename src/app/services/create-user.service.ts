@@ -14,6 +14,7 @@ export class CreateUserService {
   allUsersAsObservable!: Observable<User[]>;
   user!: User;
   loadContacts: boolean = false;
+  loadSelectedContact: boolean = false;
 
 
   createUserService(userId: string, user: User): void {
@@ -41,12 +42,12 @@ export class CreateUserService {
 
 
   getSingelUserService(userId: string | null): void {
-    this.loadContacts = true;
+    this.loadSelectedContact = true;
     if (userId) {
       const docRef = doc(this.firestore, 'users', userId);
       getDoc(docRef).then((userData) => {
+        this.loadSelectedContact = false;
         this.user = userData.data() as User;
-        this.loadContacts = false;
       })
     }
   }

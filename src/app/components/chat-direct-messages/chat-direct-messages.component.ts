@@ -104,17 +104,22 @@ export class ChatDirectMessagesComponent implements OnInit {
 
 
   noProfileImgExist(): boolean {
-    return (!this.createUserService.user.imgUrl) ? true : false;
+    return (!this.createUserService.loadSelectedContact && !this.createUserService.user.imgUrl) ? true : false;
   }
 
 
   userIsOnline(): boolean {
-    return (this.createUserService.user.isOnline) ? true : false;
+    return (!this.createUserService.loadSelectedContact && this.createUserService.user.isOnline) ? true : false;
   }
 
 
   chatAreLoading(): boolean {
     return (this.createDirectMessageService.loadChat) ? true : false;
+  }
+
+
+  loadSelectedContact(): boolean {
+    return (this.createUserService.loadSelectedContact) ? true : false;
   }
 
 

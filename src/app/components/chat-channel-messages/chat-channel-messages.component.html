@@ -7,7 +7,7 @@
         <!--------------------------------- Container Chat upper Part--------------------------------->
         <div class="containerChatChannelMessagesUpperPart">
 
-            @if (chatAreLoading()) {
+            @if (loadSelectedChannel()) {
             <img class="spinnerIconChatChannelMessagesUpperPart" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
 
             }@else {
@@ -23,7 +23,7 @@
 
             <div class="parentContainerUserImagesAndAddIcon">
 
-                @if (chatAreLoading()) {
+                @if (loadSelectedChannel()) {
                 <img class="spinnerIconChatChannelMessagesUpperPart" src="assets/icons/spinner-icon.svg"
                     alt="Spinner Icon">
 
@@ -84,7 +84,7 @@
 
 
         <!--------------------------------- Container Chat Lower Part--------------------------------->
-        @if (chatAreLoading()) {
+        @if (loadSelectedChannel()) {
         <div class="containerSpinnerIconChatChannelMessagesLowerPart">
             <img src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
         </div>

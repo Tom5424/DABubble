@@ -184,8 +184,13 @@ export class HeaderMainViewComponent implements OnInit {
   }
 
 
-  userIdMatchesWithIdFromLoggedinUser(userId: string): boolean {
+  userIdMatchesNotWithIdFromLoggedinUser(userId: string): boolean {
     return (userId !== this.authService.auth.currentUser?.uid) ? true : false;
+  }
+
+
+  userIdMatchesWithIdFromLoggedinUser(userId: string): boolean {
+    return (userId == this.authService.auth.currentUser?.uid) ? true : false;
   }
 
 

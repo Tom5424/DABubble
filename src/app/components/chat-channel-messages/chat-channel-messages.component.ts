@@ -98,6 +98,11 @@ export class ChatChannelMessagesComponent implements OnInit {
   }
 
 
+  loadSelectedChannel(): boolean {
+    return (this.createChannelService.loadSelectedChannel) ? true : false;
+  }
+
+
   noProfileImgExist(user: User): boolean {
     return (!user.imgUrl) ? true : false;
   }

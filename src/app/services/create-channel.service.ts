@@ -17,6 +17,7 @@ export class CreateChannelService {
   allChannelsAsObservable!: Observable<any[]>;
   channel!: Channel;
   loadChannels: boolean = false;
+  loadSelectedChannel: boolean = false;
 
 
   createChannelService(channelData: any, channelMembers: User[], userWhoCreatedChannel: string | null): void {
@@ -44,10 +45,12 @@ export class CreateChannelService {
 
 
   getSingleChannelService(channelId: string | null): void {
+    this.loadSelectedChannel = true;
     if (channelId) {
       const docRef = doc(this.firestore, 'channels', channelId);
       getDoc(docRef)
         .then((docData) => {
+          this.loadSelectedChannel = false;
           this.channel = docData.data() as Channel;
         })
     }

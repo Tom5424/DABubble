@@ -14,7 +14,7 @@
 
         @for (user of filteredUsers | async; track $index) {
 
-        @if (userIdMatchesWithIdFromLoggedinUser(user.userId)) {
+        @if (userIdMatchesNotWithIdFromLoggedinUser(user.userId)) {
 
         <div class="containerUserNameAndImg" routerLink="/mainView/directMessage/{{ user.userId }}"
             (click)="closeMenuSelection()">
@@ -74,6 +74,7 @@
         <p class="text">Direct Messages</p>
         @for (directMessage of filteredDirectMessages | async; track $index) {
 
+        @if (userIdMatchesWithIdFromLoggedinUser(directMessage.userThatSendedMessage.userId)) {
 
         <div class="containerDirectMessagesOrChannelMessages"
             routerLink="/mainView/directMessage/{{ directMessage.receiverId }}/thread/{{ directMessage.id }}"
@@ -106,6 +107,8 @@
 
             </div>
         </div>
+        }
+
         }
 
 

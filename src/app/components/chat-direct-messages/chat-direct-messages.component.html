@@ -8,7 +8,7 @@
         <!--------------------------------- Container Chat upper Part--------------------------------->
         <div class="containerChatDirectMessagesUpperPart">
 
-            @if (chatAreLoading()) {
+            @if (loadSelectedContact()) {
             <img class="spinnerIconChatDirectMessagesUpperPart" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
 
             }@else {
@@ -36,7 +36,7 @@
 
 
         <!--------------------------------- Container Chat Lower Part--------------------------------->
-        @if (chatAreLoading()) {
+        @if (loadSelectedContact()) {
         <div class="containerSpinnerIconChatDirectMessagesLowerPart">
             <img src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
         </div>
