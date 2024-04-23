@@ -7,12 +7,13 @@ import { HeaderComponent } from '../header/header.component';
 import { RoutingService } from '../../services/routing.service';
 import { AuthService } from '../../services/auth.service';
 import { UserFeedbackMessageComponent } from '../user-feedback-message/user-feedback-message.component';
+import { IntroComponent } from '../intro/intro.component';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, UserFeedbackMessageComponent, ReactiveFormsModule, NgClass, RouterLink],
+  imports: [HeaderComponent, FooterComponent, UserFeedbackMessageComponent, IntroComponent, ReactiveFormsModule, NgClass, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
   router = inject(Router);
   routingService = inject(RoutingService);
   authService = inject(AuthService);
+  introIsHidden: boolean = false;
   loginForm = new FormGroup({
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
@@ -29,7 +31,15 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.hideIntro();
     this.routingService.savePreviousUrl(this.router.routerState.snapshot.url);
+  }
+
+
+  hideIntro(): void {
+    setTimeout(() => {
+      this.introIsHidden = true;
+    }, 3280);
   }
 
 

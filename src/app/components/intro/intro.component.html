@@ -1,0 +1,14 @@
+<div class="containerIntro">
+
+    <div class="containerImgAndText" [ngClass]="{'moveInTheLeftUpperCorner': moveInTheLeftUpperCorner}">
+
+        <img src="assets/img/da-bubble-favicon.svg" alt="DABubble Logo"
+            [ngClass]="{'smallerLogo': moveInTheLeftUpperCorner}">
+
+        <div class="containerDabubbleLettering" [ngClass]="{'overflowXHidden': moveInTheLeftUpperCorner}">
+            <img src="assets/img/dabubble-lettering-white.svg" alt="DABubble Lettering"
+                [ngClass]="{'translateToRight': dabubbleLetteringIsDisplayed, 'smallerLettering': moveInTheLeftUpperCorner}">
+        </div>
+
+    </div>
+</div>

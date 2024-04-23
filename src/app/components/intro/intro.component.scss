@@ -1,0 +1,76 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+.containerIntro {
+    @include positionAbsolute(0, 0, 0, 0);
+    @include flexCenteredInTheMiddle();
+    gap: 30px;
+    background-image: linear-gradient($purple, #313AE5);
+
+    img {
+        width: 130px;
+    }
+}
+
+
+.containerImgAndText {
+    @include flexCenteredYAxis();
+    gap: 15px;
+}
+
+
+.containerDabubbleLettering {
+    overflow-x: scroll;
+
+    img {
+        margin-left: -300px;
+        width: 300px;
+    }
+}
+
+
+//////////////////// For Intro Animations
+.translateToRight {
+    margin-left: 0 !important;
+    transition: margin-left 300ms ease-in-out 150ms;
+}
+
+
+.smallerLogo {
+    width: 68px !important;
+    transition: width 300ms ease-in-out 350ms;
+}
+
+
+.smallerLettering {
+    width: 150px !important;
+    transition: all 300ms ease-in-out 350ms;
+    filter: brightness(0) saturate(100%) invert(0%) sepia(89%) saturate(21%) hue-rotate(309deg) brightness(104%) contrast(104%);
+}
+
+
+.overflowXHidden {
+    overflow-x: hidden;
+}
+
+
+.moveInTheLeftUpperCorner {
+    animation-name: moveInTheLeftUpperCorner;
+    animation-delay: 350ms;
+    animation-duration: 450ms;
+    animation-fill-mode: both;
+}
+
+
+@keyframes moveInTheLeftUpperCorner {
+
+    from {
+        transition: transform 350ms ease-in-out 450ms;
+    }
+
+    to {
+        transform: translate(-36vw, -43vh);
+        transition: transform 350ms ease-in-out 450ms;
+    }
+}
