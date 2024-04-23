@@ -9,7 +9,7 @@ import { RoutingService } from '../../services/routing.service';
   standalone: true,
   imports: [HeaderComponent, RouterLink],
   templateUrl: './privacy-policy.component.html',
-  styleUrl: './privacy-policy.component.scss'
+  styleUrls: ['./privacy-policy.component.scss', './privacy-policy.component.media.scss'],
 })
 
 

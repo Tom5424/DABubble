@@ -27,23 +27,33 @@ main {
         font-size: 46px;
     }
 
+
+    h2 {
+        color: $darkPurple;
+        font-size: 32px;
+    }
+
+    h3 {
+        font-size: 25px;
+    }
+
+    h4 {
+        font-size: 22px;
+    }
+
     p {
         font-size: 20px;
     }
 
     a {
         color: $darkPurple;
+        word-break: break-all;
         text-decoration: none;
 
         &:hover {
             transition: all 225ms ease-in-out;
             border-bottom: 2px solid $darkPurple;
         }
-    }
-
-    h2 {
-        color: $darkPurple;
-        font-size: 32px;
     }
 }
 

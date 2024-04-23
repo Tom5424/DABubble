@@ -1,0 +1,104 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Width
+@media screen and (min-width: 2000px) {
+
+    .privacyPolicyBox {
+        width: 1200px;
+    }
+}
+
+
+@media screen and (max-width: 925px) {
+
+    .privacyPolicyBox {
+        width: 700px;
+    }
+}
+
+
+@media screen and (max-width: 825px) {
+
+    .privacyPolicyBox {
+        width: 600px;
+    }
+}
+
+
+@media screen and (max-width: 725px) {
+
+    .privacyPolicyBox {
+        width: 500px;
+    }
+}
+
+
+@media screen and (max-width: 625px) {
+
+    .privacyPolicyBox {
+        width: 400px;
+    }
+}
+
+
+@media screen and (max-width: 540px) {
+
+    .privacyPolicyBox {
+        width: 300px;
+
+        h1 {
+            font-size: 40px;
+        }
+
+        h2 {
+            font-size: 26px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 440px) {
+
+    .privacyPolicyBox {
+        width: 200px;
+        padding: 56px 30px 56px 30px;
+
+        h1 {
+            font-size: 32px;
+        }
+
+        h2 {
+            font-size: 20px;
+        }
+
+        h3 {
+            font-size: 17px;
+        }
+
+        h4 {
+            font-size: 16px;
+        }
+
+        p {
+            font-size: 16px;
+        }
+    }
+}
+
+
+//////////////////// Disabled the hover Effects on touch Devices
+@media (pointer: coarse) {
+
+    .containerArrowIcon {
+
+        &:hover {
+            background-color: unset;
+
+            img {
+                filter: none;
+            }
+        }
+    }
+}
