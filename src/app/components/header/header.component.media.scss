@@ -1,0 +1,15 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Width
+@media screen and (max-width: 540px) {
+
+    header {
+        justify-content: center;
+
+        img {
+            width: 200px;
+        }
+    }
+}
