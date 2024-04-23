@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   standalone: true,
   imports: [NgClass],
   templateUrl: './intro.component.html',
-  styleUrl: './intro.component.scss',
+  styleUrls: ['./intro.component.scss', './intro.component.media.scss'],
 })
 
 

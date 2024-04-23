@@ -1,0 +1,430 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Width
+@media screen and (min-width: 2000px) {
+
+    .moveInTheLeftUpperCorner {
+        animation-name: moveInTheLeftUpperCorner;
+    }
+
+    @keyframes moveInTheLeftUpperCorner {
+
+        from {
+            transition: transform 350ms ease-in-out 450ms;
+        }
+
+        to {
+            transform: translate(calc(-84.5vw / 2), -43vh);
+            transition: transform 350ms ease-in-out 450ms;
+        }   
+    }   
+}
+
+
+@media screen and (max-width: 1900px) {
+
+    .moveInTheLeftUpperCorner {
+        animation-name: moveInTheLeftUpperCorner;
+    }
+
+    @keyframes moveInTheLeftUpperCorner {
+
+        from {
+            transition: transform 350ms ease-in-out 450ms;
+        }
+
+        to {
+            transform: translate(calc(-83.3vw / 2), -43vh);
+            transition: transform 350ms ease-in-out 450ms;
+        }
+    }   
+}
+
+
+@media screen and (max-width: 1800px) {
+
+    .moveInTheLeftUpperCorner {
+        animation-name: moveInTheLeftUpperCorner;
+    }
+
+    @keyframes moveInTheLeftUpperCorner {
+
+        from {
+            transition: transform 350ms ease-in-out 450ms;
+        }
+
+        to {
+            transform: translate(calc(-82.4vw / 2), -43vh);
+            transition: transform 350ms ease-in-out 450ms;
+        }
+    }   
+}
+
+
+@media screen and (max-width: 1700px) {
+
+    .moveInTheLeftUpperCorner {
+        animation-name: moveInTheLeftUpperCorner;
+    }
+
+    @keyframes moveInTheLeftUpperCorner {
+
+        from {
+            transition: transform 350ms ease-in-out 450ms;
+        }
+
+        to {
+            transform: translate(calc(-81.5vw / 2), -43vh);
+            transition: transform 350ms ease-in-out 450ms;
+        }
+    }   
+}
+
+
+@media screen and (min-width: 1600px) {
+
+    .containerIntro {
+
+        img {
+            width: 180px;
+        }
+    }
+
+    .containerDabubbleLettering {
+
+        img {
+            width: 400px;
+            margin-left: -400px;
+        }
+    }
+
+    .moveInTheLeftUpperCorner {
+        animation-name: moveInTheLeftUpperCorner;
+    }
+
+    @keyframes moveInTheLeftUpperCorner {
+
+        from {
+            transition: transform 350ms ease-in-out 450ms;
+        }
+
+        to {
+            transform: translate(calc(-80vw / 2), -43vh);
+            transition: transform 350ms ease-in-out 450ms;
+        }
+    }
+}
+
+
+@media screen and (max-width: 1286px) {
+
+    .moveInTheLeftUpperCorner {
+        animation-name: moveInTheLeftUpperCorner;
+    }
+
+    @keyframes moveInTheLeftUpperCorner {
+
+        from {
+            transition: transform 350ms ease-in-out 450ms;
+        }
+
+        to {
+            transform: translate(calc(-75.5vw / 2), -43vh);
+            transition: transform 350ms ease-in-out 450ms;
+        }
+    }   
+}
+
+
+@media screen and (max-width: 1220px) {
+
+    .moveInTheLeftUpperCorner {
+        animation-name: moveInTheLeftUpperCorner;
+    }
+
+    @keyframes moveInTheLeftUpperCorner {
+
+        from {
+            transition: transform 350ms ease-in-out 450ms;
+        }
+
+        to {
+            transform: translate(calc(-73.5vw / 2), -43vh);
+            transition: transform 350ms ease-in-out 450ms;
+        }
+    }
+}
+
+
+@media screen and (max-width: 1170px) {
+
+    .moveInTheLeftUpperCorner {
+        animation-name: moveInTheLeftUpperCorner;
+    }
+
+    @keyframes moveInTheLeftUpperCorner {
+
+        from {
+            transition: transform 350ms ease-in-out 450ms;
+        }
+
+        to {
+            transform: translate(calc(-73.1vw / 2), -43vh);
+            transition: transform 350ms ease-in-out 450ms;
+        }
+    }
+}
+
+
+@media screen and (max-width: 1100px) {
+
+    .moveInTheLeftUpperCorner {
+        animation-name: moveInTheLeftUpperCorner;
+    }
+
+    @keyframes moveInTheLeftUpperCorner {
+
+        from {
+            transition: transform 350ms ease-in-out 450ms;
+        }
+
+        to {
+            transform: translate(calc(-71.4vw / 2), -43vh);
+            transition: transform 350ms ease-in-out 450ms;
+        }
+    }
+}
+
+
+@media screen and (max-width: 1060px) {
+
+    .moveInTheLeftUpperCorner {
+        animation-name: moveInTheLeftUpperCorner;
+    }
+
+    @keyframes moveInTheLeftUpperCorner {
+
+        from {
+            transition: transform 350ms ease-in-out 450ms;
+        }
+
+        to {
+            transform: translate(calc(-70.4vw / 2), -43vh);
+            transition: transform 350ms ease-in-out 450ms;
+        }
+    }
+}
+
+
+@media screen and (max-width: 1000px) {
+
+    .moveInTheLeftUpperCorner {
+        animation-name: moveInTheLeftUpperCorner;
+    }
+
+    @keyframes moveInTheLeftUpperCorner {
+
+        from {
+            transition: transform 350ms ease-in-out 450ms;
+        }
+
+        to {
+            transform: translate(calc(-68vw / 2), -43vh);
+            transition: transform 350ms ease-in-out 450ms;
+        }
+    }
+}
+
+
+@media screen and (max-width: 930px) {
+
+    .moveInTheLeftUpperCorner {
+        animation-name: moveInTheLeftUpperCorner;
+    }
+
+    @keyframes moveInTheLeftUpperCorner {
+
+        from {
+            transition: transform 350ms ease-in-out 450ms;
+        }
+
+        to {
+            transform: translate(calc(-66vw / 2), -43vh);
+            transition: transform 350ms ease-in-out 450ms;
+        }
+    }
+}
+
+
+@media screen and (max-width: 860px) {
+
+    .moveInTheLeftUpperCorner {
+        animation-name: moveInTheLeftUpperCorner;
+    }
+
+    @keyframes moveInTheLeftUpperCorner {
+
+        from {
+            transition: transform 350ms ease-in-out 450ms;
+        }
+
+        to {
+            transform: translate(calc(-63.5vw / 2), -43vh);
+            transition: transform 350ms ease-in-out 450ms;
+        }
+    }
+}
+
+
+@media screen and (max-width: 790px) {
+
+    .moveInTheLeftUpperCorner {
+        animation-name: moveInTheLeftUpperCorner;
+    }
+
+    @keyframes moveInTheLeftUpperCorner {
+
+        from {
+            transition: transform 350ms ease-in-out 450ms;
+        }
+
+        to {
+            transform: translate(calc(-60vw / 2), -43vh);
+            transition: transform 350ms ease-in-out 450ms;
+        }
+    }
+}
+
+
+@media screen and (max-width: 720px) {
+
+    .moveInTheLeftUpperCorner {
+        animation-name: moveInTheLeftUpperCorner;
+    }
+
+    @keyframes moveInTheLeftUpperCorner {
+
+        from {
+            transition: transform 350ms ease-in-out 450ms;
+        }
+
+        to {
+            transform: translate(calc(-56vw / 2), -43vh);
+            transition: transform 350ms ease-in-out 450ms;
+        }
+    }
+}
+
+
+@media screen and (max-width: 650px) {
+
+    .moveInTheLeftUpperCorner {
+        animation-name: moveInTheLeftUpperCorner;
+    }
+
+    @keyframes moveInTheLeftUpperCorner {
+
+        from {
+            transition: transform 350ms ease-in-out 450ms;
+        }
+
+        to {
+            transform: translate(calc(-51vw / 2), -43vh);
+            transition: transform 350ms ease-in-out 450ms;
+        }
+    }
+}
+
+
+@media screen and (max-width: 580px) {
+
+    .moveInTheLeftUpperCorner {
+        animation-name: moveInTheLeftUpperCorner;
+    }
+
+    @keyframes moveInTheLeftUpperCorner {
+
+        from {
+            transition: transform 350ms ease-in-out 450ms;
+        }
+
+        to {
+            transform: translate(calc(-46vw / 2), -43vh);
+            transition: transform 350ms ease-in-out 450ms;
+        }
+    }
+}
+
+
+@media screen and (max-width: 520px) {
+
+    .containerIntro {
+
+        img {
+            width: 80px;
+        }
+    }
+
+    .containerDabubbleLettering {
+
+        img {
+            width: 200px;
+        }
+    }
+
+    .moveInTheLeftUpperCorner {
+        animation-name: moveInTheLeftUpperCorner;
+    }
+
+    @keyframes moveInTheLeftUpperCorner {
+
+        from {
+            transition: transform 350ms ease-in-out 450ms;
+        }
+
+        to {
+            transform: translate(calc(-39vw / 2), -43vh);
+            transition: transform 350ms ease-in-out 450ms;
+        }
+    }
+}
+
+
+@media screen and (max-width: 450px) {
+
+    .moveInTheLeftUpperCorner {
+        animation-name: moveInTheLeftUpperCorner;
+    }
+
+    @keyframes moveInTheLeftUpperCorner {
+
+        from {
+            transition: transform 350ms ease-in-out 450ms;
+        }
+
+        to {
+            transform: translate(calc(-35vw / 2), -43vh);
+            transition: transform 350ms ease-in-out 450ms;
+        }
+    }
+}
+
+
+@media screen and (max-width: 340px) {
+
+    .containerIntro {
+
+        img {
+            width: 60px;
+        }
+    }
+
+    .containerDabubbleLettering {
+
+        img {
+            width: 170px;
+        }
+    }
+}

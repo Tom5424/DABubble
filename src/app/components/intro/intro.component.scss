@@ -70,7 +70,7 @@
     }
 
     to {
-        transform: translate(-36vw, -43vh);
+        transform: translate(calc(-75.5vw / 2), -43vh);
         transition: transform 350ms ease-in-out 450ms;
     }
 }
