@@ -7,7 +7,7 @@ import { HeaderComponent } from '../header/header.component';
   standalone: true,
   imports: [HeaderComponent],
   templateUrl: './page-not-found.component.html',
-  styleUrl: './page-not-found.component.scss'
+  styleUrls: ['./page-not-found.component.scss' ,'./page-not-found.component.media.scss']
 })
 
 
