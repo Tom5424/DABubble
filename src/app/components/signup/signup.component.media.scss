@@ -1,0 +1,224 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Width
+@media screen and (min-width: 1600px) {
+
+    form {
+
+        input {
+            width: 650px;
+        }
+
+        label {
+            margin-right: 480px;
+        }
+    }
+
+    .errorMessage {
+        font-size: 16px;
+    }
+}
+
+
+@media screen and (max-width: 750px) {
+
+    form {
+
+        input {
+            width: 400px;
+        }
+
+        label {
+            margin-right: 250px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 640px) {
+
+    .containerArrowIcon {
+        left: 25px;
+    }
+
+    form {
+
+        input {
+            width: 300px;
+        }
+
+        label {
+            margin-right: 150px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 540px) {
+
+    .mainContainerSignupBox {
+        margin-top: 50px;
+    }
+
+    .signupBox {
+        padding: 30px 40px 30px 40px;
+    }
+
+    .containerArrowIcon {
+        left: 3px;
+    }
+
+    form {
+
+        input {
+            width: 200px;
+        }
+
+        label {
+            margin-right: 50px;
+        }
+    }
+
+    app-footer {
+        display: none;
+    }
+}
+
+
+@media screen and (max-width: 470px) {
+
+    .signupBox {
+
+        h1 {
+            font-size: 40px;
+        }
+    }
+
+    .containerArrowIcon {
+        left: 8px;
+    }
+
+    form {
+
+        input {
+            width: 150px;
+            font-size: 16px;
+        }
+
+        label {
+            margin-right: 0;
+
+            a {
+                font-size: 16px;
+            }
+        }
+    }
+
+    .btnContainer {
+
+        button {
+            font-size: 16px;
+        }
+    }
+
+    .errorMessage {
+        width: 80%;
+        margin: -15px 0px 10px 0px;
+    }
+}
+
+
+@media screen and (max-width: 390px) {
+
+    .signupBox {
+        padding: 30px 12px 30px 12px;
+
+        h1 {
+            font-size: 30px;
+        }
+    }
+
+    .containerArrowIcon {
+        top: 0;
+        left: 12px;
+    }
+
+    form {
+
+        input {
+            width: 130px;
+        }
+    }
+
+    .btnContainer {
+        justify-content: center;
+    }
+
+    .errorMessage {
+        margin: -15px -15px 10px -30px;
+    }
+}
+
+
+//////////////////// Disabled the hover Effects on touch Devices and add a active Effects
+@media (pointer: coarse) {
+
+    .containerArrowIcon {
+
+        &:hover {
+            background-color: unset;
+
+            img {
+                filter: none;
+            }
+        }
+
+        &:active {
+            background-color: $bgColor;
+            transition: all 225ms ease-in-out;
+
+            img {
+                filter: brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(1557%) hue-rotate(226deg) brightness(110%) contrast(90%);
+            }
+        }
+    }
+
+    form {
+
+        a {
+
+            &:hover {
+                background-color: unset;
+                color: unset;
+                transition: unset;
+                font-weight: unset;
+            }
+
+            &:active {
+                background-color: $bgColor;
+                color: $darkPurple;
+                transition: all 225ms ease-in-out;
+                font-weight: 500;
+            }
+        }
+    }
+
+    .btnContainer {
+
+        button {
+
+            &:hover {
+                background-color: $darkPurple;
+                transition: unset;
+            }
+
+            &:active {
+                background-color: $purple;
+                transition: all 225ms ease-in-out;
+            }
+        }
+
+    }
+}

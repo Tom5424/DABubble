@@ -84,6 +84,10 @@
 
 @media screen and (max-width: 540px) {
 
+    .mainContainerloginBox {
+        margin-top: 40px;
+    }
+
     .loginBox {
         padding: 20px 50px 20px 50px;
 
@@ -119,7 +123,6 @@
 @media screen and (max-width: 440px) {
 
     .loginBox {
-        padding: 30px 12px 30px 12px;
 
         h1 {
             font-size: 40px;
@@ -165,6 +168,18 @@
 
     .btnSecondary {
         font-size: 16px;
+    }
+}
+
+
+@media screen and (max-width: 390px) {
+
+    .loginBox {
+        padding: 20px 12px 20px 12px;
+
+        h1 {
+            font-size: 30px;
+        }
     }
 }
 

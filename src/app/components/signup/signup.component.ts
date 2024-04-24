@@ -14,7 +14,7 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [HeaderComponent, FooterComponent, AvatarPickerComponent, RouterLink, ReactiveFormsModule, NgClass],
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.scss'
+  styleUrls: ['./signup.component.scss', './signup.component.media.scss'],
 })
 
 
