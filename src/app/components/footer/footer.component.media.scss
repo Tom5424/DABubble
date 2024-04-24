@@ -10,7 +10,9 @@
         a {
 
             &:hover {
-                pointer-events: none;
+                color: $purple;
+                border: unset;
+                font-weight: unset;
             }
         }
 

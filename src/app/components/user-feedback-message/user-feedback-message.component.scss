@@ -5,6 +5,7 @@
 .overlay {
     @include positionAbsolute(0, 0, 0, 0);
     background-color: #fdfdfd47;
+    overflow-x: hidden;
 
     p {
         @include positionAbsolute(unset, 30px, unset, 30px);

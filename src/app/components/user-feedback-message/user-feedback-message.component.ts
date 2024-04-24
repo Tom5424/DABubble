@@ -11,7 +11,7 @@ import { Channel } from '../../models/channel';
   standalone: true,
   imports: [],
   templateUrl: './user-feedback-message.component.html',
-  styleUrl: './user-feedback-message.component.scss'
+  styleUrls: ['./user-feedback-message.component.scss', './user-feedback-message.component.media.scss']
 })
 
 

@@ -147,8 +147,8 @@
 
     .btnSignInWithGoogle {
         width: 240px;
-        font-size: 16px;
-        gap: 0;
+        font-size: 14px;
+        gap: 5px;
     }
 
     .btnContainer {
@@ -175,7 +175,11 @@
     .textForgotPassword {
 
         &:hover {
-            pointer-events: none;
+            color: $purple;
+            background-color: unset;
+            transition: unset;
+            border-radius: unset;
+            font-weight: unset;
         }
 
         &:active {
@@ -190,7 +194,9 @@
     .btnSignInWithGoogle {
 
         &:hover {
-            pointer-events: none;
+            border: unset;
+            transition: unset;
+            font-weight: unset;
         }
 
         &:active {
@@ -203,7 +209,8 @@
     .btnPrimary {
 
         &:hover {
-            pointer-events: none;
+            background-color: $darkPurple;
+            transition: unset;
         }
 
         &:active {
@@ -215,7 +222,9 @@
     .btnSecondary {
 
         &:hover {
-            pointer-events: none;
+            color: $darkPurple;
+            background-color: unset;
+            transition: unset;
         }
 
         &:active {

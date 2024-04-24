@@ -1,0 +1,24 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+@media screen and (max-width: 510px) {
+
+    .overlay {
+
+        p {
+            font-size: 18px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 465px) {
+
+    .overlay {
+
+        p {
+            width: 175px;
+        }
+    }
+}
