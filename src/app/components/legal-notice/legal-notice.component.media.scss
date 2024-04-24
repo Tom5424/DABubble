@@ -65,7 +65,7 @@
 }
 
 
-//////////////////// Disabled the hover Effects on touch Devices
+//////////////////// Disabled the hover Effects on touch Devices and add a active Effects
 @media (pointer: coarse) {
 
     .containerArrowIcon {
@@ -75,6 +75,15 @@
 
             img {
                 filter: none;
+            }
+        }
+
+        &:active {
+            background-color: $bgColor;
+            transition: all 225ms ease-in-out;
+
+            img {
+                filter: brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(1557%) hue-rotate(226deg) brightness(110%) contrast(90%);
             }
         }
     }

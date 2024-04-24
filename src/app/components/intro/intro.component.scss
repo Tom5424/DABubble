@@ -3,7 +3,7 @@
 
 
 .containerIntro {
-    @include positionAbsolute(0, 0, 0, 0);
+    @include positionFixed(0, 0, 0, 0);
     @include flexCenteredInTheMiddle();
     gap: 30px;
     background-image: linear-gradient($purple, #313AE5);

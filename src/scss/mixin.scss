@@ -228,3 +228,12 @@
     left: $left;
     right: $right;
 }
+
+
+@mixin positionFixed($top, $bottom, $left, $right) {
+    position: fixed;
+    top: $top;
+    bottom: $bottom;
+    left: $left;
+    right: $right;
+}
