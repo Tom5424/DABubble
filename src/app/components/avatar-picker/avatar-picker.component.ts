@@ -16,7 +16,7 @@ import { DialogUploadInvalidDataComponent } from '../dialog-upload-invalid-data/
   standalone: true,
   imports: [HeaderComponent, FooterComponent, UserFeedbackMessageComponent, DialogUploadInvalidDataComponent, RouterLink, NgClass, MatTooltipModule],
   templateUrl: './avatar-picker.component.html',
-  styleUrl: './avatar-picker.component.scss'
+  styleUrls: ['./avatar-picker.component.scss', './avatar-picker.component.media.scss'],
 })
 
 
