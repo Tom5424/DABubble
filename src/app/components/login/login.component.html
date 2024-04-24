@@ -1,9 +1,11 @@
 <main>
     <app-header></app-header>
 
+
     @if (!introIsHidden) {
     <app-intro></app-intro>
     }
+
 
     <div class="mainContainerloginBox">
 
@@ -26,7 +28,7 @@
                     [ngClass]="{'errorInputfield': inputfieldPasswordIsRequired()}">
 
                 @if (inputfieldPasswordIsRequired()) {
-                <p style="margin-right: 372px;" class="errorMessage">Password is required</p>
+                <p class="errorMessage">Password is required</p>
                 }
                 <!--------------------------------- Inputfield Password --------------------------------->
 
@@ -58,6 +60,11 @@
 
 
     <app-footer></app-footer>
+
+
+    <!--------------------------------- Only displayed in the Mobile View --------------------------------->
+    <app-button-create-account-mobile-view class="d-none"></app-button-create-account-mobile-view>
+    <!--------------------------------- Only displayed in the Mobile View --------------------------------->
 
 
     @if(authService.loginSuccessfully || authService.loginFailed) {

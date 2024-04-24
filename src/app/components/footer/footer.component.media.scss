@@ -2,27 +2,10 @@
 @import '../../../scss/mixin.scss';
 
 
-//////////////////// Width
-@media screen and (max-width: 540px) {
-
-    header {
-        justify-content: center;
-
-        img {
-            width: 200px;
-        }
-    }
-
-    .containerTextAndLink {
-        display: none;
-    }
-}
-
-
 //////////////////// Disabled the hover Effects on touch Devices and add a active Effects
 @media (pointer: coarse) {
 
-    .containerTextAndLink {
+    footer {
 
         a {
 

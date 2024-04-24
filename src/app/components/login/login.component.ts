@@ -8,14 +8,15 @@ import { RoutingService } from '../../services/routing.service';
 import { AuthService } from '../../services/auth.service';
 import { UserFeedbackMessageComponent } from '../user-feedback-message/user-feedback-message.component';
 import { IntroComponent } from '../intro/intro.component';
+import { ButtonCreateAccountMobileViewComponent } from '../button-create-account-mobile-view/button-create-account-mobile-view.component';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, UserFeedbackMessageComponent, IntroComponent, ReactiveFormsModule, NgClass, RouterLink],
+  imports: [HeaderComponent, FooterComponent, UserFeedbackMessageComponent, ButtonCreateAccountMobileViewComponent, IntroComponent, ReactiveFormsModule, NgClass, RouterLink],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrls: ['./login.component.scss', './login.component.media.scss']
 })
 
 

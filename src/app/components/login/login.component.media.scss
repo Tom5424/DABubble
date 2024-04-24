@@ -1,0 +1,227 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Width
+@media screen and (min-width: 1600px) {
+
+    .loginBox {
+
+        form {
+
+            input {
+                width: 650px;
+            }
+        }
+    }
+
+    .errorMessage {
+        font-size: 16px;
+    }
+
+    .containerTextWithTwoLines {
+
+        hr {
+            width: 310px;
+        }
+    }
+
+    .btnSignInWithGoogle {
+        width: 750px;
+    }
+}
+
+
+@media screen and (max-width: 735px) {
+
+    .loginBox {
+
+        form {
+
+            input {
+                width: 400px;
+            }
+        }
+    }
+
+    .containerTextWithTwoLines {
+
+        hr {
+            width: 195px;
+        }
+    }
+
+    .btnSignInWithGoogle {
+        width: 500px;
+    }
+}
+
+
+@media screen and (max-width: 635px) {
+
+    .loginBox {
+
+        form {
+
+            input {
+                width: 300px;
+            }
+        }
+    }
+
+    .containerTextWithTwoLines {
+
+        hr {
+            width: 145px;
+        }
+    }
+
+    .btnSignInWithGoogle {
+        width: 400px;
+    }
+}
+
+
+@media screen and (max-width: 540px) {
+
+    .loginBox {
+        padding: 20px 50px 20px 50px;
+
+        form {
+
+            input {
+                width: 200px;
+            }
+        }
+    }
+
+    .containerTextWithTwoLines {
+
+        hr {
+            width: 95px;
+        }
+    }
+
+    .btnSignInWithGoogle {
+        width: 300px;
+    }
+
+    app-footer {
+        display: none;
+    }
+
+    app-button-create-account-mobile-view {
+        display: block !important;
+    }
+}
+
+
+@media screen and (max-width: 440px) {
+
+    .loginBox {
+        padding: 30px 12px 30px 12px;
+
+        h1 {
+            font-size: 40px;
+        }
+
+        form {
+
+            input {
+                width: 130px;
+                font-size: 16px;
+            }
+        }
+    }
+
+    .textForgotPassword {
+        font-size: 16px;
+    }
+
+    .containerTextWithTwoLines {
+
+        hr {
+            width: 65px;
+        }
+    }
+
+    .btnSignInWithGoogle {
+        width: 240px;
+        font-size: 16px;
+        gap: 0;
+    }
+
+    .btnContainer {
+        gap: 15px;
+
+        button {
+            padding: 12px 15px 12px 15px;
+        }
+    }
+
+    .btnPrimary {
+        font-size: 16px;
+    }
+
+    .btnSecondary {
+        font-size: 16px;
+    }
+}
+
+
+//////////////////// Disabled the hover Effects on touch Devices and add a active Effects
+@media (pointer: coarse) {
+
+    .textForgotPassword {
+
+        &:hover {
+            pointer-events: none;
+        }
+
+        &:active {
+            background-color: $bgColor;
+            color: $darkPurple;
+            transition: all 225ms ease-in-out;
+            border-radius: 30px;
+            font-weight: 500;
+        }
+    }
+
+    .btnSignInWithGoogle {
+
+        &:hover {
+            pointer-events: none;
+        }
+
+        &:active {
+            border: 1px solid $darkPurple;
+            transition: all 225ms ease-in-out;
+            font-weight: 700;
+        }
+    }
+
+    .btnPrimary {
+
+        &:hover {
+            pointer-events: none;
+        }
+
+        &:active {
+            background-color: $purple;
+            transition: all 225ms ease-in-out;
+        }
+    }
+
+    .btnSecondary {
+
+        &:hover {
+            pointer-events: none;
+        }
+
+        &:active {
+            background-color: $middlePurple;
+            color: #ffffff;
+            transition: all 225ms ease-in-out;
+        }
+    }
+}

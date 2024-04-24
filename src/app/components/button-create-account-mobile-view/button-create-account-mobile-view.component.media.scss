@@ -1,0 +1,13 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+@media screen and (max-width: 440px) {
+
+    .containerTextAndLink {
+
+        p {
+            font-size: 16px;
+        }
+    }
+}
