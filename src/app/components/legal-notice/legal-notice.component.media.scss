@@ -55,16 +55,6 @@
 }
 
 
-//////////////////// Height
-@media screen and (max-height: 670px) {
-
-    main {
-        height: 100%;
-        padding-bottom: 80px;
-    }
-}
-
-
 //////////////////// Disabled the hover Effects on touch Devices and add active Effects
 @media (pointer: coarse) {
 

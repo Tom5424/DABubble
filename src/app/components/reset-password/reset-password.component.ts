@@ -12,7 +12,7 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [HeaderComponent, UserFeedbackMessageComponent, ReactiveFormsModule, RouterLink, NgClass],
   templateUrl: './reset-password.component.html',
-  styleUrl: './reset-password.component.scss'
+  styleUrls: ['./reset-password.component.scss', './reset-password.component.media.scss'],
 })
 
 

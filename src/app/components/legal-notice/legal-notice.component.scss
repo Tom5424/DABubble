@@ -4,13 +4,14 @@
 
 main {
     background-color: $bgColor;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 
 .mainContainerLegalNotice {
     @include flexCenteredXAxis();
     margin-top: 40px;
+    padding-bottom: 40px;
 }
 
 

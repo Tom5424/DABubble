@@ -131,10 +131,29 @@
         left: 4px;
     }
 
+    .text {
+        font-size: 16px;
+    }
+
     .containerTextAndBtn {
+
+        p {
+            font-size: 16px;
+        }
+
+        label {
+            font-size: 16px;
+        }
 
         img {
             right: 0;
+        }
+    }
+
+    .containerBtn {
+
+        button {
+            font-size: 16px;
         }
     }
 }
