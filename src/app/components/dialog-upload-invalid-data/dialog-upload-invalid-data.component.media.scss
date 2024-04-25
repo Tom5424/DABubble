@@ -31,3 +31,28 @@
         }
     }
 }
+
+
+//////////////////// Disabled the hover Effects on touch Devices and add active Effects
+@media (pointer: coarse) {
+
+    .btnContainer {
+
+        button {
+
+            &:hover {
+                background-color: $darkPurple;
+            }
+        }
+    }
+
+    .btnContainer {
+
+        button {
+
+            &:active {
+                background-color: $purple;
+            }
+        }
+    }
+}

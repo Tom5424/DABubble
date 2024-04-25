@@ -59,7 +59,7 @@
 @media screen and (max-width: 540px) {
 
     .mainContainerSignupBox {
-        margin-top: 50px;
+        margin-top: 40px;
     }
 
     .signupBox {
@@ -89,15 +89,21 @@
 
 @media screen and (max-width: 470px) {
 
+    .mainContainerSignupBox {
+        margin-top: 15px;
+    }
+
     .signupBox {
+        width: 260px;
 
         h1 {
             font-size: 40px;
+            text-align: center;
         }
     }
 
     .containerArrowIcon {
-        left: 8px;
+        left: 35px;
     }
 
     form {
@@ -131,9 +137,13 @@
 
 
 @media screen and (max-width: 390px) {
+    
+    .mainContainerSignupBox {
+        margin-top: 25px;
+    }
 
     .signupBox {
-        padding: 30px 12px 30px 12px;
+        width: 180px;
 
         h1 {
             font-size: 30px;
@@ -141,14 +151,19 @@
     }
 
     .containerArrowIcon {
-        top: 0;
-        left: 12px;
+        top: 30px;
+        left: 22px;
     }
 
     form {
 
         input {
-            width: 130px;
+            width: 100px;
+        }
+
+        label {
+            width: 110%;
+            text-align: center;
         }
     }
 
@@ -162,7 +177,7 @@
 }
 
 
-//////////////////// Disabled the hover Effects on touch Devices and add a active Effects
+//////////////////// Disabled the hover Effects on touch Devices and add active Effects
 @media (pointer: coarse) {
 
     .containerArrowIcon {

@@ -85,7 +85,7 @@
 @media screen and (max-width: 540px) {
 
     .mainContainerloginBox {
-        margin-top: 40px;
+        margin-top: 25px;
     }
 
     .loginBox {
@@ -174,17 +174,40 @@
 
 @media screen and (max-width: 390px) {
 
+    .mainContainerloginBox {
+        margin-top: 40px;
+    }
+
     .loginBox {
-        padding: 20px 12px 20px 12px;
+        width: 185px;
+        padding: 20px 40px 20px 40px;
 
         h1 {
             font-size: 30px;
         }
+
+        form {
+
+            input {
+                width: 110px;
+            }
+        }
     }
+
+    .containerTextWithTwoLines {
+
+        hr {
+            width: 55px;
+        }
+    }
+
+    .btnSignInWithGoogle {
+        width: 220px;
+    }    
 }
 
 
-//////////////////// Disabled the hover Effects on touch Devices and add a active Effects
+//////////////////// Disabled the hover Effects on touch Devices and add active Effects
 @media (pointer: coarse) {
 
     .textForgotPassword {

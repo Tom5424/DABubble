@@ -6,14 +6,15 @@ import { NgClass } from '@angular/common';
 import { UserFeedbackMessageComponent } from '../user-feedback-message/user-feedback-message.component';
 import { RoutingService } from '../../services/routing.service';
 import { AuthService } from '../../services/auth.service';
+import { HeaderComponent } from '../header/header.component';
 
 
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
-  imports: [FooterComponent, UserFeedbackMessageComponent, ReactiveFormsModule, RouterLink, NgClass],
+  imports: [HeaderComponent, FooterComponent, UserFeedbackMessageComponent, ReactiveFormsModule, RouterLink, NgClass],
   templateUrl: './forgot-password.component.html',
-  styleUrl: './forgot-password.component.scss'
+  styleUrls: ['./forgot-password.component.scss', './forgot-password.component.media.scss'],
 })
 
 
