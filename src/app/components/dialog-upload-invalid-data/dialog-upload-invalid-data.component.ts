@@ -7,7 +7,7 @@ import { MatDialogClose } from '@angular/material/dialog';
   standalone: true,
   imports: [MatDialogClose],
   templateUrl: './dialog-upload-invalid-data.component.html',
-  styleUrl: './dialog-upload-invalid-data.component.scss'
+  styleUrls: ['./dialog-upload-invalid-data.component.scss', './dialog-upload-invalid-data.component.media.scss']
 })
 
 

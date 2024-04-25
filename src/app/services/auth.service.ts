@@ -78,7 +78,7 @@ export class AuthService {
         })
         .catch((error) => {
           this.displayUserFeedbackIfSignupFailedService();
-          console.error(error.message);
+          console.error('Failed to cretae Account, the entered Email already exist', error.message);
         });
     }
   }

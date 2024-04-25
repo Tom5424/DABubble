@@ -11,6 +11,26 @@ body {
 }
 
 
+app-chat-direct-messages {
+    width: 100%;
+}
+
+
+app-chat-channel-messages {
+    width: 100%;
+}
+
+
+app-welcome-to-dabubble {
+    width: 100%;
+}
+
+
+app-new-message {
+    width: 100%;
+}
+
+
 .errorMessage {
     @include errorMessage();
 }
@@ -51,11 +71,19 @@ body {
 
 
 /////////// Custom Styles for Matdialog 
-.mat-mdc-dialog-container._mat-animation-noopable .mdc-dialog__container,
-.mat-mdc-dialog-container._mat-animation-noopable .mdc-dialog__surface {
-    border-radius: 30px;
-    background-color: #ffffff;
-    box-shadow: 0px 6px 10px 0px #00000033;
+.mat-mdc-dialog-container .mdc-dialog__surface {
+    border-radius: 30px !important;
+    box-shadow: 0 6px 10px 0 #00000033 !important;
+    background-color: #ffffff !important;
+}
+
+
+/////////// Custom media Query for Matdialog 
+@media screen and (max-height: 405px) {
+
+    .mat-mdc-dialog-container .mdc-dialog__container {
+        height: 88vh;
+    }
 }
 
 
@@ -91,26 +119,6 @@ body {
 
 .emoji-mart .emoji-mart-emoji {
     @include hover();
-}
-
-
-app-chat-direct-messages {
-    width: 100%;
-}
-
-
-app-chat-channel-messages {
-    width: 100%;
-}
-
-
-app-welcome-to-dabubble {
-    width: 100%;
-}
-
-
-app-new-message {
-    width: 100%;
 }
 
 

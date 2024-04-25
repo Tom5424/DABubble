@@ -1,0 +1,33 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Width
+@media screen and (min-width: 1600px) {
+
+    .dialogBox {
+        width: 650px;
+    }
+}
+
+
+@media screen and (max-width: 520px) {
+
+    .dialogBox {
+
+        h1 {
+            font-size: 40px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 455px) {
+
+    .dialogBox {
+
+        h1 {
+            text-align: center;
+        }
+    }
+}

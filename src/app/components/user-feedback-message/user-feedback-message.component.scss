@@ -8,7 +8,7 @@
     overflow-x: hidden;
 
     p {
-        @include positionAbsolute(unset, 30px, unset, 30px);
+        @include positionFixed(unset, 30px, unset, 30px);
         @include flexCenteredYAxis();
         gap: 28px;
         animation: slideInLeft 300ms ease-in-out 250ms both;
