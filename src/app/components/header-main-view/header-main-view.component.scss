@@ -118,7 +118,7 @@ header {
 
 .containerDirectMessagesOrChannelMessages {
     @include hover();
-    @include flexCenteredYAxis();
+    @include flex();
     gap: 15px;
     padding: 4px 20px 4px 20px;
     border-radius: 35px;
@@ -126,9 +126,7 @@ header {
     p {
         font-size: 18px;
         margin: 0;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow-x: hidden;
+        word-break: break-all;
     }
 
     &:hover {

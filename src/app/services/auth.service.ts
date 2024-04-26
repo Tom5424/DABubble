@@ -197,8 +197,7 @@ export class AuthService {
 
 
   loginWithGoogleService(): void {
-    const googleProvider = new GoogleAuthProvider();
-    signInWithPopup(this.auth, googleProvider)
+    signInWithPopup(this.auth, new GoogleAuthProvider())
       .then((userCredential) => {
         this.user.isOnline = true;
         this.saveUserOnlineStatusService();
