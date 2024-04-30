@@ -11,7 +11,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   standalone: true,
   imports: [MatDialogClose, MatTooltipModule, NgClass, NgStyle],
   templateUrl: './dialog-profile-detail-view.component.html',
-  styleUrl: './dialog-profile-detail-view.component.scss'
+  styleUrls: ['./dialog-profile-detail-view.component.scss', './dialog-profile-detail-view.component.media.scss'],
 })
 
 

@@ -1,0 +1,258 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Width
+@media screen and (min-width: 2000px) {
+
+    header {
+        gap: 350px;
+    }
+
+    .searchIcon {
+        right: 670px;
+    }
+}
+
+
+@media screen and (min-width: 1950px) and (max-width: 2000px) {
+
+    header {
+        gap: 350px;
+    }
+
+    .searchIcon {
+        right: 645px;
+    }
+}
+
+
+@media screen and (min-width: 1900px) and (max-width: 1950px) {
+
+    header {
+        gap: 325px;
+    }
+
+    .searchIcon {
+        right: 630px;
+    }
+}
+
+
+@media screen and (min-width: 1850px) and (max-width: 1900px) {
+
+    header {
+        gap: 300px;
+    }
+
+    .searchIcon {
+        right: 605px;
+    }
+}
+
+
+@media screen and (min-width: 1800px) and (max-width: 1850px) {
+
+    header {
+        gap: 250px;
+    }
+
+    .searchIcon {
+        right: 575px;
+    }
+}
+
+
+@media screen and (min-width: 1750px) and (max-width: 1800px) {
+
+    header {
+        gap: 220px;
+    }
+
+    .searchIcon {
+        right: 545px;
+    }
+}
+
+
+@media screen and (min-width: 1700px) and (max-width: 1750px) {
+
+    header {
+        gap: 200px;
+    }
+
+    .searchIcon {
+        right: 545px;
+    }
+}
+
+
+@media screen and (min-width: 1650px) and (max-width: 1700px) {
+
+    header {
+        gap: 180px;
+    }
+
+    .searchIcon {
+        right: 520px;
+    }
+}
+
+
+@media screen and (min-width: 1600px) and (max-width: 1650px) {
+
+    header {
+        gap: 180px;
+    }
+
+    .searchIcon {
+        right: 485px;
+    }
+}
+
+
+@media screen and (max-width: 1286px) {
+
+    .containerMenuSelection {
+        left: 460px;
+    }
+}
+
+
+@media screen and (max-width: 1210px) {
+
+    header {
+        gap: 100px;
+    }
+
+    .searchIcon {
+        right: 410px;
+    }
+
+    .containerMenuSelection {
+        left: 430px;
+    }
+}
+
+
+@media screen and (max-width: 1150px) {
+
+    header {
+        gap: 25px;
+    }
+
+    .searchIcon {
+        right: 335px;
+    }
+
+    .containerMenuSelection {
+        left: 355px;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+
+    .dialogBox {
+        width: 300px;
+    }
+}
+
+
+@media screen and (max-width: 475px) {
+
+    .dialogBox {
+        width: 160px;
+        padding: 45px 25px 45px 25px;
+    }
+
+    .dialogBoxUpperPart {
+
+        p {
+            font-size: 16px;
+        }
+    }
+
+    .containerProfileImg {
+
+        img {
+            width: 80px;
+            height: 80px;
+        }
+    }
+
+    .dialogBoxMiddlePart {
+        margin-bottom: 10px;
+
+        p {
+            font-size: 16px;
+        }
+
+        button {
+            font-size: 16px;
+        }
+    }
+
+    .dialogBoxUserOnlineStatus {
+
+        img {
+            width: 14px;
+        }
+
+        p {
+            font-size: 16px;
+        }
+    }
+
+    .dialogBoxLowerPart {
+
+        p {
+            font-size: 16px;
+        }
+    }
+
+    .userEmail {
+        font-size: 16px;
+        padding-left: 0;
+    }
+}
+
+
+//////////////////// Disabled the hover Effects on touch Devices and add active Effects
+@media (pointer: coarse) {
+
+    .containerCloseIcon {
+
+        &:hover {
+            background-color: unset;
+
+            img {
+                filter: none;
+            }
+        }
+
+        &:active {
+            background-color: $bgColor;
+            transition: all 225ms ease-in-out;
+
+            img {
+                filter: brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(1557%) hue-rotate(226deg) brightness(110%) contrast(90%);
+            }
+        }
+    }
+
+    .dialogBoxMiddlePart {
+
+        button {
+
+            &:hover {
+                color: $darkPurple;
+            }
+
+            &:active {
+                color: $darkPurple;
+                font-weight: 700;
+            }
+        }
+    }
+}
