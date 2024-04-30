@@ -1,0 +1,43 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+header {
+    @include flexSpaceBetween();
+    position: relative;
+    padding: 15px 50px 15px 50px;
+}
+
+
+.containerProfileImg {
+    @include hover();
+    position: relative;
+}
+
+
+.spinnerIcon {
+    @include positionAbsolute(-10px, unset, unset, -15px);
+    width: 100px;
+}
+
+
+.profileImg {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+
+.imgNoSelectedProfile {
+    background-color: $purple;
+    width: 50px;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+
+.iconOnlineStatus {
+    @include positionAbsolute(unset, 2px, unset, 3px);
+    border: 2px solid $bgColor;
+    border-radius: 50%;
+}

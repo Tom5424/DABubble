@@ -31,6 +31,13 @@ app-new-message {
 }
 
 
+app-main-view {
+    background-color: $bgColor;
+    height: 100vh;
+    display: block;
+}
+
+
 .errorMessage {
     @include errorMessage();
 }

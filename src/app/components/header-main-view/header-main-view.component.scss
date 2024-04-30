@@ -3,20 +3,15 @@
 
 
 header {
-    @include flexCenteredYAxis();
-    @include flexSpaceBetween();
-    background-color: $bgColor;
-    padding: 0px 40px 0 40px;
+    @include flexCenteredInTheMiddle();
+    gap: 130px;
+    padding: 0 50px 0 50px;
 
     input {
-        @include inputfieldOrTextarea(600px, 42px, 17.5px, 45px, 17.5px, 35px, 24px, #ffffff);
+        @include inputfieldOrTextarea(600px, 42px, 17.5px, 55px, 17.5px, 35px, 24px, #ffffff);
         @include inputfieldOrTextareaHover();
         @include inputfieldOrTextareaFocus();
         border: unset;
-        background-image: url('../../../assets/icons/search-icon.svg');
-        background-position: 635px 16px;
-        background-size: 30px;
-        background-repeat: no-repeat;
     }
 }
 
@@ -27,9 +22,87 @@ header {
 }
 
 
+.searchIcon {
+    position: absolute;
+    right: 440px;
+}
+
+
+.containerProfileImgAndName {
+    @include hover();
+    @include flexCenteredYAxis();
+    gap: 20px;
+    position: relative;
+
+    &:hover {
+
+        p {
+            color: $purple;
+        }
+
+        .arrowIcon {
+            filter: brightness(0) saturate(100%) invert(64%) sepia(67%) saturate(4918%) hue-rotate(213deg) brightness(100%) contrast(91%);
+        }
+    }
+
+    p {
+        max-width: 120px;
+        font-size: 32px;
+        font-weight: 700;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+
+.spinnerIcon {
+    width: 100px;
+}
+
+
+.profileImg {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+
+.imgNoSelectedProfile {
+    background-color: $purple;
+    width: 50px;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+
+.iconOnlineStatus {
+    @include positionAbsolute(unset, 13px, unset, 34px);
+    border: 2px solid $bgColor;
+    border-radius: 50%;
+}
+
+
+.btnMatMenu {
+    @include hover();
+    border-radius: 35px;
+    font-size: 24px;
+    font-weight: 600;
+    padding: 10px 25px 10px 25px;
+    background-color: #ffffff;
+    border: unset;
+
+    &:hover {
+        background-color: $bgColor;
+        color: $middlePurple;
+        font-weight: 700;
+    }
+}
+
+
 .containerMenuSelection {
     @include flexColumn();
-    @include positionAbsolute(70px, unset, 318px, unset);
+    @include positionAbsolute(70px, unset, 470px, unset);
     border: 1px solid $lightPurple;
     height: 145px;
     width: 400px;
@@ -168,76 +241,4 @@ header {
     font-size: 18px;
     margin: 0;
     text-align: center;
-}
-
-
-.containerProfileImgAndName {
-    @include hover();
-    @include flexCenteredYAxis();
-    gap: 20px;
-    position: relative;
-
-    &:hover {
-
-        p {
-            color: $purple;
-        }
-
-        .arrowIcon {
-            filter: brightness(0) saturate(100%) invert(64%) sepia(67%) saturate(4918%) hue-rotate(213deg) brightness(100%) contrast(91%);
-        }
-    }
-
-    p {
-        max-width: 150px;
-        font-size: 32px;
-        font-weight: 700;
-        overflow-x: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-}
-
-
-.spinnerIcon {
-    width: 100px;
-}
-
-
-.profileImg {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-}
-
-
-.imgNoSelectedProfile {
-    background-color: $purple;
-    width: 50px;
-    padding: 10px;
-    border-radius: 50%;
-}
-
-
-.iconOnlineStatus {
-    @include positionAbsolute(unset, 13px, unset, 34px);
-    border: 2px solid $bgColor;
-    border-radius: 50%;
-}
-
-
-.btnMatMenu {
-    @include hover();
-    border-radius: 35px;
-    font-size: 24px;
-    font-weight: 600;
-    padding: 10px 25px 10px 25px;
-    background-color: #ffffff;
-    border: unset;
-
-    &:hover {
-        background-color: $bgColor;
-        color: $middlePurple;
-        font-weight: 700;
-    }
 }

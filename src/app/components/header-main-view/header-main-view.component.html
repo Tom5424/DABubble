@@ -1,10 +1,54 @@
-<header>
-    <div [ngClass]="{'overlay': menuSelectionIsOpen}" (click)="closeMenuSelectionIfClickOutside()">
+<div [ngClass]="{'overlay': menuSelectionIsOpen}" (click)="closeMenuSelectionIfClickOutside()">
 
+</div>
+
+
+<!--------------------------------- Only displayed in the Mobile View --------------------------------->
+<app-header-mobile-view class="d-none"></app-header-mobile-view>
+<!--------------------------------- Only displayed in the Mobile View --------------------------------->
+
+
+<header>
+
+    <img src="assets/img/da-bubble-logo.svg" alt="DABubble Logo">
+
+    <input type="text" placeholder="Search in DABubble" [formControl]="inputField" (click)="openMenuSelection()">
+
+    <img class="searchIcon" src="assets/icons/search-icon.svg" alt="Search Icon">
+
+
+    <div class="containerProfileImgAndName" [matMenuTriggerFor]="menu">
+        @if (userDataLoading()) {
+        <img class="spinnerIcon" src="./assets/icons/spinner-icon.svg" alt="Spinner Icon">
+        }@else {
+        <p>{{ authService.user.name }}</p>
+
+        @if (noProfileImgExist()) {
+        <img class="imgNoSelectedProfile" src="./assets/img/non-user-selected.svg" alt="Profile Image">
+        }@else {
+        <img class="profileImg" src="{{ authService.user.imgUrl }}" alt="Profile Image">
+        }
+
+
+        @if (guestUserIsLoggedIn()) {
+        <!---------------- No online Status will displayed if Guest User is Logged in ---------------->
+        <img>
+        }@else if(userIsOnline()) {
+        <img class="iconOnlineStatus" src="./assets/icons/user-is-online-icon.svg" alt="Green Dot">
+        }@else {
+        <img class="iconOnlineStatus" src="./assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
+        }
+        <img class="arrowIcon" src="./assets/icons/arrow-icon-profile.svg" alt="Arrow Icon">
+        }
     </div>
 
-    <img src="./assets/img/da-bubble-logo.svg" alt="DABubble Logo">
-    <input type="text" placeholder="Search in DABubble" [formControl]="inputField" (click)="openMenuSelection()">
+
+    <mat-menu #menu="matMenu">
+        <button class="btnMatMenu" (click)="openProfileDetailView()">Profile</button>
+        <button class="btnMatMenu" (click)="logout()">Log out</button>
+        <button class="btnMatMenu" routerLink="/legalNotice">Legal Notice</button>
+        <button class="btnMatMenu" routerLink="/privacyPolicy">Privacy Policy</button>
+    </mat-menu>
 
 
     <div class="containerMenuSelection" [ngClass]="{'d-none': !menuSelectionIsOpen}">
@@ -164,38 +208,4 @@
 
 
     </div>
-
-
-    <div class="containerProfileImgAndName" [matMenuTriggerFor]="menu">
-        @if (userDataLoading()) {
-        <img class="spinnerIcon" src="./assets/icons/spinner-icon.svg" alt="Spinner Icon">
-        }@else {
-        <p>{{ authService.user.name }}</p>
-
-        @if (noProfileImgExist()) {
-        <img class="imgNoSelectedProfile" src="./assets/img/non-user-selected.svg" alt="Profile Image">
-        }@else {
-        <img class="profileImg" src="{{ authService.user.imgUrl }}" alt="Profile Image">
-        }
-
-
-        @if (guestUserIsLoggedIn()) {
-        <!---------------- No online Status will displayed if Guest User is Logged in ---------------->
-        <img>
-        }@else if(userIsOnline()) {
-        <img class="iconOnlineStatus" src="./assets/icons/user-is-online-icon.svg" alt="Green Dot">
-        }@else {
-        <img class="iconOnlineStatus" src="./assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
-        }
-        <img class="arrowIcon" src="./assets/icons/arrow-icon-profile.svg" alt="Arrow Icon">
-        }
-    </div>
-
-
-    <mat-menu #menu="matMenu">
-        <button class="btnMatMenu" (click)="openProfileDetailView()">Profile</button>
-        <button class="btnMatMenu" (click)="logout()">Log out</button>
-        <button class="btnMatMenu" routerLink="/legalNotice">Legal Notice</button>
-        <button class="btnMatMenu" routerLink="/privacyPolicy">Privacy Policy</button>
-    </mat-menu>
 </header>

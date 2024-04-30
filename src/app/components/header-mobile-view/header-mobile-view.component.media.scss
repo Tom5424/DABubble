@@ -1,0 +1,35 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Width
+@media screen and (max-width: 460px) {
+
+    header {
+        padding: 15px 40px 15px 40px;
+    }
+
+    .dabubbleLogo {
+        width: 200px;
+    }
+
+    .spinnerIcon {
+        top: -15px;
+    }
+}
+
+
+@media screen and (max-width: 390px) {
+
+    header {
+        padding: 15px 20px 15px 20px;
+    }
+
+    .dabubbleLogo {
+        width: 160px;
+    }
+
+    .spinnerIcon {
+        top: -25px;
+    }
+}

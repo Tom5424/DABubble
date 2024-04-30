@@ -15,14 +15,15 @@ import { CreateChannelMessageService } from '../../services/create-channel-messa
 import { ChannelMessage } from '../../models/channel-message';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
+import { HeaderMobileViewComponent } from '../header-mobile-view/header-mobile-view.component';
 
 
 @Component({
   selector: 'app-header-main-view',
   standalone: true,
-  imports: [MatMenuModule, RouterLink, NgClass, AsyncPipe, DatePipe, ReactiveFormsModule, RouterLink],
+  imports: [HeaderMobileViewComponent, MatMenuModule, RouterLink, NgClass, AsyncPipe, DatePipe, ReactiveFormsModule, RouterLink],
   templateUrl: './header-main-view.component.html',
-  styleUrl: './header-main-view.component.scss'
+  styleUrls: ['./header-main-view.component.scss', './header-main-view.component.media.scss'],
 })
 
 

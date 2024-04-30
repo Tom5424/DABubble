@@ -1,0 +1,27 @@
+<header>
+
+    <img class="dabubbleLogo" src="assets/img/da-bubble-logo.svg" alt="DABubble Logo">
+
+    <div class="containerProfileImg">
+        @if (userDataLoading()) {
+        <img class="spinnerIcon" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
+        }@else {
+
+        @if (noProfileImgExist()) {
+        <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="Profile Image">
+        }@else {
+        <img class="profileImg" src="{{ authService.user.imgUrl }}" alt="Profile Image">
+        }
+
+        @if (guestUserIsLoggedIn()) {
+        <!---------------- No online Status will displayed if Guest User is Logged in ---------------->
+        <img class="d-none">
+        }@else if(userIsOnline()) {
+        <img class="iconOnlineStatus" src="./assets/icons/user-is-online-icon.svg" alt="Green Dot">
+        }@else {
+        <img class="iconOnlineStatus" src="./assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
+        }
+        }
+    </div>
+
+</header>
