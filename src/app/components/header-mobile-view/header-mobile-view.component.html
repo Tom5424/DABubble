@@ -2,7 +2,9 @@
 
     <img class="dabubbleLogo" src="assets/img/da-bubble-logo.svg" alt="DABubble Logo">
 
-    <div class="containerProfileImg">
+    <div class="containerProfileImg" #matMenuTrigger="matMenuTrigger" [matMenuTriggerFor]="menu"
+        (click)="closeMatMenuIfInMobileView()">
+
         @if (userDataLoading()) {
         <img class="spinnerIcon" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
         }@else {
@@ -23,5 +25,13 @@
         }
         }
     </div>
+
+
+    <mat-menu #menu>
+        <button class="btnMatMenu" (click)="openProfileDetailView()">Profile</button>
+        <button class="btnMatMenu" (click)="logout()">Log out</button>
+        <button class="btnMatMenu" routerLink="/legalNotice">Legal Notice</button>
+        <button class="btnMatMenu" routerLink="/privacyPolicy">Privacy Policy</button>
+    </mat-menu>
 
 </header>

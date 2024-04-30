@@ -41,3 +41,20 @@ header {
     border: 2px solid $bgColor;
     border-radius: 50%;
 }
+
+
+.btnMatMenu {
+    @include hover();
+    border-radius: 35px;
+    font-size: 24px;
+    font-weight: 600;
+    padding: 10px 25px 10px 25px;
+    background-color: #ffffff;
+    border: unset;
+
+    &:hover {
+        background-color: $bgColor;
+        color: $middlePurple;
+        font-weight: 700;
+    }
+}

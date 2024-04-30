@@ -118,6 +118,15 @@ app-main-view {
 }
 
 
+/////////// Custom Media Query for MatMenu
+@media screen and (max-width: 1000px) {
+
+    .cdk-overlay-pane {
+        margin-top: 5px;
+    }
+}
+
+
 /////////// Custom Styles for the Emoji Picker
 .emoji-mart-category .emoji-mart-emoji span {
     @include hover();
