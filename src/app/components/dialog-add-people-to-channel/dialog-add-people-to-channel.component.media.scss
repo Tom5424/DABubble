@@ -1,0 +1,148 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Width
+@media screen and (min-width: 1600px) {
+
+    .errorMessage {
+        font-size: 16px;
+    }
+}
+
+
+@media screen and (max-width: 730px) {
+
+    .dialogBox {
+        width: 400px;
+    }
+}
+
+
+@media screen and (max-width: 605px) {
+
+    .dialogBox {
+        width: 300px;
+    }
+
+    .containerUserMenuSelection {
+        width: 215px;
+    }
+
+    .mainContainerAddedUserMenuSelection {
+        flex-direction: column;
+    }
+}
+
+
+@media screen and (max-width: 475px) {
+
+    .dialogBox {
+        width: 230px;
+    }
+
+    .dialogBoxUpperPart {
+
+        p {
+            font-size: 18px;
+        }
+    }
+
+    form {
+
+        label {
+            font-size: 16px;
+        }
+
+        input[type=text] {
+            font-size: 16px;
+        }
+    }
+
+    .containerUserMenuSelection {
+        width: 150px;
+    }
+
+    .childContainerAddedUserMenuSelection {
+
+        p {
+            width: 80px;
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+}
+
+
+@media screen and (max-width: 390px) {
+
+    .dialogBox {
+        width: 160px;
+        padding: 30px;
+    }
+
+    form {
+
+        label {
+            text-align: center;
+        }
+    }
+
+    .containerUserMenuSelection {
+        width: 80px;
+        left: 50px;
+        overflow-x: hidden;
+    }
+
+    .containerUserNameAndImg {
+        padding: 4px 4px 4px 11px;
+    }
+
+    .userOnlineStatus {
+        left: 50px;
+    }
+
+    .containerBtn {
+        justify-content: center;
+    }
+}
+
+
+//////////////////// Disabled the hover Effects on touch Devices and add active Effects
+@media (pointer: coarse) {
+
+    .containerCloseIcon {
+
+        &:hover {
+            background-color: unset;
+
+            img {
+                filter: none;
+            }
+        }
+
+        &:active {
+            background-color: $bgColor;
+            transition: all 225ms ease-in-out;
+
+            img {
+                filter: brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(1557%) hue-rotate(226deg) brightness(110%) contrast(90%);
+            }
+        }
+    }
+
+    .containerBtn {
+
+        button {
+
+            &:hover {
+                background-color: $darkPurple;
+            }
+
+            &:active {
+                background-color: $purple;
+            }
+        }
+    }
+}

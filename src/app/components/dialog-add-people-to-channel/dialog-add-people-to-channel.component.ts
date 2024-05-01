@@ -14,7 +14,7 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [MatDialogClose, ReactiveFormsModule, NgClass, AsyncPipe],
   templateUrl: './dialog-add-people-to-channel.component.html',
-  styleUrl: './dialog-add-people-to-channel.component.scss'
+  styleUrls: ['./dialog-add-people-to-channel.component.scss', './dialog-add-people-to-channel.component.media.scss'],
 })
 
 
