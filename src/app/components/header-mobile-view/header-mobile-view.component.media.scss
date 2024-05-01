@@ -33,3 +33,21 @@
         top: -25px;
     }
 }
+
+
+//////////////////// Disabled the hover Effects on touch Devices and add active Effects
+@media (pointer: coarse) {
+
+    .btnMatMenu {
+
+        &:hover {
+            color: #000000;
+            background-color: #ffffff;
+        }
+
+        &:active {
+            color: $middlePurple;
+            background-color: $bgColor;
+        }
+    }
+}

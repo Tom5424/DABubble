@@ -10,7 +10,7 @@ import { NgClass } from '@angular/common';
   standalone: true,
   imports: [MatDialogClose, ReactiveFormsModule, NgClass],
   templateUrl: './dialog-edit-profile.component.html',
-  styleUrl: './dialog-edit-profile.component.scss'
+  styleUrls: ['./dialog-edit-profile.component.scss', './dialog-edit-profile.component.media.scss'],
 })
 
 

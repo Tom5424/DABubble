@@ -41,34 +41,24 @@
         }
     }
 
-    .dialogBoxMiddlePart {
-        margin-bottom: 10px;
+    form {
 
-        p {
+        label {
             font-size: 18px;
-        }
 
-        button {
-            font-size: 18px;
+            img {
+                width: 27px;
+            }
         }
     }
 
-    .dialogBoxUserOnlineStatus {
-
-        img {
-            width: 14px;
-        }
-
-        p {
-            font-size: 18px;
-        }
+    .errorMessage {
+        margin: -5px 0 0 10px !important;
     }
 
-    .dialogBoxLowerPart {
-
-        p {
-            font-size: 18px;
-        }
+    .btnContainer {
+        flex-direction: column;
+        gap: 20px;
     }
 }
 
@@ -96,18 +86,27 @@
         }
     }
 
-    .dialogBoxMiddlePart {
+    .btnPrimary {
 
-        button {
+        &:hover {
+            background-color: $darkPurple;
+        }
 
-            &:hover {
-                color: $darkPurple;
-            }
+        &:active {
+            background-color: $purple;
+        }
+    }
 
-            &:active {
-                color: $darkPurple;
-                font-weight: 700;
-            }
+    .btnSecondary {
+
+        &:hover {
+            color: $darkPurple;
+            background-color: #ffffff;
+        }
+
+        &:active {
+            background-color: $middlePurple;
+            color: #ffffff;
         }
     }
 }
