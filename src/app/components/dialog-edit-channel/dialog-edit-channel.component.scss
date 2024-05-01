@@ -111,7 +111,12 @@
     padding: 20px;
 
     span {
+        max-height: 80px;
+        padding-right: 10px;
         font-size: 18px;
+        word-wrap: break-word;
+        display: block;
+        overflow-y: scroll;
     }
 
     input {
@@ -141,6 +146,7 @@
 
     p:nth-of-type(2) {
         color: $middlePurple;
+        margin-bottom: 0;
         font-size: 24px;
     }
 }

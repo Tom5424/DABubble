@@ -10,7 +10,7 @@ import { CreateChannelService } from '../../services/create-channel.service';
   standalone: true,
   imports: [MatDialogModule, ReactiveFormsModule, NgClass],
   templateUrl: './dialog-edit-channel.component.html',
-  styleUrl: './dialog-edit-channel.component.scss'
+  styleUrls: ['./dialog-edit-channel.component.scss', './dialog-edit-channel.component.media.scss']
 })
 
 
@@ -26,7 +26,7 @@ export class DialogEditChannelComponent {
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-    
+
   }
 
 

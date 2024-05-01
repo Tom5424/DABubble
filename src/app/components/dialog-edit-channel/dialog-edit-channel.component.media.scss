@@ -1,0 +1,297 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Width
+@media screen and (min-width: 1600px) {
+
+    .errorMessage {
+        font-size: 16px;
+    }
+}
+
+
+@media screen and (max-width: 1100px) {
+
+    .dialogBox {
+        width: 700px;
+    }
+
+    .dialogBoxSecondMiddlePart {
+
+        input {
+            width: 619px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 975px) {
+
+    .dialogBox {
+        width: 600px;
+    }
+
+    .dialogBoxSecondMiddlePart {
+
+        input {
+            width: 519px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 850px) {
+
+    .dialogBox {
+        width: 500px;
+    }
+
+    .dialogBoxSecondMiddlePart {
+
+        input {
+            width: 419px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 730px) {
+
+    .dialogBox {
+        width: 400px;
+    }
+
+    .dialogBoxSecondMiddlePart {
+
+        input {
+            width: 319px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 605px) {
+
+    .dialogBox {
+        width: 300px;
+    }
+
+    .dialogBoxSecondMiddlePart {
+
+        input {
+            width: 219px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 490px) {
+
+    .dialogBox {
+        width: 230px;
+    }
+
+    .containerChannelNameAndImageUpperPart {
+
+        p {
+            width: 100px;
+            font-size: 20px;
+            white-space: nowrap;
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+    .containerText {
+        gap: 10px;
+    }
+
+    .containerChannelNameAndImageMiddlePart {
+
+        p {
+            width: 100px;
+            font-size: 20px;
+            white-space: nowrap;
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+        }
+
+        input {
+            width: 150px;
+        }
+    }
+
+    .dialogBoxSecondMiddlePart {
+
+        input {
+            width: 150px;
+        }
+    }
+
+    .containerNameWhoCreatedChannel {
+
+        p:nth-of-type(2) {
+            font-size: 20px;
+        }
+    }
+
+    .containerBtn {
+        justify-content: center;
+    }
+}
+
+
+@media screen and (max-width: 390px) {
+
+    .dialogBox {
+        width: 160px;
+        padding: 30px;
+    }
+
+    .containerChannelNameAndImageUpperPart {
+
+        p {
+            font-size: 18px;
+        }
+    }
+
+    .containerText {
+        flex-direction: column;
+        gap: 0;
+
+        button {
+            font-size: 16px;
+            margin: 12px 0 12px 0;
+        }
+
+        p:nth-of-type(1) {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        p:nth-of-type(2) {
+            margin: 12px 0 12px 0;
+            font-size: 16px;
+        }
+    }
+
+    .containerChannelNameAndImageMiddlePart {
+
+        input {
+            width: 100px;
+            font-size: 16px;
+        }
+
+        p {
+            font-size: 16px;
+        }
+    }
+
+    .dialogBoxSecondMiddlePart {
+
+        input {
+            width: 100px;
+            font-size: 16px;
+        }
+
+        span {
+            max-height: 52px;
+            font-size: 16px;
+        }
+
+        hr {
+            margin: 20px 0 20px 0;
+        }
+    }
+
+    .containerNameWhoCreatedChannel {
+
+        p:nth-of-type(1) {
+            font-size: 16px;
+        }
+
+        p:nth-of-type(2) {
+            font-size: 16px;
+        }
+    }
+
+    .containerBtn {
+
+        button {
+            font-size: 16px;
+        }
+    }
+
+    .errorMessage {
+        margin: 10px 0 10px 20px !important;
+    }
+}
+
+
+//////////////////// Disabled the hover Effects on touch Devices and add active Effects
+@media (pointer: coarse) {
+
+    .containerCloseIcon {
+
+        &:hover {
+            background-color: unset;
+
+            img {
+                filter: none;
+            }
+        }
+
+        &:active {
+            background-color: $bgColor;
+            transition: all 225ms ease-in-out;
+
+            img {
+                filter: brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(1557%) hue-rotate(226deg) brightness(110%) contrast(90%);
+            }
+        }
+    }
+
+    .containerText {
+
+        p:nth-of-type(2) {
+
+            &:hover {
+                font-weight: normal;
+                transition: all 225ms ease-in-out;
+            }
+
+            &:active {
+                font-weight: 700;
+                transition: all 225ms ease-in-out;
+            }
+        }
+
+        button {
+
+            &:hover {
+                font-weight: normal;
+                transition: all 225ms ease-in-out;
+            }
+
+            &:active {
+                font-weight: 700;
+                transition: all 225ms ease-in-out;
+            }
+        }
+    }
+
+    .containerBtn {
+
+        button {
+
+            &:hover {
+                background-color: $darkPurple;
+            }
+
+            &:active {
+                background-color: $purple;
+            }
+        }
+    }
+}

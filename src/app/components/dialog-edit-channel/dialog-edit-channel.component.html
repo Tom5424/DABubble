@@ -69,8 +69,8 @@
                 <p (click)="openEditModeForChannelDescription()">Edit</p>
                 }@else {
                 <button type="submit" (click)="saveChangesToEditChannelDescription()"
-                    [disabled]="editChannelForm.controls.channelDescription.value?.trim() == ''"
-                    [ngClass]="{'disabledBtn': editChannelForm.controls.channelDescription.value?.trim() == ''}">
+                    [disabled]="editChannelForm.controls.channelDescription.value?.trim() == '' || editChannelForm.controls.channelDescription.invalid"
+                    [ngClass]="{'disabledBtn': editChannelForm.controls.channelDescription.value?.trim() == '' || editChannelForm.controls.channelDescription.invalid}">
                     Save
                 </button>
                 }
