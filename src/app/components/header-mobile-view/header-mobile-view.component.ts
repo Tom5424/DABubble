@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { DialogProfileDetailViewComponent } from '../dialog-profile-detail-view/dialog-profile-detail-view.component';
 import { MatDialog } from '@angular/material/dialog';
 import { RouterLink } from '@angular/router';
@@ -18,7 +18,6 @@ import { RouterLink } from '@angular/router';
 export class HeaderMobileViewComponent implements OnInit {
   authService = inject(AuthService);
   matDialog = inject(MatDialog);
-  @ViewChild('matMenuTrigger') matMenuTrigger!: MatMenuTrigger;
 
 
   ngOnInit(): void {
@@ -54,12 +53,5 @@ export class HeaderMobileViewComponent implements OnInit {
 
   logout(): void {
     this.authService.logoutService();
-  }
-
-
-  closeMatMenuIfInMobileView(): void {
-    if (window.innerWidth <= 540) {
-      this.matMenuTrigger.closeMenu();
-    }
   }
 }

@@ -118,11 +118,27 @@ app-main-view {
 }
 
 
-/////////// Custom Media Query for MatMenu
+/////////// Custom Media Queries for MatMenu
 @media screen and (max-width: 1000px) {
 
     .cdk-overlay-pane {
-        margin-top: 5px;
+        margin: 5px -30px 0 0;
+    }
+}
+
+
+@media screen and (max-width: 460px) {
+
+    .cdk-overlay-pane {
+        margin: 5px -20px 0 0;
+    }
+}
+
+
+@media screen and (max-width: 390px) {
+
+    .cdk-overlay-pane {
+        margin: 5px 0 0 0;
     }
 }
 

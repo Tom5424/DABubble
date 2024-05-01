@@ -2,8 +2,7 @@
 
     <img class="dabubbleLogo" src="assets/img/da-bubble-logo.svg" alt="DABubble Logo">
 
-    <div class="containerProfileImg" #matMenuTrigger="matMenuTrigger" [matMenuTriggerFor]="menu"
-        (click)="closeMatMenuIfInMobileView()">
+    <div class="containerProfileImg" [matMenuTriggerFor]="menu">
 
         @if (userDataLoading()) {
         <img class="spinnerIcon" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
