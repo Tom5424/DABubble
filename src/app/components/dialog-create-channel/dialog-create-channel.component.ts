@@ -10,7 +10,7 @@ import { DialogAddPeopleToChannelComponent } from '../dialog-add-people-to-chann
   standalone: true,
   imports: [MatDialogClose, ReactiveFormsModule, NgClass],
   templateUrl: './dialog-create-channel.component.html',
-  styleUrl: './dialog-create-channel.component.scss'
+  styleUrls: ['./dialog-create-channel.component.scss', './dialog-create-channel.component.media.scss'],
 })
 
 

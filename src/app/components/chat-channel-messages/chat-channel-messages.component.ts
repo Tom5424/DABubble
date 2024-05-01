@@ -165,13 +165,13 @@ export class ChatChannelMessagesComponent implements OnInit {
   }
 
 
-  openDialogToShowAllChannelMembers(): void {
-    this.matDialog.open(DialogChannelMembersComponent, { position: { top: '185px', left: '670px' }, data: { channelMembers: this.createChannelService.channel.channelMembers, channelId: this.channelId } });
+  openDialogToShowAllChannelMembers(): void { 
+    this.matDialog.open(DialogChannelMembersComponent, { position: { top: '185px', right: '120px' }, data: { channelMembers: this.createChannelService.channel.channelMembers, channelId: this.channelId } });
   }
 
 
   openDialogToAddMorePeopleToChannel(): void {
-    this.matDialog.open(DialogAddMorePeopleToChannelComponent, { position: { top: '185px', left: '560px' }, data: { channelName: this.createChannelService.channel.channelName, channelMembers: this.createChannelService.channel.channelMembers, channelId: this.channelId } });
+    this.matDialog.open(DialogAddMorePeopleToChannelComponent, { position: { top: '185px', right: '50px ' }, data: { channelName: this.createChannelService.channel.channelName, channelMembers: this.createChannelService.channel.channelMembers, channelId: this.channelId } });
   }
 
 

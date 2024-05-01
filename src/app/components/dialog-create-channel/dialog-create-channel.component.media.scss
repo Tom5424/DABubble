@@ -1,0 +1,94 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Width
+@media screen and (min-width: 1600px) {
+
+    .errorMessage {
+        font-size: 16px;
+    }
+}
+
+
+@media screen and (max-width: 390px) {
+
+    .dialogBoxUpperPart {
+        margin-bottom: 20px;
+
+        p {
+            font-size: 18px;
+        }
+    }
+
+    .dialogBox {
+
+        span {
+            font-size: 16px;
+        }
+    }
+
+    form {
+        margin-top: 20px;
+
+        label {
+            text-align: center;
+            font-size: 16px;
+        }
+
+        input {
+            font-size: 16px
+        }
+    }
+
+    .errorMessage {
+        margin: -10px 0 -10px 15px !important;
+    }
+
+    .containerBtn {
+        justify-content: center;
+
+        button {
+            font-size: 16px;
+        }
+    }
+}
+
+
+//////////////////// Disabled the hover Effects on touch Devices and add active Effects
+@media (pointer: coarse) {
+
+    .containerCloseIcon {
+
+        &:hover {
+            background-color: unset;
+
+            img {
+                filter: none;
+            }
+        }
+
+        &:active {
+            background-color: $bgColor;
+            transition: all 225ms ease-in-out;
+
+            img {
+                filter: brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(1557%) hue-rotate(226deg) brightness(110%) contrast(90%);
+            }
+        }
+    }
+
+    .containerBtn {
+
+        button {
+
+            &:hover {
+                background-color: $darkPurple;
+            }
+
+            &:active {
+                background-color: $purple;
+            }
+        }
+    }
+}
