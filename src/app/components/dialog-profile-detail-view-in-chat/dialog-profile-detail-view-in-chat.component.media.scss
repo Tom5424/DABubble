@@ -41,14 +41,13 @@
         }
     }
 
+    .imgNoSelectedProfile {
+        width: 80px !important;
+    }
+
     .dialogBoxMiddlePart {
-        margin-bottom: 10px;
 
         p {
-            font-size: 18px;
-        }
-
-        button {
             font-size: 18px;
         }
     }
@@ -71,7 +70,7 @@
         }
     }
 
-    .userEmail {
+    .emailAddress {
         width: 125px;
         overflow-x: hidden;
         text-overflow: ellipsis;
@@ -102,17 +101,16 @@
         }
     }
 
-    .dialogBoxMiddlePart {
+    .containerBtnAndText {
 
         button {
 
             &:hover {
-                color: $darkPurple;
+                background-color: $darkPurple;
             }
 
             &:active {
-                color: $darkPurple;
-                font-weight: 700;
+                background-color: $purple;
             }
         }
     }

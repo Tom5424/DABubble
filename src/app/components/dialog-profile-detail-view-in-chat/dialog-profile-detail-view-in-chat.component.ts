@@ -10,7 +10,7 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [MatDialogClose, NgStyle],
   templateUrl: './dialog-profile-detail-view-in-chat.component.html',
-  styleUrl: './dialog-profile-detail-view-in-chat.component.scss'
+  styleUrls: ['./dialog-profile-detail-view-in-chat.component.scss', './dialog-profile-detail-view-in-chat.component.media.scss']
 })
 
 
@@ -21,7 +21,7 @@ export class DialogProfileDetailViewInChatComponent {
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-    
+
   }
 
 
