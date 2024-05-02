@@ -20,7 +20,7 @@ import { WorkspaceMenuService } from '../../services/workspace-menu.service';
   standalone: true,
   imports: [NgClass, AsyncPipe, DatePipe, RouterLink, ReactiveFormsModule],
   templateUrl: './inputfield-in-sidebar-mobile-view.component.html',
-  styleUrl: './inputfield-in-sidebar-mobile-view.component.scss'
+  styleUrls: ['./inputfield-in-sidebar-mobile-view.component.scss', './inputfield-in-sidebar-mobile-view.component.media.scss'],
 })
 
 

@@ -1,0 +1,105 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Width
+@media screen and (max-width: 610px) {
+
+    .containerMenuSelection {
+        width: 350px;
+    }
+}
+
+
+@media screen and (max-width: 555px) {
+
+    .containerMenuSelection {
+        width: 300px;
+    }
+}
+
+
+@media screen and (max-width: 505px) {
+
+    .containerMenuSelection {
+        width: 250px;
+    }
+
+    .containerTimeWhenTheMessageWasSent {
+        flex-direction: column;
+    }
+}
+
+
+@media screen and (max-width: 455px) {
+
+    .containerMenuSelection {
+        width: 180px;
+    }
+
+    .text {
+        text-align: center;
+    }
+
+
+    .containerDirectMessagesOrChannelMessages {
+        flex-direction: column;
+        align-items: center;
+
+        p {
+            text-align: center;
+        }
+    }
+
+    .containerTimeWhenTheMessageWasSent {
+        align-items: center;
+    }
+}
+
+
+@media screen and (max-width: 390px) {
+
+    .containerMenuSelection {
+        width: 130px;
+    }
+
+    .text {
+        font-size: 16px;
+    }
+
+    .containerUserNameAndImg {
+
+        p {
+            font-size: 16px;
+        }
+    }
+
+    .containerChannelNameAndImg {
+
+        p {
+            font-size: 16px;
+        }
+    }
+
+    .containerDirectMessagesOrChannelMessages {
+
+        p {
+            font-size: 16px;
+        }
+    }
+
+    .containerTimeWhenTheMessageWasSent {
+
+        p {
+            font-size: 14px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 340px) {
+
+    .containerMenuSelection {
+        left: 60px;
+    }
+}
