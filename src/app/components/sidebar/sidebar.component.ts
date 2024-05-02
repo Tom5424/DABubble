@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [RouterLink, ChannelsInSidebarComponent, ContactsInSidebarComponent],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+  styleUrls: ['./sidebar.component.scss', './sidebar.component.media.scss']
 })
 
 

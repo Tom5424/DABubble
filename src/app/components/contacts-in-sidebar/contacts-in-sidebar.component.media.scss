@@ -1,0 +1,84 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Width
+@media screen and (max-width: 1000px) {
+
+    .containerSpinnerIcon {
+        justify-content: flex-start;
+    }
+}
+
+
+@media screen and (max-width: 340px) {
+
+    .containerSidebarLowerPart {
+
+        p {
+            font-size: 16px;
+        }
+    }
+
+    img:nth-of-type(2) {
+        width: 25px;
+    }
+
+    .contactList {
+
+        li {
+
+            img:nth-of-type(2) {
+                top: 41px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+
+//////////////////// Disabled the hover Effects on touch Devices and add active Effects
+@media (pointer: coarse) {
+
+    .containerSidebarLowerPart {
+
+        &:hover {
+
+            img {
+                filter: unset;
+            }
+
+            p {
+                color: #000000;
+            }
+        }
+
+        &:active {
+
+            img {
+                filter: brightness(0) saturate(100%) invert(36%) sepia(75%) saturate(3861%) hue-rotate(228deg) brightness(96%) contrast(97%);
+            }
+
+            p {
+                color: $middlePurple;
+            }
+        }
+    }
+
+    .contactList {
+
+        li {
+
+            &:hover {
+                background-color: unset;
+            }
+
+            &:active {
+                background-color: $bgColor;
+            }
+        }
+    }
+}

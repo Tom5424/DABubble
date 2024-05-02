@@ -11,7 +11,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   standalone: true,
   imports: [NgClass, AsyncPipe, RouterLink, RouterLinkActive],
   templateUrl: './channels-in-sidebar.component.html',
-  styleUrl: './channels-in-sidebar.component.scss'
+  styleUrls: ['./channels-in-sidebar.component.scss', './channels-in-sidebar.component.media.scss']
 })
 
 

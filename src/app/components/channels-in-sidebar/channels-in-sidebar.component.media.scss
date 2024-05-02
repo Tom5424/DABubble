@@ -1,0 +1,133 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Width
+@media screen and (max-width: 1000px) {
+
+    .containerSpinnerIcon {
+        justify-content: flex-start;
+    }
+}
+
+
+@media screen and (max-width: 340px) {
+
+    .childContainerSidebarMiddlePart {
+
+        p {
+            font-size: 16px;
+        }
+
+        img:nth-of-type(2) {
+            width: 20px;
+        }
+    }
+
+    .channelList {
+
+        li {
+
+            p {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+
+//////////////////// Disabled the hover Effects on touch Devices and add active Effects
+@media (pointer: coarse) {
+
+    .childContainerSidebarMiddlePart {
+
+        &:hover {
+
+            img {
+                filter: unset;
+            }
+
+            p {
+                color: #000000;
+            }
+        }
+
+        &:active {
+
+            img {
+                filter: brightness(0) saturate(100%) invert(36%) sepia(75%) saturate(3861%) hue-rotate(228deg) brightness(96%) contrast(97%);
+            }
+
+            p {
+                color: $middlePurple;
+            }
+        }
+    }
+
+    .containerPlusIcon {
+
+        &:hover {
+            background-color: unset;
+
+            img {
+                filter: unset;
+            }
+        }
+
+        &:active {
+            background-color: $bgColor;
+
+            img {
+                filter: brightness(0) saturate(100%) invert(0%) sepia(85%) saturate(7500%) hue-rotate(280deg) brightness(111%) contrast(115%);
+            }
+        }
+    }
+
+    .channelList {
+
+        li {
+
+            &:hover {
+                background-color: unset;
+
+                img {
+                    filter: unset;
+                }
+            }
+
+            &:active {
+                background-color: $bgColor;
+
+                img {
+                    filter: brightness(0) saturate(100%) invert(30%) sepia(20%) saturate(6972%) hue-rotate(226deg) brightness(105%) contrast(89%);
+                }
+            }
+        }
+    }
+
+
+    .containerIconAndText {
+
+        &:hover {
+
+            img {
+                filter: unset;
+            }
+
+            p {
+                color: #000000;
+            }
+        }
+
+        &:active {
+
+            img {
+                filter: brightness(0) saturate(100%) invert(27%) sepia(38%) saturate(4414%) hue-rotate(230deg) brightness(106%) contrast(89%);
+            }
+
+            p {
+                color: $middlePurple;
+            }
+        }
+    }
+}

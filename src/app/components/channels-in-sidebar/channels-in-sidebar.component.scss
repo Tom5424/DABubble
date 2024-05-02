@@ -81,8 +81,12 @@
         padding: 5px 0 5px 20px;
 
         p {
-            margin: 0;
+            width: 80px;
             font-size: 18px;
+            margin: 0;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow-x: hidden;
         }
 
         &:hover {

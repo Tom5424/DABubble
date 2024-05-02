@@ -12,10 +12,10 @@ import { WorkspaceMenuService } from '../../services/workspace-menu.service';
   standalone: true,
   imports: [HeaderMainViewComponent, SidebarComponent, WorkspaceMenuButtonComponent, RouterOutlet, NgClass],
   templateUrl: './main-view.component.html',
-  styleUrl: './main-view.component.scss'
+  styleUrls: ['./main-view.component.scss', './main-view.component.media.scss']
 })
 
 
 export class MainViewComponent {
-  workspaceMenu = inject(WorkspaceMenuService);
+  workspaceMenuService = inject(WorkspaceMenuService);
 }

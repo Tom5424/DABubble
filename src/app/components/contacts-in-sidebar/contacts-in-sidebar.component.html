@@ -12,7 +12,9 @@
 
     @if (!userIdMatchesWithIdFromLoggedinUser(user)) {
 
-    <li routerLink="/mainView/directMessage/{{ user.userId }}" routerLinkActive="activeUserDirectMessages">
+    <li routerLink="/mainView/directMessage/{{ user.userId }}" routerLinkActive="activeUserDirectMessages"
+        (click)="selectContactInMobileView()">
+
         @if (noProfileImgExist(user)) {
         <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="User Profile Image">
         }@else {

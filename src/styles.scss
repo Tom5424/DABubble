@@ -11,6 +11,20 @@ body {
 }
 
 
+/////////// Media Query for selectors
+@media screen and (max-width: 1286px) {
+
+    app-thread-direct-message {
+        @include positionAbsolute(unset, unset, unset, 0);
+    }
+
+    app-thread-channel-message {
+        @include positionAbsolute(unset, unset, unset, 0);
+    }
+}
+
+
+/////////// Styles for selectors
 app-chat-direct-messages {
     width: 100%;
 }
@@ -33,11 +47,12 @@ app-new-message {
 
 app-main-view {
     background-color: $bgColor;
-    height: 100vh;
+    min-height: 100vh;
     display: block;
 }
 
 
+/////////// Common used Classes
 .errorMessage {
     @include errorMessage();
 }
@@ -118,7 +133,7 @@ app-main-view {
 }
 
 
-/////////// Custom Media Queries for MatMenu
+/////////// Custom media Queries for MatMenu
 @media screen and (max-width: 1000px) {
 
     .cdk-overlay-pane {

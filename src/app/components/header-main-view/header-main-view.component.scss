@@ -8,7 +8,7 @@ header {
     padding: 0 50px 0 50px;
 
     input {
-        @include inputfieldOrTextarea(600px, 42px, 17.5px, 55px, 17.5px, 35px, 24px, #ffffff);
+        @include inputfieldOrTextarea(600px, 42px, 17.5px, 65px, 17.5px, 35px, 24px, #ffffff);
         @include inputfieldOrTextareaHover();
         @include inputfieldOrTextareaFocus();
         border: unset;

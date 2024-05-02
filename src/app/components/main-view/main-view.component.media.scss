@@ -1,0 +1,25 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Width
+@media screen and (max-width: 1000px) {
+
+    app-workspace-menu-button {
+        display: none;
+    }
+
+    app-sidebar {
+        @include flexCenteredXAxis();
+        width: 100%;
+    }
+
+    .routerContainer {
+        display: none;
+    }
+}
+
+
+.show {
+    display: flex;
+}
