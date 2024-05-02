@@ -1,0 +1,22 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+.containerInputfield {
+    @include flexCenteredXAxis();
+    width: 100%;
+    padding-bottom: 4px;
+    position: relative;
+
+    input {
+        @include inputfieldOrTextarea(100%, 42px, 17.5px, 60px, 17.5px, 24px, 18px, #ffffff);
+        @include inputfieldOrTextareaHover();
+        @include inputfieldOrTextareaFocus();
+        border: 1px solid $lightPurple;
+    }
+
+    img {
+        @include positionAbsolute(14px, unset, unset, 15px);
+        width: 30px;
+    }
+}
