@@ -22,7 +22,6 @@ export class CreateChannelMessageService {
   createChannelMessageService(user: User, receiverId: string | null, messageText: string | null | undefined, uploadedImages: string[]): void {
     const userData = {  // Created a custom User Object here to get the logged in User so that the correct Messages are displayed by the correct User. And prevents error Messages.
       email: user.email,
-      isOnline: user.isOnline,
       name: user.name,
       imgUrl: user.imgUrl,
       userId: user.userId,
