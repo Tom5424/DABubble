@@ -154,12 +154,11 @@ form {
 
 .containerIconAndBtns {
     @include flexCenteredYAxis();
-    @include flexSpaceBetween();
-    width: 90%;
+    gap: 180px;
     position: absolute;
     background-color: #ffffff;
     margin-left: -10px;
-    margin: -81px 0 0 15px;
+    margin: -81.2px 0 0 15px;
     padding: 15px 20px 15px 0;
 }
 

@@ -1,0 +1,128 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Width
+@media screen and (max-width: 1000px) {
+
+    .mainContainerChatDirectMessages {
+        margin: 0;
+    }
+}
+
+
+@media screen and (max-width: 640px) {
+
+    .containerTimeWhenTheMessageWasSent {
+
+        hr {
+            width: 29%;
+        }
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+
+    .containerTimeWhenTheMessageWasSent {
+
+        hr {
+            width: 26%;
+        }
+    }
+}
+
+
+@media screen and (max-width: 430px) {
+
+    .containerTimeWhenTheMessageWasSent {
+
+        hr {
+            width: 22%;
+        }
+    }
+}
+
+
+@media screen and (max-width: 390px) {
+
+    .containerUserImageAndNameUpperPart {
+
+        p {
+            font-size: 18px;
+        }
+    }
+
+    .imgSelectedProfileChatDirectMessagesLowerPart {
+        width: 90px;
+        height: 90px;
+    }
+
+    .imgNoSelectedProfileChatDirectMessagesLowerPart {
+        width: 74px;
+        height: 74px;
+    }
+
+    .containerUserImageAndNameLowerPart {
+        margin-top: 90px;
+
+        p {
+            font-size: 18px;
+        }
+    }
+
+    .text {
+        font-size: 18px;
+    }
+
+    .containerTimeWhenTheMessageWasSent {
+
+        hr {
+            width: 16%;
+        }
+    }
+}
+
+
+//////////////////// Height
+@media screen and (max-height: 600px) {
+
+    .mainContainerChatDirectMessages {
+        margin-bottom: 15px;
+    }
+}
+
+
+//////////////////// Disabled the hover Effects on touch Devices and add active Effects
+@media (pointer: coarse) {
+
+    .containerUserImageAndNameUpperPart {
+
+        &:hover {
+            background-color: unset;
+        }
+
+        &:active {
+            background-color: $bgColor;
+        }
+    }
+
+    .containerSingleIcon {
+
+        &:hover {
+            background-color: unset;
+
+            img {
+                filter: unset;
+            }
+        }
+
+        &:active {
+            background-color: $bgColor;
+
+            img {
+                filter: brightness(0) saturate(100%) invert(32%) sepia(74%) saturate(1212%) hue-rotate(215deg) brightness(97%) contrast(107%);
+            }
+        }
+    }
+}

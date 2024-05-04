@@ -11,7 +11,7 @@ body {
 }
 
 
-/////////// Media Query for selectors
+/////////// Media Queries for selectors
 @media screen and (max-width: 1286px) {
 
     app-thread-direct-message {
@@ -20,6 +20,15 @@ body {
 
     app-thread-channel-message {
         @include positionAbsolute(unset, unset, unset, 0);
+    }
+}
+
+
+@media screen and (max-width: 1000px) {
+
+    app-chat-direct-messages {
+        @include flexCenteredXAxis();
+        margin: 0 15px 0 15px;
     }
 }
 
@@ -166,6 +175,33 @@ app-main-view {
 
 .emoji-mart .emoji-mart-emoji {
     @include hover();
+}
+
+
+/////////// Custom media Queries for Emoji Picker
+@media screen and (max-width: 575px) {
+
+    .emoji-mart {
+        width: 280px !important;
+        bottom: 260px !important;
+    }
+}
+
+
+@media screen and (max-width: 470px) {
+
+    .emoji-mart {
+        width: 250px !important;
+    }
+}
+
+
+@media screen and (max-width: 390px) {
+
+    .emoji-mart {
+        width: 210px !important;
+        left: 0 !important;
+    }
 }
 
 

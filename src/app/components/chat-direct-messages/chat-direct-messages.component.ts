@@ -22,7 +22,7 @@ import { RoutingService } from '../../services/routing.service';
   standalone: true,
   imports: [PickerComponent, NgStyle, NgClass, ReactiveFormsModule, AsyncPipe, DatePipe, DirectMessageComponent, RouterOutlet],
   templateUrl: './chat-direct-messages.component.html',
-  styleUrl: './chat-direct-messages.component.scss'
+  styleUrls: ['./chat-direct-messages.component.scss', './chat-direct-messages.component.media.scss'],
 })
 
 
