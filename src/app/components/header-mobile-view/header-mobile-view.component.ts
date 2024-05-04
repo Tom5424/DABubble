@@ -4,6 +4,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { DialogProfileDetailViewComponent } from '../dialog-profile-detail-view/dialog-profile-detail-view.component';
 import { MatDialog } from '@angular/material/dialog';
 import { RouterLink } from '@angular/router';
+import { WorkspaceMenuService } from '../../services/workspace-menu.service';
 
 
 @Component({
@@ -17,12 +18,19 @@ import { RouterLink } from '@angular/router';
 
 export class HeaderMobileViewComponent implements OnInit {
   authService = inject(AuthService);
+  workspaceMenuService = inject(WorkspaceMenuService);
   matDialog = inject(MatDialog);
 
 
   ngOnInit(): void {
     this.authService.getDataFromLoggedInUserService();
     this.authService.loadUserOnlineStatusService();
+  }
+
+
+  directBack(): void {
+    this.workspaceMenuService.sidebarIsHidden = false;
+    this.workspaceMenuService.inChatMessage = false;
   }
 
 

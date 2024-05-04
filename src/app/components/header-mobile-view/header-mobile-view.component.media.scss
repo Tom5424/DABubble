@@ -13,6 +13,14 @@
         width: 200px;
     }
 
+    .containerImages {
+        width: 200px;
+
+        img:nth-of-type(2) {
+            width: 200px;
+        }
+    }
+
     .spinnerIcon {
         top: -15px;
     }
@@ -27,6 +35,14 @@
 
     .dabubbleLogo {
         width: 160px;
+    }
+
+    .containerImages {
+        width: 160px;
+
+        img:nth-of-type(2) {
+            width: 160px;
+        }
     }
 
     .spinnerIcon {

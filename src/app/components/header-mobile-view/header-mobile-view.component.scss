@@ -9,6 +9,17 @@ header {
 }
 
 
+.containerImages {
+    @include hover();
+    @include flex();
+    gap: 15px;
+
+    img:nth-of-type(1) {
+        transform: rotate(90deg);   
+    }
+}
+
+
 .containerProfileImg {
     @include hover();
     position: relative;

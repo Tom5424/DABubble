@@ -1,6 +1,19 @@
 <header>
 
+    @if (!workspaceMenuService.inChatMessage) {
     <img class="dabubbleLogo" src="assets/img/da-bubble-logo.svg" alt="DABubble Logo">
+    }
+
+
+    <!---------------- Only shown when chatting with a Contact or in Channel ---------------->
+    @if (workspaceMenuService.inChatMessage) {
+    <div class="containerImages" (click)="directBack()">
+        <img src="/assets/icons/arrow-icon-profile.svg" alt="Arrow Icon">
+        <img src="assets/img/workspace-logo.svg" alt="Workspace Logo">
+    </div>
+    }
+    <!---------------- Only shown when chatting with a Contact or in Channel ---------------->
+
 
     <div class="containerProfileImg" [matMenuTriggerFor]="menu">
 
