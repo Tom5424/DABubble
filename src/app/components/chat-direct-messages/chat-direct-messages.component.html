@@ -3,7 +3,7 @@
 
     </div>
 
-    <div class="mainContainerChatDirectMessages">
+    <div class="mainContainerChatDirectMessages" [ngClass]="{'d-none': workspaceMenuService.inThreadDirectMessagesMobileView}">
 
         <!--------------------------------- Container Chat upper Part--------------------------------->
         <div class="containerChatDirectMessagesUpperPart">

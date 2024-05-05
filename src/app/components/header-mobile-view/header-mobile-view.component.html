@@ -1,13 +1,13 @@
 <header>
 
-    @if (!workspaceMenuService.inChatMessage) {
+    @if (!workspaceMenuService.inChatDirectMessagesMobileView) {
     <img class="dabubbleLogo" src="assets/img/da-bubble-logo.svg" alt="DABubble Logo">
     }
 
 
     <!---------------- Only shown when chatting with a Contact or in Channel ---------------->
-    @if (workspaceMenuService.inChatMessage) {
-    <div class="containerImages" (click)="directBack()">
+    @if (workspaceMenuService.inChatDirectMessagesMobileView) {
+    <div class="containerImages" (click)="directBackToSidebar()">
         <img src="/assets/icons/arrow-icon-profile.svg" alt="Arrow Icon">
         <img src="assets/img/workspace-logo.svg" alt="Workspace Logo">
     </div>

@@ -28,9 +28,10 @@ export class HeaderMobileViewComponent implements OnInit {
   }
 
 
-  directBack(): void {
+  directBackToSidebar(): void {
     this.workspaceMenuService.sidebarIsHidden = false;
-    this.workspaceMenuService.inChatMessage = false;
+    this.workspaceMenuService.inChatDirectMessagesMobileView = false;
+    this.workspaceMenuService.inThreadDirectMessagesMobileView = false;
   }
 
 

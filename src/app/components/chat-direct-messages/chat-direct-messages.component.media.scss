@@ -5,6 +5,10 @@
 //////////////////// Width
 @media screen and (max-width: 1000px) {
 
+    .flex {
+        width: 100%;
+    }
+
     .mainContainerChatDirectMessages {
         margin: 0;
     }

@@ -87,7 +87,9 @@
             class="mainContainerDirectMessageLowerPart">
 
             <div class="childContainerDirectMessageLowerPart">
-                <p routerLink="/mainView/directMessage/{{ userId }}/thread/{{ directMessageId }}">
+                <p routerLink="/mainView/directMessage/{{ userId }}/thread/{{ directMessageId }}"
+                    (click)="selectThreadInMobileView()">
+                    
                     {{ messageAmountFromThreadDirectMessages }} Answers
                 </p>
                 <p>Last Answer {{ latestMessageInThreadDirectMessage | date: 'HH:mm' }} Uhr</p>
@@ -153,7 +155,7 @@
         </div>
 
         <div class="containerSingleIcon" routerLink="/mainView/directMessage/{{ userId }}/thread/{{ directMessageId }}">
-            <img src="assets/icons/open-thread-icon.svg" alt="Open Thread Icon">
+            <img src="assets/icons/open-thread-icon.svg" alt="Open Thread Icon" (click)="selectThreadInMobileView()">
         </div>
 
         @if (userIdMatchesWithIdFromLoggedinUser()) {

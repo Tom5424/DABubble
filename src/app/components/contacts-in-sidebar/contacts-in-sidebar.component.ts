@@ -26,7 +26,7 @@ export class ContactsInSidebarComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getWindowSize()
+    this.getWindowSize();
     this.createUserService.getAllUserService();
   }
 
@@ -70,7 +70,7 @@ export class ContactsInSidebarComponent implements OnInit {
   selectContactInMobileView(): void {
     if (this.windowInnerWidth <= 1000) {
       this.workspaceMenuService.sidebarIsHidden = true;
-      this.workspaceMenuService.inChatMessage = true;
+      this.workspaceMenuService.inChatDirectMessagesMobileView = true;
     }
   }
 }

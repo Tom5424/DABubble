@@ -8,7 +8,8 @@ import { Injectable } from '@angular/core';
 
 export class WorkspaceMenuService {
   sidebarIsHidden: boolean = false;
-  inChatMessage: boolean = false;
+  inChatDirectMessagesMobileView: boolean = false;
+  inThreadDirectMessagesMobileView: boolean = false;
 
 
   toggleSidebarService(): void {

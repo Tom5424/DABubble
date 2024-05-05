@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, HostListener, Input, OnInit, inject } from '@angular/core';
 import { CreateDirectMessageService } from '../../services/create-direct-message.service';
 import { DatePipe, NgClass, NgStyle } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
@@ -12,6 +12,7 @@ import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 import { CreateThreadMessageInDirectMessageService } from '../../services/create-thread-message-in-direct-message.service';
 import { ThreadMessage } from '../../models/thread-message';
+import { WorkspaceMenuService } from '../../services/workspace-menu.service';
 
 
 @Component({
@@ -28,12 +29,14 @@ export class DirectMessageComponent implements OnInit {
   createThreadMessageInDirectMessageService = inject(CreateThreadMessageInDirectMessageService);
   createUserService = inject(CreateUserService);
   authService = inject(AuthService);
+  workspaceMenuService = inject(WorkspaceMenuService);
   activatedRoute = inject(ActivatedRoute);
   matDialog = inject(MatDialog);
   @Input() directMessage!: DirectMessage;
   @Input() directMessageId: string = '';
   messageAmountFromThreadDirectMessages: number = 0;
   latestMessageInThreadDirectMessage: number = 0;
+  windowInnerWidth: number = 0;
   menuMoreOptionsAreOpen: boolean = false;
   messageIsInEditMode: boolean = false;
   barToSelectEmojisAreOpen: boolean = false;
@@ -47,10 +50,16 @@ export class DirectMessageComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.getWindowSize();
     this.activatedRoute.paramMap.subscribe((params) => {
       this.userId = params.get('id');
       this.getAllMessagesFromThreadDirectMessage();
     });
+  }
+
+  
+  getWindowSize(): void {
+    this.windowInnerWidth = window.innerWidth;
   }
 
 
@@ -175,5 +184,18 @@ export class DirectMessageComponent implements OnInit {
   deleteMessage(): void {
     this.createDirectMessageService.deleteDirectMessageService(this.directMessageId);
     this.menuMoreOptionsAreOpen = false;
+  }
+
+
+  @HostListener('window:resize', ['$event'])
+  checkWindowSize() {
+    this.windowInnerWidth = window.innerWidth;
+  }
+
+
+  selectThreadInMobileView(): void {
+    if (this.windowInnerWidth <= 1000) {
+      this.workspaceMenuService.inThreadDirectMessagesMobileView = true;
+    }
   }
 }

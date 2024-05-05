@@ -1,5 +1,5 @@
 import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
-import { Component, ElementRef, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { DialogUploadedImgFullViewComponent } from '../dialog-uploaded-img-full-view/dialog-uploaded-img-full-view.component';
@@ -11,6 +11,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MessageInThreadDirectMessageComponent } from '../message-in-thread-direct-message/message-in-thread-direct-message.component';
 import { CreateThreadMessageInDirectMessageService } from '../../services/create-thread-message-in-direct-message.service';
 import { RoutingService } from '../../services/routing.service';
+import { WorkspaceMenuService } from '../../services/workspace-menu.service';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class ThreadDirectMessageComponent implements OnInit {
   authService = inject(AuthService);
   storageInThreadService = inject(StorageInThreadService);
   routingService = inject(RoutingService);
+  workspaceMenuService = inject(WorkspaceMenuService);
   renderer2 = inject(Renderer2);
   matDialog = inject(MatDialog);
   router = inject(Router);
@@ -36,15 +38,22 @@ export class ThreadDirectMessageComponent implements OnInit {
   inputValue: string | null | undefined = '';
   directMesageId: string = '';
   threadMessageId: string | null = '';
+  windowInnerWidth: number = 0;
   addMessageForm = new FormGroup({
     textarea: new FormControl('', Validators.required)
   })
 
 
   ngOnInit(): void {
+    this.getWindowSize();
     this.getUrlFromRoute();
     this.getIdFromActivatedRoute();
     this.routingService.savePreviousUrl(this.router.routerState.snapshot.url);
+  }
+
+
+  getWindowSize(): void {
+    this.windowInnerWidth = window.innerWidth;
   }
 
 
@@ -133,6 +142,19 @@ export class ThreadDirectMessageComponent implements OnInit {
 
   closeEmojiPickerOrOtherMenuIfClickOutside(): void {
     this.emojiPickerIsDisplayed = false;
+  }
+
+
+  @HostListener('window:resize', ['$event'])
+  checkWindowSize() {
+    this.windowInnerWidth = window.innerWidth;
+  }
+
+
+  closeThreadInMobileView(): void {
+    if (this.windowInnerWidth <= 1000) {
+      this.workspaceMenuService.inThreadDirectMessagesMobileView = false;
+    }
   }
 
 
