@@ -2,7 +2,7 @@
 @import '../../../scss/mixin.scss';
 
 
-.mainContainerChannelMessageOwnMessage {
+.mainContainerThreadMessageOwnMessage {
     @include flex();
     gap: 30px;
     margin-top: 44px;
@@ -29,7 +29,7 @@
 }
 
 
-.mainContainerChannelMessageFromOtherUser {
+.mainContainerThreadMessageFromOtherUser {
     @include flex();
     flex-direction: row-reverse;
     gap: 30px;
@@ -298,8 +298,8 @@ form {
     position: absolute;
     background-color: #ffffff;
     border-radius: 20px;
-    margin: -81px 0 0 2px;
-    padding: 16px 20px 16px 0;
+    margin: -80.8px 0 0 2px;
+    padding: 16px 0 16px 0;
 }
 
 
@@ -348,6 +348,11 @@ form {
 }
 
 
+.containerUploadedImages {
+    @include flexColumn();
+}
+
+
 .uploadedImage {
     @include hover();
     width: 200px !important;
@@ -373,10 +378,10 @@ form {
 
 
 .marginLeft {
-    margin-left: -60px;
+    margin-left: -50px;
 }
 
 
 .marginRight {
-    margin-right: -60px;
+    margin-right: -52px;
 }

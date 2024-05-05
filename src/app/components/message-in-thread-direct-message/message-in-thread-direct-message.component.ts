@@ -15,7 +15,7 @@ import { CreateThreadMessageInDirectMessageService } from '../../services/create
   standalone: true,
   imports: [AsyncPipe, DatePipe, NgClass, NgStyle, ReactiveFormsModule, PickerComponent],
   templateUrl: './message-in-thread-direct-message.component.html',
-  styleUrl: './message-in-thread-direct-message.component.scss'
+  styleUrls: ['./message-in-thread-direct-message.component.scss', './message-in-thread-direct-message.component.media.scss'],
 })
 
 

@@ -1,0 +1,94 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Width
+@media screen and (max-width: 1000px) {
+
+    .mainContainerThread {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .containerSingleIcon {
+
+        label {
+
+            input {
+                right: 828px;
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 415px) {
+
+    .spinnerIcon {
+        left: 40px;
+    }
+}
+
+
+@media screen and (max-width: 390px) {
+
+    .containerTextAndImage {
+
+        p {
+            font-size: 18px;
+        }
+    }
+
+}
+
+
+//////////////////// Height
+@media screen and (max-height: 600px) {
+
+    .mainContainerThread {
+        margin-bottom: 15px;
+    }
+}
+
+
+//////////////////// Disabled the hover Effects on touch Devices and add active Effects
+@media (pointer: coarse) {
+
+    .containerCloseIcon {
+
+        &:hover {
+            background-color: unset;
+
+            img {
+                filter: unset;
+            }
+        }
+
+        &:active {
+            background-color: $bgColor;
+
+            img {
+                filter: brightness(0) saturate(100%) invert(32%) sepia(74%) saturate(1212%) hue-rotate(215deg) brightness(97%) contrast(107%);
+            }
+        }
+    }
+
+    .containerSingleIcon {
+
+        &:hover {
+            background-color: unset;
+
+            img {
+                filter: unset;
+            }
+        }
+
+        &:active {
+            background-color: $bgColor;
+
+            img {
+                filter: brightness(0) saturate(100%) invert(32%) sepia(76%) saturate(3470%) hue-rotate(230deg) brightness(98%) contrast(93%);
+            }
+        }
+    }
+}

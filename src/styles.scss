@@ -30,6 +30,12 @@ body {
         @include flexCenteredXAxis();
         margin: 0 15px 0 15px;
     }
+
+    app-thread-direct-message {
+        @include flexCenteredXAxis();
+        width: 100%;
+        position: unset;
+    }
 }
 
 
@@ -179,11 +185,22 @@ app-main-view {
 
 
 /////////// Custom media Queries for Emoji Picker
+@media screen and (max-width: 1000px) {
+
+    .emoji-mart {
+        width: 346px !important;
+        top: unset !important;
+        bottom: -45px !important;
+        right: 0 !important;
+    }
+}
+
+
 @media screen and (max-width: 575px) {
 
     .emoji-mart {
         width: 280px !important;
-        bottom: 260px !important;
+        bottom: 130px !important;
     }
 }
 

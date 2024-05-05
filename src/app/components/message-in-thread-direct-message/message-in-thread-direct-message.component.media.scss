@@ -3,78 +3,53 @@
 
 
 //////////////////// Width
-@media screen and (min-width: 1600px) {
-
-    .uploadedImage {
-        width: 400px !important;
-        height: 300px !important;
-    }
-
-    .containerDirectMessageUpperPartOwnMessage {
-
-        p:nth-of-type(2) {
-            font-size: 16px;
-        }
-    }
-
-    .containerDirectMessageUpperPartFromOtherUser {
-
-        p:nth-of-type(2) {
-            font-size: 16px;
-        }
-    }
-
-    .childContainerDirectMessageLowerPart {
-
-        p:nth-of-type(2) {
-            font-size: 16px;
-        }
-    }
-}
-
-
-@media screen and (max-width: 1125px) {
-
-    .mainContainerDirectMessageLowerPart {
-        flex-direction: column;
-    }
-}
-
-
-@media screen and (max-width: 1100px) {
-
-    .mainContainerDirectMessageOwnMessage {
-        padding: 10px 35px 10px 35px;
-    }
-
-    .mainContainerDirectMessageFromOtherUser {
-        padding: 10px 35px 10px 35px;
-    }
+@media screen and (max-width: 1000px) {
 
     form {
 
         textarea {
-            width: 390px;
+            width: 470px;
+            height: 120px;
         }
     }
 
     .containerIconAndBtns {
-        gap: 100px;
+        gap: 250px;
+        padding: 16px 25px 16px 10px;
+        border-radius: 0 0 0 20px;
+    }
+
+    .uploadedImage {
+        width: 350px !important;
+        height: 250px !important;
+    }
+
+    .marginRight {
+        margin-right: 0;
+    }
+
+    .marginLeft {
+        margin-left: 0;
     }
 }
 
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 685px) {
 
-    .mainContainerDirectMessageLowerPart {
-        flex-direction: column;
-        align-items: unset;
-        gap: 15px;
+    form {
+
+        textarea {
+            width: 420px;
+        }
+    }
+
+    .containerIconAndBtns {
+        gap: 200px;
     }
 }
 
 
-@media screen and (max-width: 670px) {
+@media screen and (max-width: 635px) {
 
     form {
 
@@ -84,12 +59,12 @@
     }
 
     .containerIconAndBtns {
-        gap: 80px;
+        gap: 150px;
     }
 }
 
 
-@media screen and (max-width: 630px) {
+@media screen and (max-width: 585px) {
 
     form {
 
@@ -99,16 +74,12 @@
     }
 
     .containerIconAndBtns {
-        gap: 30px;
+        gap: 100px;
     }
 }
 
 
-@media screen and (max-width: 575px) {
-
-    .uploadedImage {
-        width: 300px !important;
-    }
+@media screen and (max-width: 535px) {
 
     form {
 
@@ -120,37 +91,24 @@
 
     .containerIconAndBtns {
         flex-direction: column;
+        border-radius: unset;
+        margin: -121.2px 0 0 13px;
         gap: 0;
-        margin: -121.1px 0 0 13px;
-        padding: 15px 20px 15px 20px;
     }
-}
 
-
-@media screen and (max-width: 520px) {
-
-    form {
-
-        textarea {
-            width: 220px;
-        }
+    .containerBtn {
+        gap: 90px;
     }
 
     .uploadedImage {
-        width: 250px !important;
-    }
-
-    .containerIconAndBtns {
-        border-radius: 0 0 20px 20px;
-        margin: -121.1px 0 0 3px;
-        padding: 15px 10px 15px 10px;
+        width: 300px !important;
     }
 }
 
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 475px) {
 
-    .mainContainerDirectMessageOwnMessage {
+    .mainContainerThreadMessageOwnMessage {
         @include flexColumnCenteredXAxis();
     }
 
@@ -160,61 +118,41 @@
 
     .messageTextOwnMessage {
         max-width: 170px;
-        border-radius: 30px;
+        border-radius: 30px
     }
 
-    .mainContainerDirectMessageFromOtherUser {
+    .mainContainerThreadMessageFromOtherUser {
         @include flexColumnCenteredXAxis();
     }
 
     .messageTextFromOtherUser {
         max-width: 170px;
-        border-radius: 30px;
-    }
-
-    .uploadedImage {
-        width: 200px !important;
-    }
-}
-
-
-@media screen and (max-width: 390px) {
-
-    .mainContainerDirectMessageOwnMessage {
-        padding: 10px 0 10px 0;
-    }
-
-    .mainContainerDirectMessageFromOtherUser {
-        padding: 10px 0 10px 0;
-    }
-
-    .childContainerDirectMessageLowerPart {
-        @include flexColumnCenteredXAxis();
-    }
-
-    .containerMenuMoreOptions {
-
-        p {
-            font-size: 18px;
-        }
+        border-radius: 30px
     }
 
     form {
 
         textarea {
-            width: 160px;
+            width: 220px;
         }
     }
 
     .containerIconAndBtns {
-        padding: 15px 30px 17px 20px;
-        margin: -200px 10px 0 14px;
-        border-radius: unset;
+        margin: -120.8px 0 0 13px;
     }
 
     .containerBtn {
-        flex-direction: column;
+        gap: 45px;
     }
+
+    .uploadedImage {
+        width: 200px !important;
+        height: 150px !important;
+    }
+}
+
+
+@media screen and (max-width: 390px) {
 
     .mainContainerSelctedEmojis {
         justify-content: center;
@@ -225,22 +163,38 @@
         width: 25%;
         justify-content: center;
     }
+
+    .containerMenuMoreOptions {
+
+        p {
+            font-size: 18px;
+        }
+    }
+
+    
+    form {
+
+        textarea {
+            width: 160px;
+        }
+    }
+
+    .containerIconAndBtns {
+        margin: -183.2px 0 0 13px;
+        padding: 16px 45px 16px 45px;
+    }   
+
+    .containerBtn {
+        flex-direction: column;
+        gap: 20px;
+    }
 }
 
 
 @media screen and (max-width: 300px) {
 
-    .containerReactionBarRightSide {
-        right: 10px;
-    }
-
-    .containerReactionBarLeftSide {
-        left: 20px;
-    }
-
     .containerMenuMoreOptions {
         width: 180px;
-        right: 10px;
     }
 }
 
@@ -248,7 +202,7 @@
 //////////////////// Disabled the hover Effects on touch Devices and add active Effects
 @media (pointer: coarse) {
 
-    .mainContainerDirectMessageOwnMessage {
+    .mainContainerThreadMessageOwnMessage {
 
         &:hover {
             background-color: unset;
@@ -259,7 +213,7 @@
         }
     }
 
-    .mainContainerDirectMessageFromOtherUser {
+    .mainContainerThreadMessageFromOtherUser {
 
         &:hover {
             background-color: unset;
@@ -371,20 +325,6 @@
 
             &:active {
                 background-color: $purple;
-            }
-        }
-    }
-
-    .childContainerDirectMessageLowerPart {
-
-        p:nth-of-type(1) {
-
-            &:hover {
-                font-weight: normal;
-            }
-
-            &:active {
-                font-weight: 700;
             }
         }
     }

@@ -19,7 +19,7 @@ import { WorkspaceMenuService } from '../../services/workspace-menu.service';
   standalone: true,
   imports: [NgClass, NgStyle, ReactiveFormsModule, PickerComponent, RouterLink, MessageInThreadDirectMessageComponent, AsyncPipe],
   templateUrl: './thread-direct-message.component.html',
-  styleUrl: './thread-direct-message.component.scss'
+  styleUrls: ['./thread-direct-message.component.scss', './thread-direct-message.component.media.scss'],
 })
 
 

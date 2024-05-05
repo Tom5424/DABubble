@@ -1,7 +1,7 @@
 <div [ngClass]="{'overlay': emojiPickerIsDisplayed}" (click)="closeEmojiPickerIfClickOutside()"></div>
 
-<div class="mainContainerMessage" [ngClass]="{'mainContainerChannelMessageOwnMessage': userIdMatchesWithIdFromLoggedinUser(), 
-    'mainContainerChannelMessageFromOtherUser': !userIdMatchesWithIdFromLoggedinUser()}"
+<div class="mainContainerMessage" [ngClass]="{'mainContainerThreadMessageOwnMessage': userIdMatchesWithIdFromLoggedinUser(), 
+    'mainContainerThreadMessageFromOtherUser': !userIdMatchesWithIdFromLoggedinUser()}"
     (mouseleave)="closeOpenMenusInMessageIfHoverOutside()">
 
     <!--------------------------------- Reaction Bar --------------------------------->
@@ -66,7 +66,7 @@
     }
 
 
-    <div [ngClass]="{'container': !userIdMatchesWithIdFromLoggedinUser()}">
+    <div class="containerOwnMessages" [ngClass]="{'container': !userIdMatchesWithIdFromLoggedinUser()}">
 
         <div [ngClass]="{'containerChannelMessageUpperPartOwnMessage': userIdMatchesWithIdFromLoggedinUser(), 
             'containerChannelMessageUpperPartFromOtherUser': !userIdMatchesWithIdFromLoggedinUser()}">
@@ -81,6 +81,55 @@
             {{ threadMessage.messageText }}
         </p>
         }
+
+
+        <!--------------------------------- Textarea to Edit Message --------------------------------->
+        @if (messageIsInEditMode) {
+        <form [formGroup]="editMessageForm" (ngSubmit)="editMessage()">
+            <textarea placeholder="{{ threadMessage.messageText }}" formControlName="textareaEditMessage">
+
+            </textarea>
+
+
+            <!--------------------------------- Emoji Picker --------------------------------->
+            @if (emojiPickerIsDisplayed) {
+            <emoji-mart [style]="{position: 'absolute', top: '270px', right: '10px', 'z-index': '1', width: '280px'}"
+                (emojiClick)="selectEmojiInEmojiPicker($event)">
+            </emoji-mart>
+            }
+            <!--------------------------------- Emoji Picker -----  ---------------------------->
+
+
+            <div class="containerIconAndBtns">
+
+                <div class="containerSmileyIcon" (click)="tootgleEmojiPicker()">
+                    <img src="assets/icons/smiley-icon.svg" alt="Smiley Icon">
+                </div>
+
+                <div class="containerBtn">
+                    <button type="button" (click)="closeEditModeFromMessage()">Cancel</button>
+
+                    <button type="submit"
+                        [disabled]="editMessageForm.invalid || editMessageForm.controls.textareaEditMessage.value?.trim() == ''"
+                        [ngClass]="{'btnDisabled': editMessageForm.invalid || editMessageForm.controls.textareaEditMessage.value?.trim() == ''}">
+                        Save
+                    </button>
+                </div>
+
+            </div>
+        </form>
+        }
+        <!--------------------------------- Textarea to Edit Message --------------------------------->
+
+
+        <!--------------------------------- Displayed here the uploaded Images in Message --------------------------------->
+        <div class="containerUploadedImages">
+            @for (uploadedImage of threadMessage.attachedFiles; track $index) {
+            <img class="uploadedImage" src="{{ uploadedImage }}" alt="Uploaded Image"
+                (click)="openImageDetailView(uploadedImage)">
+            }
+        </div>
+        <!--------------------------------- Displayed here the uploaded Images in Message --------------------------------->
 
 
         <!--------------------------------- Selected Emojis --------------------------------->
@@ -109,53 +158,6 @@
             }
         </div>
         <!--------------------------------- Selected Emojis --------------------------------->
-        
 
-        <!--------------------------------- Textarea to Edit Message --------------------------------->
-        @if (messageIsInEditMode) {
-        <form [formGroup]="editMessageForm" (ngSubmit)="editMessage()">
-            <textarea placeholder="{{ threadMessage.messageText }}" formControlName="textareaEditMessage">
-
-            </textarea>
-
-
-            <!--------------------------------- Emoji Picker --------------------------------->
-            @if (emojiPickerIsDisplayed) {
-            <emoji-mart [style]="{position: 'absolute', top: '270px', right: '10px', 'z-index': '1', width: '280px'}"
-                (emojiClick)="selectEmojiInEmojiPicker($event)">
-            </emoji-mart>
-            }
-            <!--------------------------------- Emoji Picker -----  ---------------------------->
-
-
-            <div class="containerIconAndBtns"
-                [ngStyle]="{'width': threadMessage.attachedFiles.length >= 1 ? '80%' : '89%'}">
-
-                <div class="containerSmileyIcon" (click)="tootgleEmojiPicker()">
-                    <img src="assets/icons/smiley-icon.svg" alt="Smiley Icon">
-                </div>
-
-                <div class="containerBtn">
-                    <button type="button" (click)="closeEditModeFromMessage()">Cancel</button>
-
-                    <button type="submit"
-                        [disabled]="editMessageForm.invalid || editMessageForm.controls.textareaEditMessage.value?.trim() == ''"
-                        [ngClass]="{'btnDisabled': editMessageForm.invalid || editMessageForm.controls.textareaEditMessage.value?.trim() == ''}">
-                        Save
-                    </button>
-                </div>
-
-            </div>
-        </form>
-        }
-        <!--------------------------------- Textarea to Edit Message --------------------------------->
-
-
-        <!--------------------------------- Displayed here the uploaded Images in Message --------------------------------->
-        @for (uploadedImage of threadMessage.attachedFiles; track $index) {
-        <img class="uploadedImage" src="{{ uploadedImage }}" alt="Uploaded Image"
-            (click)="openImageDetailView(uploadedImage)">
-        }
-        <!--------------------------------- Displayed here the uploaded Images in Message --------------------------------->
     </div>
 </div>
