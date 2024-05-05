@@ -52,7 +52,7 @@
 .scrollingContainer {
     overflow-y: hidden;
     height: 300px;
-    padding-bottom: 25px;
+    margin-bottom: 25px;
 
     &:hover {
         transition: all 225ms ease-in-out;
