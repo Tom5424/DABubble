@@ -39,3 +39,27 @@
         margin-bottom: 15px;
     }
 }
+
+
+//////////////////// Disabled the hover Effects on touch Devices and add active Effects
+@media (pointer: coarse) {
+
+    .containerPencilIcon {
+
+        &:hover {
+            background-color: unset;
+
+            img {
+                filter: unset;
+            }
+        }
+
+        &:active {
+            background-color: $bgColor;
+
+            img {
+                filter: unset;
+            }
+        }
+    }
+}

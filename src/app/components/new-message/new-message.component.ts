@@ -24,7 +24,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [NgClass, NgStyle, ReactiveFormsModule, PickerComponent, AsyncPipe, UserFeedbackMessageComponent],
   templateUrl: './new-message.component.html',
-  styleUrl: './new-message.component.scss'
+  styleUrls: ['./new-message.component.scss', './new-message.component.media.scss']
 })
 
 

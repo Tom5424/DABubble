@@ -77,6 +77,7 @@
     padding: 4px 20px 4px 20px;
 
     p {
+        width: 52px;
         font-size: 18px;
         margin: 18px 0 18px 0;
         font-weight: normal;
@@ -128,6 +129,7 @@
     border-radius: 35px;
 
     p {
+        width: 52px;
         font-size: 18px;
         margin: 0;
         font-weight: normal;
@@ -161,21 +163,23 @@
 }
 
 
+.wrapperContainer {
+    @include positionAbsolute(unset, 320px, 40px, unset)
+}
+
+
 .mainContainerSelectedUsers {
     @include flexCenteredYAxis();
     gap: 10px;
-    position: absolute;
-    top: -240px;
-    left: 20px;
+    padding-right: 20px;
+    margin-bottom: 25px;
 }
 
 
 .mainContainerSelectedChannels {
     @include flexCenteredYAxis();
     gap: 10px;
-    position: absolute;
-    top: -190px;
-    left: 20px;
+    padding-right: 20px;
 }
 
 
@@ -187,9 +191,13 @@
     border-radius: 35px;
 
     p {
+        width: 70px;
         margin: 0;
         font-size: 16px;
         font-weight: normal;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 }
 
@@ -227,6 +235,7 @@
 
 .textMoreSelcted {
     color: $middlePurple;
+    margin: 0;
     font-size: 16px !important;
     font-weight: normal !important;
 }
@@ -268,7 +277,7 @@ form {
 .spinnerIcon {
     position: absolute;
     top: -55px;
-    left: 270px;
+    left: 60px;
     z-index: 1;
     width: 120px;
 }

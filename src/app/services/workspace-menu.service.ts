@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
 
 export class WorkspaceMenuService {
   sidebarIsHidden: boolean = false;
+  inNewMessageMobileView: boolean = false;
   inChatDirectMessagesMobileView: boolean = false;
   inThreadDirectMessagesMobileView: boolean = false;
 

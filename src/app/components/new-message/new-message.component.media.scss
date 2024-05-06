@@ -1,0 +1,193 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Width
+@media screen and (max-width: 670px) {
+
+    .wrapperContainer {
+        @include flex();
+        bottom: 210px;
+    }
+
+    .mainContainerSelectedUsers {
+        flex-direction: column;
+    }
+
+    .mainContainerSelectedChannels {
+        flex-direction: column;
+    }
+}
+
+
+@media screen and (max-width: 610px) {
+
+    .containerUserAndChannelMenuSelection {
+        width: 350px;
+    }
+}
+
+
+@media screen and (max-width: 555px) {
+
+    .containerUserAndChannelMenuSelection {
+        width: 300px;
+    }
+}
+
+
+@media screen and (max-width: 505px) {
+
+    .containerUserAndChannelMenuSelection {
+        width: 250px;
+    }
+}
+
+
+@media screen and (max-width: 455px) {
+
+    .containerUserAndChannelMenuSelection {
+        width: 200px;
+    }
+}
+
+
+@media screen and (max-width: 445px) {
+
+    .wrapperContainer {
+        width: 100%;
+        height: 203px;
+        left: 0;
+        bottom: 215px;
+        flex-direction: column;
+        overflow-y: scroll;
+    }
+}
+
+
+@media screen and (max-width: 390px) {
+
+    .containerNewMessagesUpperPart {
+
+        p {
+            font-size: 16px;
+        }
+
+        form {
+
+            input {
+                font-size: 16px;
+            }
+        }
+    }
+
+    .containerUserAndChannelMenuSelection {
+        width: 150px;
+    }
+
+    .containerUserAndChannelMenuSelection {
+        top: 110px;
+    }
+
+    .text {
+        font-size: 16px !important;
+    }
+
+    .containerUserNameAndImg {
+        flex-direction: column;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    .userOnlineStatus {
+        top: 42px;
+        left: 82px;
+    }
+
+    .containerChannelNameAndImg {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+
+@media screen and (max-width: 340px) {
+
+    .containerUserAndChannelMenuSelection {
+        width: 100px;
+    }
+
+    .userOnlineStatus {
+        left: 57px;
+    }
+}
+
+
+//////////////////// Height
+@media screen and (max-height: 600px) {
+
+    .mainContainerNewMessages {
+        margin-bottom: 15px;
+    }
+}
+
+
+//////////////////// Disabled the hover Effects on touch Devices and add active Effects
+@media (pointer: coarse) {
+
+    .containerUserNameAndImg {
+
+        &:hover {
+            background-color: unset;
+        }
+
+        &:active {
+            background-color: $bgColor;
+        }
+    }
+
+    .containerChannelNameAndImg {
+
+        &:hover {
+            background-color: unset;
+        }
+
+        &:active {
+            background-color: $bgColor;
+        }
+    }
+
+    .closeIconSelectedUserOrChannel {
+
+        &:hover {
+            filter: unset;
+            transform: scale(1);
+        }
+
+        &:active {
+            filter: brightness(0) saturate(100%) invert(28%) sepia(87%) saturate(2837%) hue-rotate(231deg) brightness(99%) contrast(91%);
+            transform: scale(1);
+        }
+    }
+
+    .containerSingleIcon {
+
+        &:hover {
+            background-color: unset;
+
+            img {
+                filter: unset;
+            }
+        }
+
+        &:active {
+            background-color: $bgColor;
+
+            img {
+                filter: brightness(0) saturate(100%) invert(32%) sepia(74%) saturate(1212%) hue-rotate(215deg) brightness(97%) contrast(107%);
+            }
+        }
+    }
+}

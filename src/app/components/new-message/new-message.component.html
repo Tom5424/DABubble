@@ -101,58 +101,62 @@
     <!--------------------------------- Container Chat Lower Part--------------------------------->
     <div class="containerNewMessagesLowerPart">
 
-        <!--------------------------------- Here will displayed the added Users from the searchbar --------------------------------->
-        @if (selectedUsers.length > 0) {
-        <div class="mainContainerSelectedUsers">
 
-            @for (user of selectedUsers.slice(0, 3); track $index) {
-            <div class="containerSelectedUserOrChannel">
+        <div class="wrapperContainer">
 
-                @if (noProfileImgExist(user)) {
-                <img class="imgNoSelectedProfileAddedUser" src="assets/img/non-user-selected.svg"
-                    alt="User Profile Image">
-                }@else {
-                <img class="userImgAddedUser" src="{{ user.imgUrl }}" alt="User Profile Image">
+            <!--------------------------------- Here will displayed the added Users from the searchbar --------------------------------->
+            @if (selectedUsers.length > 0) {
+            <div class="mainContainerSelectedUsers">
+
+                @for (user of selectedUsers.slice(0, 3); track $index) {
+                <div class="containerSelectedUserOrChannel">
+
+                    @if (noProfileImgExist(user)) {
+                    <img class="imgNoSelectedProfileAddedUser" src="assets/img/non-user-selected.svg"
+                        alt="User Profile Image">
+                    }@else {
+                    <img class="userImgAddedUser" src="{{ user.imgUrl }}" alt="User Profile Image">
+                    }
+
+                    <p>{{ user.name }}</p>
+
+                    <img class="closeIconSelectedUserOrChannel" src="assets/icons/close-icon.svg" alt="Close Icon"
+                        (click)="removeSelectedUser($index)">
+                </div>
                 }
 
-                <p>{{ user.name }}</p>
-
-                <img class="closeIconSelectedUserOrChannel" src="assets/icons/close-icon.svg" alt="Close Icon"
-                    (click)="removeSelectedUser($index)">
+                @if (selectedUsers.length >= 4) {
+                <p class="textMoreSelcted">+ {{ selectedUsers.length - 3 }} more</p>
+                }
             </div>
             }
-
-            @if (selectedUsers.length >= 4) {
-            <p class="textMoreSelcted">+ {{ selectedUsers.length - 3 }} more</p>
-            }
-        </div>
-        }
-        <!--------------------------------- Here will displayed the added Users from the searchbar --------------------------------->
+            <!--------------------------------- Here will displayed the added Users from the searchbar --------------------------------->
 
 
-        <!--------------------------------- Here will displayed the added Channels from the searchbar --------------------------------->
-        @if (selectedChannels.length > 0) {
-        <div class="mainContainerSelectedChannels">
+            <!--------------------------------- Here will displayed the added Channels from the searchbar --------------------------------->
+            @if (selectedChannels.length > 0) {
+            <div class="mainContainerSelectedChannels">
 
-            @for (channel of selectedChannels.slice(0, 3); track $index) {
-            <div class="containerSelectedUserOrChannel">
+                @for (channel of selectedChannels.slice(0, 3); track $index) {
+                <div class="containerSelectedUserOrChannel">
 
-                <img class="hashtagIcon" src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
+                    <img class="hashtagIcon" src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
 
-                <p>{{ channel.channelName }}</p>
+                    <p>{{ channel.channelName }}</p>
 
-                <img class="closeIconSelectedUserOrChannel" src="assets/icons/close-icon.svg" alt="Close Icon"
-                    (click)="removeSelectedChannel($index)">
+                    <img class="closeIconSelectedUserOrChannel" src="assets/icons/close-icon.svg" alt="Close Icon"
+                        (click)="removeSelectedChannel($index)">
+                </div>
+                }
+
+                @if (selectedChannels.length >= 4) {
+                <p class="textMoreSelcted">+ {{ selectedChannels.length - 3 }} more</p>
+                }
             </div>
             }
+            <!--------------------------------- Here will displayed the added Channels from the searchbar --------------------------------->
 
-            @if (selectedChannels.length >= 4) {
-            <p class="textMoreSelcted">+ {{ selectedChannels.length - 3 }} more</p>
-            }
         </div>
-        }
-        <!--------------------------------- Here will displayed the added Channels from the searchbar --------------------------------->
-
 
         <div class="containerForm" [ngStyle]="{'padding-bottom': storageService.uploadedImages.length >= 1 ? '11px' : '50px', 
             'margin-top': storageService.uploadedImages.length >= 1 ? '256px' : '266px'}">

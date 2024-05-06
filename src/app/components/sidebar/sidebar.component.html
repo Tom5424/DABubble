@@ -7,10 +7,12 @@
         </div>
     </div>
 
+
     <!--------------------------------- Only displayed in the Mobile View --------------------------------->
     <app-inputfield-in-sidebar-mobile-view class="d-none"></app-inputfield-in-sidebar-mobile-view>
     <!--------------------------------- Only displayed in the Mobile View --------------------------------->
 
+    
     <div class="scrollingContainer">
 
         <app-channels-in-sidebar></app-channels-in-sidebar>
@@ -22,6 +24,9 @@
 
 
     <!--------------------------------- Only displayed in the Mobile View --------------------------------->
-    <app-button-create-new-message-mobile-view class="d-none"></app-button-create-new-message-mobile-view>
+    <app-button-create-new-message-mobile-view class="d-none" routerLink="/mainView/newMessage"
+        (click)="directToNewMessageComponentIfInMobileView()">
+
+    </app-button-create-new-message-mobile-view>
     <!--------------------------------- Only displayed in the Mobile View --------------------------------->
 </nav>
