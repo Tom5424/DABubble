@@ -8,7 +8,7 @@
 
 
 .containerCloseIcon {
-    @include positionAbsolute(7px, unset, unset, 10px);
+    @include positionAbsolute(6px, unset, unset, 8px);
     @include iconHover();
     @include flex();
     padding: 6px;

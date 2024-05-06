@@ -7,7 +7,7 @@ import { MAT_DIALOG_DATA, MatDialogClose } from '@angular/material/dialog';
   standalone: true,
   imports: [MatDialogClose],
   templateUrl: './dialog-uploaded-img-full-view.component.html',
-  styleUrl: './dialog-uploaded-img-full-view.component.scss'
+  styleUrls: ['./dialog-uploaded-img-full-view.component.scss', './dialog-uploaded-img-full-view.component.media.scss']
 })
 
 
