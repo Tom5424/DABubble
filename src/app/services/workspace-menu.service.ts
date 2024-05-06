@@ -11,6 +11,7 @@ export class WorkspaceMenuService {
   inNewMessageMobileView: boolean = false;
   inChatDirectMessagesMobileView: boolean = false;
   inThreadDirectMessagesMobileView: boolean = false;
+  inChatChannelMessagesMobileView: boolean = false;
 
 
   toggleSidebarService(): void {

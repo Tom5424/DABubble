@@ -33,6 +33,7 @@ export class HeaderMobileViewComponent implements OnInit {
     this.workspaceMenuService.inChatDirectMessagesMobileView = false;
     this.workspaceMenuService.inThreadDirectMessagesMobileView = false;
     this.workspaceMenuService.inNewMessageMobileView = false;
+    this.workspaceMenuService.inChatChannelMessagesMobileView = false;
   }
 
 

@@ -54,7 +54,7 @@
     @for (channel of filteredChannels | async; track $index) {
 
     <div class="containerChannelNameAndImg" routerLink="/mainView/channel/{{ channel.id }}"
-        (click)="closeMenuSelection()">
+        (click)="closeMenuSelection()" (click)="selectChannelInMobileView()">
 
         <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
 
@@ -126,7 +126,7 @@
 
     @for (channelMessage of filteredChannelMessages | async; track $index) {
     <div class="containerDirectMessagesOrChannelMessages" routerLink="/mainView/channel/{{ channelMessage.receiverId }}"
-        (click)="closeMenuSelection()">
+        (click)="closeMenuSelection()" (click)="selectChannelInMobileView()">
 
         @if (noProfileImgExistInMenuSelection(channelMessage.userThatSendedMessage)) {
         <img class="imgNoSelectedProfileInMenuSelection" src="assets/img/non-user-selected.svg"

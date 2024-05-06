@@ -26,7 +26,9 @@
 
     @for(channel of channels; track $index) {
 
-    <li routerLink="/mainView/channel/{{ channel.id }}" routerLinkActive="activeChannel">
+    <li routerLink="/mainView/channel/{{ channel.id }}" routerLinkActive="activeChannel"
+        (click)="selectChannelInMobileView()">
+        
         <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
         <p>{{ channel.channelName }}</p>
     </li>

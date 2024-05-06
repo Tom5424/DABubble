@@ -1,9 +1,10 @@
 import { AsyncPipe, NgClass } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, HostListener, OnInit, inject } from '@angular/core';
 import { CreateChannelService } from '../../services/create-channel.service';
 import { DialogCreateChannelComponent } from '../dialog-create-channel/dialog-create-channel.component';
 import { MatDialog } from '@angular/material/dialog';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { WorkspaceMenuService } from '../../services/workspace-menu.service';
 
 
 @Component({
@@ -17,12 +18,20 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 
 export class ChannelsInSidebarComponent implements OnInit {
   createChannelService = inject(CreateChannelService);
+  workspaceMenuService = inject(WorkspaceMenuService);
   matDialog = inject(MatDialog);
   channelListAreCollapsed: boolean = false;
+  windowInnerWidth: number = 0;
 
 
   ngOnInit(): void {
+    this.getWindowSize();
     this.createChannelService.getAllChannelsService();
+  }
+
+
+  getWindowSize(): void {
+    this.windowInnerWidth = window.innerWidth;
   }
 
 
@@ -38,5 +47,19 @@ export class ChannelsInSidebarComponent implements OnInit {
 
   channelsAreLoading(): boolean {
     return (this.createChannelService.loadChannels) ? true : false;
+  }
+
+
+  @HostListener('window:resize', ['$event'])
+  checkWindowSize() {
+    this.windowInnerWidth = window.innerWidth;
+  }
+
+
+  selectChannelInMobileView(): void {
+    if (this.windowInnerWidth <= 1000) {
+      this.workspaceMenuService.sidebarIsHidden = true;
+      this.workspaceMenuService.inChatChannelMessagesMobileView = true;
+    }
   }
 }

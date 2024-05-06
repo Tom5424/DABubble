@@ -203,4 +203,12 @@ export class InputfieldInSidebarMobileViewComponent implements OnInit {
       this.workspaceMenuService.inChatDirectMessagesMobileView = true;
     }
   }
+
+  
+  selectChannelInMobileView(): void {
+    if (this.windowInnerWidth <= 1000) {
+      this.workspaceMenuService.sidebarIsHidden = true;
+      this.workspaceMenuService.inChatChannelMessagesMobileView = true;
+    }
+  }
 }
