@@ -119,6 +119,20 @@
         }
     }
 
+    .text {
+
+        mark {
+            
+            &:hover {
+                font-weight: normal;
+            }
+
+            &:active {
+                font-weight: 700;
+            }
+        }
+    }
+
     .containerSingleIcon {
 
         &:hover {

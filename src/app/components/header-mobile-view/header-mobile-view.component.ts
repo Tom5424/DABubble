@@ -4,12 +4,13 @@ import { MatMenuModule } from '@angular/material/menu';
 import { DialogProfileDetailViewComponent } from '../dialog-profile-detail-view/dialog-profile-detail-view.component';
 import { MatDialog } from '@angular/material/dialog';
 import { WorkspaceMenuService } from '../../services/workspace-menu.service';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-header-mobile-view',
   standalone: true,
-  imports: [MatMenuModule],
+  imports: [MatMenuModule, RouterLink],
   templateUrl: './header-mobile-view.component.html',
   styleUrls: ['./header-mobile-view.component.scss', './header-mobile-view.component.media.scss'],
 })

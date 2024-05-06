@@ -166,8 +166,10 @@ form {
         @include hover();
 
         input {
-            @include positionAbsolute(72px, 12px, 10px, 283px);
             @include hover();
+            position: absolute;
+            width: 35px;
+            height: 38px;
             z-index: 1;
             opacity: 0;
         }

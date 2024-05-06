@@ -200,6 +200,7 @@ export class InputfieldInSidebarMobileViewComponent implements OnInit {
   selectContactInMobileView(): void {
     if (this.windowInnerWidth <= 1000) {
       this.workspaceMenuService.sidebarIsHidden = true;
+      this.workspaceMenuService.inChatDirectMessagesMobileView = true;
     }
   }
 }
