@@ -1,0 +1,40 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Disabled the hover Effects on touch Devices and add active Effects
+@media (pointer: coarse) {
+
+    .containerWorkSpaceMenuBtn {
+
+        &:hover {
+
+            p {
+                color: #000000;
+                font-weight: normal;
+            }
+        }
+
+        &:active {
+
+            p {
+                color: $middlePurple;
+                font-weight: 700;
+            }
+        }
+
+        &:hover {
+
+            img {
+                filter: unset;
+            }
+        }
+
+        &:active {
+
+            img {
+                filter: brightness(0) saturate(100%) invert(37%) sepia(82%) saturate(6236%) hue-rotate(234deg) brightness(95%) contrast(99%);
+            }
+        }
+    }
+}

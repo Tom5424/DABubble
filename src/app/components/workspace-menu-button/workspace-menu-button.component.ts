@@ -8,7 +8,7 @@ import { NgClass } from '@angular/common';
   standalone: true,
   imports: [NgClass],
   templateUrl: './workspace-menu-button.component.html',
-  styleUrl: './workspace-menu-button.component.scss'
+  styleUrls: ['./workspace-menu-button.component.scss', './workspace-menu-button.component.media.scss']
 })
 
 
