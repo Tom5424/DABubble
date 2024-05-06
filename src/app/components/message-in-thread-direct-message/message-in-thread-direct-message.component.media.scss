@@ -160,7 +160,7 @@
     }
 
     .childContainerSelctedEmojis {
-        width: 25%;
+        min-width: 25%;
         justify-content: center;
     }
 
@@ -171,7 +171,6 @@
         }
     }
 
-    
     form {
 
         textarea {

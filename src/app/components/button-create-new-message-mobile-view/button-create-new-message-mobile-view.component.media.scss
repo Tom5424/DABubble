@@ -1,0 +1,20 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Disabled the hover Effects on touch Devices and add active Effects
+@media (pointer: coarse) {
+
+    .containerIcon {
+
+        &:hover {
+            background-color: $darkPurple;
+            transition: all 225ms ease-in-out;
+        }
+
+        &:active {
+            background-color: $purple;
+            transition: all 225ms ease-in-out;
+        }
+    }
+}

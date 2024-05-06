@@ -46,3 +46,8 @@ nav {
         overflow-y: scroll;
     }
 }
+
+
+app-button-create-new-message-mobile-view {
+    @include positionAbsolute(unset, 40px, unset, 45px);
+}

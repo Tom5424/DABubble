@@ -1,0 +1,20 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+.containerIcon {
+    @include hover();
+    background-color: $darkPurple;
+    border-radius: 50%;
+    padding: 16px;
+    box-shadow: 0px 6px 10px 0px #00000033;
+
+    img {
+        filter: brightness(0) saturate(100%) invert(88%) sepia(81%) saturate(1%) hue-rotate(101deg) brightness(108%) contrast(101%);
+    }
+
+    &:hover {
+        background-color: $purple;
+        transition: all 225ms ease-in-out;
+    }
+}
