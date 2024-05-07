@@ -14,7 +14,7 @@ import { NgClass } from '@angular/common';
   standalone: true,
   imports: [NgClass, MatDialogClose],
   templateUrl: './dialog-channel-members.component.html',
-  styleUrl: './dialog-channel-members.component.scss'
+  styleUrls: ['./dialog-channel-members.component.scss', './dialog-channel-members.component.media.scss']
 })
 
 

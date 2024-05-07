@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { CreateChannelService } from '../../services/create-channel.service';
 import { User } from '../../models/user';
@@ -42,14 +42,21 @@ export class ChatChannelMessagesComponent implements OnInit {
   emojiPickerIsDisplayed: boolean = false;
   channelId: string | null = '';
   inputValue: string | null | undefined = '';
+  windowInnerWidth: number = 0;
   addMessageForm = new FormGroup({
     textarea: new FormControl('', Validators.required)
   })
 
 
   ngOnInit(): void {
+    this.getWindowSize();
     this.routingService.savePreviousUrl(this.router.routerState.snapshot.url);
     this.getSelectedChannelInSidebar();
+  }
+
+
+  getWindowSize(): void {
+    this.windowInnerWidth = window.innerWidth;
   }
 
 
@@ -171,7 +178,22 @@ export class ChatChannelMessagesComponent implements OnInit {
 
 
   openDialogToAddMorePeopleToChannel(): void {
-    this.matDialog.open(DialogAddMorePeopleToChannelComponent, { position: { top: '185px', right: '50px ' }, data: { channelName: this.createChannelService.channel.channelName, channelMembers: this.createChannelService.channel.channelMembers, channelId: this.channelId } });
+    if (this.checkIfIsInMobileView()) {
+      this.matDialog.open(DialogChannelMembersComponent, { position: { top: '180px', right: '40px' }, data: { channelMembers: this.createChannelService.channel.channelMembers, channelId: this.channelId } });
+    } else {
+      this.matDialog.open(DialogAddMorePeopleToChannelComponent, { position: { top: '185px', right: '50px ' }, data: { channelName: this.createChannelService.channel.channelName, channelMembers: this.createChannelService.channel.channelMembers, channelId: this.channelId } });
+    }
+  }
+
+
+  checkIfIsInMobileView(): boolean {
+    return (this.windowInnerWidth <= 1000) ? true : false;
+  }
+
+
+  @HostListener('window:resize', ['$event'])
+  checkWindowSize() {
+    this.windowInnerWidth = window.innerWidth;
   }
 
 
