@@ -17,6 +17,17 @@
         width: 300px;
     }
 
+    form {
+
+        label {
+
+            mark {
+                display: block;
+                padding-left: 25px;
+            }
+        }
+    }
+
     .containerUserMenuSelection {
         width: 215px;
     }
@@ -92,6 +103,10 @@
 
         label {
             text-align: center;
+
+            mark {
+                padding-left: 0;
+            }
         }
     }
 

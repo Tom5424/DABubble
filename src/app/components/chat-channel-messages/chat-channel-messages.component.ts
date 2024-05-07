@@ -179,9 +179,9 @@ export class ChatChannelMessagesComponent implements OnInit {
 
   openDialogToAddMorePeopleToChannel(): void {
     if (this.checkIfIsInMobileView()) {
-      this.matDialog.open(DialogChannelMembersComponent, { position: { top: '180px', right: '40px' }, data: { channelMembers: this.createChannelService.channel.channelMembers, channelId: this.channelId } });
+      this.matDialog.open(DialogChannelMembersComponent, { position: { top: '185px', right: '40px' }, data: { channelMembers: this.createChannelService.channel.channelMembers, channelId: this.channelId } });
     } else {
-      this.matDialog.open(DialogAddMorePeopleToChannelComponent, { position: { top: '185px', right: '50px ' }, data: { channelName: this.createChannelService.channel.channelName, channelMembers: this.createChannelService.channel.channelMembers, channelId: this.channelId } });
+      this.matDialog.open(DialogAddMorePeopleToChannelComponent, { position: { top: '185px', right: '40px ' }, data: { channelName: this.createChannelService.channel.channelName, channelMembers: this.createChannelService.channel.channelMembers, channelId: this.channelId } });
     }
   }
 

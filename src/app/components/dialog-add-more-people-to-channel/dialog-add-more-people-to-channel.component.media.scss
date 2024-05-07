@@ -1,0 +1,234 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Width
+@media screen and (max-width: 685px) {
+
+    .mainContainerAddedUserMenuSelection {
+        flex-direction: column;
+    }
+
+    .text {
+        margin: 0;
+        text-align: center;
+    }
+}
+
+
+@media screen and (max-width: 675px) {
+
+    form {
+
+        input {
+            width: 370px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 620px) {
+
+    form {
+
+        input {
+            width: 320px;
+        }
+    }
+
+    .containerUserMenuSelection {
+        width: 250px;
+    }
+}
+
+
+@media screen and (max-width: 555px) {
+
+    form {
+
+        input {
+            width: 270px;
+        }
+    }
+
+    .containerUserMenuSelection {
+        width: 200px;
+    }
+
+    .containerUserNameAndImg {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .userOnlineStatus {
+        top: 40px;
+        left: 107px;
+    }
+}
+
+
+@media screen and (max-width: 495px) {
+
+    form {
+
+        input {
+            width: 220px;
+        }
+    }
+
+    .containerUserMenuSelection {
+        width: 150px;
+    }
+
+    .containerUserNameAndImg {
+        padding: 20px;
+    }
+
+    .userOnlineStatus {
+        left: 82px;
+    }
+}
+
+
+@media screen and (max-width: 435px) {
+
+    form {
+
+        input {
+            width: 170px;
+        }
+    }
+
+    .containerUserMenuSelection {
+        width: 100px;
+    }
+
+    .userOnlineStatus {
+        left: 58px;
+    }
+}
+
+
+@media screen and (max-width: 370px) {
+
+    .dialogBoxUpperPart {
+
+        p {
+            font-size: 18px;
+        }
+    }
+
+    .containerImageAndChannelName {
+
+        p {
+            width: 100px;
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+
+    form {
+
+        input {
+            width: 120px;
+        }
+    }
+
+    .containerUserMenuSelection {
+        width: 80px;
+    }
+
+    .userOnlineStatus {
+        top: 56px;
+        left: 47px;
+    }
+
+    .containerUserNameAndImg {
+
+        p {
+            width: 60px;
+            text-align: center;
+        }
+    }
+
+    .childContainerAddedUserMenuSelection {
+
+        p {
+            width: 70px;
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+
+    .btnContainer {
+        justify-content: center;
+
+        button {
+            width: 70%;
+        }
+    }
+}
+
+
+//////////////////// Disabled the hover Effects on touch Devices and add active Effects
+@media (pointer: coarse) {
+
+    .containerCloseIcon {
+
+        &:hover {
+            background-color: unset;
+
+            img {
+                filter: none;
+            }
+        }
+
+        &:active {
+            background-color: $bgColor;
+            transition: all 225ms ease-in-out;
+
+            img {
+                filter: brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(1557%) hue-rotate(226deg) brightness(110%) contrast(90%);
+            }
+        }
+    }
+
+    .containerUserNameAndImg {
+
+        &:hover {
+            background-color: unset;
+        }
+
+        &:active {
+            background-color: $bgColor;
+        }
+
+    }
+
+    .closeIcon {
+
+        &:hover {
+            filter: unset;
+        }
+
+        &:active {
+            filter: brightness(0) saturate(100%) invert(28%) sepia(87%) saturate(2837%) hue-rotate(231deg) brightness(99%) contrast(91%);
+        }
+    }
+
+    .btnContainer {
+
+        button {
+
+            &:hover {
+                background-color: $darkPurple;
+            }
+
+            &:active {
+                background-color: $purple;
+            }
+        }
+    }
+}

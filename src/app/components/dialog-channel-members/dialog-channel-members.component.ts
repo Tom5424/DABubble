@@ -36,7 +36,7 @@ export class DialogChannelMembersComponent {
 
   openDialogToAddMorePeopleToChannel(): void {
     this.matDialog.closeAll();
-    this.matDialog.open(DialogAddMorePeopleToChannelComponent, { position: { top: '185px', right: '50px' }, data: { channelName: this.createChannelService.channel.channelName, channelMembers: this.data.channelMembers, channelId: this.data.channelId } });
+    this.matDialog.open(DialogAddMorePeopleToChannelComponent, { position: { top: '185px', right: '40px' }, data: { channelName: this.createChannelService.channel.channelName, channelMembers: this.data.channelMembers, channelId: this.data.channelId } });
   }
 
 

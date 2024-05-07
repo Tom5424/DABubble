@@ -14,7 +14,7 @@ import { Observable, map, startWith } from 'rxjs';
   standalone: true,
   imports: [MatDialogClose, ReactiveFormsModule, NgClass, AsyncPipe],
   templateUrl: './dialog-add-more-people-to-channel.component.html',
-  styleUrl: './dialog-add-more-people-to-channel.component.scss'
+  styleUrls: ['./dialog-add-more-people-to-channel.component.scss', './dialog-add-more-people-to-channel.component.media.scss']
 })
 
 

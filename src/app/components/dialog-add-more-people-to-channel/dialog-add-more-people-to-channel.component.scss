@@ -73,7 +73,7 @@ form {
     @include flexColumn();
     @include positionAbsolute(175px, unset, 60px, unset);
     border: 1px solid $lightPurple;
-    height: 65px;
+    max-height: 57px;
     width: 300px;
     gap: 15px;
     border-radius: 0 20px 20px 20px;
