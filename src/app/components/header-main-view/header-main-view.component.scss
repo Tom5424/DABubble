@@ -104,7 +104,7 @@ header {
     @include flexColumn();
     @include positionAbsolute(70px, unset, 470px, unset);
     border: 1px solid $lightPurple;
-    height: 145px;
+    height: 175px;
     width: 400px;
     gap: 15px;
     border-radius: 0 20px 20px 20px;

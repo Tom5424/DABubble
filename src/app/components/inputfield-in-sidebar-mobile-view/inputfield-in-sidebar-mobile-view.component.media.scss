@@ -15,6 +15,47 @@
 
     .containerMenuSelection {
         width: 300px;
+        height: 230px;
+    }
+
+    .text {
+        text-align: center;
+    }
+
+    .containerUserNameAndImg {
+        flex-direction: column;
+
+        p {
+            margin: 0;
+            text-align: center;
+        }
+    }
+
+    .userOnlineStatus {
+        bottom: 37px;
+        left: 156px;
+    }
+
+    .containerChannelNameAndImg {
+        flex-direction: column;
+
+        p {
+            margin: 0;
+            text-align: center;
+        }
+    }
+
+    .containerDirectMessagesOrChannelMessages {
+        flex-direction: column;
+        align-items: center;
+
+        p {
+            text-align: center;
+        }
+    }
+
+    .containerTimeWhenTheMessageWasSent {
+        justify-content: center;
     }
 }
 
@@ -23,6 +64,11 @@
 
     .containerMenuSelection {
         width: 250px;
+    }
+
+    .userOnlineStatus {
+        bottom: 37px;
+        left: 132px;
     }
 
     .containerTimeWhenTheMessageWasSent {
@@ -37,22 +83,12 @@
         width: 180px;
     }
 
+    .userOnlineStatus {
+        left: 97px;
+    }
+
     .text {
         text-align: center;
-    }
-
-
-    .containerDirectMessagesOrChannelMessages {
-        flex-direction: column;
-        align-items: center;
-
-        p {
-            text-align: center;
-        }
-    }
-
-    .containerTimeWhenTheMessageWasSent {
-        align-items: center;
     }
 }
 
@@ -68,6 +104,11 @@
 
     .containerMenuSelection {
         width: 130px;
+    }
+
+    .userOnlineStatus {
+        left: 72px;
+        bottom: 34px;
     }
 
     .text {
@@ -112,5 +153,43 @@
 
     .containerMenuSelection {
         left: 60px;
+    }
+}
+
+
+//////////////////// Disabled the hover Effects on touch Devices and add active Effects
+@media (pointer: coarse) {
+
+    .containerUserNameAndImg {
+
+        &:hover {
+            background-color: unset;
+        }
+
+        &:active {
+            background-color: $bgColor;
+        }
+    }
+
+    .containerChannelNameAndImg {
+
+        &:hover {
+            background-color: unset;
+        }
+
+        &:active {
+            background-color: $bgColor;
+        }
+    }
+
+    .containerDirectMessagesOrChannelMessages {
+
+        &:hover {
+            background-color: unset;
+        }
+
+        &:active {
+            background-color: $bgColor;
+        }
     }
 }

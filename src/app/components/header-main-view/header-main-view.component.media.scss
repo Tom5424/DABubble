@@ -114,6 +114,7 @@
 @media screen and (max-width: 1286px) {
 
     .containerMenuSelection {
+        width: 310px;
         left: 460px;
     }
 }
@@ -130,7 +131,12 @@
     }
 
     .containerMenuSelection {
+        width: 290px;
         left: 430px;
+    }
+
+    .containerTimeWhenTheMessageWasSent {
+        flex-direction: column;
     }
 }
 
@@ -147,6 +153,14 @@
 
     .containerMenuSelection {
         left: 355px;
+    }
+}
+
+
+@media screen and (max-width: 1050px) {
+
+    .containerMenuSelection {
+        width: 250px;
     }
 }
 
@@ -200,6 +214,39 @@
 
         &:active {
             color: $middlePurple;
+            background-color: $bgColor;
+        }
+    }
+
+    .containerUserNameAndImg {
+
+        &:hover {
+            background-color: unset;
+        }
+
+        &:active {
+            background-color: $bgColor;
+        }
+    }
+
+    .containerChannelNameAndImg {
+
+        &:hover {
+            background-color: unset;
+        }
+
+        &:active {
+            background-color: $bgColor;
+        }
+    }
+
+    .containerDirectMessagesOrChannelMessages {
+
+        &:hover {
+            background-color: unset;
+        }
+
+        &:active {
             background-color: $bgColor;
         }
     }
