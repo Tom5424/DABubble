@@ -19,7 +19,7 @@ import { ThreadMessage } from '../../models/thread-message';
   standalone: true,
   imports: [DatePipe, NgClass, NgStyle, ReactiveFormsModule, RouterLink, PickerComponent],
   templateUrl: './channel-message.component.html',
-  styleUrl: './channel-message.component.scss'
+  styleUrls: ['./channel-message.component.scss', './channel-message.component.media.scss']
 })
 
 

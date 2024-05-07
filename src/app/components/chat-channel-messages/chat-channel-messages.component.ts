@@ -24,7 +24,7 @@ import { RoutingService } from '../../services/routing.service';
   standalone: true,
   imports: [RouterOutlet, NgStyle, NgClass, AsyncPipe, DatePipe, MatDialogModule, PickerComponent, ReactiveFormsModule, ChannelMessageComponent, DialogEditChannelComponent, DialogChannelMembersComponent, DialogAddMorePeopleToChannelComponent],
   templateUrl: './chat-channel-messages.component.html',
-  styleUrl: './chat-channel-messages.component.scss'
+  styleUrls: ['./chat-channel-messages.component.scss', './chat-channel-messages.component.media.scss']
 })
 
 
@@ -165,7 +165,7 @@ export class ChatChannelMessagesComponent implements OnInit {
   }
 
 
-  openDialogToShowAllChannelMembers(): void { 
+  openDialogToShowAllChannelMembers(): void {
     this.matDialog.open(DialogChannelMembersComponent, { position: { top: '185px', right: '120px' }, data: { channelMembers: this.createChannelService.channel.channelMembers, channelId: this.channelId } });
   }
 

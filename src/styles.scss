@@ -36,6 +36,11 @@ body {
         width: 100%;
         position: unset;
     }
+
+    app-chat-channel-messages {
+        @include flexCenteredXAxis();
+        margin: 0 15px 0 15px;
+    }
 }
 
 

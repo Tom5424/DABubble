@@ -12,7 +12,7 @@
     }
 
 
-    <div [ngClass]="{'container': !userIdMatchesWithIdFromLoggedinUser()}">
+    <div class="containerOwnMessages" [ngClass]="{'container': !userIdMatchesWithIdFromLoggedinUser()}">
 
         <div [ngClass]="{'containerChannelMessageUpperPartOwnMessage': userIdMatchesWithIdFromLoggedinUser(), 
             'containerChannelMessageUpperPartFromOtherUser': !userIdMatchesWithIdFromLoggedinUser()}">
@@ -44,7 +44,7 @@
 
             <!--------------------------------- Emoji Picker --------------------------------->
             @if (emojiPickerIsDisplayed) {
-            <emoji-mart [style]="{position: 'absolute', bottom: '0', left: '235px', 'z-index': '1'}"
+            <emoji-mart [style]="{position: 'absolute', bottom: '170px', left: '15px', 'z-index': '1'}"
                 (emojiClick)="selectEmojiInEmojiPicker($event)">
             </emoji-mart>
             }

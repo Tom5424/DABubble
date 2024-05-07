@@ -44,6 +44,14 @@
 }
 
 
+@media screen and (max-width: 280px) {
+
+    .text {
+        padding-left: 0;
+    }
+}
+
+
 //////////////////// Disabled the hover Effects on touch Devices and add active Effects
 @media (pointer: coarse) {
 

@@ -100,8 +100,12 @@
 
                     <div class="containerText">
                         <p>This is the beginning of the Channel</p>
-                        <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
-                        <mark>{{ createChannelService.channel.channelName }}</mark>
+
+                        <div class="containerImgAndMark">
+                            <img src="assets/icons/hashtag-icon-black.svg" alt="Hashtag Icon">
+                            <mark>{{ createChannelService.channel.channelName }}</mark>
+                        </div>
+
                     </div>
 
                     @if ((createChannelMessageService.channelMessagesAsObservable | async); as channelMessages) {
