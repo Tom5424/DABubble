@@ -89,7 +89,7 @@
             <div class="childContainerDirectMessageLowerPart">
                 <p routerLink="/mainView/directMessage/{{ userId }}/thread/{{ directMessageId }}"
                     (click)="selectThreadInMobileView()">
-                    
+
                     {{ messageAmountFromThreadDirectMessages }} Answers
                 </p>
                 <p>Last Answer {{ latestMessageInThreadDirectMessage | date: 'HH:mm' }} Uhr</p>
@@ -154,8 +154,10 @@
             <img src="assets/icons/add-emojis-icon.svg" alt="Add Emoji Icon">
         </div>
 
-        <div class="containerSingleIcon" routerLink="/mainView/directMessage/{{ userId }}/thread/{{ directMessageId }}">
-            <img src="assets/icons/open-thread-icon.svg" alt="Open Thread Icon" (click)="selectThreadInMobileView()">
+        <div class="containerSingleIcon" routerLink="/mainView/directMessage/{{ userId }}/thread/{{ directMessageId }}"
+            (click)="selectThreadInMobileView()">
+            
+            <img src="assets/icons/open-thread-icon.svg" alt="Open Thread Icon">
         </div>
 
         @if (userIdMatchesWithIdFromLoggedinUser()) {

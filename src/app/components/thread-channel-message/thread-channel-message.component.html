@@ -20,7 +20,9 @@
 
             </div>
 
-            <div class="containerCloseIcon" routerLink="/mainView/channel/{{ channelMessageId }}">
+            <div class="containerCloseIcon" routerLink="/mainView/channel/{{ channelMessageId }}"
+                (click)="closeThreadInMobileView()">
+
                 <img src="assets/icons/close-icon.svg" alt="Close Icon">
             </div>
         </div>

@@ -1,5 +1,5 @@
 import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
-import { Component, ElementRef, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { StorageInThreadService } from '../../services/storage-in-thread.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -12,6 +12,7 @@ import { CreateChannelService } from '../../services/create-channel.service';
 import { CreateThreadMessageInChannelMessageService } from '../../services/create-thread-message-in-channel-message.service';
 import { MessageInThreadChannelMessageComponent } from '../message-in-thread-channel-message/message-in-thread-channel-message.component';
 import { RoutingService } from '../../services/routing.service';
+import { WorkspaceMenuService } from '../../services/workspace-menu.service';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class ThreadChannelMessageComponent implements OnInit {
   storageInThreadService = inject(StorageInThreadService);
   authService = inject(AuthService);
   routingService = inject(RoutingService);
+  workspaceMenuService = inject(WorkspaceMenuService);
   renderer2 = inject(Renderer2);
   matDialog = inject(MatDialog);
   router = inject(Router);
@@ -37,6 +39,7 @@ export class ThreadChannelMessageComponent implements OnInit {
   channelMessageId: string = '';
   threadMessageId: string | null = '';
   inputValue: string | null | undefined = '';
+  windowInnerWidth: number = 0;
   emojiPickerIsDisplayed: boolean = false;
   addMessageForm = new FormGroup({
     textarea: new FormControl('', Validators.required)
@@ -44,9 +47,15 @@ export class ThreadChannelMessageComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.getWindowSize();
     this.routingService.savePreviousUrl(this.router.routerState.snapshot.url);
     this.getUrlFromRoute();
     this.getIdFromActivatedRoute();
+  }
+
+  
+  getWindowSize(): void {
+    this.windowInnerWidth = window.innerWidth;
   }
 
 
@@ -140,5 +149,18 @@ export class ThreadChannelMessageComponent implements OnInit {
 
   tootgleEmojiPicker() {
     this.emojiPickerIsDisplayed = !this.emojiPickerIsDisplayed;
+  }
+
+
+  @HostListener('window:resize', ['$event'])
+  checkWindowSize() {
+    this.windowInnerWidth = window.innerWidth;
+  }
+
+
+  closeThreadInMobileView(): void {
+    if (this.windowInnerWidth <= 1000) {
+      this.workspaceMenuService.inThreadChannelMessagesMobileView = false;
+    }
   }
 }

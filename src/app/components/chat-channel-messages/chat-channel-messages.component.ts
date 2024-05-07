@@ -17,6 +17,7 @@ import { CreateChannelMessageService } from '../../services/create-channel-messa
 import { ChannelMessageComponent } from '../channel-message/channel-message.component';
 import { ChannelMessage } from '../../models/channel-message';
 import { RoutingService } from '../../services/routing.service';
+import { WorkspaceMenuService } from '../../services/workspace-menu.service';
 
 
 @Component({
@@ -34,6 +35,7 @@ export class ChatChannelMessagesComponent implements OnInit {
   storageService = inject(StorageService);
   createChannelMessageService = inject(CreateChannelMessageService);
   routingService = inject(RoutingService);
+  workspaceMenuService = inject(WorkspaceMenuService);
   renderer2 = inject(Renderer2);
   matDialog = inject(MatDialog);
   router = inject(Router);

@@ -87,7 +87,8 @@
             class="mainContainerChannelMessageLowerPart">
 
             <div class="childContainerChannelMessageLowerPart">
-                <p routerLink="/mainView/channel/{{ channelId }}/thread/{{ channelMessageId }}">
+                <p routerLink="/mainView/channel/{{ channelId }}/thread/{{ channelMessageId }}"
+                    (click)="selectThreadInMobileView()">
                     {{ messageAmountFromThreadChannelMessages }} Answers
                 </p>
                 <p>Last Answer {{ latestMessageInThreadChannelMessage | date: 'HH:mm' }} Uhr</p>
@@ -152,7 +153,9 @@
             <img src="assets/icons/add-emojis-icon.svg" alt="Add Emoji Icon">
         </div>
 
-        <div class="containerSingleIcon" routerLink="/mainView/channel/{{ channelId }}/thread/{{ channelMessageId }}">
+        <div class="containerSingleIcon" routerLink="/mainView/channel/{{ channelId }}/thread/{{ channelMessageId }}"
+            (click)="selectThreadInMobileView()">
+            
             <img src="assets/icons/open-thread-icon.svg" alt="Open Thread Icon">
         </div>
 

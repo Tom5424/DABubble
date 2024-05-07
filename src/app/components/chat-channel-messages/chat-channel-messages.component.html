@@ -1,5 +1,8 @@
 <div class="flex">
-    <div class="mainContainerChatChannelMessages">
+
+    <div class="mainContainerChatChannelMessages"
+        [ngClass]="{'d-none': workspaceMenuService.inThreadChannelMessagesMobileView}">
+
         <div [ngClass]="{'overlay': emojiPickerIsDisplayed}" (click)="closeEmojiPickerOrOtherMenuIfClickOutside()">
 
         </div>
@@ -226,4 +229,5 @@
     <!--------------------------------- Displayed here the opened Thread in Channel Messsages --------------------------------->
     <router-outlet></router-outlet>
     <!--------------------------------- Displayed here the opened Thread in Channel Messsages --------------------------------->
+    
 </div>

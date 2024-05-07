@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, HostListener, Input, inject } from '@angular/core';
 import { DatePipe, NgClass, NgStyle } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -11,6 +11,7 @@ import { CreateChannelMessageService } from '../../services/create-channel-messa
 import { ChannelMessage } from '../../models/channel-message';
 import { CreateThreadMessageInChannelMessageService } from '../../services/create-thread-message-in-channel-message.service';
 import { ThreadMessage } from '../../models/thread-message';
+import { WorkspaceMenuService } from '../../services/workspace-menu.service';
 
 
 
@@ -27,6 +28,7 @@ export class ChannelMessageComponent {
   createThreadMessageInChannelMessageService = inject(CreateThreadMessageInChannelMessageService);
   createChannelMessageService = inject(CreateChannelMessageService);
   authService = inject(AuthService);
+  workspaceMenuService = inject(WorkspaceMenuService);
   activatedRoute = inject(ActivatedRoute);
   matDialog = inject(MatDialog);
   @Input() channelMessage!: ChannelMessage;
@@ -40,16 +42,23 @@ export class ChannelMessageComponent {
   channelId: string | null = '';
   messageAmountFromThreadChannelMessages: number = 0;
   latestMessageInThreadChannelMessage: number = 0;
+  windowInnerWidth: number = 0;
   editMessageForm = new FormGroup({
     textareaEditMessage: new FormControl(this.inputValue, Validators.required),
   })
 
 
   ngOnInit(): void {
+    this.getWindowSize();
     this.activatedRoute.paramMap.subscribe((params) => {
       this.channelId = params.get('id');
       this.getAllMessagesFromThreadChannelMessage();
     });
+  }
+
+
+  getWindowSize(): void {
+    this.windowInnerWidth = window.innerWidth;
   }
 
 
@@ -174,5 +183,18 @@ export class ChannelMessageComponent {
   deleteMessage(): void {
     this.createChannelMessageService.deleteChannelMessageService(this.channelMessageId);
     this.menuMoreOptionsAreOpen = false;
+  }
+
+
+  @HostListener('window:resize', ['$event'])
+  checkWindowSize() {
+    this.windowInnerWidth = window.innerWidth;
+  }
+
+
+  selectThreadInMobileView(): void {
+    if (this.windowInnerWidth <= 1000) {
+      this.workspaceMenuService.inThreadChannelMessagesMobileView = true;
+    }
   }
 }
