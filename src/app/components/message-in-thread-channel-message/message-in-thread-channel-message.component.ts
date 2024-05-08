@@ -15,7 +15,7 @@ import { CreateThreadMessageInChannelMessageService } from '../../services/creat
   standalone: true,
   imports: [NgClass, NgStyle, AsyncPipe, DatePipe, ReactiveFormsModule, PickerComponent],
   templateUrl: './message-in-thread-channel-message.component.html',
-  styleUrl: './message-in-thread-channel-message.component.scss'
+  styleUrls: ['./message-in-thread-channel-message.component.scss', './message-in-thread-channel-message.component.media.scss']
 })
 
 
@@ -70,6 +70,7 @@ export class MessageInThreadChannelMessageComponent {
 
   openMenuMoreOptions(): void {
     this.menuMoreOptionsAreOpen = !this.menuMoreOptionsAreOpen;
+    this.barToSelectEmojisAreOpen = false;
   }
 
 

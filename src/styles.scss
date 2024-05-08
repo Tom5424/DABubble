@@ -41,6 +41,12 @@ body {
         @include flexCenteredXAxis();
         margin: 0 15px 0 15px;
     }
+    
+    app-thread-channel-message {
+        @include flexCenteredXAxis();
+        width: 100%;
+        position: unset;
+    }
 }
 
 
@@ -195,7 +201,7 @@ app-main-view {
     .emoji-mart {
         width: 346px !important;
         top: unset !important;
-        bottom: -45px !important;
+        bottom: -25px !important;
         right: 0 !important;
     }
 }

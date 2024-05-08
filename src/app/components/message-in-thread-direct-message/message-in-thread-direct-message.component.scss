@@ -62,6 +62,7 @@
     @include positionAbsolute(-20px, unset, unset, unset);
     @include flexCenteredYAxis();
     border: 1px solid $lightPurple;
+    z-index: 1;
     display: none;
     gap: 5px;
     height: 40px;

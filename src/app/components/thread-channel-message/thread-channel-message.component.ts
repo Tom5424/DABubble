@@ -20,7 +20,7 @@ import { WorkspaceMenuService } from '../../services/workspace-menu.service';
   standalone: true,
   imports: [NgClass, NgStyle, RouterLink, AsyncPipe, ReactiveFormsModule, PickerComponent, MessageInThreadChannelMessageComponent],
   templateUrl: './thread-channel-message.component.html',
-  styleUrl: './thread-channel-message.component.scss'
+  styleUrls: ['./thread-channel-message.component.scss', './thread-channel-message.component.media.scss']
 })
 
 
@@ -53,7 +53,7 @@ export class ThreadChannelMessageComponent implements OnInit {
     this.getIdFromActivatedRoute();
   }
 
-  
+
   getWindowSize(): void {
     this.windowInnerWidth = window.innerWidth;
   }

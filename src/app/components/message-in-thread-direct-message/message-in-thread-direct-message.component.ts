@@ -51,6 +51,7 @@ export class MessageInThreadDirectMessageComponent {
 
   openMenuMoreOptions(): void {
     this.menuMoreOptionsAreOpen = !this.menuMoreOptionsAreOpen;
+    this.barToSelectEmojisAreOpen = false;
   }
 
 
