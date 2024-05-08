@@ -1,0 +1,66 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Width
+@media screen and (max-width: 1000px) {
+
+    .secondHeadline {
+        display: none;
+    }
+
+    .containerTextAndBtnMobileView {
+        display: flex !important;
+    }
+}
+
+
+@media screen and (max-width: 390px) {
+
+    .mainContainerWelcomeToDabubble {
+
+        h1 {
+            font-size: 25px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+    }
+
+    .containerTextAndBtnMobileView {
+
+        h2 {
+            font-size: 20px;
+        }
+    }
+}
+
+
+//////////////////// Height
+@media screen and (max-height: 600px) {
+
+    .mainContainerWelcomeToDabubble {
+        margin-bottom: 15px;
+    }
+}
+
+
+//////////////////// Disabled the hover Effects on touch Devices and add active Effects
+@media (pointer: coarse) {
+
+    .containerTextAndBtnMobileView {
+
+        button {
+
+            &:hover {
+                background-color: $darkPurple;
+            }
+
+            &:active {
+                background-color: $purple;
+            }
+        }
+
+    }
+}

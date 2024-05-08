@@ -22,5 +22,21 @@
 
     p {
         font-size: 20px;
+        text-align: center;
+    }
+}
+
+
+.containerTextAndBtnMobileView {
+    @include flexColumnCenteredXAxis();
+    margin-bottom: 20px;
+
+    button {
+        @include btnPrimary();
+        @include btnPrimaryHover();
+        @include btnPrimaryActive();
+        border-radius: 25px;
+        padding: 10px 20px 10px 20px;
+        border: unset;
     }
 }

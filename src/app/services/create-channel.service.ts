@@ -61,7 +61,11 @@ export class CreateChannelService {
     const collectionRef = collection(this.firestore, 'channels');
     getDocs(collectionRef)
       .then((data) => {
-        this.router.navigateByUrl('/mainView/channel/' + data.docs[0].id);
+        if (!data.empty) {
+          this.router.navigateByUrl('/mainView/channel/' + data.docs[0].id);
+        } else {
+          this.router.navigateByUrl('/mainView/welcomeToDABubble');
+        }
       })
   }
 
