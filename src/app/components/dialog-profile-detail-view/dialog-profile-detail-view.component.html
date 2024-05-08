@@ -4,14 +4,14 @@
         <p>Profile</p>
 
         <div mat-dialog-close class="containerCloseIcon">
-            <img src="/assets/icons/close-icon.svg" alt="Close Icon">
+            <img src="assets/icons/close-icon.svg" alt="Close Icon">
         </div>
     </div>
 
 
     <div class="containerProfileImg">
         @if (noProfileImgExist()) {
-        <img class="imgNoSelectedProfile" src="/assets/img/non-user-selected.svg" alt="Profile Image">
+        <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="Profile Image">
         }@else {
         <img src="{{ authService.user.imgUrl }}" alt="Profile Image">
         }
@@ -38,7 +38,7 @@
 
         }@else {
 
-        <img src="/assets/icons/user-is-online-icon.svg" alt="Green Dot">
+        <img src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
         <p [ngStyle]="guestUserIsLoggedIn() ? {'color': '#000000'} : {'color': '#92C83E'}">
             Online
         </p>
@@ -47,7 +47,7 @@
 
 
     <div class="dialogBoxLowerPart">
-        <img src="/assets/icons/email-icon-black.svg" alt="Email Icon">
+        <img src="assets/icons/email-icon-black.svg" alt="Email Icon">
         <p>Email Address</p>
     </div>
 

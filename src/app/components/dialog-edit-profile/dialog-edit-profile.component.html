@@ -4,14 +4,14 @@
         <p>Edit your profile</p>
 
         <div mat-dialog-close class="containerCloseIcon">
-            <img src="/assets/icons/close-icon.svg" alt="Close Icon">
+            <img src="assets/icons/close-icon.svg" alt="Close Icon">
         </div>
     </div>
 
 
     <div class="containerProfileImg">
         @if (!authService.user.imgUrl) {
-        <img class="imgNoSelectedProfile" src="/assets/img/non-user-selected.svg" alt="Profile Image">
+        <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="Profile Image">
         }@else {
         <img src="{{ authService.user.imgUrl }}" alt="Profile Image">
         }
@@ -20,7 +20,7 @@
 
     <form (ngSubmit)="updateUserName()" id="editProfileForm" [formGroup]="editProfileForm">
         <label for="userName" form="editProfileForm">
-            <img src="/assets/icons/user-icon-with-circle-black.svg" alt="User Icon">
+            <img src="assets/icons/user-icon-with-circle-black.svg" alt="User Icon">
             Full Name
         </label>
         <input type="text" id="userName" placeholder="{{ authService.user.name }}" formControlName="name"

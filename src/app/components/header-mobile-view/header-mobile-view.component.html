@@ -8,7 +8,7 @@
     <!---------------- Only shown when chatting with a Contact or in Channel or create a new Message ---------------->
     @if (workspaceMenuService.inChatDirectMessagesMobileView || workspaceMenuService.inNewMessageMobileView || workspaceMenuService.inChatChannelMessagesMobileView) {
     <div class="containerImages" (click)="directBackToSidebar()">
-        <img src="/assets/icons/arrow-icon-profile.svg" alt="Arrow Icon">
+        <img src="assets/icons/arrow-icon-profile.svg" alt="Arrow Icon">
         <img src="assets/img/workspace-logo.svg" alt="Workspace Logo">
     </div>
     }
@@ -31,9 +31,9 @@
         <!---------------- No online Status will displayed if Guest User is Logged in ---------------->
         <img class="d-none">
         }@else if(userIsOnline()) {
-        <img class="iconOnlineStatus" src="./assets/icons/user-is-online-icon.svg" alt="Green Dot">
+        <img class="iconOnlineStatus" src="assets/icons/user-is-online-icon.svg" alt="Green Dot">
         }@else {
-        <img class="iconOnlineStatus" src="./assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
+        <img class="iconOnlineStatus" src="assets/icons/user-is-offline-icon.svg" alt="Gray Dot">
         }
         }
     </div>

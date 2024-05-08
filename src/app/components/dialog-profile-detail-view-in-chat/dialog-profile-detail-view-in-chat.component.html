@@ -11,7 +11,7 @@
 
     <div class="containerProfileImg">
         @if (noProfileImgExist()) {
-        <img class="imgNoSelectedProfile" src="/assets/img/non-user-selected.svg" alt="Profile Image">
+        <img class="imgNoSelectedProfile" src="assets/img/non-user-selected.svg" alt="Profile Image">
         }@else {
         <img src="{{ data.dataFromSelectedUser.imgUrl }}" alt="Profile Image">
         }
