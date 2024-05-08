@@ -121,7 +121,7 @@
 
 .containerDirectMessagesOrChannelMessages {
     @include hover();
-    @include flex();
+    @include flexStartYAxis();
     gap: 15px;
     padding: 4px 20px 4px 20px;
     border-radius: 35px;
