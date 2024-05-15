@@ -14,7 +14,7 @@ import { StorageInDialogEditProfileImgService } from '../../services/storage-in-
   standalone: true,
   imports: [NgClass, MatTooltipModule, MatDialogClose],
   templateUrl: './dialog-edit-profile-img.component.html',
-  styleUrl: './dialog-edit-profile-img.component.scss'
+  styleUrls: ['./dialog-edit-profile-img.component.scss', './dialog-edit-profile-img.component.media.scss'],
 })
 
 

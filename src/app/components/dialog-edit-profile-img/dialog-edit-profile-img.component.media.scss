@@ -1,0 +1,229 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+//////////////////// Width
+@media screen and (max-width: 690px) {
+
+    .dialogBox {
+        width: 350px;
+        padding: 20px 50px 20px 50px;
+    }
+
+    .avatarPickerBox {
+
+        h1 {
+            font-size: 40px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 26px;
+        }
+    }
+
+    .containerCloseIcon {
+        top: -8px;
+        right: -30px;
+    }
+
+    .text {
+        width: unset;
+        text-align: center;
+    }
+
+    .containerAvatarImages {
+        height: 60px;
+        flex-wrap: wrap;
+        overflow-y: scroll;
+    }
+
+    .containerTextAndBtn {
+        flex-direction: column;
+        gap: 15px;
+
+        input {
+            top: 38px;
+            right: 99px;
+        }
+
+        img {
+            top: 25px;
+            right: 60px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 565px) {
+
+    .dialogBox {
+        width: 290px;
+    }
+
+    .containerTextAndBtn {
+
+        input {
+            right: 70px;
+        }
+
+        img {
+            right: 30px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 490px) {
+
+    .dialogBox {
+        width: 230px;
+        padding: 20px 40px 20px 40px;
+    }
+
+    .avatarPickerBox {
+
+        h1 {
+            font-size: 32px;
+        }
+
+        h2 {
+            font-size: 20px;
+        }
+    }
+
+    .containerTextAndBtn {
+
+        input {
+            top: 39px;
+            right: 43px;
+        }
+
+        img {
+            right: 0;
+        }
+    }
+}
+
+
+@media screen and (max-width: 390px) {
+
+    .dialogBox {
+        width: 140px;
+        height: 530px;
+        overflow-y: scroll;
+    }
+
+    .avatarPickerBox {
+
+        h1 {
+            font-size: 30px;
+        }
+    }
+
+    .containerTextAndBtn {
+        margin-bottom: 30px;
+
+        p {
+            text-align: center;
+        }
+
+        input {
+            top: 62px;
+            right: 1px;
+        }
+
+        img {
+            right: -20px;
+        }
+    }
+
+    .containerBtn {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+
+//////////////////// Disabled the hover Effects on touch Devices and add active Effects
+@media (pointer: coarse) {
+
+    .containerCloseIcon {
+
+        &:hover {
+            background-color: unset;
+
+            img {
+                filter: none;
+            }
+        }
+
+        &:active {
+            background-color: $bgColor;
+            transition: all 225ms ease-in-out;
+
+            img {
+                filter: brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(1557%) hue-rotate(226deg) brightness(110%) contrast(90%);
+            }
+        }
+    }
+
+    .containerAvatarImages {
+
+        img {
+
+            &:hover {
+                border: 4px solid transparent;
+            }
+        }
+
+        img {
+
+            &:active {
+                border: 4px solid $bgColor;
+            }
+        }
+    }
+
+    .containerTextAndBtn {
+
+        label {
+
+            &:hover {
+                color: $darkPurple;
+                background-color: #ffffff;
+            }
+
+            &:active {
+                background-color: $darkPurple;
+                color: #ffffff;
+            }
+        }
+    }
+
+    .btnPrimary {
+
+        &:hover {
+            background-color: $darkPurple;
+            color: #ffffff;
+        }
+
+        &:active {
+            background-color: $purple;
+            color: #ffffff;
+        }
+    }
+
+    .btnSecondary {
+
+        &:hover {
+            color: $darkPurple;
+            background-color: #ffffff;
+        }
+
+        &:active {
+            background-color: $darkPurple;
+            color: #ffffff;
+        }
+    }
+}

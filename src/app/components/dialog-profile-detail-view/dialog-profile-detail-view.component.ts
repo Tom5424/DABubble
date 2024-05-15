@@ -31,6 +31,7 @@ export class DialogProfileDetailViewComponent implements OnInit {
 
 
   openDialogEditProfileImg(): void {
+    this.matDialog.closeAll();
     let dialogRef = this.matDialog.open(DialogEditProfileImgComponent, { position: { top: '95px', right: '25px' } });
     dialogRef.afterClosed().subscribe(() => {
       this.storageInDialogEditProfileImgService.selectedImageAvatarUrl = '';

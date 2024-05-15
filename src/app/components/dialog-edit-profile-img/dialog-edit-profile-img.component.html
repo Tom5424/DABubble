@@ -18,10 +18,12 @@
         <img class="spinnerIcon" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
 
         }@else if(imageIsUploaded()){
-        <img class="uploadedImg" src="{{ storageInDialogEditProfileImgService.urlFromUploadedImg }}" alt="Uploaded Image">
+        <img class="uploadedImg" src="{{ storageInDialogEditProfileImgService.urlFromUploadedImg }}"
+            alt="Uploaded Image">
 
         }@else if (avatarIsSelected() ) {
-        <img class="avatarImages" src="{{ storageInDialogEditProfileImgService.selectedImageAvatarUrl }}" alt="Avatar Image">
+        <img class="avatarImages" src="{{ storageInDialogEditProfileImgService.selectedImageAvatarUrl }}"
+            alt="Avatar Image">
 
         }@else if(noAvatarIsSelected()){
         <img class="imgNonSelectedAvatar" src="assets/img/non-user-selected.svg" alt="Image non selected Avatar">
@@ -62,7 +64,14 @@
 
                 <button type="button" class="btnSecondary" matDialogClose>Cancel</button>
 
-                <button type="button" class="btnPrimary" (click)="saveNewSelectedAvatar()">Save</button>
+                <button type="button" class="btnPrimary" [disabled]="this.storageInDialogEditProfileImgService.selectedImageAvatarUrl == '' && 
+                    this.storageInDialogEditProfileImgService.urlFromUploadedImg == ''" 
+                    
+                    [ngClass]="{'btnDisabled': this.storageInDialogEditProfileImgService.selectedImageAvatarUrl == '' && 
+                    this.storageInDialogEditProfileImgService.urlFromUploadedImg == ''}"
+                    (click)="saveNewSelectedAvatar()">
+                    Save
+                </button>
             </div>
         </div>
 

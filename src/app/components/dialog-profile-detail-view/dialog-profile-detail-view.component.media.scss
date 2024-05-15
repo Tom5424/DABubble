@@ -16,6 +16,16 @@
     .dialogBox {
         width: 230px;
     }
+
+    .containerProfileImg {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+
+        button {
+            position: unset;
+        }
+    }
 }
 
 
@@ -104,6 +114,21 @@
 
             img {
                 filter: brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(1557%) hue-rotate(226deg) brightness(110%) contrast(90%);
+            }
+        }
+    }
+
+    .containerProfileImg {
+
+        button {
+
+            &:hover {
+                color: $darkPurple;
+            }
+
+            &:active {
+                color: $darkPurple;
+                font-weight: 700;
             }
         }
     }
