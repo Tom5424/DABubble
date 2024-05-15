@@ -1,0 +1,191 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+
+
+.overlay {
+    @include positionAbsolute(0, 0, 0, 0);
+    background-color: #fdfdfd47;
+    z-index: 1;
+}
+
+
+.dialogBox {
+    @include flexCenteredXAxis();
+}
+
+
+.avatarPickerBox {
+    @include flexColumnCenteredXAxis();
+    position: relative;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 10px 0px #00000014;
+    border-radius: 30px;
+    padding: 30px 50px 30px 50px;
+
+    h1 {
+        color: $darkPurple;
+        margin: 0 0 25px 0;
+        font-size: 46px;
+    }
+
+    h2 {
+        font-size: 32px;
+        margin: 10px 0 0 0;
+    }
+}
+
+
+.containerAvatarPickerBoxLowerPart {
+    padding-top: 10px;
+}
+
+
+.containerCloseIcon {
+    @include hover();
+    @include iconHover();
+    @include flexCenteredInTheMiddle();
+    @include positionAbsolute(10px, unset, unset, 12px);
+    width: 20px;
+    height: 20px;
+    padding: 8px;
+
+    &:hover {
+
+        img {
+            transition: all 225ms ease-in-out;
+            filter: brightness(0) saturate(100%) invert(24%) sepia(99%) saturate(1557%) hue-rotate(226deg) brightness(110%) contrast(90%);
+        }
+    }
+}
+
+
+.imgNonSelectedAvatar {
+    background-color: $purple;
+    border-radius: 50%;
+    padding: 16px;
+    width: 70px;
+}
+
+
+.avatarImages {
+    width: 102px;
+    height: 102px;
+    border-radius: 50%;
+}
+
+
+.uploadedImg {
+    width: 102px;
+    height: 102px;
+    border-radius: 50%;
+}
+
+
+.spinnerIcon {
+    height: 140px;
+    margin-top: -35px;
+}
+
+
+.text {
+    width: 95%;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+
+.containerAvatarImages {
+    @include flex();
+    gap: 8px;
+
+    img {
+        @include hover();
+        border: 4px solid transparent;
+        width: 55px;
+        border-radius: 50%;
+
+        &:hover {
+            border: 4px solid $bgColor;
+        }
+    }
+}
+
+
+.selectedAvatar {
+    transition: all 225ms ease-in-out;
+    border: 4px solid $bgColor !important;
+}
+
+
+.containerTextAndBtn {
+    @include flexCenteredYAxis();
+    position: relative;
+    gap: 24px;
+    margin-top: 20px;
+
+    p {
+        font-size: 20px;
+        margin: 0;
+    }
+
+    label {
+        @include btnSecondaryHover();
+        @include btnSecondaryActive();
+        @include btnSecondary();
+        @include hover();
+        width: 100px;
+        height: 20px;
+        padding: 12px 25px 12px 25px;
+        border-radius: 25px;
+    }
+
+    input {
+        @include positionAbsolute(0, unset, unset, 59px);
+        @include hover();
+        width: 150px;
+        height: 44px;
+        opacity: 0;
+    }
+
+    img {
+        @include positionAbsolute(0, unset, unset, 20px);
+    }
+}
+
+
+.containerBtn {
+    @include flexCenteredXAxis();
+    gap: 32px;
+    margin-top: 20px;
+
+    button {
+        padding: 12px 25px 12px 25px;
+        border-radius: 25px;
+    }
+}
+
+
+.btnPrimary {
+    @include btnPrimary();
+    @include btnPrimaryHover();
+    @include btnPrimaryActive();
+    border: unset;
+}
+
+
+.btnSecondary {
+    @include btnSecondary();
+    @include btnSecondaryHover();
+    @include btnSecondaryActive();
+}
+
+
+/////////// Custom Styles for tooltip 
+::ng-deep .customTooltip {
+    background-color: $darkPurple;
+    border-radius: 30px;
+    padding: 15px 10px 15px 10px;
+    --mdc-plain-tooltip-container-color: #444DF2;
+    --mdc-plain-tooltip-supporting-text-line-height: 20px;
+    --mdc-plain-tooltip-supporting-text-size: 16px;
+}

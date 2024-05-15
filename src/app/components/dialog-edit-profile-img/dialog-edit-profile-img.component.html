@@ -1,0 +1,71 @@
+<!--------------------------------- Only Displayed if Image upload is in Progress --------------------------------->
+<div [ngClass]="{'overlay': storageInDialogEditProfileImgService.uploadImg}"></div>
+<!--------------------------------- Only Displayed if Image upload is in Progress --------------------------------->
+
+
+<div class="dialogBox">
+
+    <div class="avatarPickerBox">
+        <div class="containerCloseIcon" matDialogClose>
+            <img src="assets/icons/close-icon.svg" alt="Close Icon">
+        </div>
+
+
+        <h1>Choose other Avatar</h1>
+
+
+        @if (imageUploadingIsInProgress()) {
+        <img class="spinnerIcon" src="assets/icons/spinner-icon.svg" alt="Spinner Icon">
+
+        }@else if(imageIsUploaded()){
+        <img class="uploadedImg" src="{{ storageInDialogEditProfileImgService.urlFromUploadedImg }}" alt="Uploaded Image">
+
+        }@else if (avatarIsSelected() ) {
+        <img class="avatarImages" src="{{ storageInDialogEditProfileImgService.selectedImageAvatarUrl }}" alt="Avatar Image">
+
+        }@else if(noAvatarIsSelected()){
+        <img class="imgNonSelectedAvatar" src="assets/img/non-user-selected.svg" alt="Image non selected Avatar">
+
+        }@else{
+        <img class="avatarImages" src="{{ authService.user.imgUrl }}" alt="Profile Image">
+        }
+
+
+        <h2>{{ authService.user.name }}</h2>
+
+
+        <div class="containerAvatarPickerBoxLowerPart">
+            <p class="text">Choose from the List</p>
+
+            <div class="containerAvatarImages">
+                @for (avatarImageUrl of storageInDialogEditProfileImgService.avatarImageUrls; track $index) {
+                <img (click)="selectAvatar(avatarImageUrl)" src="{{ avatarImageUrl }}" alt="Avatar Image"
+                    [ngClass]="{'selectedAvatar': avatarImageUrl == storageInDialogEditProfileImgService.selectedImageAvatarUrl}">
+                }
+            </div>
+
+            <div class="containerTextAndBtn">
+                <p>Use your own Image</p>
+
+                <label for="uploadFile">
+                    Upload File
+                    <input id="uploadFile" type="file" (change)="selectFile(selectedFile)" #selectedFile>
+                </label>
+
+                <img src="assets/icons/info-icon.svg" alt="Info Icon" matTooltip="{{ tooltipText }}"
+                    matTooltipClass="customTooltip" matTooltipShowDelay="150" matTooltipHideDelay="150"
+                    matTooltipPosition="above">
+            </div>
+
+
+            <div class="containerBtn">
+
+                <button type="button" class="btnSecondary" matDialogClose>Cancel</button>
+
+                <button type="button" class="btnPrimary" (click)="saveNewSelectedAvatar()">Save</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>

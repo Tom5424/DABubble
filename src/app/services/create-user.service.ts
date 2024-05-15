@@ -75,6 +75,18 @@ export class CreateUserService {
   }
 
 
+  updateUserImgService(userId: string, selectedImgUrl: string, uploadedImgUrl: string): void {
+    const docRef = doc(this.firestore, 'users', userId);
+    updateDoc(docRef, { imgUrl: selectedImgUrl ? selectedImgUrl : uploadedImgUrl })
+      .then(() => {
+
+      })
+      .catch((error) => {
+        console.error(error.message);
+      })
+  }
+
+
   deleteUserService(userId: string): void {
     const docRef = doc(this.firestore, 'users', userId);
     deleteDoc(docRef)

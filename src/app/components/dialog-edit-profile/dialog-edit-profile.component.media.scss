@@ -30,6 +30,7 @@
 
         p {
             font-size: 18px;
+            text-align: center;
         }
     }
 
@@ -39,6 +40,12 @@
             width: 100px;
             height: 100px;
         }
+    }
+
+    .imgNoSelectedProfile {
+        width: 80px !important;
+        height: 80px !important;
+        padding: 8px !important;
     }
 
     form {

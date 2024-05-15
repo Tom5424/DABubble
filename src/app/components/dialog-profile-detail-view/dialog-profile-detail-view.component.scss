@@ -35,11 +35,27 @@
 
 .containerProfileImg {
     @include flexCenteredXAxis();
+    position: relative;
 
     img {
         width: 140px;
         height: 140px;
         border-radius: 50%;
+    }
+
+    button {
+        @include positionAbsolute(60px, unset, unset, 2px);
+        @include hover();
+        color: $middlePurple;
+        font-size: 18px;
+        font-weight: 600;
+        background-color: #ffffff;
+        border: unset;
+
+        &:hover {
+            color: $darkPurple;
+            font-weight: 700;
+        }
     }
 }
 

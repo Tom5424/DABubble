@@ -15,6 +15,14 @@
         }@else {
         <img src="{{ authService.user.imgUrl }}" alt="Profile Image">
         }
+
+
+        <button (click)="openDialogEditProfileImg()" type="button" [disabled]="guestUserIsLoggedIn()"
+            [ngClass]="{'disabledEditButton': guestUserIsLoggedIn()}"
+            [matTooltip]="guestUserIsLoggedIn() ? tooltipTextForEditUserImg  : ''" matTooltipPosition="above"
+            matTooltipClass="customTooltip" matTooltipShowDelay="150" matTooltipHideDelay="150">
+            Edit
+        </button>
     </div>
 
 

@@ -119,6 +119,18 @@ export class AuthService {
   }
 
 
+  updateUserImgService(userCredential: any, selectedImgUrl: string, uploadedImgUrl: string): void {
+    updateProfile(userCredential, { photoURL: selectedImgUrl !== '' ? selectedImgUrl : uploadedImgUrl })
+      .then(() => {
+        this.createUserService.updateUserImgService(userCredential.uid, selectedImgUrl, uploadedImgUrl);
+        this.getDataFromLoggedInUserService();
+      })
+      .catch((error) => {
+        console.error(error.message);
+      })
+  }
+
+
   displayUserFeedbackIfSignupSuccessfullyService(): void {
     this.accountIsCreated = true;
     setTimeout(() => {
