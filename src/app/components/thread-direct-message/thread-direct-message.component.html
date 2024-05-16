@@ -22,19 +22,33 @@
     <div class="containerThreadLowerPart">
 
         <div class="scrollingContainer" #scrollingContainer>
-            
+
             @if(chatAreLoading()) {
             <div class="containerSpinnerIcon">
                 <img src="assets/icons/spinner-icon.svg" alt="Sinner Icon">
             </div>
             }@else {
 
-            @for (threadMessage of createThreadMessageInDirectMessageService.threadMesssagesAsObservable | async; track $index) {
+                
+            @if(createThreadMessageInDirectMessageService.threadMesssagesAsObservable | async; as threadMessages) {
+
+
+            @for (threadMessage of threadMessages; track $index) {
+
+
+            @if (threadMessages.length >= 2 && $index == 1) {
+            <div class="containerAmountOfMessages">
+                <p>{{ threadMessages.length - 1 }} Answers</p>
+                <hr>
+            </div>
+            }
 
             <app-message-in-thread-direct-message [directMessageId]="threadMessageId"
                 [threadMessageId]="threadMessage.id" [threadMessage]="threadMessage">
 
             </app-message-in-thread-direct-message>
+
+            }
 
             }
 
@@ -101,7 +115,7 @@
 
                     <button type="submit"
                         [disabled]="(storageInThreadService.uploadedImagesInThread.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') ||
-                         (addMessageForm.controls.textarea.value == null && storageInThreadService.uploadedImagesInThread.length == 0)"
+                        (addMessageForm.controls.textarea.value == null && storageInThreadService.uploadedImagesInThread.length == 0)"
                         [ngClass]="{'disabledBtn': (storageInThreadService.uploadedImagesInThread.length == 0 && addMessageForm.controls.textarea.value?.trim() == '') || 
                         (addMessageForm.controls.textarea.value == null && storageInThreadService.uploadedImagesInThread.length == 0)}">
 

@@ -9,6 +9,82 @@
         width: 100%;
         margin-right: 0;
     }
+
+    .containerAmountOfMessages {
+
+        hr {
+            width: 85%;
+        }
+    }
+}
+
+
+@media screen and (max-width: 900px) {
+
+    .containerAmountOfMessages {
+
+        hr {
+            width: 83%;
+        }
+    }
+}
+
+
+@media screen and (max-width: 800px) {
+
+    .containerAmountOfMessages {
+
+        hr {
+            width: 81%;
+        }
+    }
+}
+
+
+@media screen and (max-width: 700px) {
+
+    .containerAmountOfMessages {
+
+        hr {
+            width: 79%;
+        }
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+
+    .containerAmountOfMessages {
+
+        hr {
+            width: 75%;
+        }
+    }
+}
+
+
+@media screen and (max-width: 540px) {
+
+    .containerAmountOfMessages {
+
+        hr {
+            width: 71%;
+        }
+    }
+}
+
+
+@media screen and (max-width: 475px) {
+
+    .containerAmountOfMessages {
+        flex-direction: column;
+        margin-top: 7px;
+        padding-left: 0;
+
+        hr {
+            width: 85%;
+        }
+    }
 }
 
 
@@ -28,7 +104,17 @@
             font-size: 18px;
         }
     }
+}
 
+
+@media screen and (max-width: 350px) {
+
+    .containerAmountOfMessages {
+
+        hr {
+            width: 80%;
+        }
+    }
 }
 
 

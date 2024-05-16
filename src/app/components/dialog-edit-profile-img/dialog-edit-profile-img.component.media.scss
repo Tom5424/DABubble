@@ -109,9 +109,8 @@
 @media screen and (max-width: 390px) {
 
     .dialogBox {
-        width: 140px;
+        width: 130px;
         height: 530px;
-        overflow-y: scroll;
     }
 
     .avatarPickerBox {
@@ -141,6 +140,7 @@
     .containerBtn {
         flex-direction: column;
         gap: 15px;
+        margin-bottom: 20px;
     }
 }
 

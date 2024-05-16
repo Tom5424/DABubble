@@ -39,12 +39,26 @@
             </div>
             }@else {
 
-            @for (threadMessage of createThreadMessageInChannelMessageService.threadMesssagesAsObservable | async; track $index) {
+
+            @if (createThreadMessageInChannelMessageService.threadMesssagesAsObservable | async; as threadMessages) {
+
+
+            @for (threadMessage of threadMessages; track $index) {
+
+
+            @if (threadMessages.length >= 2 && $index == 1) {
+            <div class="containerAmountOfMessages">
+                <p>{{ threadMessages.length - 1 }} Answers</p>
+                <hr>
+            </div>
+            }
 
             <app-message-in-thread-channel-message [channelMessageId]="threadMessageId"
                 [threadMessageId]="threadMessage.id" [threadMessage]="threadMessage">
 
             </app-message-in-thread-channel-message>
+
+            }
 
             }
 
