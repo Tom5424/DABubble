@@ -55,6 +55,15 @@
 }
 
 
+//////////////////// Height
+@media screen and (max-height: 600px) {
+
+    .mainContainerLegalNotice {
+        padding-bottom: 40px;
+    }
+}
+
+
 //////////////////// Disabled the hover Effects on touch Devices and add active Effects
 @media (pointer: coarse) {
 
